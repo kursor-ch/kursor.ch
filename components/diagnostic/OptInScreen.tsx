@@ -4,10 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 export interface OptIns {
-  recrutement: boolean;
-  assurance: boolean;
-  prevoyance: boolean;
-  fiscalite: boolean;
+  consent: boolean;
+  partnerContact: boolean;
 }
 
 interface OptInScreenProps {
@@ -15,126 +13,105 @@ interface OptInScreenProps {
   onBack: () => void;
 }
 
-const PARTNER_OPTIONS: { key: keyof OptIns; label: string; description: string }[] = [
-  {
-    key: "recrutement",
-    label: "Recrutement",
-    description:
-      "Trouver un emploi plus rapidement grâce à notre réseau de partenaires",
-  },
-  {
-    key: "assurance",
-    label: "Assurance maladie",
-    description:
-      "Éviter toutes les erreurs liées au processus d'affiliation des assurances obligatoires",
-  },
-  {
-    key: "prevoyance",
-    label: "Prévoyance & 3e pilier",
-    description:
-      "Comprendre et optimiser votre épargne afin de créer votre retraite",
-  },
-  {
-    key: "fiscalite",
-    label: "Fiscalité",
-    description:
-      "Être accompagné(e) par un professionnel dans la création et la gestion de sa société en Suisse (SA/SÀRL/RI)",
-  },
-];
-
 export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
   const [consent, setConsent] = useState(false);
-  const [optIns, setOptIns] = useState<OptIns>({
-    recrutement: false,
-    assurance: false,
-    prevoyance: false,
-    fiscalite: false,
-  });
+  const [partnerContact, setPartnerContact] = useState(false);
   const [showError, setShowError] = useState(false);
-
-  const toggleOptIn = (key: keyof OptIns) => {
-    setOptIns((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
 
   const handleSubmit = () => {
     if (!consent) {
       setShowError(true);
       return;
     }
-    onSubmit(optIns);
+    onSubmit({ consent, partnerContact });
   };
 
   return (
-    <div className="space-y-6">
+    <div className="animate-screen-in space-y-8">
       <div>
         <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           Presque terminé
         </h2>
-        <p className="text-sm text-gray-500">
-          Avant de recevoir votre diagnostic, souhaitez-vous être mis en
-          relation avec nos experts ? Sélectionnez les domaines où vous
-          aimeriez un accompagnement. Gratuit et sans engagement — vos données
-          sont partagées uniquement avec les partenaires que vous choisissez.
+        <p className="text-sm text-gray-500 leading-relaxed">
+          Avant de recevoir votre diagnostic, veuillez confirmer votre accord.
         </p>
       </div>
 
-      <div className="space-y-3">
-        {PARTNER_OPTIONS.map((opt) => (
-          <label
-            key={opt.key}
-            className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
-              optIns[opt.key]
-                ? "border-amber bg-amber/5"
-                : "border-gray-200 bg-white"
-            }`}
-          >
-            <input
-              type="checkbox"
-              checked={optIns[opt.key]}
-              onChange={() => toggleOptIn(opt.key)}
-              className="mt-0.5 h-5 w-5 rounded border-gray-300 text-amber focus:ring-amber"
-            />
-            <div>
-              <span className="text-sm font-medium text-gray-800">
-                {opt.label}
-              </span>
-              <p className="text-xs text-gray-500 mt-0.5">{opt.description}</p>
-            </div>
-          </label>
-        ))}
-      </div>
-
-      <div className="space-y-4 pt-2">
+      <div className="space-y-4">
         {/* Mandatory consent */}
         <label
-          className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
+          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
             consent
-              ? "border-amber bg-amber/5"
+              ? "border-amber bg-[#FEF3C7] shadow-sm"
               : showError
               ? "border-rouge bg-rouge/5"
-              : "border-gray-200 bg-white"
+              : "border-stone-200 bg-white shadow-sm hover:border-amber/40 hover:shadow-md"
           }`}
         >
-          <input
-            type="checkbox"
-            checked={consent}
-            onChange={(e) => {
-              setConsent(e.target.checked);
-              if (e.target.checked) setShowError(false);
-            }}
-            className="mt-0.5 h-5 w-5 rounded border-gray-300 text-amber focus:ring-amber"
-          />
-          <span className="text-sm text-gray-700 leading-relaxed">
-            J&apos;accepte que Kursor CH traite mes données afin de me fournir
-            mon score et me recontacter.
-            <span className="text-rouge ml-0.5">*</span>
-          </span>
+          <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
+            consent ? "border-amber bg-amber" : showError ? "border-rouge" : "border-gray-300"
+          }`}>
+            {consent && (
+              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+          </div>
+          <div>
+            <span className="text-sm font-medium text-gray-800 leading-relaxed">
+              J&apos;accepte que Kursor CH traite mes données afin de me fournir
+              mon score et me recontacter.
+              <span className="text-rouge ml-0.5">*</span>
+            </span>
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => {
+                setConsent(e.target.checked);
+                if (e.target.checked) setShowError(false);
+              }}
+              className="sr-only"
+            />
+          </div>
         </label>
         {showError && (
           <p className="text-xs text-rouge -mt-2 ml-1">
             Ce consentement est obligatoire pour recevoir votre diagnostic.
           </p>
         )}
+
+        {/* Optional partner contact */}
+        <label
+          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+            partnerContact
+              ? "border-amber bg-[#FEF3C7] shadow-sm"
+              : "border-stone-200 bg-white shadow-sm hover:border-amber/40 hover:shadow-md"
+          }`}
+        >
+          <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
+            partnerContact ? "border-amber bg-amber" : "border-gray-300"
+          }`}>
+            {partnerContact && (
+              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+          </div>
+          <div>
+            <span className="text-sm font-medium text-gray-800 leading-relaxed">
+              Je souhaite être mis en relation avec les partenaires Kursor
+              (recrutement, assurances, prévoyance, fiscalité, immobilier).
+              Gratuit et sans engagement.
+            </span>
+            <input
+              type="checkbox"
+              checked={partnerContact}
+              onChange={(e) => setPartnerContact(e.target.checked)}
+              className="sr-only"
+            />
+          </div>
+        </label>
       </div>
 
       <p className="text-xs text-gray-400">
@@ -154,14 +131,14 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3 rounded-full border-2 border-gray-200 text-gray-600 font-medium hover:border-gray-300 transition-colors"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 px-6 py-3 rounded-full bg-amber text-white font-semibold hover:bg-amber/90 transition-colors"
+          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
         >
           Voir mon score
         </button>

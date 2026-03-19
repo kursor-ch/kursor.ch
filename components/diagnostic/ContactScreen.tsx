@@ -47,24 +47,25 @@ export default function ContactScreen({
   };
 
   const inputCls = (field: keyof ContactInfo) =>
-    `w-full px-4 py-3.5 rounded-xl border-2 text-[15px] transition-colors focus:outline-none focus:ring-0 ${
+    `w-full px-4 py-3.5 rounded-xl border-2 text-[15px] bg-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber/20 ${
       errors[field]
-        ? "border-rouge bg-rouge/5 focus:border-rouge"
-        : "border-gray-200 bg-white focus:border-amber"
+        ? "border-rouge bg-rouge/5 focus:border-rouge focus:ring-rouge/20"
+        : "border-stone-200 focus:border-amber"
     }`;
 
   return (
-    <div className="space-y-6">
+    <div className="animate-screen-in space-y-8">
       <div>
         <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           Dernière étape
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 leading-relaxed">
           Vos informations sont protégées et ne seront jamais partagées sans votre accord.
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div>
           <input
             type="text"
@@ -119,14 +120,14 @@ export default function ContactScreen({
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3 rounded-full border-2 border-gray-200 text-gray-600 font-medium hover:border-gray-300 transition-colors"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 px-6 py-3 rounded-full bg-amber text-white font-semibold hover:bg-amber/90 transition-colors"
+          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
         >
           Continuer
         </button>

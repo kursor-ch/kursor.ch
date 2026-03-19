@@ -45,9 +45,10 @@ export default function ResultsScreen({
   ];
 
   return (
-    <div className="space-y-8 text-center">
+    <div className="animate-screen-in space-y-8 text-center">
       <div className="space-y-4 animate-count-up">
         <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-px" />
           Votre score de viabilité
         </p>
         <div className="flex items-baseline justify-center gap-1">
@@ -85,7 +86,7 @@ export default function ResultsScreen({
       </div>
 
       <div className="max-w-md mx-auto pt-4 border-t border-gray-100">
-        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-sm">
           <p className="text-sm text-gray-500 mb-1">
             {prenom}, votre rapport détaillé arrive dans votre boîte email sous
             quelques minutes.
