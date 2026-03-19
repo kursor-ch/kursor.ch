@@ -41,6 +41,7 @@ export default function DiagnosticWorkPage() {
   });
   const [scores, setScores] = useState<ScoreBreakdown | null>(null);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
+  const [screenKey, setScreenKey] = useState(0);
 
   useEffect(() => {
     retryPendingWebhook();
@@ -58,6 +59,7 @@ export default function DiagnosticWorkPage() {
   const goNext = () => {
     const nextScreen = screen + 1;
     setScreen(nextScreen);
+    setScreenKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     if (screen === 0) {
@@ -76,6 +78,7 @@ export default function DiagnosticWorkPage() {
 
   const goBack = () => {
     setScreen((prev) => Math.max(0, prev - 1));
+    setScreenKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -85,6 +88,7 @@ export default function DiagnosticWorkPage() {
     setScores(computed);
     setVerdict(v);
     setScreen(6);
+    setScreenKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     trackEvent("Diagnostic Completed", {
@@ -101,7 +105,7 @@ export default function DiagnosticWorkPage() {
     <main className="min-h-screen">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-xl mx-auto px-6 py-3 flex items-center justify-between">
           <span className="flex items-center gap-2 font-heading font-semibold text-lg text-gray-900">
             <Image src="/logo.svg" alt="Kursor" width={24} height={24} />
             Kursor <span className="text-amber">CH</span>
@@ -113,7 +117,7 @@ export default function DiagnosticWorkPage() {
       </header>
 
       {/* Content */}
-      <div className="max-w-xl mx-auto px-4 py-8 md:py-12">
+      <div className="max-w-xl mx-auto px-6 py-8 md:py-12" key={screenKey}>
         {screen === 0 && <IntroScreen onStart={goNext} />}
 
         {screen >= 1 && screen <= 3 && (

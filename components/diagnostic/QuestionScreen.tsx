@@ -23,19 +23,20 @@ export default function QuestionScreen({
   canProceed,
 }: QuestionScreenProps) {
   return (
-    <div className="space-y-8">
+    <div className="animate-screen-in space-y-10">
       <div>
         <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-1">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           {screen.title}
         </h2>
         {screen.subtitle && (
-          <p className="text-sm text-gray-500">{screen.subtitle}</p>
+          <p className="text-sm text-gray-500 ml-4">{screen.subtitle}</p>
         )}
       </div>
 
       {screen.questions.map((q) => (
         <div key={q.id} className="space-y-3">
-          <label className="block text-base font-medium text-gray-800">
+          <label className="block text-lg font-semibold text-gray-800">
             {q.label}
           </label>
           {q.hint && (
@@ -54,7 +55,7 @@ export default function QuestionScreen({
               ))}
             </div>
           ) : (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {q.options.map((opt) => (
                 <OptionPill
                   key={opt.key}
@@ -72,7 +73,7 @@ export default function QuestionScreen({
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3 rounded-full border-2 border-gray-200 text-gray-600 font-medium hover:border-gray-300 transition-colors"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>
@@ -80,7 +81,7 @@ export default function QuestionScreen({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className="flex-1 px-6 py-3 rounded-full bg-amber text-white font-semibold hover:bg-amber/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-md"
         >
           Continuer
         </button>

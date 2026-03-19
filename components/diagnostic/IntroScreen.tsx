@@ -14,7 +14,7 @@ const steps = [
 
 export default function IntroScreen({ onStart }: IntroScreenProps) {
   return (
-    <div className="relative flex flex-col items-center min-h-[85vh] text-center px-4 pt-16 pb-20 overflow-hidden">
+    <div className="animate-screen-in relative flex flex-col items-center min-h-[85vh] text-center px-6 pt-16 pb-20 overflow-hidden">
       {/* Subtle radial gradient overlay */}
       <div
         className="pointer-events-none absolute inset-0"
