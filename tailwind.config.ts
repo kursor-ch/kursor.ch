@@ -19,7 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         heading: ["Fraunces", "serif"],
-        body: ["Outfit", "sans-serif"],
+        body: ["IBM Plex Sans", "sans-serif"],
       },
     },
   },
