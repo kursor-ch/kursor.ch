@@ -1,3 +1,4 @@
+import Image from "next/image";
 import VerdictBadge from "@/components/ui/VerdictBadge";
 
 interface ReportHeaderProps {
@@ -17,7 +18,8 @@ export default function ReportHeader({
 }: ReportHeaderProps) {
   return (
     <section className="text-center space-y-6 pb-8 border-b border-gray-100">
-      <div>
+      <div className="flex items-center justify-center gap-2">
+        <Image src="/logo.svg" alt="Kursor" width={32} height={32} />
         <span className="font-heading font-semibold text-2xl text-gray-900">
           Kursor <span className="text-amber">CH</span>
         </span>
