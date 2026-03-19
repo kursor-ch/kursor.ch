@@ -11,7 +11,7 @@ import QuestionScreen from "@/components/diagnostic/QuestionScreen";
 import ContactScreen, {
   ContactInfo,
 } from "@/components/diagnostic/ContactScreen";
-import OptInScreen from "@/components/diagnostic/OptInScreen";
+import OptInScreen, { OptIns } from "@/components/diagnostic/OptInScreen";
 import ResultsScreen from "@/components/diagnostic/ResultsScreen";
 
 declare global {
@@ -78,7 +78,7 @@ export default function DiagnosticWorkPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSubmit = async (optInPartners: boolean) => {
+  const handleSubmit = async (optIns: OptIns) => {
     const computed = computeScore(answers);
     const v = getVerdict(computed.total);
     setScores(computed);
@@ -92,7 +92,7 @@ export default function DiagnosticWorkPage() {
       score: String(computed.total),
     });
 
-    const payload = buildPayload(contact, computed, v.key, answers, optInPartners);
+    const payload = buildPayload(contact, computed, v.key, answers, optIns);
     await sendWebhook(payload);
   };
 

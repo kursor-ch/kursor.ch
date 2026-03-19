@@ -2,6 +2,14 @@ import { Answers, ScoreBreakdown } from "./scoring";
 
 const STORAGE_KEY = "kursor_pending_lead";
 
+export interface OptIns {
+  recrutement: boolean;
+  assurance: boolean;
+  prevoyance: boolean;
+  fiscalite: boolean;
+  immobilier: boolean;
+}
+
 export interface WebhookPayload {
   funnel_id: string;
   prenom: string;
@@ -15,7 +23,7 @@ export interface WebhookPayload {
   score_preparation: number;
   verdict: string;
   answers: Answers;
-  opt_in_partners: boolean;
+  opt_ins: OptIns;
   consent: boolean;
   timestamp: string;
 }
@@ -25,7 +33,7 @@ export function buildPayload(
   scores: ScoreBreakdown,
   verdict: string,
   answers: Answers,
-  optInPartners: boolean
+  optIns: Omit<OptIns, "immobilier">
 ): WebhookPayload {
   return {
     funnel_id: "work",
@@ -40,7 +48,10 @@ export function buildPayload(
     score_preparation: scores.preparation,
     verdict,
     answers,
-    opt_in_partners: optInPartners,
+    opt_ins: {
+      ...optIns,
+      immobilier: false,
+    },
     consent: true,
     timestamp: new Date().toISOString(),
   };
