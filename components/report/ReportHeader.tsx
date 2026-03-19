@@ -19,7 +19,7 @@ export default function ReportHeader({
   return (
     <section className="text-center space-y-6 pb-8 border-b border-gray-100">
       <div className="flex items-center justify-center gap-2">
-        <Image src="/logo.svg" alt="Kursor" width={32} height={32} />
+        <Image src="/kursor-logo-amber.png" alt="Kursor" width={40} height={40} className="h-10 w-auto" />
         <span className="font-heading font-semibold text-2xl text-gray-900">
           Kursor <span className="text-amber">CH</span>
         </span>

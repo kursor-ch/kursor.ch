@@ -28,10 +28,11 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       {/* Logo */}
       <div className="relative mb-10">
         <Image
-          src="/logo.svg"
+          src="/kursor-logo-amber.png"
           alt="Kursor"
-          width={56}
-          height={56}
+          width={80}
+          height={80}
+          className="h-20 w-auto"
           priority
         />
       </div>
