@@ -3,22 +3,65 @@
 import { useState } from "react";
 import Link from "next/link";
 
+export interface OptIns {
+  recrutement: boolean;
+  assurance: boolean;
+  prevoyance: boolean;
+  fiscalite: boolean;
+}
+
 interface OptInScreenProps {
-  onSubmit: (optInPartners: boolean) => void;
+  onSubmit: (optIns: OptIns) => void;
   onBack: () => void;
 }
 
+const PARTNER_OPTIONS: { key: keyof OptIns; label: string; description: string }[] = [
+  {
+    key: "recrutement",
+    label: "Recrutement",
+    description:
+      "Trouver un emploi plus rapidement grâce à notre réseau de partenaires",
+  },
+  {
+    key: "assurance",
+    label: "Assurance maladie",
+    description:
+      "Éviter toutes les erreurs liées au processus d'affiliation des assurances obligatoires",
+  },
+  {
+    key: "prevoyance",
+    label: "Prévoyance & 3e pilier",
+    description:
+      "Comprendre et optimiser votre épargne afin de créer votre retraite",
+  },
+  {
+    key: "fiscalite",
+    label: "Fiscalité",
+    description:
+      "Être accompagné(e) par un professionnel dans la création et la gestion de sa société en Suisse (SA/SÀRL/RI)",
+  },
+];
+
 export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
   const [consent, setConsent] = useState(false);
-  const [optInPartners, setOptInPartners] = useState(false);
+  const [optIns, setOptIns] = useState<OptIns>({
+    recrutement: false,
+    assurance: false,
+    prevoyance: false,
+    fiscalite: false,
+  });
   const [showError, setShowError] = useState(false);
+
+  const toggleOptIn = (key: keyof OptIns) => {
+    setOptIns((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const handleSubmit = () => {
     if (!consent) {
       setShowError(true);
       return;
     }
-    onSubmit(optInPartners);
+    onSubmit(optIns);
   };
 
   return (
@@ -28,11 +71,40 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
           Presque terminé
         </h2>
         <p className="text-sm text-gray-500">
-          Cochez les cases ci-dessous pour recevoir votre diagnostic.
+          Avant de recevoir votre diagnostic, souhaitez-vous être mis en
+          relation avec nos experts ? Sélectionnez les domaines où vous
+          aimeriez un accompagnement. Gratuit et sans engagement — vos données
+          sont partagées uniquement avec les partenaires que vous choisissez.
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
+        {PARTNER_OPTIONS.map((opt) => (
+          <label
+            key={opt.key}
+            className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
+              optIns[opt.key]
+                ? "border-amber bg-amber/5"
+                : "border-gray-200 bg-white"
+            }`}
+          >
+            <input
+              type="checkbox"
+              checked={optIns[opt.key]}
+              onChange={() => toggleOptIn(opt.key)}
+              className="mt-0.5 h-5 w-5 rounded border-gray-300 text-amber focus:ring-amber"
+            />
+            <div>
+              <span className="text-sm font-medium text-gray-800">
+                {opt.label}
+              </span>
+              <p className="text-xs text-gray-500 mt-0.5">{opt.description}</p>
+            </div>
+          </label>
+        ))}
+      </div>
+
+      <div className="space-y-4 pt-2">
         {/* Mandatory consent */}
         <label
           className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
@@ -63,27 +135,6 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
             Ce consentement est obligatoire pour recevoir votre diagnostic.
           </p>
         )}
-
-        {/* Optional partner opt-in */}
-        <label
-          className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${
-            optInPartners
-              ? "border-amber bg-amber/5"
-              : "border-gray-200 bg-white"
-          }`}
-        >
-          <input
-            type="checkbox"
-            checked={optInPartners}
-            onChange={(e) => setOptInPartners(e.target.checked)}
-            className="mt-0.5 h-5 w-5 rounded border-gray-300 text-amber focus:ring-amber"
-          />
-          <span className="text-sm text-gray-700 leading-relaxed">
-            J&apos;accepte que Kursor partage mon profil avec ses partenaires de
-            confiance (recrutement, assurance, prévoyance) afin de m&apos;adresser
-            des propositions adaptées.
-          </span>
-        </label>
       </div>
 
       <p className="text-xs text-gray-400">

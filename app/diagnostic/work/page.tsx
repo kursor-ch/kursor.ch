@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { questionScreens } from "@/lib/questions";
 import { Answers, computeScore, ScoreBreakdown } from "@/lib/scoring";
 import { getVerdict, Verdict } from "@/lib/verdicts";
@@ -11,7 +12,7 @@ import QuestionScreen from "@/components/diagnostic/QuestionScreen";
 import ContactScreen, {
   ContactInfo,
 } from "@/components/diagnostic/ContactScreen";
-import OptInScreen from "@/components/diagnostic/OptInScreen";
+import OptInScreen, { OptIns } from "@/components/diagnostic/OptInScreen";
 import ResultsScreen from "@/components/diagnostic/ResultsScreen";
 
 declare global {
@@ -78,7 +79,7 @@ export default function DiagnosticWorkPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSubmit = async (optInPartners: boolean) => {
+  const handleSubmit = async (optIns: OptIns) => {
     const computed = computeScore(answers);
     const v = getVerdict(computed.total);
     setScores(computed);
@@ -92,7 +93,7 @@ export default function DiagnosticWorkPage() {
       score: String(computed.total),
     });
 
-    const payload = buildPayload(contact, computed, v.key, answers, optInPartners);
+    const payload = buildPayload(contact, computed, v.key, answers, optIns);
     await sendWebhook(payload);
   };
 
@@ -101,7 +102,8 @@ export default function DiagnosticWorkPage() {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
-          <span className="font-heading font-semibold text-lg text-gray-900">
+          <span className="flex items-center gap-2 font-heading font-semibold text-lg text-gray-900">
+            <Image src="/logo.svg" alt="Kursor" width={24} height={24} />
             Kursor <span className="text-amber">CH</span>
           </span>
           {screen > 0 && screen < 6 && (
