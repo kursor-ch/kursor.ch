@@ -47,10 +47,10 @@ export default function ContactScreen({
   };
 
   const inputCls = (field: keyof ContactInfo) =>
-    `w-full px-4 py-3.5 rounded-xl border-2 text-[15px] bg-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber/20 ${
+    `w-full px-4 py-3.5 rounded-xl border-2 text-[15px] bg-white font-body transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber/20 ${
       errors[field]
         ? "border-rouge bg-rouge/5 focus:border-rouge focus:ring-rouge/20"
-        : "border-stone-200 focus:border-amber"
+        : "border-[#E7E5E4] focus:border-amber"
     }`;
 
   return (
@@ -60,7 +60,7 @@ export default function ContactScreen({
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           Dernière étape
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed">
+        <p className="text-sm text-gray-500 leading-relaxed font-body">
           Vos informations sont protégées et ne seront jamais partagées sans votre accord.
         </p>
       </div>
@@ -120,7 +120,7 @@ export default function ContactScreen({
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-600 font-semibold hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>

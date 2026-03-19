@@ -107,7 +107,7 @@ export default function DiagnosticWorkPage() {
       <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-xl mx-auto px-6 py-3 flex items-center justify-between">
           <span className="flex items-center gap-2 font-heading font-semibold text-lg text-gray-900">
-            <Image src="/logo.svg" alt="Kursor" width={24} height={24} />
+            <Image src="/kursor-logo-amber.png" alt="Kursor" width={40} height={40} className="h-10 w-auto rounded-lg" />
             Kursor <span className="text-amber">CH</span>
           </span>
           {screen > 0 && screen < 6 && (
@@ -117,7 +117,7 @@ export default function DiagnosticWorkPage() {
       </header>
 
       {/* Content */}
-      <div className="max-w-xl mx-auto px-6 py-8 md:py-12" key={screenKey}>
+      <div className="max-w-xl mx-auto px-6 py-10 md:py-14" key={screenKey}>
         {screen === 0 && <IntroScreen onStart={goNext} />}
 
         {screen >= 1 && screen <= 3 && (

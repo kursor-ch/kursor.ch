@@ -73,7 +73,7 @@ export default function QuestionScreen({
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-600 font-semibold hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>
@@ -81,7 +81,7 @@ export default function QuestionScreen({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-md"
+          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:bg-amber disabled:text-white disabled:opacity-100 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-md"
         >
           Continuer
         </button>
