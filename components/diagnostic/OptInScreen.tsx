@@ -33,7 +33,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           Presque terminé
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed">
+        <p className="text-sm text-gray-500 leading-relaxed font-body">
           Avant de recevoir votre diagnostic, veuillez confirmer votre accord.
         </p>
       </div>
@@ -41,12 +41,12 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
       <div className="space-y-4">
         {/* Mandatory consent */}
         <label
-          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm ${
             consent
-              ? "border-amber bg-[#FEF3C7] shadow-sm"
+              ? "border-amber bg-[#FEF3C7] shadow-md"
               : showError
               ? "border-rouge bg-rouge/5"
-              : "border-stone-200 bg-white shadow-sm hover:border-amber/40 hover:shadow-md"
+              : "border-stone-200 hover:border-amber/40 hover:shadow-md"
           }`}
         >
           <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
@@ -59,7 +59,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
             )}
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed">
+            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
               J&apos;accepte que Kursor CH traite mes données afin de me fournir
               mon score et me recontacter.
               <span className="text-rouge ml-0.5">*</span>
@@ -83,10 +83,10 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
 
         {/* Optional partner contact */}
         <label
-          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm ${
             partnerContact
-              ? "border-amber bg-[#FEF3C7] shadow-sm"
-              : "border-stone-200 bg-white shadow-sm hover:border-amber/40 hover:shadow-md"
+              ? "border-amber bg-[#FEF3C7] shadow-md"
+              : "border-stone-200 hover:border-amber/40 hover:shadow-md"
           }`}
         >
           <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
@@ -99,7 +99,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
             )}
           </div>
           <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed">
+            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
               Je souhaite être mis en relation avec les partenaires Kursor
               (recrutement, assurances, prévoyance, fiscalité, immobilier).
               Gratuit et sans engagement.
@@ -114,7 +114,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
         </label>
       </div>
 
-      <p className="text-xs text-gray-400">
+      <p className="text-xs text-gray-400 font-body">
         En soumettant ce formulaire, vous confirmez avoir pris connaissance de
         notre{" "}
         <Link
@@ -131,7 +131,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-700 font-medium hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
+          className="px-6 py-3.5 rounded-full border-2 border-stone-300 text-gray-600 font-semibold hover:border-stone-400 hover:bg-stone-50 transition-all duration-200"
         >
           Retour
         </button>
