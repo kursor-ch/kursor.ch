@@ -138,7 +138,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 px-6 py-3.5 rounded-full bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+          className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
         >
           Voir mon score
         </button>
