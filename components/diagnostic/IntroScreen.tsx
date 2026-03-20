@@ -43,10 +43,8 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </h1>
 
       {/* Subtitle */}
-      <p className="relative text-base md:text-lg text-gray-500 max-w-md mb-6 leading-relaxed font-body animate-intro-subtitle">
-        Certains réussissent brillamment leur expatriation. D&apos;autres
-        perdent des milliers de francs en erreurs évitables. La différence&nbsp;?
-        La préparation.
+      <p className="relative text-lg text-gray-500 text-center max-w-md mx-auto mb-6 leading-relaxed font-body animate-intro-subtitle">
+        Identifiez vos forces, vos risques et les erreurs à éviter avant de vous lancer.
       </p>
 
       {/* Badge — below subtitle */}
