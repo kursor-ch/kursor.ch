@@ -32,9 +32,9 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
         aria-hidden="true"
       />
 
-      {/* Headline — stagger delay 1 */}
-      <h1 className="relative text-[2rem] md:text-[2.75rem] lg:text-[3.5rem] font-heading font-semibold text-gray-900 leading-[1.1] max-w-2xl mb-7 animate-intro-headline">
-        Prêt pour la{" "}
+      {/* Headline */}
+      <h1 className="relative text-[2rem] md:text-[2.75rem] lg:text-[3.5rem] font-heading font-bold text-gray-900 leading-[1.1] max-w-2xl mb-7 animate-intro-headline">
+        Êtes-vous prêt pour la{" "}
         <span className="relative text-amber">
           Suisse
           <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-amber/25 rounded-full" />
@@ -42,22 +42,25 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
         &nbsp;?
       </h1>
 
-      {/* Subtitle — stagger delay 2 */}
-      <p className="relative text-base md:text-lg text-gray-500 max-w-md mb-8 leading-relaxed font-body animate-intro-subtitle">
+      {/* Subtitle */}
+      <p className="relative text-base md:text-lg text-gray-500 max-w-md mb-6 leading-relaxed font-body animate-intro-subtitle">
         Certains réussissent brillamment leur expatriation. D&apos;autres
         perdent des milliers de francs en erreurs évitables. La différence&nbsp;?
         La préparation.
       </p>
 
-      {/* Badge — below subtitle, stagger delay 3 */}
-      <div className="relative mb-8 animate-intro-badge">
-        <span className="inline-flex items-center gap-2 rounded-full border border-amber/20 bg-amber/5 px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-amber">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber animate-pulse" />
+      {/* Badge — below subtitle */}
+      <div className="relative mb-10 animate-intro-badge">
+        <span className="inline-flex items-center gap-2.5 rounded-full border border-amber/30 bg-gradient-to-r from-amber/8 to-amber/4 px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-amber shadow-sm shadow-amber/10">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
+          </span>
           Diagnostic gratuit — 2 minutes
         </span>
       </div>
 
-      {/* Trust badges — stagger delay 4 */}
+      {/* Trust badges */}
       <div className="relative flex items-start justify-center gap-8 md:gap-12 mb-12 animate-intro-features">
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-full bg-amber/8 border border-amber/10 flex items-center justify-center">
@@ -85,7 +88,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
         </div>
       </div>
 
-      {/* CTA Button — stagger delay 5 */}
+      {/* CTA Button */}
       <div className="relative animate-intro-cta">
         <button
           onClick={onStart}
@@ -98,7 +101,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
         </button>
       </div>
 
-      {/* Scroll indicator — stagger delay 6 */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-intro-scroll">
         <div className="flex flex-col items-center gap-2 text-gray-300">
           <div className="w-5 h-8 rounded-full border-2 border-gray-300/50 flex justify-center pt-1.5">
