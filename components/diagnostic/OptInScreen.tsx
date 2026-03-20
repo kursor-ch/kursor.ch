@@ -31,10 +31,10 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
       <div>
         <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-2">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
-          Presque terminé
+          Une dernière chose
         </h2>
         <p className="text-sm text-gray-500 leading-relaxed font-body">
-          Avant de recevoir votre diagnostic, veuillez confirmer votre accord.
+          Des experts en expatriation accompagnent gratuitement les profils qualifiés. Souhaitez-vous en bénéficier ?
         </p>
       </div>
 

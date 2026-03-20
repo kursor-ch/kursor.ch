@@ -85,16 +85,24 @@ export default function ResultsScreen({
         </p>
       </div>
 
-      <div className="max-w-md mx-auto pt-4 border-t border-gray-100">
-        <div className="bg-white rounded-2xl p-6 border-2 border-stone-200 shadow-sm">
-          <p className="text-sm text-gray-500 mb-1">
-            {prenom}, votre rapport détaillé arrive dans votre boîte email sous
-            quelques minutes.
-          </p>
-          <p className="text-xs text-gray-400">
-            Pensez à vérifier vos spams si vous ne le recevez pas.
-          </p>
-        </div>
+      <div className="max-w-md mx-auto">
+        <p className="text-sm text-gray-500">
+          Votre rapport détaillé arrive dans votre boîte email sous quelques minutes.
+        </p>
+      </div>
+
+      <div className="max-w-md mx-auto pt-4 border-t border-gray-100 space-y-3">
+        <a
+          href="https://calendly.com/sav-gcconsulting/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-full bg-amber px-8 py-4 text-white font-semibold text-lg shadow-lg shadow-amber/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber/30 hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0"
+        >
+          Réserver un appel gratuit de 15 minutes →
+        </a>
+        <p className="text-xs text-gray-400">
+          Sans engagement. Un expert analyse votre situation et vous oriente.
+        </p>
       </div>
     </div>
   );
