@@ -112,6 +112,10 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
             />
           </div>
         </label>
+
+        <p className="text-xs text-rouge ml-1">
+          <span>*</span> requis
+        </p>
       </div>
 
       <p className="text-xs text-gray-400 font-body">
