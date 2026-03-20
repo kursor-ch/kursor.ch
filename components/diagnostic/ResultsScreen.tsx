@@ -40,8 +40,8 @@ export default function ResultsScreen({
   const categories = [
     { label: "Profil professionnel", score: scores.profil, max: 30, delayClass: "animate-bar-delay-0" },
     { label: "Maturité projet", score: scores.projet, max: 30, delayClass: "animate-bar-delay-1" },
-    { label: "Solidité financière", score: scores.financier, max: 20, delayClass: "animate-bar-delay-2" },
-    { label: "Préparation", score: scores.preparation, max: 20, delayClass: "animate-bar-delay-3" },
+    { label: "Ancrage financier", score: scores.financier, max: 20, delayClass: "animate-bar-delay-2" },
+    { label: "Préparation administrative", score: scores.preparation, max: 20, delayClass: "animate-bar-delay-3" },
   ];
 
   return (

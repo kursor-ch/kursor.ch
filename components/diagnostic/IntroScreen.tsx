@@ -59,7 +59,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </div>
 
       {/* Trust badges */}
-      <div className="relative flex items-start justify-center gap-8 md:gap-12 mb-12 animate-intro-features">
+      <div className="relative grid grid-cols-3 w-full max-w-md mb-12 animate-intro-features">
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-full bg-amber/8 border border-amber/10 flex items-center justify-center">
             <svg className="w-4.5 h-4.5 text-amber" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -87,10 +87,10 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </div>
 
       {/* CTA Button */}
-      <div className="relative animate-intro-cta">
+      <div className="relative animate-intro-cta w-full max-w-md">
         <button
           onClick={onStart}
-          className="group relative inline-flex items-center justify-center gap-3 bg-amber text-white px-12 py-5 text-lg font-bold tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-2xl hover:shadow-amber/30 hover:-translate-y-1 active:translate-y-0 rounded-xl shadow-lg shadow-amber/20 ring-1 ring-amber/20"
+          className="group relative w-full inline-flex items-center justify-center gap-3 bg-amber text-white px-8 py-5 text-base font-bold tracking-wide whitespace-nowrap transition-all duration-300 hover:brightness-110 hover:shadow-2xl hover:shadow-amber/30 hover:-translate-y-1 active:translate-y-0 rounded-xl shadow-lg shadow-amber/20 ring-1 ring-amber/20"
         >
           Évaluer mon projet
           <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-base transition-transform duration-300 group-hover:translate-x-1.5">

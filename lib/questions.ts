@@ -21,7 +21,7 @@ export interface QuestionScreen {
 
 export const questionScreens: QuestionScreen[] = [
   {
-    title: "Commençons par votre profil",
+    title: "Commençons par votre situation actuelle",
     subtitle: "Le marché suisse valorise certains profils plus que d\u2019autres. Ces trois questions nous permettent d\u2019évaluer votre positionnement.",
     questions: [
       {
