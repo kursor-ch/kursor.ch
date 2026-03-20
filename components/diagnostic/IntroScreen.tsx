@@ -35,8 +35,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
 
       {/* Subtitle */}
       <p className="relative text-lg text-gray-500 text-center max-w-md mx-auto mb-6 leading-relaxed font-body animate-intro-subtitle">
-        Évaluez la viabilité de votre projet d&apos;expatriation en 8 questions.
-        Identifiez les risques cachés et recevez des recommandations concrètes.
+        Identifiez vos forces, vos risques et les erreurs à éviter avant de vous lancer.
       </p>
 
       {/* Badge — elegant luxury-brand tagline style */}
