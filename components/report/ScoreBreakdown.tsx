@@ -20,8 +20,8 @@ export default function ScoreBreakdown({
   const categories = [
     { label: "Profil professionnel", score: profil, max: 30 },
     { label: "Maturité projet", score: projet, max: 30 },
-    { label: "Solidité financière", score: financier, max: 20 },
-    { label: "Préparation", score: preparation, max: 20 },
+    { label: "Ancrage financier", score: financier, max: 20 },
+    { label: "Préparation administrative", score: preparation, max: 20 },
   ];
 
   return (

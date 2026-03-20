@@ -34,7 +34,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
           Une dernière chose
         </h2>
         <p className="text-sm text-gray-500 leading-relaxed font-body mt-1">
-          Des experts en expatriation accompagnent gratuitement les profils qualifiés. Souhaitez-vous en bénéficier ?
+          Souhaitez-vous être mis en relation avec nos partenaires spécialisés ? Sans engagement.
         </p>
       </div>
 
