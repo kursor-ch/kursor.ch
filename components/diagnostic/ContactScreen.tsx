@@ -56,11 +56,11 @@ export default function ContactScreen({
   return (
     <div className="animate-screen-in space-y-8">
       <div>
-        <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-2">
+        <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-1">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           Votre diagnostic est prêt
         </h2>
-        <p className="text-sm text-gray-500 leading-relaxed font-body">
+        <p className="text-sm text-gray-500 leading-relaxed font-body mt-1">
           Encore quelques secondes — entrez vos coordonnées pour recevoir votre score de viabilité et un rapport avec des recommandations concrètes.
         </p>
       </div>

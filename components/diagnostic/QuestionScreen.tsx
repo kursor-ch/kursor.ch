@@ -30,7 +30,7 @@ export default function QuestionScreen({
           {screen.title}
         </h2>
         {screen.subtitle && (
-          <p className="animate-q-subtitle text-sm text-gray-500 ml-4">{screen.subtitle}</p>
+          <p className="animate-q-subtitle text-sm text-gray-500 mt-1">{screen.subtitle}</p>
         )}
       </div>
 
