@@ -101,9 +101,9 @@ export default function ResultsScreen({
           href="https://calendly.com/sav-gcconsulting/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-xl bg-amber px-8 py-4 text-white font-semibold text-lg shadow-lg shadow-amber/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber/30 hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0"
+          className="inline-flex items-center justify-center rounded-xl bg-amber px-6 py-4 text-white font-semibold text-base sm:text-lg shadow-lg shadow-amber/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber/30 hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0"
         >
-          Réserver un appel gratuit de 15 minutes →
+          Réservez un appel gratuit avec un conseiller →
         </a>
         <p className="text-xs text-gray-400">
           Sans engagement. Un expert analyse votre situation et vous oriente.

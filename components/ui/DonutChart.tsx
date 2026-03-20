@@ -59,11 +59,7 @@ export default function DonutChart({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
-  // Total filled portion = (total / 100) of the ring
-  const filledLength = (total / 100) * circumference;
-  const unfilledLength = circumference - filledLength;
-
-  // Build category arcs
+  // Build category arcs — segments fill the ENTIRE ring
   const totalScore = categories.reduce((sum, c) => sum + c.score, 0);
   const segments: { offset: number; length: number; color: string }[] = [];
   let accumulated = 0;
@@ -74,7 +70,7 @@ export default function DonutChart({
       continue;
     }
     const proportion = cat.score / (totalScore || 1);
-    const segLength = proportion * filledLength;
+    const segLength = proportion * circumference;
     segments.push({
       offset: accumulated,
       length: segLength,
@@ -128,7 +124,7 @@ export default function DonutChart({
           })}
         </svg>
 
-        {/* Center text */}
+        {/* Center text — score only */}
         <div className="absolute inset-0 flex flex-col items-center justify-center rotate-0">
           <span
             className="text-5xl font-heading font-bold leading-none"
@@ -139,17 +135,19 @@ export default function DonutChart({
           <span className="text-base text-gray-400 font-heading mt-0.5">
             /100
           </span>
-          <span
-            className="text-xs font-bold uppercase tracking-wider mt-2 px-3 py-1 rounded-full"
-            style={{
-              color: verdictColor,
-              backgroundColor: `${verdictColor}15`,
-            }}
-          >
-            {verdictLabel}
-          </span>
         </div>
       </div>
+
+      {/* Verdict label below donut */}
+      <span
+        className="mt-4 inline-block text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full"
+        style={{
+          color: verdictColor,
+          backgroundColor: `${verdictColor}15`,
+        }}
+      >
+        {verdictLabel}
+      </span>
     </div>
   );
 }
