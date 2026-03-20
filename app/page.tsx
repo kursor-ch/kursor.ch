@@ -115,7 +115,7 @@ export default function DiagnosticWorkPage() {
       </header>
 
       {/* Content */}
-      <div className="max-w-xl mx-auto px-6 py-10 md:py-14" key={screenKey}>
+      <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
         {screen === 0 && <IntroScreen onStart={goNext} />}
 
         {screen >= 1 && screen <= 3 && (
