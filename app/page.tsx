@@ -14,6 +14,7 @@ import ContactScreen, {
 } from "@/components/diagnostic/ContactScreen";
 import OptInScreen, { OptIns } from "@/components/diagnostic/OptInScreen";
 import ResultsScreen from "@/components/diagnostic/ResultsScreen";
+import LoadingScreen from "@/components/diagnostic/LoadingScreen";
 
 declare global {
   interface Window {
@@ -21,7 +22,7 @@ declare global {
   }
 }
 
-// Screens: 0=intro, 1-3=questions, 4=contact, 5=optin, 6=results
+// Screens: 0=intro, 1-3=questions, 4=contact, 5=optin, 6=loading, 7=results
 const TOTAL_STEPS = 6;
 
 function trackEvent(event: string, props?: Record<string, string>) {
@@ -109,7 +110,7 @@ export default function DiagnosticWorkPage() {
           <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
           <span className="text-sm tracking-wide"><span className="text-amber font-heading font-semibold">Kursor</span> <span className="text-gray-900 font-normal">CH</span></span>
         </div>
-        {screen > 0 && screen < 6 && (
+        {screen > 0 && screen <= 5 && (
           <ProgressBar current={screen} total={TOTAL_STEPS} />
         )}
       </header>
@@ -142,7 +143,17 @@ export default function DiagnosticWorkPage() {
           <OptInScreen onSubmit={handleSubmit} onBack={goBack} />
         )}
 
-        {screen === 6 && scores && verdict && (
+        {screen === 6 && (
+          <LoadingScreen
+            onComplete={() => {
+              setScreen(7);
+              setScreenKey((k) => k + 1);
+              window.scrollTo({ top: 0, behavior: "instant" });
+            }}
+          />
+        )}
+
+        {screen === 7 && scores && verdict && (
           <ResultsScreen
             scores={scores}
             verdict={verdict}

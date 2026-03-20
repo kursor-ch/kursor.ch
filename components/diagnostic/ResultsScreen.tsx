@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 import { ScoreBreakdown } from "@/lib/scoring";
 import { Verdict } from "@/lib/verdicts";
-import CategoryBar from "@/components/ui/CategoryBar";
-import VerdictBadge from "@/components/ui/VerdictBadge";
+import DonutChart from "@/components/ui/DonutChart";
 
 interface ResultsScreenProps {
   scores: ScoreBreakdown;
@@ -12,88 +11,91 @@ interface ResultsScreenProps {
   prenom: string;
 }
 
+const CATEGORY_COLORS = {
+  profil: "#D97706",
+  projet: "#15803D",
+  financier: "#3B82F6",
+  preparation: "#8B5CF6",
+};
+
 export default function ResultsScreen({
   scores,
   verdict,
   prenom,
 }: ResultsScreenProps) {
-  const [displayScore, setDisplayScore] = useState(0);
+  const [legendVisible, setLegendVisible] = useState(false);
 
-  useEffect(() => {
-    const target = scores.total;
-    const duration = 1200;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setDisplayScore(target);
-        clearInterval(interval);
-      } else {
-        setDisplayScore(Math.round(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(interval);
-  }, [scores.total]);
+  const handleDonutComplete = useCallback(() => {
+    setLegendVisible(true);
+  }, []);
 
   const categories = [
-    { label: "Profil professionnel", score: scores.profil, max: 30, delayClass: "animate-bar-delay-0" },
-    { label: "Maturité projet", score: scores.projet, max: 30, delayClass: "animate-bar-delay-1" },
-    { label: "Ancrage financier", score: scores.financier, max: 20, delayClass: "animate-bar-delay-2" },
-    { label: "Préparation administrative", score: scores.preparation, max: 20, delayClass: "animate-bar-delay-3" },
+    { label: "Profil professionnel", score: scores.profil, max: 30, color: CATEGORY_COLORS.profil },
+    { label: "Maturité projet", score: scores.projet, max: 30, color: CATEGORY_COLORS.projet },
+    { label: "Ancrage financier", score: scores.financier, max: 20, color: CATEGORY_COLORS.financier },
+    { label: "Préparation administrative", score: scores.preparation, max: 20, color: CATEGORY_COLORS.preparation },
   ];
 
   return (
     <div className="animate-screen-in space-y-8 text-center">
-      <div className="space-y-4 animate-count-up">
-        <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-px" />
-          Votre score de viabilité
-        </p>
-        <div className="flex items-baseline justify-center gap-1">
-          <span
-            className="text-6xl md:text-7xl font-heading font-bold"
-            style={{ color: verdict.color }}
-          >
-            {displayScore}
-          </span>
-          <span className="text-2xl text-gray-400 font-heading">/100</span>
-        </div>
-        <div className="animate-verdict-bounce">
-          <VerdictBadge
-            label={verdict.label}
-            color={verdict.color}
-            bgLight={verdict.bgLight}
-          />
-        </div>
-      </div>
+      {/* Section label */}
+      <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-px" />
+        Votre score de viabilité
+      </p>
 
-      <div className="max-w-md mx-auto space-y-4 text-left">
-        {categories.map((cat) => (
-          <CategoryBar
+      {/* Donut chart */}
+      <DonutChart
+        total={scores.total}
+        categories={categories.map((c) => ({
+          label: c.label,
+          score: c.score,
+          color: c.color,
+        }))}
+        verdictLabel={verdict.label}
+        verdictColor={verdict.color}
+        onAnimationComplete={handleDonutComplete}
+      />
+
+      {/* Category legend */}
+      <div className="max-w-sm mx-auto space-y-2.5 text-left">
+        {categories.map((cat, i) => (
+          <div
             key={cat.label}
-            label={cat.label}
-            score={cat.score}
-            max={cat.max}
-            color={verdict.color}
-            barDelayClass={cat.delayClass}
-          />
+            className="flex items-center gap-3 text-sm transition-all duration-500"
+            style={{
+              opacity: legendVisible ? 1 : 0,
+              transform: legendVisible ? "translateY(0)" : "translateY(8px)",
+              transitionDelay: `${i * 100}ms`,
+            }}
+          >
+            <span
+              className="flex-shrink-0 w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: cat.color }}
+            />
+            <span className="text-gray-700 font-medium">{cat.label}</span>
+            <span className="ml-auto text-gray-400 font-body tabular-nums">
+              {cat.score}/{cat.max}
+            </span>
+          </div>
         ))}
       </div>
 
+      {/* Verdict summary */}
       <div className="max-w-md mx-auto">
         <p className="text-base text-gray-600 leading-relaxed">
           {verdict.summary}
         </p>
       </div>
 
+      {/* Email notification */}
       <div className="max-w-md mx-auto">
         <p className="text-sm text-gray-500">
           Votre rapport détaillé arrive dans votre boîte email sous quelques minutes.
         </p>
       </div>
 
+      {/* Calendly CTA */}
       <div className="max-w-md mx-auto pt-4 border-t border-gray-100 space-y-3">
         <a
           href="https://calendly.com/sav-gcconsulting/30min"
