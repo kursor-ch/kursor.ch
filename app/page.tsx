@@ -107,10 +107,6 @@ export default function DiagnosticWorkPage() {
       <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-xl mx-auto px-6 py-3 flex items-center">
           <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
-          <span className="ml-2 text-sm font-heading font-semibold tracking-tight">
-            <span className="text-gray-900">Kursor</span>
-            <span className="text-amber ml-0.5">CH</span>
-          </span>
         </div>
         {screen > 0 && screen < 6 && (
           <ProgressBar current={screen} total={TOTAL_STEPS} />
