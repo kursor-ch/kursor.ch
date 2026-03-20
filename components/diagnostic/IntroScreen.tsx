@@ -90,10 +90,10 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       <div className="relative animate-intro-cta">
         <button
           onClick={onStart}
-          className="group relative inline-flex items-center justify-center gap-3 bg-amber text-white px-10 py-4.5 text-base font-semibold tracking-wide transition-all duration-300 hover:bg-amber/90 hover:shadow-2xl hover:shadow-amber/20 hover:-translate-y-0.5 active:translate-y-0 rounded-xl"
+          className="group relative inline-flex items-center justify-center gap-3 bg-amber text-white px-12 py-5 text-lg font-bold tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-2xl hover:shadow-amber/30 hover:-translate-y-1 active:translate-y-0 rounded-xl shadow-lg shadow-amber/20 ring-1 ring-amber/20"
         >
           Évaluer mon projet
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber text-white text-sm transition-transform duration-300 group-hover:translate-x-1">
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-base transition-transform duration-300 group-hover:translate-x-1.5">
             →
           </span>
         </button>
