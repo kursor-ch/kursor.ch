@@ -5,6 +5,7 @@ interface CategoryBarProps {
   score: number;
   max: number;
   color: string;
+  barDelayClass?: string;
 }
 
 export default function CategoryBar({
@@ -12,6 +13,7 @@ export default function CategoryBar({
   score,
   max,
   color,
+  barDelayClass,
 }: CategoryBarProps) {
   const pct = Math.round((score / max) * 100);
 
@@ -25,7 +27,7 @@ export default function CategoryBar({
       </div>
       <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
         <div
-          className="h-full rounded-full animate-bar-fill"
+          className={`h-full rounded-full ${barDelayClass || "animate-bar-fill"}`}
           style={{ width: `${pct}%`, backgroundColor: color }}
         />
       </div>
