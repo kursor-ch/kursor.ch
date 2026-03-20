@@ -6,7 +6,7 @@ interface IntroScreenProps {
 
 export default function IntroScreen({ onStart }: IntroScreenProps) {
   return (
-    <div className="relative flex flex-col items-center min-h-[calc(100vh-60px)] justify-center text-center px-6 py-10 overflow-hidden">
+    <div className="relative flex flex-col items-center min-h-[calc(100vh-60px)] justify-center text-center px-6 py-4 md:py-10 overflow-hidden">
       {/* Layered atmospheric background */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -28,12 +28,12 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       />
       {/* Decorative geometric accent — thin amber line */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-amber/30 to-transparent"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-px h-10 md:h-20 bg-gradient-to-b from-amber/30 to-transparent"
         aria-hidden="true"
       />
 
       {/* Headline */}
-      <h1 className="relative text-[2rem] md:text-[2.75rem] lg:text-[3.5rem] font-heading font-bold text-gray-900 leading-[1.1] max-w-2xl mb-7 animate-intro-headline">
+      <h1 className="relative text-[2rem] md:text-[2.75rem] lg:text-[3.5rem] font-heading font-bold text-gray-900 leading-[1.1] max-w-2xl mb-4 md:mb-7 animate-intro-headline">
         Êtes-vous prêt pour la{" "}
         <span className="relative text-amber">
           Suisse
@@ -43,12 +43,12 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </h1>
 
       {/* Subtitle */}
-      <p className="relative text-lg text-gray-500 text-center max-w-md mx-auto mb-6 leading-relaxed font-body animate-intro-subtitle">
+      <p className="relative text-lg text-gray-500 text-center max-w-md mx-auto mb-3 md:mb-6 leading-relaxed font-body animate-intro-subtitle">
         Identifiez vos forces, vos risques et les erreurs à éviter avant de vous lancer.
       </p>
 
       {/* Badge — below subtitle */}
-      <div className="relative mb-10 animate-intro-badge">
+      <div className="relative mb-6 md:mb-10 animate-intro-badge">
         <span className="inline-flex items-center gap-2.5 rounded-full border border-amber/30 bg-gradient-to-r from-amber/8 to-amber/4 px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-amber shadow-sm shadow-amber/10">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/60" />
@@ -59,7 +59,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </div>
 
       {/* Trust badges */}
-      <div className="relative grid grid-cols-3 w-full max-w-md mb-12 animate-intro-features">
+      <div className="relative grid grid-cols-3 w-full max-w-md mb-6 md:mb-12 animate-intro-features">
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-full bg-amber/8 border border-amber/10 flex items-center justify-center">
             <svg className="w-4.5 h-4.5 text-amber" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
