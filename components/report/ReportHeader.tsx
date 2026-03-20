@@ -19,10 +19,8 @@ export default function ReportHeader({
   return (
     <section className="text-center space-y-6 pb-8 border-b border-gray-100">
       <div className="flex items-center justify-center gap-2">
-        <Image src="/kursor-logo-amber.png" alt="Kursor" width={40} height={40} className="h-10 w-auto rounded-lg" />
-        <span className="font-heading font-semibold text-2xl text-gray-900">
-          Kursor <span className="text-amber">CH</span>
-        </span>
+        <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
+        <span className="font-heading font-semibold text-sm text-amber">kursor</span>
       </div>
       <h1 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900">
         {prenom}, votre diagnostic Kursor CH
