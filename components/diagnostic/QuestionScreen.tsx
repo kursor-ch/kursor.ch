@@ -25,12 +25,12 @@ export default function QuestionScreen({
   return (
     <div className="animate-screen-in space-y-10">
       <div>
-        <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-1">
+        <h2 className="animate-q-title text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-1">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
           {screen.title}
         </h2>
         {screen.subtitle && (
-          <p className="text-sm text-gray-500 ml-4">{screen.subtitle}</p>
+          <p className="animate-q-subtitle text-sm text-gray-500 ml-4">{screen.subtitle}</p>
         )}
       </div>
 
@@ -45,24 +45,34 @@ export default function QuestionScreen({
 
           {q.type === "card" ? (
             <div className="space-y-2.5">
-              {q.options.map((opt) => (
-                <OptionCard
+              {q.options.map((opt, i) => (
+                <div
                   key={opt.key}
-                  label={opt.label}
-                  selected={answers[q.id] === opt.key}
-                  onClick={() => onAnswer(q.id, opt.key)}
-                />
+                  className="animate-stagger-item"
+                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                >
+                  <OptionCard
+                    label={opt.label}
+                    selected={answers[q.id] === opt.key}
+                    onClick={() => onAnswer(q.id, opt.key)}
+                  />
+                </div>
               ))}
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">
-              {q.options.map((opt) => (
-                <OptionPill
+              {q.options.map((opt, i) => (
+                <div
                   key={opt.key}
-                  label={opt.label}
-                  selected={answers[q.id] === opt.key}
-                  onClick={() => onAnswer(q.id, opt.key)}
-                />
+                  className="animate-stagger-item"
+                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                >
+                  <OptionPill
+                    label={opt.label}
+                    selected={answers[q.id] === opt.key}
+                    onClick={() => onAnswer(q.id, opt.key)}
+                  />
+                </div>
               ))}
             </div>
           )}

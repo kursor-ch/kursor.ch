@@ -50,11 +50,23 @@
   animation: screenIn 0.4s ease-out forwards;
 }
 
-/* Intro screen — staggered entrance choreography */
-@keyframes introReveal {
+/* ===== Intro screen — staggered entrance choreography ===== */
+
+/* Title line 1: "Prêt pour la" — fade in */
+@keyframes introFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Title "Suisse ?" — fade in + slide up */
+@keyframes introSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -62,32 +74,126 @@
   }
 }
 
-.animate-intro-badge {
+.animate-intro-title-line1 {
   opacity: 0;
-  animation: introReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  animation: introFadeIn 0.5s ease-out 0.3s forwards;
 }
 
-.animate-intro-headline {
+.animate-intro-title-suisse {
   opacity: 0;
-  animation: introReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+  animation: introSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
 .animate-intro-subtitle {
   opacity: 0;
-  animation: introReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  animation: introFadeIn 0.6s ease-out 0.6s forwards;
 }
 
-.animate-intro-features {
+.animate-intro-badge {
   opacity: 0;
-  animation: introReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  animation: introFadeIn 0.6s ease-out 0.8s forwards;
+}
+
+/* CTA — scale in with bounce */
+@keyframes introBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-intro-cta {
   opacity: 0;
-  animation: introReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+  animation: introBounceIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
 }
 
-.animate-intro-scroll {
+/* ===== Question screen animations ===== */
+
+/* Title — slide in from left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-q-title {
   opacity: 0;
-  animation: introReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+/* Subtitle — fade in with delay after title */
+.animate-q-subtitle {
+  opacity: 0;
+  animation: introFadeIn 0.4s ease-out 0.2s forwards;
+}
+
+/* Cards and pills — stagger in from bottom */
+@keyframes staggerUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger-item {
+  opacity: 0;
+  animation: staggerUp 0.35s ease-out forwards;
+}
+
+/* ===== Results screen animations ===== */
+
+/* Verdict badge — scale in with bounce */
+@keyframes verdictBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-verdict-bounce {
+  opacity: 0;
+  animation: verdictBounce 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+}
+
+/* Staggered bar fill delays */
+.animate-bar-delay-0 {
+  animation: barFill 0.8s ease-out 0.3s forwards;
+  width: 0%;
+}
+.animate-bar-delay-1 {
+  animation: barFill 0.8s ease-out 0.5s forwards;
+  width: 0%;
+}
+.animate-bar-delay-2 {
+  animation: barFill 0.8s ease-out 0.7s forwards;
+  width: 0%;
+}
+.animate-bar-delay-3 {
+  animation: barFill 0.8s ease-out 0.9s forwards;
+  width: 0%;
 }

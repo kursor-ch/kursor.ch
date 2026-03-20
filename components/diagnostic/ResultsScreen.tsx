@@ -38,10 +38,10 @@ export default function ResultsScreen({
   }, [scores.total]);
 
   const categories = [
-    { label: "Profil professionnel", score: scores.profil, max: 30 },
-    { label: "Maturité projet", score: scores.projet, max: 30 },
-    { label: "Solidité financière", score: scores.financier, max: 20 },
-    { label: "Préparation", score: scores.preparation, max: 20 },
+    { label: "Profil professionnel", score: scores.profil, max: 30, delayClass: "animate-bar-delay-0" },
+    { label: "Maturité projet", score: scores.projet, max: 30, delayClass: "animate-bar-delay-1" },
+    { label: "Solidité financière", score: scores.financier, max: 20, delayClass: "animate-bar-delay-2" },
+    { label: "Préparation", score: scores.preparation, max: 20, delayClass: "animate-bar-delay-3" },
   ];
 
   return (
@@ -60,11 +60,13 @@ export default function ResultsScreen({
           </span>
           <span className="text-2xl text-gray-400 font-heading">/100</span>
         </div>
-        <VerdictBadge
-          label={verdict.label}
-          color={verdict.color}
-          bgLight={verdict.bgLight}
-        />
+        <div className="animate-verdict-bounce">
+          <VerdictBadge
+            label={verdict.label}
+            color={verdict.color}
+            bgLight={verdict.bgLight}
+          />
+        </div>
       </div>
 
       <div className="max-w-md mx-auto space-y-4 text-left">
@@ -75,6 +77,7 @@ export default function ResultsScreen({
             score={cat.score}
             max={cat.max}
             color={verdict.color}
+            barDelayClass={cat.delayClass}
           />
         ))}
       </div>
