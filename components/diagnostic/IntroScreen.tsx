@@ -54,7 +54,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
           </span>
-          Diagnostic gratuit — 2 minutes
+          Diagnostic gratuit
         </span>
       </div>
 
