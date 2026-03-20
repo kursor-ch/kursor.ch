@@ -59,6 +59,27 @@ export default function QuestionScreen({
                 </div>
               ))}
             </div>
+          ) : q.type === "select" ? (
+            <div className="animate-stagger-item" style={{ animationDelay: "0.3s" }}>
+              <select
+                value={answers[q.id] || ""}
+                onChange={(e) => onAnswer(q.id, e.target.value)}
+                className={`w-full rounded-xl border bg-white py-4 px-4 text-base appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%2378716c%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.23%207.21a.75.75%200%20011.06.02L10%2011.168l3.71-3.938a.75.75%200%20111.08%201.04l-4.25%204.5a.75.75%200%2001-1.08%200l-4.25-4.5a.75.75%200%2001.02-1.06z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-10 transition-colors duration-200 focus:outline-none focus:ring-0 ${
+                  answers[q.id]
+                    ? "border-[#E7E5E4] text-gray-900 focus:border-amber"
+                    : "border-[#E7E5E4] text-gray-400 focus:border-amber"
+                }`}
+              >
+                <option value="" disabled>
+                  Sélectionnez une option
+                </option>
+                {q.options.map((opt) => (
+                  <option key={opt.key} value={opt.key}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {q.options.map((opt, i) => (

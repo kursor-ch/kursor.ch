@@ -1,4 +1,4 @@
-export type QuestionType = "card" | "pill";
+export type QuestionType = "card" | "pill" | "select";
 
 export interface QuestionOption {
   label: string;
@@ -39,7 +39,7 @@ export const questionScreens: QuestionScreen[] = [
         id: "secteur",
         label: "Dans quel secteur travaillez-vous ?",
         hint: "Certains secteurs sont en forte pénurie en Suisse — votre profil pourrait être très demandé.",
-        type: "pill",
+        type: "select",
         options: [
           { label: "Tech / IT / Digital", key: "tech" },
           { label: "Finance / Banque / Assurance", key: "finance" },
@@ -77,7 +77,7 @@ export const questionScreens: QuestionScreen[] = [
         id: "canton",
         label: "Quelle région ou canton visez-vous ?",
         hint: "Le canton change tout : fiscalité, primes d'assurance, coût de la vie, marché de l'emploi.",
-        type: "pill",
+        type: "select",
         options: [
           { label: "Genève", key: "geneve" },
           { label: "Vaud (Lausanne)", key: "vaud" },
