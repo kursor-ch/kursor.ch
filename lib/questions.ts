@@ -21,7 +21,8 @@ export interface QuestionScreen {
 
 export const questionScreens: QuestionScreen[] = [
   {
-    title: "Votre situation actuelle",
+    title: "Commençons par votre profil",
+    subtitle: "Le marché suisse valorise certains profils plus que d\u2019autres. Ces trois questions nous permettent d\u2019évaluer votre positionnement.",
     questions: [
       {
         id: "statut",
@@ -69,7 +70,8 @@ export const questionScreens: QuestionScreen[] = [
     ],
   },
   {
-    title: "Votre projet suisse",
+    title: "Parlons de votre projet",
+    subtitle: "Le canton que vous visez et votre horizon de départ changent tout : fiscalité, opportunités, coût de la vie. Précisons votre projet.",
     questions: [
       {
         id: "canton",
@@ -103,8 +105,8 @@ export const questionScreens: QuestionScreen[] = [
     ],
   },
   {
-    title: "Votre préparation",
-    subtitle: "Ces questions révèlent les angles morts qui coûtent le plus cher aux expatriés.",
+    title: "Évaluons votre préparation",
+    subtitle: "C\u2019est souvent là que se cachent les erreurs les plus coûteuses. Assurance maladie, budget, démarches — faisons le point.",
     questions: [
       {
         id: "budget",
