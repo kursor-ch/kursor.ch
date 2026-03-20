@@ -89,7 +89,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       <div className="relative animate-intro-cta">
         <button
           onClick={onStart}
-          className="group relative inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-10 py-4.5 text-base font-semibold tracking-wide transition-all duration-300 hover:bg-gray-800 hover:shadow-2xl hover:shadow-gray-900/20 hover:-translate-y-0.5 active:translate-y-0 rounded-2xl"
+          className="group relative inline-flex items-center justify-center gap-3 bg-amber text-white px-10 py-4.5 text-base font-semibold tracking-wide transition-all duration-300 hover:bg-amber/90 hover:shadow-2xl hover:shadow-amber/20 hover:-translate-y-0.5 active:translate-y-0 rounded-xl"
         >
           Évaluer mon projet
           <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber text-white text-sm transition-transform duration-300 group-hover:translate-x-1">

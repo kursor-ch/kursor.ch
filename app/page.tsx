@@ -60,7 +60,7 @@ export default function DiagnosticWorkPage() {
     const nextScreen = screen + 1;
     setScreen(nextScreen);
     setScreenKey((k) => k + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
 
     if (screen === 0) {
       trackEvent("Diagnostic Started", { funnel: "work" });
@@ -79,7 +79,7 @@ export default function DiagnosticWorkPage() {
   const goBack = () => {
     setScreen((prev) => Math.max(0, prev - 1));
     setScreenKey((k) => k + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const handleSubmit = async (optIns: OptIns) => {
@@ -89,7 +89,7 @@ export default function DiagnosticWorkPage() {
     setVerdict(v);
     setScreen(6);
     setScreenKey((k) => k + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
 
     trackEvent("Diagnostic Completed", {
       funnel: "work",
@@ -105,12 +105,16 @@ export default function DiagnosticWorkPage() {
     <main className="min-h-screen">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="max-w-xl mx-auto px-6 py-3 flex items-center">
           <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
-          {screen > 0 && screen < 6 && (
-            <ProgressBar current={screen} total={TOTAL_STEPS} />
-          )}
+          <span className="ml-2 text-sm font-heading font-semibold tracking-tight">
+            <span className="text-gray-900">Kursor</span>
+            <span className="text-amber ml-0.5">CH</span>
+          </span>
         </div>
+        {screen > 0 && screen < 6 && (
+          <ProgressBar current={screen} total={TOTAL_STEPS} />
+        )}
       </header>
 
       {/* Content */}
