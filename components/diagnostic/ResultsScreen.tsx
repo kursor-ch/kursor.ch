@@ -103,7 +103,7 @@ export default function ResultsScreen({
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-xl bg-amber px-6 py-4 text-white font-semibold text-base sm:text-lg shadow-lg shadow-amber/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber/30 hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0"
         >
-          Réservez un appel gratuit avec un conseiller →
+          Réservez un appel gratuit avec un conseiller Kursor →
         </a>
         <p className="text-xs text-gray-400">
           Sans engagement. Un expert analyse votre situation et vous oriente.

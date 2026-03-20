@@ -7,8 +7,9 @@ interface LoadingScreenProps {
 }
 
 const messages = [
-  "Analyse en cours...",
-  "Calcul de votre score...",
+  "Analyse de votre profil...",
+  "Évaluation de votre projet...",
+  "Calcul de votre score de viabilité...",
 ];
 
 export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
@@ -29,13 +30,15 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     };
     requestAnimationFrame(raf);
 
-    // Message transition at 1.5s, complete at 3s
-    const t1 = setTimeout(() => setActiveIndex(1), 1500);
-    const t2 = setTimeout(() => onComplete(), 3000);
+    // Message transitions at 1s and 2s, complete at 3s
+    const t1 = setTimeout(() => setActiveIndex(1), 1000);
+    const t2 = setTimeout(() => setActiveIndex(2), 2000);
+    const t3 = setTimeout(() => onComplete(), 3000);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, [onComplete]);
 
