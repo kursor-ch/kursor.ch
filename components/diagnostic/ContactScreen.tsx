@@ -83,6 +83,9 @@ export default function ContactScreen({
 
       <div className="space-y-5">
         <div>
+          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+            Prénom <span className="text-rouge">*</span>
+          </label>
           <input
             type="text"
             placeholder="Prénom"
@@ -95,6 +98,9 @@ export default function ContactScreen({
           )}
         </div>
         <div>
+          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+            Nom <span className="text-rouge">*</span>
+          </label>
           <input
             type="text"
             placeholder="Nom"
@@ -107,6 +113,9 @@ export default function ContactScreen({
           )}
         </div>
         <div>
+          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+            Email <span className="text-rouge">*</span>
+          </label>
           <input
             type="email"
             placeholder="Email"
@@ -119,6 +128,9 @@ export default function ContactScreen({
           )}
         </div>
         <div>
+          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+            Numéro de téléphone <span className="text-rouge">*</span>
+          </label>
           <input
             type="tel"
             placeholder="Numéro de téléphone"
@@ -134,6 +146,16 @@ export default function ContactScreen({
 
       {/* Separator */}
       <div className="border-t border-stone-200" />
+
+      {/* Consent intro */}
+      <div>
+        <h3 className="text-[16px] font-heading text-[#111827] mb-2">
+          Une dernière chose avant vos résultats
+        </h3>
+        <p className="text-[13px] font-body text-[#9CA3AF] mb-4">
+          Vos données sont traitées de manière confidentielle et ne sont jamais revendues.
+        </p>
+      </div>
 
       {/* Consent checkboxes */}
       <div className="space-y-4">
@@ -242,7 +264,7 @@ export default function ContactScreen({
           onClick={handleSubmit}
           className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
         >
-          Voir mon score
+          Générer mon score →
         </button>
       </div>
     </div>
