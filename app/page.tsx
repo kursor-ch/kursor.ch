@@ -152,6 +152,7 @@ export default function DiagnosticWorkPage() {
             scores={scores}
             verdict={verdict}
             prenom={contact.prenom}
+            answers={answers}
           />
         )}
       </div>

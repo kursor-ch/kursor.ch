@@ -195,3 +195,20 @@
   animation: barFill 0.8s ease-out 0.9s forwards;
   width: 0%;
 }
+
+/* Results — strengths & risks staggered fade-in */
+@keyframes fadeStagger {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-stagger {
+  opacity: 0;
+  animation: fadeStagger 0.4s ease-out forwards;
+}
