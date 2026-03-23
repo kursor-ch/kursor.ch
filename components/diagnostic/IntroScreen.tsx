@@ -162,18 +162,10 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
           </footer>
         </blockquote>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-intro-scroll">
-          <div className="flex flex-col items-center gap-2 text-gray-300">
-            <div className="w-5 h-8 rounded-full border-2 border-gray-300/50 flex justify-center pt-1.5">
-              <div className="w-1 h-2 rounded-full bg-gray-400 animate-bounce" />
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Below the fold — Calendly CTA */}
-      <section className="relative px-6 py-16 md:py-20 text-center border-t border-gray-100">
+      <section className="relative px-6 py-10 md:py-14 text-center border-t border-gray-100">
         <h2 className="text-xl md:text-2xl font-heading font-bold text-gray-900 mb-3">
           Besoin d&apos;un accompagnement personnalisé&nbsp;?
         </h2>
