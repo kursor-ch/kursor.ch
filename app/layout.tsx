@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "Kursor CH — Diagnostic d'expatriation en Suisse",
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
