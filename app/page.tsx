@@ -11,8 +11,8 @@ import IntroScreen from "@/components/diagnostic/IntroScreen";
 import QuestionScreen from "@/components/diagnostic/QuestionScreen";
 import ContactScreen, {
   ContactInfo,
+  OptIns,
 } from "@/components/diagnostic/ContactScreen";
-import OptInScreen, { OptIns } from "@/components/diagnostic/OptInScreen";
 import ResultsScreen from "@/components/diagnostic/ResultsScreen";
 import LoadingScreen from "@/components/diagnostic/LoadingScreen";
 
@@ -22,8 +22,8 @@ declare global {
   }
 }
 
-// Screens: 0=intro, 1-3=questions, 4=contact, 5=optin, 6=loading, 7=results
-const TOTAL_STEPS = 6;
+// Screens: 0=intro, 1-3=questions, 4=contact+consent, 5=loading, 6=results
+const TOTAL_STEPS = 5;
 
 function trackEvent(event: string, props?: Record<string, string>) {
   if (typeof window !== "undefined" && window.plausible) {
@@ -72,9 +72,6 @@ export default function DiagnosticWorkPage() {
         screen: String(screen),
       });
     }
-    if (screen === 4) {
-      trackEvent("Contact Info Submitted", { funnel: "work" });
-    }
   };
 
   const goBack = () => {
@@ -88,10 +85,11 @@ export default function DiagnosticWorkPage() {
     const v = getVerdict(computed.total);
     setScores(computed);
     setVerdict(v);
-    setScreen(6);
+    setScreen(5);
     setScreenKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "instant" });
 
+    trackEvent("Contact Info Submitted", { funnel: "work" });
     trackEvent("Diagnostic Completed", {
       funnel: "work",
       verdict: v.key,
@@ -110,7 +108,7 @@ export default function DiagnosticWorkPage() {
           <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
           <span className="text-sm tracking-wide"><span className="text-amber font-heading font-semibold">Kursor</span> <span className="text-gray-900 font-normal">CH</span></span>
         </div>
-        {screen > 0 && screen <= 5 && (
+        {screen > 0 && screen <= 4 && (
           <ProgressBar current={screen} total={TOTAL_STEPS} />
         )}
       </header>
@@ -134,26 +132,22 @@ export default function DiagnosticWorkPage() {
           <ContactScreen
             contact={contact}
             onChange={setContact}
-            onNext={goNext}
+            onSubmit={handleSubmit}
             onBack={goBack}
           />
         )}
 
         {screen === 5 && (
-          <OptInScreen onSubmit={handleSubmit} onBack={goBack} />
-        )}
-
-        {screen === 6 && (
           <LoadingScreen
             onComplete={() => {
-              setScreen(7);
+              setScreen(6);
               setScreenKey((k) => k + 1);
               window.scrollTo({ top: 0, behavior: "instant" });
             }}
           />
         )}
 
-        {screen === 7 && scores && verdict && (
+        {screen === 6 && scores && verdict && (
           <ResultsScreen
             scores={scores}
             verdict={verdict}
