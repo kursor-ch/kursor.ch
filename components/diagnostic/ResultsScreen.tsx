@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { ScoreBreakdown } from "@/lib/scoring";
+import { Answers, ScoreBreakdown } from "@/lib/scoring";
 import { Verdict } from "@/lib/verdicts";
+import { generateInsight } from "@/lib/insights";
+import { detectStrengths } from "@/lib/strengths";
+import { detectRisks, SEVERITY_COLORS } from "@/lib/risks";
 import DonutChart from "@/components/ui/DonutChart";
 
 interface ResultsScreenProps {
   scores: ScoreBreakdown;
   verdict: Verdict;
   prenom: string;
+  answers: Answers;
 }
 
 const CATEGORY_COLORS = {
@@ -18,10 +22,17 @@ const CATEGORY_COLORS = {
   preparation: "#8B5CF6",
 };
 
+const SEVERITY_STYLES: Record<string, { bg: string; text: string; border: string }> = {
+  CRITIQUE: { bg: "#FEF2F2", text: "#DC2626", border: "#FECACA" },
+  "ÉLEVÉ": { bg: "#FFF7ED", text: "#EA580C", border: "#FED7AA" },
+  MOYEN: { bg: "#FFFBEB", text: "#D97706", border: "#FDE68A" },
+};
+
 export default function ResultsScreen({
   scores,
   verdict,
   prenom,
+  answers,
 }: ResultsScreenProps) {
   const [legendVisible, setLegendVisible] = useState(false);
 
@@ -35,6 +46,10 @@ export default function ResultsScreen({
     { label: "Ancrage financier", score: scores.financier, max: 20, color: CATEGORY_COLORS.financier },
     { label: "Préparation administrative", score: scores.preparation, max: 20, color: CATEGORY_COLORS.preparation },
   ];
+
+  const insight = generateInsight(answers, scores);
+  const strengths = detectStrengths(answers);
+  const risks = detectRisks(answers).slice(0, 3);
 
   return (
     <div className="animate-screen-in space-y-8 text-center">
@@ -81,12 +96,87 @@ export default function ResultsScreen({
         ))}
       </div>
 
-      {/* Verdict summary */}
-      <div className="max-w-md mx-auto">
-        <p className="text-base text-gray-600 leading-relaxed">
-          {verdict.summary}
+      {/* Answer-aware insight paragraph */}
+      <div className="max-w-[520px] mx-auto">
+        <p className="text-base text-gray-600 leading-[1.75] text-center">
+          {insight}
         </p>
       </div>
+
+      {/* Detected strengths */}
+      {strengths.length > 0 && (
+        <div>
+          <h3 className="text-lg text-gray-900 mb-3">Vos atouts</h3>
+          <div className="flex flex-wrap justify-center gap-2">
+            {strengths.map((s, i) => (
+              <span
+                key={s.id}
+                className="animate-fade-stagger inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[13px] font-medium border"
+                style={{
+                  animationDelay: `${i * 150}ms`,
+                  backgroundColor: "#F0FDF4",
+                  borderColor: "#BBF7D0",
+                  color: "#15803D",
+                }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0" />
+                {s.title}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Detected risks */}
+      {risks.length > 0 && (
+        <div className="max-w-md mx-auto">
+          <h3 className="text-lg text-gray-900 mb-3">Points d&apos;attention</h3>
+          <div className="space-y-2">
+            {risks.map((r, i) => {
+              const style = SEVERITY_STYLES[r.severity];
+              return (
+                <div
+                  key={r.id}
+                  className="animate-fade-stagger text-left rounded-lg border bg-white p-3.5"
+                  style={{
+                    animationDelay: `${i * 150}ms`,
+                    borderColor: "#E5E7EB",
+                    borderLeftWidth: "3px",
+                    borderLeftColor: SEVERITY_COLORS[r.severity],
+                  }}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="inline-block text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded"
+                      style={{
+                        backgroundColor: style.bg,
+                        color: style.text,
+                        border: `1px solid ${style.border}`,
+                      }}
+                    >
+                      {r.severity}
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900">
+                      {r.title}
+                    </span>
+                  </div>
+                  {r.cost && r.cost !== "—" && (
+                    <p
+                      className="text-[13px] font-semibold mt-1"
+                      style={{ color: style.text }}
+                    >
+                      {r.cost}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-[13px] text-gray-400 text-center mt-4">
+            Votre rapport détaillé par email analyse chaque point et vous donne les clés pour les anticiper.
+          </p>
+        </div>
+      )}
 
       {/* Email notification */}
       <div className="max-w-md mx-auto">
