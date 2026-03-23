@@ -17,9 +17,9 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Progress bar animation: 0 to 100 over 3s
+    // Progress bar animation: 0 to 100 over 2.2s
     const startTime = Date.now();
-    const duration = 3000;
+    const duration = 2200;
     const raf = () => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min(elapsed / duration, 1);
@@ -30,10 +30,10 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     };
     requestAnimationFrame(raf);
 
-    // Message transitions at 1s and 2s, complete at 3s
-    const t1 = setTimeout(() => setActiveIndex(1), 1000);
-    const t2 = setTimeout(() => setActiveIndex(2), 2000);
-    const t3 = setTimeout(() => onComplete(), 3000);
+    // Message transitions evenly spaced, complete at 2.2s
+    const t1 = setTimeout(() => setActiveIndex(1), 733);
+    const t2 = setTimeout(() => setActiveIndex(2), 1466);
+    const t3 = setTimeout(() => onComplete(), 2200);
 
     return () => {
       clearTimeout(t1);
