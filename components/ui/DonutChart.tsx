@@ -59,8 +59,7 @@ export default function DonutChart({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
-  // Build category arcs — segments fill the ENTIRE ring
-  const totalScore = categories.reduce((sum, c) => sum + c.score, 0);
+  // Build category arcs — segments fill proportionally to max 100
   const segments: { offset: number; length: number; color: string }[] = [];
   let accumulated = 0;
 
@@ -69,7 +68,7 @@ export default function DonutChart({
       segments.push({ offset: 0, length: 0, color: cat.color });
       continue;
     }
-    const proportion = cat.score / (totalScore || 1);
+    const proportion = cat.score / 100;
     const segLength = proportion * circumference;
     segments.push({
       offset: accumulated,
@@ -140,10 +139,11 @@ export default function DonutChart({
 
       {/* Verdict label below donut */}
       <span
-        className="mt-4 inline-block text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full"
+        className="mt-4 inline-block text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-sm border-2"
         style={{
           color: verdictColor,
-          backgroundColor: `${verdictColor}15`,
+          borderColor: verdictColor,
+          backgroundColor: "transparent",
         }}
       >
         {verdictLabel}
