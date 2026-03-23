@@ -88,14 +88,34 @@
   animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
 }
 
-.animate-intro-cta {
+.animate-intro-urgency {
+  opacity: 0;
+  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
+}
+
+.animate-intro-outcomes {
   opacity: 0;
   animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
 }
 
-.animate-intro-scroll {
+.animate-intro-cta {
+  opacity: 0;
+  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+}
+
+.animate-intro-social {
   opacity: 0;
   animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
+}
+
+.animate-intro-testimonial {
+  opacity: 0;
+  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
+}
+
+.animate-intro-scroll {
+  opacity: 0;
+  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.8s forwards;
 }
 
 /* ===== Question screen animations ===== */
