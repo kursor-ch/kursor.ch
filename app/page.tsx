@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
+import NewsletterSection from "@/components/NewsletterSection";
 
 const DiagnosticApp = dynamic(
   () => import("@/components/diagnostic/DiagnosticApp"),
@@ -21,6 +22,7 @@ export default function HomePage() {
       <HeroSection />
       <ServicesSection />
       <HowItWorksSection />
+      <NewsletterSection />
       <DiagnosticApp />
     </>
   );
