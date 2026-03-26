@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IBM_Plex_Sans, Fraunces, Outfit } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body className="min-h-screen font-body">
         <Navbar />
         {children}
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>
