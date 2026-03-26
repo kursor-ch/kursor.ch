@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import HeroSection from "@/components/HeroSection";
 
 const DiagnosticApp = dynamic(
   () => import("@/components/diagnostic/DiagnosticApp"),
@@ -13,5 +14,10 @@ const DiagnosticApp = dynamic(
 );
 
 export default function HomePage() {
-  return <DiagnosticApp />;
+  return (
+    <>
+      <HeroSection />
+      <DiagnosticApp />
+    </>
+  );
 }
