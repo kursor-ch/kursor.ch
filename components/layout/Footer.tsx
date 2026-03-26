@@ -3,14 +3,13 @@ import Link from "next/link";
 
 const diagnosticLinks = [
   { label: "Emploi", href: "/emploi" },
-  { label: "Logement", href: "#" },
-  { label: "Assurance", href: "#" },
-  { label: "Prévoyance", href: "#" },
+  { label: "Logement", href: "/logement" },
+  { label: "Assurance", href: "/assurance" },
+  { label: "Prévoyance", href: "/prevoyance" },
 ];
 
 const ressourceLinks = [
-  { label: "Comment ça marche", href: "/#comment-ca-marche" },
-  { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
+  { label: "Politique de confidentialit\u00e9", href: "/politique-de-confidentialite" },
   { label: "Contact", href: "mailto:equipe@kursor.ch" },
 ];
 

@@ -41,11 +41,11 @@ export default function NewsletterSection() {
       style={{
         backgroundColor: "#FFFFFF",
         borderColor: "#E5E7EB",
-        paddingTop: 56,
-        paddingBottom: 56,
+        paddingTop: 48,
+        paddingBottom: 48,
       }}
     >
-      <div className="mx-auto px-6" style={{ maxWidth: 480 }}>
+      <div className="mx-auto px-6" style={{ maxWidth: 460 }}>
         <h2
           className="font-heading text-center"
           style={{ fontSize: 22, fontWeight: 600, color: "#111827" }}
