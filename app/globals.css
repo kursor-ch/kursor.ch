@@ -212,3 +212,22 @@
   opacity: 0;
   animation: fadeStagger 0.4s ease-out forwards;
 }
+
+/* ===== Footer link & icon hover styles ===== */
+
+.footer-link {
+  transition: color 0.15s ease;
+}
+
+.footer-link:hover {
+  color: #FFFFFF !important;
+  text-decoration: underline;
+}
+
+.footer-icon {
+  transition: color 0.15s ease;
+}
+
+.footer-icon:hover {
+  color: #FFFFFF !important;
+}
