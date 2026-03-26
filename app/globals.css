@@ -70,47 +70,47 @@
 
 .animate-intro-headline {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
 }
 
 .animate-intro-subtitle {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
 }
 
 .animate-intro-badge {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;
 }
 
 .animate-intro-features {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.30s forwards;
 }
 
 .animate-intro-urgency {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.19s forwards;
 }
 
 .animate-intro-outcomes {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.34s forwards;
 }
 
 .animate-intro-cta {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.38s forwards;
 }
 
 .animate-intro-social {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
 }
 
 .animate-intro-testimonial {
   opacity: 0;
-  animation: introReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.6s forwards;
+  animation: introReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
 }
 
 /* ===== Question screen animations ===== */
