@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
   { label: "Assurance", href: "/assurance" },
-  { label: "Prévoyance", href: "/prevoyance" },
+  { label: "Pr\u00e9voyance", href: "/prevoyance" },
 ];
 
 const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/prevoyance"];
@@ -30,7 +30,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -46,22 +45,21 @@ export default function Navbar() {
       }}
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        {/* Desktop / Mobile bar */}
-        <div className="flex h-14 items-center justify-between md:h-16">
+        <div className="flex items-center justify-between h-14 md:h-16">
           {/* Left: Logo + brand */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
               src="/kursor-logo-amber.png"
               alt="Kursor CH"
-              width={28}
-              height={28}
-              className="md:w-8 md:h-8"
+              width={36}
+              height={36}
+              style={{ height: 36, width: "auto" }}
             />
-            <span className="text-lg leading-none">
-              <span className="font-semibold text-gray-900">Kursor</span>{" "}
-              <span className="font-normal" style={{ color: "#9CA3AF" }}>
-                CH
-              </span>
+            <span style={{ fontSize: 14, lineHeight: 1 }}>
+              <span style={{ fontWeight: 600, color: "#111827" }}>
+                Kursor
+              </span>{" "}
+              <span style={{ fontWeight: 400, color: "#9CA3AF" }}>CH</span>
             </span>
           </Link>
 
@@ -70,20 +68,41 @@ export default function Navbar() {
             {isDiagnosticPage ? (
               <Link
                 href="/"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                className="transition-colors"
+                style={{
+                  fontSize: 14,
+                  fontWeight: 400,
+                  color: "#6B7280",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#111827")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "#6B7280")
+                }
               >
-                ← Retour
+                &larr; Retour
               </Link>
             ) : (
               NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors ${
-                    pathname === link.href
-                      ? "text-amber"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`}
+                  className="transition-colors"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color:
+                      pathname === link.href ? "#D97706" : "#6B7280",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (pathname !== link.href)
+                      e.currentTarget.style.color = "#111827";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (pathname !== link.href)
+                      e.currentTarget.style.color = "#6B7280";
+                  }}
                 >
                   {link.label}
                 </Link>
@@ -95,76 +114,88 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/#services"
-              className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90"
-              style={{ backgroundColor: "#D97706" }}
+              className="rounded-lg text-white transition-colors"
+              style={{
+                backgroundColor: "#D97706",
+                fontSize: 14,
+                fontWeight: 500,
+                padding: "10px 20px",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#B45309")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "#D97706")
+              }
             >
               Diagnostic gratuit
             </Link>
 
             {/* Hamburger (mobile only) */}
-            <button
-              type="button"
-              onClick={() => setMenuOpen((v) => !v)}
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 md:hidden"
-              aria-expanded={menuOpen}
-              aria-label="Menu de navigation"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
+            {!isDiagnosticPage && (
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 md:hidden"
+                aria-expanded={menuOpen}
+                aria-label="Menu de navigation"
               >
-                {menuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                >
+                  {menuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            )}
           </div>
         </div>
 
         {/* Mobile slide-down menu */}
-        <div
-          className={`overflow-hidden transition-all duration-200 ease-in-out md:hidden ${
-            menuOpen ? "max-h-60 pb-4" : "max-h-0"
-          }`}
-        >
-          <div className="flex flex-col gap-1 pt-1">
-            {isDiagnosticPage ? (
-              <Link
-                href="/"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              >
-                ← Retour
-              </Link>
-            ) : (
-              NAV_LINKS.map((link) => (
+        {!isDiagnosticPage && (
+          <div
+            className={`overflow-hidden transition-all duration-200 ease-in-out md:hidden ${
+              menuOpen ? "max-h-60 pb-4" : "max-h-0"
+            }`}
+          >
+            <div className="flex flex-col gap-1 pt-1">
+              {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                    pathname === link.href
-                      ? "text-amber bg-amber/5"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
+                  className="rounded-md px-3 py-2 transition-colors"
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color:
+                      pathname === link.href ? "#D97706" : "#6B7280",
+                    backgroundColor:
+                      pathname === link.href
+                        ? "rgba(217,119,6,0.05)"
+                        : undefined,
+                  }}
                 >
                   {link.label}
                 </Link>
-              ))
-            )}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );
