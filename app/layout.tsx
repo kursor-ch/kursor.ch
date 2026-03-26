@@ -3,6 +3,20 @@ import "./globals.css";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { IBM_Plex_Sans, Fraunces } from "next/font/google";
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "Kursor CH — Diagnostic d'expatriation en Suisse",
@@ -18,30 +32,18 @@ export default function RootLayout({
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${ibmPlexSans.variable} ${fraunces.variable}`}>
       <head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         {plausibleDomain && (
           <Script
             defer
             data-domain={plausibleDomain}
             src="https://plausible.io/js/script.js"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
         )}
       </head>
-      <body className="min-h-screen">
+      <body className="min-h-screen font-body">
         {children}
         <Analytics />
         <SpeedInsights />

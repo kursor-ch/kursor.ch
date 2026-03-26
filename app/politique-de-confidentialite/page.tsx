@@ -15,17 +15,17 @@ export default function PolitiqueConfidentialitePage() {
               --bg: #050505; --card: #0D0D0D; --line: #1C1C1C;
               --amb: #C87F1A; --amb3: #E5A740;
               --w: #F5F1EB; --w2: #C4BEB4; --w3: #918B82; --w4: #5E5952;
-              font-family: 'Manrope', -apple-system, sans-serif;
+              font-family: var(--font-body), -apple-system, sans-serif;
               background: var(--bg); color: var(--w2);
               line-height: 1.75; -webkit-font-smoothing: antialiased;
               font-size: 14.5px; min-height: 100vh;
             }
             .privacy-page .wrap { max-width: 680px; margin: 0 auto; padding: 24px 24px 80px; }
             .privacy-page .hdr { display: flex; align-items: center; gap: 10px; padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-            .privacy-page .hdr a { font-family: 'Manrope', -apple-system, sans-serif; font-weight: 700; font-size: 15px; color: var(--w); text-decoration: none; }
-            .privacy-page h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; font-weight: 400; color: var(--w); margin-bottom: 8px; line-height: 1.2; }
+            .privacy-page .hdr a { font-family: var(--font-body), -apple-system, sans-serif; font-weight: 700; font-size: 15px; color: var(--w); text-decoration: none; }
+            .privacy-page h1 { font-family: var(--font-heading), Georgia, serif; font-size: 32px; font-weight: 400; color: var(--w); margin-bottom: 8px; line-height: 1.2; }
             .privacy-page .updated { font-size: 12px; color: var(--w4); margin-bottom: 40px; font-weight: 500; }
-            .privacy-page h2 { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--w); margin-top: 40px; margin-bottom: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
+            .privacy-page h2 { font-family: var(--font-heading), Georgia, serif; font-size: 22px; font-weight: 400; color: var(--w); margin-top: 40px; margin-bottom: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
             .privacy-page h2:first-of-type { border-top: none; padding-top: 0; }
             .privacy-page h3 { font-size: 15px; font-weight: 700; color: var(--w); margin-top: 24px; margin-bottom: 8px; }
             .privacy-page p { margin-bottom: 14px; color: var(--w2); }
@@ -43,17 +43,12 @@ export default function PolitiqueConfidentialitePage() {
           `,
         }}
       />
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
       <div className="wrap">
         <div className="hdr">
           <Link href="/" style={{ textDecoration: "none" }}>
             <span
               style={{
-                fontFamily: "'Manrope', -apple-system, sans-serif",
+                fontFamily: "var(--font-body), -apple-system, sans-serif",
                 fontWeight: 700,
                 fontSize: 15,
                 color: "#F5F1EB",

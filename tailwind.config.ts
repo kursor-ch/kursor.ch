@@ -18,8 +18,8 @@ const config: Config = {
         rouge: "#DC2626",
       },
       fontFamily: {
-        heading: ["Fraunces", "serif"],
-        body: ["IBM Plex Sans", "sans-serif"],
+        heading: ["var(--font-heading)", "serif"],
+        body: ["var(--font-body)", "sans-serif"],
       },
     },
   },
