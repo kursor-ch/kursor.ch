@@ -9,7 +9,7 @@ const diagnosticLinks = [
 ];
 
 const ressourceLinks = [
-  { label: "Politique de confidentialit\u00e9", href: "/politique-de-confidentialite" },
+  { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
   { label: "Contact", href: "mailto:equipe@kursor.ch" },
 ];
 
