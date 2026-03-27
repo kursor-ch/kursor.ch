@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
   { label: "Assurance", href: "/assurance" },
-  { label: "Pr\u00e9voyance", href: "/prevoyance" },
+  { label: "Prévoyance", href: "/prevoyance" },
 ];
 
 const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/prevoyance"];

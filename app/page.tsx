@@ -5,7 +5,7 @@ const services = [
   {
     icon: "\u{1F4BC}",
     title: "Emploi",
-    description: "Trouvez un poste en Suisse et n\u00e9gociez au bon niveau.",
+    description: "Trouvez un poste en Suisse et négociez au bon niveau.",
     stat: "+40% de salaire en moyenne",
     cta: "Faire le diagnostic \u2192",
     href: "/emploi",
@@ -15,26 +15,26 @@ const services = [
     icon: "\u{1F3E0}",
     title: "Logement",
     description: "Trouvez votre logement en Suisse romande.",
-    stat: "3 mois de caution \u00e0 anticiper",
-    cta: "Bient\u00f4t disponible",
+    stat: "3 mois de caution à anticiper",
+    cta: "Bientôt disponible",
     href: "/logement",
     live: false,
   },
   {
     icon: "\u{1F6E1}",
     title: "Assurance",
-    description: "Optimisez votre couverture et \u00e9vitez les surco\u00fbts.",
-    stat: "2\u00a0400 CHF/an d\u2019\u00e9conomie potentielle",
-    cta: "Bient\u00f4t disponible",
+    description: "Optimisez votre couverture et évitez les surcoûts.",
+    stat: "2\u00a0400 CHF/an d'économie potentielle",
+    cta: "Bientôt disponible",
     href: "/assurance",
     live: false,
   },
   {
     icon: "\u{1F3E6}",
-    title: "Pr\u00e9voyance",
-    description: "Ne perdez plus une ann\u00e9e de d\u00e9duction fiscale.",
-    stat: "7\u00a0258 CHF/an de d\u00e9duction 3\u00e8me pilier",
-    cta: "Bient\u00f4t disponible",
+    title: "Prévoyance",
+    description: "Ne perdez plus une année de déduction fiscale.",
+    stat: "7\u00a0258 CHF/an de déduction 3ème pilier",
+    cta: "Bientôt disponible",
     href: "/prevoyance",
     live: false,
   },
@@ -68,7 +68,7 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
             padding: "2px 8px",
           }}
         >
-          Bient\u00f4t
+          Bientôt
         </span>
       )}
 
@@ -176,8 +176,8 @@ export default function HomePage() {
             }}
           >
             <span className="block text-[28px] md:text-[40px] leading-[1.15]">
-              Chaque \u00e9tape de votre vie en{" "}
-              <span style={{ color: "#D97706" }}>Suisse</span>, simplifi\u00e9e.
+              Chaque étape de votre vie en{" "}
+              <span style={{ color: "#D97706" }}>Suisse</span>, simplifiée.
             </span>
           </h1>
 
@@ -193,8 +193,8 @@ export default function HomePage() {
               marginBottom: 36,
             }}
           >
-            Emploi, logement, assurances, pr\u00e9voyance — identifiez vos
-            forces, vos risques et les erreurs \u00e0 \u00e9viter.
+            Emploi, logement, assurances, prévoyance — identifiez vos
+            forces, vos risques et les erreurs à éviter.
           </p>
         </div>
 
@@ -227,7 +227,7 @@ export default function HomePage() {
               backgroundColor: "#15803D",
             }}
           />
-          3&nbsp;155 diagnostics r\u00e9alis\u00e9s
+          3&nbsp;155 diagnostics réalisés
         </p>
       </section>
 
