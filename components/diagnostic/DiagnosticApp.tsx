@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import { questionScreens } from "@/lib/questions";
 import { Answers, computeScore, ScoreBreakdown } from "@/lib/scoring";
 import { getVerdict, Verdict } from "@/lib/verdicts";
@@ -102,16 +101,10 @@ export default function DiagnosticApp() {
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-10 bg-creme/80 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-xl mx-auto px-6 py-3 flex items-center justify-between">
-          <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" priority />
-          <span className="text-sm tracking-wide"><span className="text-amber font-heading font-semibold">Kursor</span> <span className="text-gray-900 font-normal">CH</span></span>
-        </div>
-        {screen > 0 && screen <= 4 && (
-          <ProgressBar current={screen} total={TOTAL_STEPS} />
-        )}
-      </header>
+      {/* Progress bar (shown during question screens) */}
+      {screen > 0 && screen <= 4 && (
+        <ProgressBar current={screen} total={TOTAL_STEPS} />
+      )}
 
       {/* Content */}
       <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
