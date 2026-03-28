@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -40,7 +41,7 @@ const icons = [BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon];
 const services = [
   {
     title: "Emploi",
-    description: "Trouvez un poste en Suisse et négociez au bon niveau.",
+    description: "83% des CV français sont éliminés en 6 secondes. Le vôtre est-il prêt ?",
     stat: "+40% de salaire en moyenne",
     cta: "Faire le diagnostic",
     href: "/emploi",
@@ -48,7 +49,7 @@ const services = [
   },
   {
     title: "Logement",
-    description: "Trouvez votre logement en Suisse romande.",
+    description: "Le taux de vacance est sous 1%. Sans stratégie, la recherche dure des mois.",
     stat: "3 mois de caution à anticiper",
     cta: "Bientôt disponible",
     href: "/logement",
@@ -56,7 +57,7 @@ const services = [
   },
   {
     title: "Assurance",
-    description: "Optimisez votre couverture et évitez les surcoûts.",
+    description: "LAMal, complémentaire, franchise — un mauvais choix, c\u2019est 2\u00a0400 CHF/an perdus.",
     stat: "2\u00a0400 CHF/an d\u2019économie potentielle",
     cta: "Bientôt disponible",
     href: "/assurance",
@@ -64,7 +65,7 @@ const services = [
   },
   {
     title: "Prévoyance",
-    description: "Ne perdez plus une année de déduction fiscale.",
+    description: "Chaque année sans 3ème pilier = 7\u00a0258 CHF de déduction fiscale perdus. Définitivement.",
     stat: "7\u00a0258 CHF/an de déduction 3ème pilier",
     cta: "Bientôt disponible",
     href: "/prevoyance",
@@ -72,34 +73,80 @@ const services = [
   },
 ];
 
+/* Card entrance directions: desktop alternates L/R, mobile all from left */
+const cardDirections: Array<"from-left" | "from-right"> = [
+  "from-left",
+  "from-right",
+  "from-left",
+  "from-right",
+];
+
+/* Desktop stagger delays in ms */
+const cardDesktopDelays = [0, 150, 300, 450];
+/* Mobile stagger delays in ms */
+const cardMobileDelays = [0, 120, 240, 360];
+
+function useCardEntranceObserver(threshold = 0.15) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [entered, setEntered] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setEntered(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { containerRef, entered };
+}
+
 function ServiceCard({
   service,
   index,
-  isVisible,
+  entered,
 }: {
   service: (typeof services)[number];
   index: number;
-  isVisible: boolean;
+  entered: boolean;
 }) {
   const Icon = icons[index];
+  const direction = cardDirections[index];
+  const desktopDelay = cardDesktopDelays[index];
+  const mobileDelay = cardMobileDelays[index];
 
   const inner = (
     <div
-      className={`relative bg-white border rounded-xl transition-all duration-250 ${
+      className={`relative bg-white border rounded-xl ${
         service.live
-          ? "border-t-2 cursor-pointer hover:scale-[1.02] hover:border-amber hover:shadow-[0_8px_30px_rgba(217,119,6,0.12)]"
-          : "opacity-[0.85] cursor-default"
-      } ${!service.live ? "stripe-pattern" : ""} scroll-reveal-card ${isVisible ? "visible" : ""}`}
+          ? "border-t-2 cursor-pointer service-card-live"
+          : "opacity-[0.85] service-card-soon"
+      } ${!service.live ? "stripe-pattern" : ""} service-card-enter ${direction} ${entered ? "entered" : ""}`}
       style={{
         padding: "24px 22px",
         borderTopColor: service.live ? "#D97706" : undefined,
         borderColor: service.live ? undefined : "#E5E7EB",
-        transitionDelay: isVisible ? `${index * 100}ms` : "0ms",
+        transitionDelay: entered
+          ? `var(--card-delay, ${desktopDelay}ms)`
+          : "0ms",
+        // CSS custom property for responsive delay
+        ["--card-delay-desktop" as string]: `${desktopDelay}ms`,
+        ["--card-delay-mobile" as string]: `${mobileDelay}ms`,
       }}
     >
       {!service.live && (
         <span
-          className="absolute font-body uppercase"
+          className="absolute font-body uppercase bientot-badge"
           style={{
             top: 12,
             right: 12,
@@ -153,7 +200,7 @@ function ServiceCard({
 
       <span
         className={`font-body inline-flex items-center gap-1 ${
-          service.live ? "group" : ""
+          service.live ? "card-cta-link" : ""
         }`}
         style={{
           display: "block",
@@ -163,9 +210,9 @@ function ServiceCard({
           marginTop: 12,
         }}
       >
-        {service.cta}
+        <span className="card-cta-text">{service.cta}</span>
         {service.live && (
-          <span className="inline-block transition-transform duration-250 group-hover:translate-x-1">
+          <span className="card-cta-arrow">
             &rarr;
           </span>
         )}
@@ -175,7 +222,7 @@ function ServiceCard({
 
   if (service.live) {
     return (
-      <Link href={service.href} className="group">
+      <Link href={service.href} className="card-cta-link">
         {inner}
       </Link>
     );
@@ -184,9 +231,153 @@ function ServiceCard({
   return inner;
 }
 
+/* Hero word-by-word animation component (desktop) */
+function HeroHeadlineDesktop() {
+  const words = ["Chaque", "étape", "de", "votre", "vie", "en"];
+  const afterSuisse = [",", "simplifiée."];
+  // Base delay: badge is 0ms + 400ms duration = words start at ~400ms
+  const baseDelay = 400; // ms after page load
+  const stagger = 60; // ms between words
+  const suisseExtraDelay = 100; // extra delay for "Suisse"
+
+  let wordIndex = 0;
+
+  return (
+    <h1
+      className="font-heading text-center mx-auto hidden md:block"
+      style={{
+        fontWeight: 600,
+        color: "#111827",
+        maxWidth: 640,
+        marginTop: 20,
+      }}
+    >
+      <span className="block text-[48px] leading-[1.12]">
+        {words.map((word) => {
+          const delay = baseDelay + wordIndex * stagger;
+          wordIndex++;
+          return (
+            <span
+              key={`${word}-${wordIndex}`}
+              className="hero-word"
+              style={{ animationDelay: `${delay}ms`, marginRight: "0.25em" }}
+            >
+              {word}
+            </span>
+          );
+        })}
+        <span
+          className="hero-word suisse-underline"
+          style={{
+            animationDelay: `${baseDelay + wordIndex * stagger + suisseExtraDelay}ms`,
+            color: "#D97706",
+            marginRight: "0",
+          }}
+        >
+          Suisse
+          <style>{`
+            .suisse-underline::after {
+              animation-delay: ${baseDelay + wordIndex * stagger + suisseExtraDelay + 500}ms;
+            }
+          `}</style>
+        </span>
+        {afterSuisse.map((word, i) => {
+          wordIndex++;
+          const delay = baseDelay + wordIndex * stagger + suisseExtraDelay;
+          return (
+            <span
+              key={`after-${i}`}
+              className="hero-word"
+              style={{ animationDelay: `${delay}ms`, marginRight: i === 0 ? "0.25em" : "0" }}
+            >
+              {word}
+            </span>
+          );
+        })}
+      </span>
+    </h1>
+  );
+}
+
+/* Hero line-by-line animation (mobile) */
+function HeroHeadlineMobile() {
+  const baseDelay = 400;
+
+  return (
+    <h1
+      className="font-heading text-center mx-auto md:hidden"
+      style={{
+        fontWeight: 600,
+        color: "#111827",
+        maxWidth: 640,
+        marginTop: 20,
+      }}
+    >
+      <span className="block text-[32px] leading-[1.12]">
+        <span
+          className="hero-line-mobile block"
+          style={{ animationDelay: `${baseDelay}ms` }}
+        >
+          Chaque étape de votre
+        </span>
+        <span
+          className="hero-line-mobile block"
+          style={{ animationDelay: `${baseDelay + 200}ms` }}
+        >
+          vie en{" "}
+          <span
+            className="suisse-underline"
+            style={{ color: "#D97706" }}
+          >
+            Suisse
+            <style>{`
+              @media (max-width: 767px) {
+                .suisse-underline::after {
+                  animation-delay: ${baseDelay + 200 + 500}ms;
+                }
+              }
+            `}</style>
+          </span>
+          , simplifiée.
+        </span>
+      </span>
+    </h1>
+  );
+}
+
 export default function HomePage() {
-  const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal(0.15);
+  const { containerRef: cardsRef, entered: cardsEntered } = useCardEntranceObserver(0.15);
   const { ref: proofRef, isVisible: proofVisible } = useScrollReveal(0.15);
+  const [sepReady, setSepReady] = useState(false);
+
+  // Calculate when subtitle finishes to trigger separator
+  // Badge: 0 + 400ms, Words: ~400ms + 8 words * 60ms + 100ms extra = ~980ms, Subtitle: 980 + 200 + 500 = ~1680ms
+  // Separator: 1680 + 100 = 1780ms
+  const subtitleDelay = 1180; // After last word finishes
+  const separatorDelay = subtitleDelay + 500 + 100; // After subtitle finishes
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSepReady(true), separatorDelay);
+    return () => clearTimeout(timer);
+  }, [separatorDelay]);
+
+  // iOS Safari :active fix
+  useEffect(() => {
+    document.body.addEventListener("touchstart", function () {}, { passive: true });
+  }, []);
+
+  // Re-run delay calculation when entered changes
+  const cardsRefCurrent = cardsRef.current;
+  useEffect(() => {
+    if (cardsRefCurrent) {
+      const cards = cardsRefCurrent.querySelectorAll<HTMLElement>(".service-card-enter");
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      cards.forEach((card, i) => {
+        const delay = isMobile ? cardMobileDelays[i] : cardDesktopDelays[i];
+        card.style.transitionDelay = cardsEntered ? `${delay}ms` : "0ms";
+      });
+    }
+  }, [cardsEntered, cardsRefCurrent]);
 
   return (
     <>
@@ -217,31 +408,9 @@ export default function HomePage() {
             </span>
           </div>
 
-          {/* Headline */}
-          <h1
-            className="font-heading text-center mx-auto animate-hero-headline"
-            style={{
-              fontWeight: 600,
-              color: "#111827",
-              maxWidth: 640,
-              marginTop: 20,
-            }}
-          >
-            <span className="block text-[32px] md:text-[48px] leading-[1.12]">
-              Chaque étape de votre vie en{" "}
-              <span
-                style={{
-                  textDecoration: "underline",
-                  textDecorationColor: "#D97706",
-                  textUnderlineOffset: "4px",
-                  textDecorationThickness: "2px",
-                }}
-              >
-                Suisse
-              </span>
-              , simplifiée.
-            </span>
-          </h1>
+          {/* Headline — desktop: word-by-word, mobile: line-by-line */}
+          <HeroHeadlineDesktop />
+          <HeroHeadlineMobile />
 
           {/* Subtitle */}
           <p
@@ -249,18 +418,26 @@ export default function HomePage() {
             style={{
               fontWeight: 400,
               color: "#6B7280",
-              maxWidth: 500,
+              maxWidth: 520,
               lineHeight: 1.7,
               marginTop: 16,
               marginBottom: 32,
+              animationDelay: `${subtitleDelay}ms`,
             }}
           >
-            Emploi, logement, assurances, prévoyance — identifiez vos
-            forces, vos risques et les erreurs à éviter.
+            Les mauvaises décisions des 3 premiers mois coûtent en moyenne
+            5&nbsp;000 à 15&nbsp;000 CHF. Nos diagnostics gratuits vous
+            montrent lesquelles vous concernent.
           </p>
 
           {/* Amber gradient separator */}
-          <div className="flex justify-center animate-hero-separator" style={{ marginBottom: 32 }}>
+          <div
+            className={`flex justify-center animate-hero-separator ${sepReady ? "sep-ready" : ""}`}
+            style={{
+              marginBottom: 32,
+              animationDelay: `${separatorDelay - 100}ms`,
+            }}
+          >
             <div
               style={{
                 width: 200,
@@ -277,7 +454,7 @@ export default function HomePage() {
         <div
           id="services"
           ref={cardsRef}
-          className="mx-auto grid grid-cols-1 md:grid-cols-2"
+          className="mx-auto grid grid-cols-1 md:grid-cols-2 cards-grid-mobile-snap"
           style={{ maxWidth: 600, gap: 22 }}
         >
           {services.map((s, i) => (
@@ -285,7 +462,7 @@ export default function HomePage() {
               key={s.title}
               service={s}
               index={i}
-              isVisible={cardsVisible}
+              entered={cardsEntered}
             />
           ))}
         </div>
