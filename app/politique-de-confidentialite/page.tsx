@@ -627,7 +627,7 @@ export default function PolitiqueConfidentialitePage() {
 
         <Link
           href="/"
-          className="inline-block font-body transition-all duration-200"
+          className="inline-block font-body transition-all duration-200 hover:border-amber-600 hover:text-gray-900"
           style={{
             marginTop: 40,
             padding: "12px 24px",
@@ -638,14 +638,6 @@ export default function PolitiqueConfidentialitePage() {
             fontSize: 13,
             fontWeight: 600,
             textDecoration: "none",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.borderColor = "#D97706";
-            e.currentTarget.style.color = "#111827";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.borderColor = "#E5E7EB";
-            e.currentTarget.style.color = "#6B7280";
           }}
         >
           &larr; Revenir à l&apos;accueil
