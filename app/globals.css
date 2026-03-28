@@ -22,6 +22,7 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-creme text-gray-900 font-body;
@@ -235,21 +236,31 @@
   transition: color 0.15s ease;
 }
 
-.footer-link:hover {
-  color: #FFFFFF !important;
-  text-decoration: underline;
+@media (hover: hover) {
+  .footer-link:hover {
+    color: #FFFFFF !important;
+    text-decoration: underline;
+  }
+}
+
+/* Footer link touch feedback */
+.footer-link:active {
+  border-bottom: 1px solid currentColor;
+  transition: border-bottom 0.15s ease;
 }
 
 .footer-icon {
   transition: color 0.15s ease, transform 0.2s ease;
 }
 
-.footer-icon:hover {
-  color: #D97706 !important;
-  transform: scale(1.15);
+@media (hover: hover) {
+  .footer-icon:hover {
+    color: #D97706 !important;
+    transform: scale(1.15);
+  }
 }
 
-/* ===== Homepage animations ===== */
+/* ===== Homepage hero animations (page load) ===== */
 
 @keyframes badgePulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
@@ -260,26 +271,94 @@
   animation: badgePulse 3s ease-in-out infinite;
 }
 
-@keyframes heroReveal {
-  from { opacity: 0; transform: translateY(16px); }
+/* Badge: fade in + slide down from above */
+@keyframes heroBadgeIn {
+  from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-hero-badge {
   opacity: 0;
-  animation: heroReveal 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s forwards;
+  animation: heroBadgeIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
-.animate-hero-headline {
+
+/* Hero word reveal (desktop) */
+@keyframes heroWordIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-word {
   opacity: 0;
-  animation: heroReveal 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s forwards;
+  display: inline-block;
+  animation: heroWordIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  will-change: transform, opacity;
 }
+
+/* Suisse underline draw-in */
+@keyframes underlineDraw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.suisse-underline {
+  display: inline-block;
+  position: relative;
+}
+
+.suisse-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #D97706;
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: underlineDraw 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* Hero mobile line reveal */
+@keyframes heroLineIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-line-mobile {
+  opacity: 0;
+  animation: heroLineIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* Subtitle fade in */
+@keyframes heroSubtitleIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-hero-subtitle {
   opacity: 0;
-  animation: heroReveal 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s forwards;
+  animation: heroSubtitleIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
+
+/* Amber separator draw from center */
+@keyframes separatorDraw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 .animate-hero-separator {
   opacity: 0;
-  animation: heroReveal 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.7s forwards;
+  animation: heroSubtitleIn 0.1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.animate-hero-separator > div {
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.animate-hero-separator.sep-ready > div {
+  animation: separatorDraw 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 @keyframes greenPulse {
@@ -305,28 +384,222 @@
   animation: flagBounce 0.6s ease-out 1s forwards;
 }
 
-/* Scroll reveal */
+/* ===== Service card entrance animations ===== */
+
+.service-card-enter {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Desktop: alternating left/right */
+@media (min-width: 768px) {
+  .service-card-enter.from-left {
+    transform: translateX(-60px);
+  }
+  .service-card-enter.from-right {
+    transform: translateX(60px);
+  }
+  .service-card-enter.entered {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+/* Mobile: all from left, less dramatic */
+@media (max-width: 767px) {
+  .service-card-enter {
+    transform: translateX(-40px);
+  }
+  .service-card-enter.entered {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+/* ===== Service card hover animations (desktop only) ===== */
+
+.service-card-live {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              background-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .service-card-live:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(217,119,6,0.15);
+    background-color: #FFFBF0 !important;
+    border-color: #D97706 !important;
+  }
+  .service-card-live:hover .card-cta-arrow {
+    transform: translateX(6px);
+  }
+}
+
+.service-card-soon {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  cursor: default;
+}
+
+@media (hover: hover) {
+  .service-card-soon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+}
+
+/* Card CTA arrow transition */
+.card-cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ===== Mobile touch feedback ===== */
+
+/* Service card press feedback */
+.service-card-live:active,
+.service-card-soon:active {
+  transform: scale(0.98);
+  background-color: #F9F5F0 !important;
+  transition: transform 0.05s ease, background-color 0.05s ease;
+}
+
+/* Live card amber flash on tap */
+.service-card-live:active {
+  border-color: #F59E0B !important;
+}
+
+/* Coming soon badge pulse on tap */
+.service-card-soon:active .bientot-badge {
+  animation: bientotPulse 0.3s ease-out;
+}
+
+@keyframes bientotPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* CTA button touch feedback */
+.cta-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease-out, background-color 0.1s ease;
+}
+
+.cta-btn:active {
+  transform: scale(0.96);
+  background-color: #B45309 !important;
+}
+
+/* Ripple effect on CTA buttons */
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cta-btn:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+/* "Faire le diagnostic" link touch feedback */
+.card-cta-link:active .card-cta-arrow {
+  transform: translateX(4px);
+}
+
+.card-cta-link:active .card-cta-text {
+  font-weight: 600;
+}
+
+/* ===== Newsletter input focus ===== */
+
+.newsletter-input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-input:focus {
+  border-color: #D97706 !important;
+  box-shadow: 0 0 0 3px rgba(217,119,6,0.15);
+  outline: none;
+}
+
+/* ===== Navbar hamburger animation ===== */
+
+.hamburger-line {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-open .hamburger-line-1 {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-open .hamburger-line-2 {
+  opacity: 0;
+}
+
+.hamburger-open .hamburger-line-3 {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu item stagger */
+@keyframes menuItemIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.menu-item-stagger {
+  opacity: 0;
+  animation: menuItemIn 0.25s ease-out forwards;
+}
+
+/* Mobile menu link tap feedback */
+.mobile-menu-link:active {
+  background-color: #FEF3C7 !important;
+  transition: background-color 0.15s ease;
+}
+
+/* ===== Scroll reveal ===== */
+
 .scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
               transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform, opacity;
 }
 .scroll-reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Staggered card reveal */
-.scroll-reveal-card {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
-              transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.scroll-reveal-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ===== Mobile scroll snap on cards ===== */
+@media (max-width: 767px) {
+  .cards-grid-mobile-snap {
+    scroll-snap-type: y proximity;
+  }
+  .cards-grid-mobile-snap > * {
+    scroll-snap-align: start;
+  }
 }
 
 /* Grain texture overlay */
@@ -362,4 +635,25 @@
     rgba(156, 163, 175, 0.03) 8px,
     rgba(156, 163, 175, 0.03) 9px
   );
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .service-card-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-word,
+  .hero-line-mobile,
+  .animate-hero-badge,
+  .animate-hero-subtitle,
+  .animate-hero-separator,
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

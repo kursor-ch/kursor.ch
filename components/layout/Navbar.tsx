@@ -39,6 +39,8 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  const allMenuLinks = [...NAV_LINKS, ...INFO_LINKS];
+
   return (
     <nav
       className="sticky top-0 z-50 border-b font-body transition-all duration-200"
@@ -133,7 +135,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/#services"
-              className="rounded-lg text-white transition-all duration-200"
+              className="rounded-lg text-white cta-btn"
               style={{
                 backgroundColor: "#D97706",
                 fontSize: 14,
@@ -153,12 +155,14 @@ export default function Navbar() {
               Diagnostic gratuit
             </Link>
 
-            {/* Hamburger (mobile only) */}
+            {/* Hamburger (mobile only) — animated three lines ↔ X */}
             {!isDiagnosticPage && (
               <button
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:text-gray-900 md:hidden"
+                className={`inline-flex items-center justify-center rounded-md p-2 text-gray-600 md:hidden ${
+                  menuOpen ? "hamburger-open" : ""
+                }`}
                 aria-expanded={menuOpen}
                 aria-label="Menu de navigation"
               >
@@ -169,19 +173,9 @@ export default function Navbar() {
                   strokeWidth={2}
                   stroke="currentColor"
                 >
-                  {menuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  )}
+                  <line x1="4" y1="5" x2="20" y2="5" className="hamburger-line hamburger-line-1" />
+                  <line x1="4" y1="12" x2="20" y2="12" className="hamburger-line hamburger-line-2" />
+                  <line x1="4" y1="19" x2="20" y2="19" className="hamburger-line hamburger-line-3" />
                 </svg>
               </button>
             )}
@@ -196,11 +190,13 @@ export default function Navbar() {
             }`}
           >
             <div className="flex flex-col gap-1 pt-1">
-              {NAV_LINKS.map((link) => (
+              {NAV_LINKS.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-md px-3 py-2 transition-colors duration-200"
+                  className={`rounded-md px-3 py-2 transition-colors duration-200 mobile-menu-link ${
+                    menuOpen ? "menu-item-stagger" : ""
+                  }`}
                   style={{
                     fontSize: 14,
                     fontWeight: 400,
@@ -210,6 +206,7 @@ export default function Navbar() {
                       pathname === link.href
                         ? "rgba(217,119,6,0.05)"
                         : undefined,
+                    animationDelay: menuOpen ? `${i * 50}ms` : "0ms",
                   }}
                 >
                   {link.label}
@@ -222,11 +219,13 @@ export default function Navbar() {
                 style={{ height: 1, backgroundColor: "#E5E7EB" }}
               />
 
-              {INFO_LINKS.map((link) => (
+              {INFO_LINKS.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-md px-3 py-2 transition-colors duration-200"
+                  className={`rounded-md px-3 py-2 transition-colors duration-200 mobile-menu-link ${
+                    menuOpen ? "menu-item-stagger" : ""
+                  }`}
                   style={{
                     fontSize: 14,
                     fontWeight: 400,
@@ -236,6 +235,9 @@ export default function Navbar() {
                       pathname === link.href
                         ? "rgba(217,119,6,0.05)"
                         : undefined,
+                    animationDelay: menuOpen
+                      ? `${(NAV_LINKS.length + i) * 50}ms`
+                      : "0ms",
                   }}
                 >
                   {link.label}

@@ -112,7 +112,7 @@ export default function NewsletterSection() {
                 name="email"
                 required
                 placeholder="Votre adresse email"
-                className="font-body flex-1 outline-none transition-shadow duration-200"
+                className="font-body flex-1 newsletter-input"
                 style={{
                   border: "1px solid #E5E7EB",
                   borderRadius: 8,
@@ -122,20 +122,11 @@ export default function NewsletterSection() {
                   color: "#111827",
                   backgroundColor: "#FDFAF5",
                 }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "#D97706";
-                  e.currentTarget.style.boxShadow =
-                    "0 0 0 3px rgba(217,119,6,0.15)";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "#E5E7EB";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="font-body whitespace-nowrap transition-all duration-200 group"
+                className="font-body whitespace-nowrap group cta-btn"
                 style={{
                   backgroundColor: loading ? "#B45309" : "#D97706",
                   color: "#FFFFFF",
