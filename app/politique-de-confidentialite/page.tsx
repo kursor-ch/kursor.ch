@@ -7,72 +7,57 @@ export const metadata: Metadata = {
 
 export default function PolitiqueConfidentialitePage() {
   return (
-    <div className="privacy-page">
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            .privacy-page {
-              --bg: #050505; --card: #0D0D0D; --line: #1C1C1C;
-              --amb: #C87F1A; --amb3: #E5A740;
-              --w: #F5F1EB; --w2: #C4BEB4; --w3: #918B82; --w4: #5E5952;
-              font-family: var(--font-body), -apple-system, sans-serif;
-              background: var(--bg); color: var(--w2);
-              line-height: 1.75; -webkit-font-smoothing: antialiased;
-              font-size: 14.5px; min-height: 100vh;
-            }
-            .privacy-page .wrap { max-width: 680px; margin: 0 auto; padding: 24px 24px 80px; }
-            .privacy-page .hdr { display: flex; align-items: center; gap: 10px; padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
-            .privacy-page .hdr a { font-family: var(--font-body), -apple-system, sans-serif; font-weight: 700; font-size: 15px; color: var(--w); text-decoration: none; }
-            .privacy-page h1 { font-family: var(--font-heading), Georgia, serif; font-size: 32px; font-weight: 400; color: var(--w); margin-bottom: 8px; line-height: 1.2; }
-            .privacy-page .updated { font-size: 12px; color: var(--w4); margin-bottom: 40px; font-weight: 500; }
-            .privacy-page h2 { font-family: var(--font-heading), Georgia, serif; font-size: 22px; font-weight: 400; color: var(--w); margin-top: 40px; margin-bottom: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
-            .privacy-page h2:first-of-type { border-top: none; padding-top: 0; }
-            .privacy-page h3 { font-size: 15px; font-weight: 700; color: var(--w); margin-top: 24px; margin-bottom: 8px; }
-            .privacy-page p { margin-bottom: 14px; color: var(--w2); }
-            .privacy-page ul, .privacy-page ol { margin-bottom: 14px; padding-left: 20px; }
-            .privacy-page li { margin-bottom: 6px; color: var(--w2); }
-            .privacy-page strong { color: var(--w); font-weight: 600; }
-            .privacy-page a { color: var(--amb3); text-decoration: underline; text-underline-offset: 2px; }
-            .privacy-page .highlight { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; margin: 20px 0; }
-            .privacy-page .highlight p { margin-bottom: 0; }
-            .privacy-page table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 13px; }
-            .privacy-page th { text-align: left; padding: 10px 12px; background: var(--card); color: var(--w); font-weight: 600; border: 1px solid var(--line); }
-            .privacy-page td { padding: 10px 12px; border: 1px solid var(--line); color: var(--w2); vertical-align: top; }
-            .privacy-page .back { display: inline-block; margin-top: 40px; padding: 12px 24px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; color: var(--w3); font-size: 13px; font-weight: 600; text-decoration: none; transition: all .12s; }
-            .privacy-page .back:hover { border-color: var(--amb); color: var(--w); }
-          `,
-        }}
-      />
-      <div className="wrap">
-        <div className="hdr">
-          <Link href="/" style={{ textDecoration: "none" }}>
-            <span
-              style={{
-                fontFamily: "var(--font-body), -apple-system, sans-serif",
-                fontWeight: 700,
-                fontSize: 15,
-                color: "#F5F1EB",
-              }}
-            >
-              Kursor CH
-            </span>
-          </Link>
-        </div>
+    <div className="bg-creme" style={{ minHeight: "100vh" }}>
+      <div
+        className="mx-auto px-6"
+        style={{ maxWidth: 640, paddingTop: 48, paddingBottom: 80 }}
+      >
+        <h1
+          className="font-heading"
+          style={{
+            fontSize: 32,
+            fontWeight: 600,
+            color: "#111827",
+            marginBottom: 8,
+            lineHeight: 1.2,
+          }}
+        >
+          Politique de confidentialité
+        </h1>
+        <p
+          className="font-body"
+          style={{
+            fontSize: 13,
+            fontWeight: 400,
+            color: "#9CA3AF",
+            marginBottom: 40,
+          }}
+        >
+          Dernière mise à jour : mars 2026
+        </p>
 
-        <h1>Politique de confidentialité</h1>
-        <p className="updated">Dernière mise à jour : 12 mars 2026</p>
-
-        <div className="highlight">
+        <div
+          className="rounded-xl border font-body"
+          style={{
+            borderColor: "#E5E7EB",
+            backgroundColor: "#FFFFFF",
+            padding: "16px 20px",
+            marginBottom: 40,
+            fontSize: 14.5,
+            lineHeight: 1.75,
+            color: "#4B5563",
+          }}
+        >
           <p>
             La présente politique décrit comment Kursor CH collecte, traite,
             utilise et protège vos données personnelles. Elle est rédigée en
             conformité avec le{" "}
-            <strong>
+            <strong style={{ color: "#111827" }}>
               Règlement Général sur la Protection des Données (RGPD — Règlement
               UE 2016/679)
             </strong>{" "}
             et la{" "}
-            <strong>
+            <strong style={{ color: "#111827" }}>
               Loi fédérale suisse sur la protection des données (nLPD — RS
               235.1)
             </strong>
@@ -80,13 +65,29 @@ export default function PolitiqueConfidentialitePage() {
           </p>
         </div>
 
-        <h2>1. Responsable du traitement</h2>
-        <p>
+        {/* Section style helpers - using consistent inline styles */}
+
+        {/* 1. Responsable du traitement */}
+        <h2
+          className="font-heading"
+          style={{
+            fontSize: 20,
+            fontWeight: 600,
+            color: "#111827",
+            marginTop: 40,
+            marginBottom: 16,
+            paddingTop: 24,
+            borderTop: "1px solid #E5E7EB",
+          }}
+        >
+          1. Responsable du traitement
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Le responsable du traitement des données collectées via le site
           kursor.ch et ses sous-domaines est :
         </p>
-        <p>
-          <strong>SAVGC Consulting</strong>
+        <p className="font-body" style={bodyStyle}>
+          <strong style={{ color: "#111827" }}>SAVGC Consulting</strong>
           <br />
           Représenté par son fondateur
           <br />
@@ -94,474 +95,483 @@ export default function PolitiqueConfidentialitePage() {
           <br />
           Suisse
         </p>
-        <p>
+        <p className="font-body" style={bodyStyle}>
           En l&apos;absence de délégué à la protection des données (DPO)
           désigné, toute demande relative à l&apos;exercice de vos droits peut
           être adressée directement à l&apos;adresse indiquée ci-dessus.
         </p>
 
-        <h2>2. Données collectées</h2>
-        <h3>2.1 Données collectées directement</h3>
-        <p>
+        {/* 2. Données collectées */}
+        <h2 className="font-heading" style={h2Style}>
+          2. Données collectées
+        </h2>
+        <h3 className="font-heading" style={h3Style}>
+          2.1 Données collectées directement
+        </h3>
+        <p className="font-body" style={bodyStyle}>
           Lorsque vous complétez le diagnostic de viabilité sur kursor.ch, les
           données suivantes sont collectées :
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Catégorie</th>
-              <th>Données</th>
-              <th>Finalité</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <strong>Identité</strong>
-              </td>
-              <td>Prénom, adresse email</td>
-              <td>Générer et transmettre votre rapport</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Projet professionnel</strong>
-              </td>
-              <td>
-                Type de projet (salarié, entrepreneur, frontalier), secteur
-                d&apos;activité, canton visé, horizon temporel
-              </td>
-              <td>
-                Calculer votre score de viabilité et personnaliser les
-                recommandations
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Préparation</strong>
-              </td>
-              <td>
-                Sujets déjà anticipés (LAMal, LPP, fiscalité, logement, RC
-                ménage)
-              </td>
-              <td>
-                Identifier vos angles morts et calibrer le rapport
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Consentements</strong>
-              </td>
-              <td>
-                Choix explicites d&apos;opt-in pour chaque finalité de
-                traitement
-              </td>
-              <td>
-                Respecter vos préférences de contact et de partage
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="overflow-x-auto" style={{ marginBottom: 20 }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Catégorie</th>
+                <th style={thStyle}>Données</th>
+                <th style={thStyle}>Finalité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>
+                  <strong style={{ color: "#111827" }}>Identité</strong>
+                </td>
+                <td style={tdStyle}>Prénom, adresse email</td>
+                <td style={tdStyle}>Générer et transmettre votre rapport</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  <strong style={{ color: "#111827" }}>Projet professionnel</strong>
+                </td>
+                <td style={tdStyle}>
+                  Type de projet (salarié, entrepreneur, frontalier), secteur
+                  d&apos;activité, canton visé, horizon temporel
+                </td>
+                <td style={tdStyle}>
+                  Calculer votre score de viabilité et personnaliser les
+                  recommandations
+                </td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  <strong style={{ color: "#111827" }}>Préparation</strong>
+                </td>
+                <td style={tdStyle}>
+                  Sujets déjà anticipés (LAMal, LPP, fiscalité, logement, RC
+                  ménage)
+                </td>
+                <td style={tdStyle}>
+                  Identifier vos angles morts et calibrer le rapport
+                </td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  <strong style={{ color: "#111827" }}>Consentements</strong>
+                </td>
+                <td style={tdStyle}>
+                  Choix explicites d&apos;opt-in pour chaque finalité de
+                  traitement
+                </td>
+                <td style={tdStyle}>
+                  Respecter vos préférences de contact et de partage
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>2.2 Données collectées automatiquement</h3>
-        <p>
+        <h3 className="font-heading" style={h3Style}>
+          2.2 Données collectées automatiquement
+        </h3>
+        <p className="font-body" style={bodyStyle}>
           Aucun cookie de suivi publicitaire n&apos;est déposé sur votre
-          terminal. L&apos;outil d&apos;analyse statistique utilisé (Umami) est
-          conforme au RGPD, auto-hébergé, et ne collecte ni ne stocke de
+          terminal. L&apos;outil d&apos;analyse statistique utilisé (Plausible) est
+          conforme au RGPD et ne collecte ni ne stocke de
           données à caractère personnel. Les données agrégées suivantes sont
           enregistrées :
         </p>
-        <ul>
-          <li>
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
             Pages consultées, durée de session, taux de complétion du diagnostic
           </li>
-          <li>
+          <li style={liStyle}>
             Pays d&apos;origine de la connexion (géolocalisation au niveau du
             pays uniquement)
           </li>
-          <li>
+          <li style={liStyle}>
             Type de terminal et navigateur (données techniques anonymisées)
           </li>
         </ul>
-        <p>
+        <p className="font-body" style={bodyStyle}>
           Aucune de ces données ne permet d&apos;identifier un utilisateur
           individuellement.
         </p>
 
-        <h2>3. Bases juridiques du traitement</h2>
-        <p>
+        {/* 3. Bases juridiques */}
+        <h2 className="font-heading" style={h2Style}>
+          3. Bases juridiques du traitement
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Conformément à l&apos;article 6 du RGPD et aux articles 30 à 31 de la
           nLPD, les bases juridiques fondant les traitements de données opérés
           par Kursor CH sont les suivantes :
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Traitement</th>
-              <th>Base juridique</th>
-              <th>Référence</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                Génération du diagnostic et du rapport personnalisé
-              </td>
-              <td>
-                Exécution de mesures précontractuelles à la demande de la
-                personne concernée
-              </td>
-              <td>Art. 6(1)(b) RGPD</td>
-            </tr>
-            <tr>
-              <td>
-                Transmission du profil aux partenaires de confiance
-              </td>
-              <td>Consentement explicite</td>
-              <td>Art. 6(1)(a) RGPD / Art. 6(6) nLPD</td>
-            </tr>
-            <tr>
-              <td>
-                Envoi de conseils et actualités par email
-              </td>
-              <td>Consentement explicite</td>
-              <td>Art. 6(1)(a) RGPD / Art. 6(6) nLPD</td>
-            </tr>
-            <tr>
-              <td>
-                Amélioration du service (statistiques agrégées)
-              </td>
-              <td>
-                Intérêt légitime du responsable du traitement
-              </td>
-              <td>Art. 6(1)(f) RGPD / Art. 31(1) nLPD</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="overflow-x-auto" style={{ marginBottom: 20 }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Traitement</th>
+                <th style={thStyle}>Base juridique</th>
+                <th style={thStyle}>Référence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>
+                  Génération du diagnostic et du rapport personnalisé
+                </td>
+                <td style={tdStyle}>
+                  Exécution de mesures précontractuelles à la demande de la
+                  personne concernée
+                </td>
+                <td style={tdStyle}>Art. 6(1)(b) RGPD</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  Transmission du profil aux partenaires de confiance
+                </td>
+                <td style={tdStyle}>Consentement explicite</td>
+                <td style={tdStyle}>Art. 6(1)(a) RGPD / Art. 6(6) nLPD</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  Envoi de conseils et actualités par email
+                </td>
+                <td style={tdStyle}>Consentement explicite</td>
+                <td style={tdStyle}>Art. 6(1)(a) RGPD / Art. 6(6) nLPD</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>
+                  Amélioration du service (statistiques agrégées)
+                </td>
+                <td style={tdStyle}>
+                  Intérêt légitime du responsable du traitement
+                </td>
+                <td style={tdStyle}>Art. 6(1)(f) RGPD / Art. 31(1) nLPD</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h2>4. Finalités du traitement</h2>
-        <p>
+        {/* 4. Finalités */}
+        <h2 className="font-heading" style={h2Style}>
+          4. Finalités du traitement
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Vos données personnelles sont traitées exclusivement pour les
           finalités suivantes :
         </p>
-        <ol>
-          <li>
-            <strong>Diagnostic et rapport personnalisé</strong> — Calculer votre
+        <ol className="font-body" style={olStyle}>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Diagnostic et rapport personnalisé</strong> — Calculer votre
             score de viabilité (/100), identifier vos risques, générer et vous
             transmettre un rapport détaillé par email. Ce traitement est
             indispensable à la fourniture du service.
           </li>
-          <li>
-            <strong>Mise en relation avec des partenaires</strong> — Uniquement
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Mise en relation avec des partenaires</strong> — Uniquement
             si vous y consentez expressément : transmission de votre profil
             (secteur, canton, horizon, score) à des partenaires de confiance
             (cabinets de recrutement, fiduciaires, conseillers en prévoyance)
             afin que ceux-ci puissent vous proposer un accompagnement adapté.
           </li>
-          <li>
-            <strong>Communications marketing</strong> — Uniquement si vous y
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Communications marketing</strong> — Uniquement si vous y
             consentez expressément : envoi de conseils, guides et actualités
             relatifs à l&apos;expatriation en Suisse. Fréquence maximale : 2
             emails par semaine.
           </li>
-          <li>
-            <strong>Amélioration du service</strong> — Analyse statistique
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Amélioration du service</strong> — Analyse statistique
             anonymisée des diagnostics complétés pour affiner l&apos;algorithme
             de scoring et améliorer la pertinence des recommandations. Ces
             données sont systématiquement agrégées et ne permettent pas de vous
             identifier.
           </li>
         </ol>
-        <p>
+        <p className="font-body" style={bodyStyle}>
           Vos données ne font l&apos;objet d&apos;
-          <strong>aucune vente</strong> à des tiers. Aucun traitement de
+          <strong style={{ color: "#111827" }}>aucune vente</strong> à des tiers. Aucun traitement de
           profilage au sens de l&apos;article 22 du RGPD n&apos;est effectué à
           votre encontre.
         </p>
 
-        <h2>5. Destinataires des données</h2>
-        <p>
+        {/* 5. Destinataires */}
+        <h2 className="font-heading" style={h2Style}>
+          5. Destinataires des données
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Les données personnelles collectées sont susceptibles d&apos;être
           communiquées aux catégories de destinataires suivantes, dans les
           limites strictes des consentements que vous avez accordés :
         </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Destinataire</th>
-              <th>Données partagées</th>
-              <th>Condition</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Partenaires d&apos;insertion professionnelle</td>
-              <td>Prénom, email, secteur, canton, score, horizon</td>
-              <td>Consentement explicite (case 2)</td>
-            </tr>
-            <tr>
-              <td>Partenaires fiduciaires</td>
-              <td>
-                Prénom, email, type d&apos;activité, canton, score, horizon
-              </td>
-              <td>Consentement explicite (case 2)</td>
-            </tr>
-            <tr>
-              <td>Partenaires prévoyance/assurance</td>
-              <td>Prénom, email, canton, sujets non anticipés</td>
-              <td>Consentement explicite (case 2)</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="overflow-x-auto" style={{ marginBottom: 20 }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Destinataire</th>
+                <th style={thStyle}>Données partagées</th>
+                <th style={thStyle}>Condition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>Partenaires d&apos;insertion professionnelle</td>
+                <td style={tdStyle}>Prénom, email, secteur, canton, score, horizon</td>
+                <td style={tdStyle}>Consentement explicite (case 2)</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Partenaires fiduciaires</td>
+                <td style={tdStyle}>
+                  Prénom, email, type d&apos;activité, canton, score, horizon
+                </td>
+                <td style={tdStyle}>Consentement explicite (case 2)</td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Partenaires prévoyance/assurance</td>
+                <td style={tdStyle}>Prénom, email, canton, sujets non anticipés</td>
+                <td style={tdStyle}>Consentement explicite (case 2)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>5.1 Sous-traitants techniques</h3>
-        <p>
+        <h3 className="font-heading" style={h3Style}>
+          5.1 Sous-traitants techniques
+        </h3>
+        <p className="font-body" style={bodyStyle}>
           Pour le fonctionnement de la plateforme, les sous-traitants suivants
           interviennent dans le traitement de vos données :
         </p>
-        <ul>
-          <li>
-            <strong>Tally.so</strong> (Belgique, UE) — Collecte des réponses au
-            diagnostic
-          </li>
-          <li>
-            <strong>Airtable</strong> (États-Unis) — Stockage structuré des
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Airtable</strong> (États-Unis) — Stockage structuré des
             données de leads. Transfert encadré par les clauses contractuelles
             types (SCC) adoptées par la Commission européenne.
           </li>
-          <li>
-            <strong>Resend</strong> (États-Unis) — Envoi transactionnel et
-            marketing d&apos;emails. Transfert encadré par les SCC.
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Brevo</strong> (France, UE) — Envoi transactionnel et
+            marketing d&apos;emails.
           </li>
-          <li>
-            <strong>Vercel</strong> (États-Unis) — Hébergement de
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Vercel</strong> (États-Unis) — Hébergement de
             l&apos;application. Aucune donnée personnelle stockée côté serveur
             au-delà des logs techniques éphémères.
           </li>
         </ul>
-        <p>
+        <p className="font-body" style={bodyStyle}>
           Chaque sous-traitant est lié par un accord de traitement des données
           (DPA) garantissant un niveau de protection adéquat au sens de
           l&apos;article 28 du RGPD et de l&apos;article 9 de la nLPD.
         </p>
 
-        <h2>6. Transferts de données hors Suisse et hors EEE</h2>
-        <p>
-          Certains sous-traitants (Airtable, Resend, Vercel) sont établis aux
+        {/* 6. Transferts */}
+        <h2 className="font-heading" style={h2Style}>
+          6. Transferts de données hors Suisse et hors EEE
+        </h2>
+        <p className="font-body" style={bodyStyle}>
+          Certains sous-traitants (Airtable, Vercel) sont établis aux
           États-Unis. Ces transferts sont encadrés par :
         </p>
-        <ul>
-          <li>
-            Le <strong>EU-US Data Privacy Framework</strong> (DPF) pour les
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
+            Le <strong style={{ color: "#111827" }}>EU-US Data Privacy Framework</strong> (DPF) pour les
             entités certifiées, et/ou
           </li>
-          <li>
-            Les <strong>clauses contractuelles types</strong> (SCC) de la
+          <li style={liStyle}>
+            Les <strong style={{ color: "#111827" }}>clauses contractuelles types</strong> (SCC) de la
             Commission européenne (Décision 2021/914), et/ou
           </li>
-          <li>
+          <li style={liStyle}>
             Le{" "}
-            <strong>Swiss-US Data Privacy Framework</strong> reconnu par le
+            <strong style={{ color: "#111827" }}>Swiss-US Data Privacy Framework</strong> reconnu par le
             Conseil fédéral suisse
           </li>
         </ul>
-        <p>
+        <p className="font-body" style={bodyStyle}>
           En l&apos;absence de décision d&apos;adéquation applicable, des
           garanties supplémentaires (chiffrement en transit et au repos,
           minimisation des données transférées) sont mises en œuvre conformément
           aux recommandations du PFPDT et du CEPD.
         </p>
 
-        <h2>7. Durée de conservation</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Données</th>
-              <th>Durée</th>
-              <th>Justification</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Réponses au diagnostic et score</td>
-              <td>24 mois à compter de la soumission</td>
-              <td>
-                Amélioration du modèle de scoring et suivi de la relation
-              </td>
-            </tr>
-            <tr>
-              <td>Adresse email</td>
-              <td>
-                24 mois ou jusqu&apos;au retrait du consentement
-              </td>
-              <td>
-                Transmission du rapport et communications autorisées
-              </td>
-            </tr>
-            <tr>
-              <td>Données de consentement (preuves)</td>
-              <td>36 mois</td>
-              <td>
-                Obligation de preuve du consentement (Art. 7(1) RGPD)
-              </td>
-            </tr>
-            <tr>
-              <td>Données anonymisées (statistiques)</td>
-              <td>Durée illimitée</td>
-              <td>
-                Données ne permettant pas d&apos;identification
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p>
+        {/* 7. Conservation */}
+        <h2 className="font-heading" style={h2Style}>
+          7. Durée de conservation
+        </h2>
+        <div className="overflow-x-auto" style={{ marginBottom: 20 }}>
+          <table style={tableStyle}>
+            <thead>
+              <tr>
+                <th style={thStyle}>Données</th>
+                <th style={thStyle}>Durée</th>
+                <th style={thStyle}>Justification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={tdStyle}>Réponses au diagnostic et score</td>
+                <td style={tdStyle}>24 mois à compter de la soumission</td>
+                <td style={tdStyle}>
+                  Amélioration du modèle de scoring et suivi de la relation
+                </td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Adresse email</td>
+                <td style={tdStyle}>
+                  24 mois ou jusqu&apos;au retrait du consentement
+                </td>
+                <td style={tdStyle}>
+                  Transmission du rapport et communications autorisées
+                </td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Données de consentement (preuves)</td>
+                <td style={tdStyle}>36 mois</td>
+                <td style={tdStyle}>
+                  Obligation de preuve du consentement (Art. 7(1) RGPD)
+                </td>
+              </tr>
+              <tr>
+                <td style={tdStyle}>Données anonymisées (statistiques)</td>
+                <td style={tdStyle}>Durée illimitée</td>
+                <td style={tdStyle}>
+                  Données ne permettant pas d&apos;identification
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="font-body" style={bodyStyle}>
           À l&apos;expiration de ces délais, les données sont supprimées de
           manière sécurisée ou anonymisées de façon irréversible.
         </p>
 
-        <h2>8. Vos droits</h2>
-        <p>
+        {/* 8. Vos droits */}
+        <h2 className="font-heading" style={h2Style}>
+          8. Vos droits
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Conformément au RGPD (articles 15 à 22) et à la nLPD (articles 25 à
           29), vous disposez des droits suivants :
         </p>
-        <ul>
-          <li>
-            <strong>Droit d&apos;accès</strong> — Obtenir confirmation que vos
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit d&apos;accès</strong> — Obtenir confirmation que vos
             données sont traitées et en recevoir une copie
           </li>
-          <li>
-            <strong>Droit de rectification</strong> — Corriger des données
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit de rectification</strong> — Corriger des données
             inexactes ou incomplètes
           </li>
-          <li>
-            <strong>Droit à l&apos;effacement</strong> — Demander la suppression
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit à l&apos;effacement</strong> — Demander la suppression
             de vos données lorsque le traitement n&apos;est plus nécessaire ou
             que vous retirez votre consentement
           </li>
-          <li>
-            <strong>Droit à la portabilité</strong> — Recevoir vos données dans
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit à la portabilité</strong> — Recevoir vos données dans
             un format structuré, couramment utilisé et lisible par machine
           </li>
-          <li>
-            <strong>Droit d&apos;opposition</strong> — Vous opposer à un
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit d&apos;opposition</strong> — Vous opposer à un
             traitement fondé sur l&apos;intérêt légitime
           </li>
-          <li>
-            <strong>Droit de retrait du consentement</strong> — Retirer à tout
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit de retrait du consentement</strong> — Retirer à tout
             moment un consentement précédemment accordé, sans effet rétroactif
             sur la licéité du traitement effectué avant le retrait
           </li>
-          <li>
-            <strong>Droit de déposer une réclamation</strong> — Saisir
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Droit de déposer une réclamation</strong> — Saisir
             l&apos;autorité de contrôle compétente
           </li>
         </ul>
 
-        <h3>8.1 Exercice de vos droits</h3>
-        <p>
+        <h3 className="font-heading" style={h3Style}>
+          8.1 Exercice de vos droits
+        </h3>
+        <p className="font-body" style={bodyStyle}>
           Toute demande peut être adressée par email à{" "}
-          <strong>contact@kursor.ch</strong> en précisant votre identité et la
+          <strong style={{ color: "#111827" }}>equipe@kursor.ch</strong> en précisant votre identité et la
           nature de votre demande. Nous nous engageons à y répondre dans un
-          délai de <strong>30 jours</strong>.
+          délai de <strong style={{ color: "#111827" }}>30 jours</strong>.
         </p>
 
-        <h3>8.2 Autorités de contrôle compétentes</h3>
-        <ul>
-          <li>
-            <strong>Suisse :</strong> Préposé fédéral à la protection des
-            données et à la transparence (PFPDT) —{" "}
-            <a
-              href="https://www.edoeb.admin.ch"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              edoeb.admin.ch
-            </a>
+        <h3 className="font-heading" style={h3Style}>
+          8.2 Autorités de contrôle compétentes
+        </h3>
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Suisse :</strong> Préposé fédéral à la protection des
+            données et à la transparence (PFPDT)
           </li>
-          <li>
-            <strong>France :</strong> Commission nationale de
-            l&apos;informatique et des libertés (CNIL) —{" "}
-            <a
-              href="https://www.cnil.fr"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              cnil.fr
-            </a>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>France :</strong> Commission nationale de
+            l&apos;informatique et des libertés (CNIL)
           </li>
-          <li>
-            <strong>Belgique :</strong> Autorité de protection des données
-            (APD) —{" "}
-            <a
-              href="https://www.autoriteprotectiondonnees.be"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              autoriteprotectiondonnees.be
-            </a>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Belgique :</strong> Autorité de protection des données
+            (APD)
           </li>
-          <li>
-            <strong>Luxembourg :</strong> Commission nationale pour la
-            protection des données (CNPD) —{" "}
-            <a
-              href="https://cnpd.public.lu"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              cnpd.public.lu
-            </a>
+          <li style={liStyle}>
+            <strong style={{ color: "#111827" }}>Luxembourg :</strong> Commission nationale pour la
+            protection des données (CNPD)
           </li>
         </ul>
 
-        <h2>9. Sécurité des données</h2>
-        <p>
+        {/* 9. Sécurité */}
+        <h2 className="font-heading" style={h2Style}>
+          9. Sécurité des données
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Kursor CH met en œuvre des mesures techniques et organisationnelles
           appropriées pour protéger vos données personnelles contre tout accès
           non autorisé, altération, divulgation ou destruction, conformément aux
           principes de « Privacy by Design » et de « Privacy by Default »
           inscrits dans l&apos;article 7 de la nLPD :
         </p>
-        <ul>
-          <li>
+        <ul className="font-body" style={ulStyle}>
+          <li style={liStyle}>
             Chiffrement des données en transit (TLS 1.3) et au repos
           </li>
-          <li>
+          <li style={liStyle}>
             Accès restreint aux données sur la base du principe du moindre
             privilège
           </li>
-          <li>
+          <li style={liStyle}>
             Authentification renforcée pour l&apos;accès aux interfaces
             d&apos;administration
           </li>
-          <li>
+          <li style={liStyle}>
             Aucun stockage de données bancaires ou de mots de passe utilisateur
           </li>
-          <li>Revue périodique des accès et des sous-traitants</li>
+          <li style={liStyle}>Revue périodique des accès et des sous-traitants</li>
         </ul>
 
-        <h2>10. Cookies et technologies de suivi</h2>
-        <p>
+        {/* 10. Cookies */}
+        <h2 className="font-heading" style={h2Style}>
+          10. Cookies et technologies de suivi
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Le site kursor.ch{" "}
-          <strong>
+          <strong style={{ color: "#111827" }}>
             ne dépose aucun cookie publicitaire, de retargeting ou de profilage
           </strong>{" "}
           sur votre terminal.
         </p>
-        <p>
-          Seuls des cookies strictement nécessaires au fonctionnement du service
-          (gestion de session, préférences d&apos;affichage) sont susceptibles
-          d&apos;être utilisés. Ces cookies ne requièrent pas votre consentement
-          au titre de l&apos;article 5(3) de la Directive 2002/58/CE
-          (ePrivacy).
-        </p>
-        <p>
-          L&apos;outil d&apos;analyse statistique utilisé (Umami) fonctionne
+        <p className="font-body" style={bodyStyle}>
+          L&apos;outil d&apos;analyse statistique utilisé (Plausible) fonctionne
           sans cookie et sans collecte de données personnelles, en conformité
           avec les lignes directrices du PFPDT et de la CNIL relatives aux
           outils de mesure d&apos;audience exemptés de consentement.
         </p>
 
-        <h2>11. Mineurs</h2>
-        <p>
+        {/* 11. Mineurs */}
+        <h2 className="font-heading" style={h2Style}>
+          11. Mineurs
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           Le diagnostic Kursor CH s&apos;adresse à des professionnels majeurs
           envisageant une expatriation. Le service n&apos;est pas destiné aux
           personnes de moins de 18 ans. Aucune donnée n&apos;est collectée
@@ -570,8 +580,11 @@ export default function PolitiqueConfidentialitePage() {
           sans délai.
         </p>
 
-        <h2>12. Modification de la présente politique</h2>
-        <p>
+        {/* 12. Modification */}
+        <h2 className="font-heading" style={h2Style}>
+          12. Modification de la présente politique
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           La présente politique de confidentialité est susceptible d&apos;être
           mise à jour pour refléter l&apos;évolution des traitements ou des
           obligations réglementaires. La date de dernière mise à jour figure en
@@ -579,8 +592,11 @@ export default function PolitiqueConfidentialitePage() {
           notification sera adressée par email aux personnes concernées.
         </p>
 
-        <h2>13. Droit applicable et juridiction</h2>
-        <p>
+        {/* 13. Droit applicable */}
+        <h2 className="font-heading" style={h2Style}>
+          13. Droit applicable et juridiction
+        </h2>
+        <p className="font-body" style={bodyStyle}>
           La présente politique est soumise au droit suisse. Tout litige relatif
           à l&apos;interprétation ou à l&apos;exécution de la présente politique
           sera porté devant les tribunaux compétents du canton de domicile du
@@ -589,18 +605,121 @@ export default function PolitiqueConfidentialitePage() {
           personne concernée.
         </p>
 
-        <div className="highlight">
+        {/* Contact box */}
+        <div
+          className="rounded-xl border font-body"
+          style={{
+            borderColor: "#E5E7EB",
+            backgroundColor: "#FFFFFF",
+            padding: "16px 20px",
+            marginTop: 40,
+            fontSize: 14.5,
+            lineHeight: 1.75,
+            color: "#4B5563",
+          }}
+        >
           <p>
-            <strong>Contact :</strong> Pour toute question relative à cette
+            <strong style={{ color: "#111827" }}>Contact :</strong> Pour toute question relative à cette
             politique ou à vos données personnelles, écrivez-nous à{" "}
-            <strong>contact@kursor.ch</strong>.
+            <strong style={{ color: "#111827" }}>equipe@kursor.ch</strong>.
           </p>
         </div>
 
-        <Link href="/" className="back">
-          ← Revenir au diagnostic
+        <Link
+          href="/"
+          className="inline-block font-body transition-all duration-200"
+          style={{
+            marginTop: 40,
+            padding: "12px 24px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #E5E7EB",
+            borderRadius: 10,
+            color: "#6B7280",
+            fontSize: 13,
+            fontWeight: 600,
+            textDecoration: "none",
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.borderColor = "#D97706";
+            e.currentTarget.style.color = "#111827";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.borderColor = "#E5E7EB";
+            e.currentTarget.style.color = "#6B7280";
+          }}
+        >
+          &larr; Revenir à l&apos;accueil
         </Link>
       </div>
     </div>
   );
 }
+
+/* Shared styles */
+const bodyStyle: React.CSSProperties = {
+  fontSize: 15,
+  fontWeight: 400,
+  color: "#4B5563",
+  lineHeight: 1.8,
+  marginBottom: 14,
+};
+
+const h2Style: React.CSSProperties = {
+  fontSize: 20,
+  fontWeight: 600,
+  color: "#111827",
+  marginTop: 40,
+  marginBottom: 16,
+  paddingTop: 24,
+  borderTop: "1px solid #E5E7EB",
+};
+
+const h3Style: React.CSSProperties = {
+  fontSize: 16,
+  fontWeight: 600,
+  color: "#111827",
+  marginTop: 24,
+  marginBottom: 8,
+};
+
+const ulStyle: React.CSSProperties = {
+  marginBottom: 14,
+  paddingLeft: 20,
+  listStyleType: "disc",
+};
+
+const olStyle: React.CSSProperties = {
+  marginBottom: 14,
+  paddingLeft: 20,
+  listStyleType: "decimal",
+};
+
+const liStyle: React.CSSProperties = {
+  marginBottom: 8,
+  fontSize: 15,
+  lineHeight: 1.8,
+  color: "#4B5563",
+};
+
+const tableStyle: React.CSSProperties = {
+  width: "100%",
+  borderCollapse: "collapse",
+  margin: "16px 0 20px",
+  fontSize: 13,
+};
+
+const thStyle: React.CSSProperties = {
+  textAlign: "left",
+  padding: "10px 12px",
+  backgroundColor: "#F9FAFB",
+  color: "#111827",
+  fontWeight: 600,
+  border: "1px solid #E5E7EB",
+};
+
+const tdStyle: React.CSSProperties = {
+  padding: "10px 12px",
+  border: "1px solid #E5E7EB",
+  color: "#4B5563",
+  verticalAlign: "top",
+};

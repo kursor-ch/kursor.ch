@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,15 +11,17 @@ const diagnosticLinks = [
 ];
 
 const ressourceLinks = [
+  { label: "Comment ça marche", href: "/comment-ca-marche" },
+  { label: "À propos", href: "/a-propos" },
   { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
   { label: "Contact", href: "mailto:equipe@kursor.ch" },
 ];
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#111827" }}>
+    <footer className="relative topo-pattern" style={{ backgroundColor: "#111827" }}>
       <div
-        className="mx-auto w-full px-6"
+        className="relative mx-auto w-full px-6"
         style={{ maxWidth: "1200px" }}
       >
         {/* Main footer */}
@@ -33,10 +37,14 @@ export default function Footer() {
                 alt="Kursor logo"
                 width={32}
                 height={32}
-                style={{ height: "32px", width: "auto" }}
+                style={{
+                  height: "32px",
+                  width: "auto",
+                  filter: "drop-shadow(0 0 8px rgba(217,119,6,0.3))",
+                }}
               />
               <span
-                className="font-outfit"
+                className="font-body"
                 style={{
                   fontWeight: 600,
                   fontSize: "14px",
@@ -47,7 +55,7 @@ export default function Footer() {
               </span>
             </div>
             <p
-              className="font-outfit"
+              className="font-body"
               style={{
                 fontWeight: 400,
                 fontSize: "13px",
@@ -64,7 +72,7 @@ export default function Footer() {
           {/* Column 2 — Diagnostics */}
           <div>
             <h3
-              className="font-outfit"
+              className="font-body"
               style={{
                 fontWeight: 600,
                 fontSize: "13px",
@@ -81,7 +89,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="font-outfit footer-link"
+                    className="font-body footer-link"
                     style={{
                       fontWeight: 400,
                       fontSize: "14px",
@@ -100,7 +108,7 @@ export default function Footer() {
           {/* Column 3 — Ressources */}
           <div>
             <h3
-              className="font-outfit"
+              className="font-body"
               style={{
                 fontWeight: 600,
                 fontSize: "13px",
@@ -117,7 +125,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="font-outfit footer-link"
+                    className="font-body footer-link"
                     style={{
                       fontWeight: 400,
                       fontSize: "14px",
@@ -136,7 +144,7 @@ export default function Footer() {
           {/* Column 4 — Contact */}
           <div>
             <h3
-              className="font-outfit"
+              className="font-body"
               style={{
                 fontWeight: 600,
                 fontSize: "13px",
@@ -150,7 +158,7 @@ export default function Footer() {
             </h3>
             <a
               href="mailto:equipe@kursor.ch"
-              className="font-outfit footer-link"
+              className="font-body footer-link"
               style={{
                 fontWeight: 400,
                 fontSize: "14px",
@@ -214,16 +222,17 @@ export default function Footer() {
           className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between"
         >
           <span
-            className="font-outfit"
+            className="font-body"
             style={{ fontWeight: 400, fontSize: "12px", color: "#6B7280" }}
           >
-            © 2026 Kursor CH. Tous droits réservés.
+            &copy; 2026 Kursor CH. Tous droits réservés.
           </span>
           <span
-            className="font-outfit"
+            className="font-body"
             style={{ fontWeight: 400, fontSize: "12px", color: "#6B7280" }}
           >
-            Fait en Suisse 🇨🇭
+            Fait en Suisse{" "}
+            <span className="animate-flag-bounce">&#127464;&#127469;</span>
           </span>
         </div>
       </div>
