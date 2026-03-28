@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 async function submitEmail(email: string) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
@@ -15,9 +16,34 @@ async function submitEmail(email: string) {
   }
 }
 
+function DiamondDivider() {
+  return (
+    <div className="relative w-full" style={{ height: 1 }}>
+      <div
+        className="absolute inset-0"
+        style={{ backgroundColor: "#D97706", opacity: 0.2 }}
+      />
+      <div
+        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{
+          top: "50%",
+          color: "#D97706",
+          fontSize: 10,
+          lineHeight: 1,
+          backgroundColor: "#FFFFFF",
+          padding: "0 8px",
+        }}
+      >
+        &#9670;
+      </div>
+    </div>
+  );
+}
+
 export default function NewsletterSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { ref, isVisible } = useScrollReveal(0.15);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -39,13 +65,17 @@ export default function NewsletterSection() {
     <section
       className="w-full border-t border-b"
       style={{
-        backgroundColor: "#FFFFFF",
+        background: "linear-gradient(180deg, #FFFFFF 0%, #FEF9F0 100%)",
         borderColor: "#E5E7EB",
-        paddingTop: 48,
-        paddingBottom: 48,
       }}
     >
-      <div className="mx-auto px-6" style={{ maxWidth: 460 }}>
+      <DiamondDivider />
+
+      <div
+        ref={ref}
+        className={`mx-auto px-6 scroll-reveal ${isVisible ? "visible" : ""}`}
+        style={{ maxWidth: 460, paddingTop: 48, paddingBottom: 48 }}
+      >
         <h2
           className="font-heading text-center"
           style={{ fontSize: 22, fontWeight: 600, color: "#111827" }}
@@ -53,7 +83,7 @@ export default function NewsletterSection() {
           Restez informé
         </h2>
         <p
-          className="font-outfit text-center"
+          className="font-body text-center"
           style={{
             fontSize: 14,
             fontWeight: 400,
@@ -69,10 +99,10 @@ export default function NewsletterSection() {
 
         {submitted ? (
           <p
-            className="font-outfit text-center"
+            className="font-body text-center"
             style={{ fontSize: 14, fontWeight: 500, color: "#15803D" }}
           >
-            ✓ Vous êtes inscrit(e). À bientôt dans votre boîte mail.
+            &#10003; Vous êtes inscrit(e). À bientôt dans votre boîte mail.
           </p>
         ) : (
           <form onSubmit={handleSubmit}>
@@ -82,7 +112,7 @@ export default function NewsletterSection() {
                 name="email"
                 required
                 placeholder="Votre adresse email"
-                className="font-outfit flex-1 outline-none"
+                className="font-body flex-1 outline-none transition-shadow duration-200"
                 style={{
                   border: "1px solid #E5E7EB",
                   borderRadius: 8,
@@ -92,17 +122,20 @@ export default function NewsletterSection() {
                   color: "#111827",
                   backgroundColor: "#FDFAF5",
                 }}
-                onFocus={(e) =>
-                  (e.currentTarget.style.borderColor = "#D97706")
-                }
-                onBlur={(e) =>
-                  (e.currentTarget.style.borderColor = "#E5E7EB")
-                }
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = "#D97706";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 3px rgba(217,119,6,0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = "#E5E7EB";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="font-outfit whitespace-nowrap transition-colors"
+                className="font-body whitespace-nowrap transition-all duration-200 group"
                 style={{
                   backgroundColor: loading ? "#B45309" : "#D97706",
                   color: "#FFFFFF",
@@ -114,20 +147,25 @@ export default function NewsletterSection() {
                   cursor: loading ? "wait" : "pointer",
                 }}
                 onMouseEnter={(e) => {
-                  if (!loading) e.currentTarget.style.backgroundColor = "#B45309";
+                  if (!loading)
+                    e.currentTarget.style.backgroundColor = "#B45309";
                 }}
                 onMouseLeave={(e) => {
-                  if (!loading) e.currentTarget.style.backgroundColor = "#D97706";
+                  if (!loading)
+                    e.currentTarget.style.backgroundColor = "#D97706";
                 }}
               >
-                S&apos;inscrire →
+                S&apos;inscrire{" "}
+                <span className="inline-block transition-transform duration-200 group-hover:translate-x-[3px]">
+                  &rarr;
+                </span>
               </button>
             </div>
           </form>
         )}
 
         <p
-          className="font-outfit text-center"
+          className="font-body text-center"
           style={{
             fontSize: 12,
             fontWeight: 400,
@@ -138,6 +176,8 @@ export default function NewsletterSection() {
           Pas de spam. Désabonnement en un clic.
         </p>
       </div>
+
+      <DiamondDivider />
     </section>
   );
 }

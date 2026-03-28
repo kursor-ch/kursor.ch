@@ -11,6 +11,9 @@ const config: Config = {
         amber: {
           DEFAULT: "#D97706",
           600: "#D97706",
+          hover: "#B45309",
+          light: "#FEF3C7",
+          glow: "rgba(217,119,6,0.15)",
         },
         creme: "#FDFAF5",
         vert: "#15803D",
