@@ -3,18 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const diagnosticLinks = [
+const serviceLinks = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
   { label: "Assurance", href: "/assurance" },
   { label: "Prévoyance", href: "/prevoyance" },
 ];
 
-const ressourceLinks = [
+const infoLinks = [
   { label: "Comment ça marche", href: "/comment-ca-marche" },
   { label: "À propos", href: "/a-propos" },
   { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
-  { label: "Contact", href: "mailto:equipe@kursor.ch" },
 ];
 
 export default function Footer() {
@@ -27,7 +26,7 @@ export default function Footer() {
         {/* Main footer */}
         <div
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
-          style={{ paddingTop: "56px", paddingBottom: "40px" }}
+          style={{ paddingTop: "48px", paddingBottom: "32px" }}
         >
           {/* Column 1 — Brand */}
           <div>
@@ -65,11 +64,11 @@ export default function Footer() {
                 marginTop: "12px",
               }}
             >
-              Chaque étape de votre vie en Suisse, simplifiée.
+              Diagnostic gratuit &middot; Rapport personnalisé &middot; Experts spécialisés
             </p>
           </div>
 
-          {/* Column 2 — Diagnostics */}
+          {/* Column 2 — Nos Services */}
           <div>
             <h3
               className="font-body"
@@ -82,10 +81,10 @@ export default function Footer() {
                 marginBottom: "12px",
               }}
             >
-              Diagnostics
+              Nos services
             </h3>
             <ul className="space-y-0">
-              {diagnosticLinks.map((link) => (
+              {serviceLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -105,7 +104,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 — Ressources */}
+          {/* Column 3 — Informations */}
           <div>
             <h3
               className="font-body"
@@ -118,10 +117,10 @@ export default function Footer() {
                 marginBottom: "12px",
               }}
             >
-              Ressources
+              Informations
             </h3>
             <ul className="space-y-0">
-              {ressourceLinks.map((link) => (
+              {infoLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}

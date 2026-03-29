@@ -592,6 +592,19 @@
   transform: translateY(0);
 }
 
+/* Staggered scroll reveal (per-item) */
+.scroll-reveal-stagger {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform, opacity;
+}
+.scroll-reveal-stagger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ===== Mobile scroll snap on cards ===== */
 @media (max-width: 767px) {
   .cards-grid-mobile-snap {
@@ -652,7 +665,8 @@
   .animate-hero-badge,
   .animate-hero-subtitle,
   .animate-hero-separator,
-  .scroll-reveal {
+  .scroll-reveal,
+  .scroll-reveal-stagger {
     opacity: 1 !important;
     transform: none !important;
   }

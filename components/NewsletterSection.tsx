@@ -16,30 +16,6 @@ async function submitEmail(email: string) {
   }
 }
 
-function DiamondDivider() {
-  return (
-    <div className="relative w-full" style={{ height: 1 }}>
-      <div
-        className="absolute inset-0"
-        style={{ backgroundColor: "#D97706", opacity: 0.2 }}
-      />
-      <div
-        className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{
-          top: "50%",
-          color: "#D97706",
-          fontSize: 10,
-          lineHeight: 1,
-          backgroundColor: "#FFFFFF",
-          padding: "0 8px",
-        }}
-      >
-        &#9670;
-      </div>
-    </div>
-  );
-}
-
 export default function NewsletterSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,12 +41,10 @@ export default function NewsletterSection() {
     <section
       className="w-full border-t border-b"
       style={{
-        background: "linear-gradient(180deg, #FFFFFF 0%, #FEF9F0 100%)",
+        backgroundColor: "#FFFFFF",
         borderColor: "#E5E7EB",
       }}
     >
-      <DiamondDivider />
-
       <div
         ref={ref}
         className={`mx-auto px-6 scroll-reveal ${isVisible ? "visible" : ""}`}
@@ -80,7 +54,7 @@ export default function NewsletterSection() {
           className="font-heading text-center"
           style={{ fontSize: 22, fontWeight: 600, color: "#111827" }}
         >
-          Restez informé
+          Un conseil par semaine. Pas plus.
         </h2>
         <p
           className="font-body text-center"
@@ -93,8 +67,8 @@ export default function NewsletterSection() {
             marginBottom: 20,
           }}
         >
-          Chaque semaine, un conseil actionnable sur l&apos;emploi, la
-          fiscalité, les assurances et la prévoyance en Suisse.
+          Chaque vendredi, un email avec un conseil actionnable — emploi,
+          fiscalité, assurances ou prévoyance. Zéro spam.
         </p>
 
         {submitted ? (
@@ -167,8 +141,6 @@ export default function NewsletterSection() {
           Pas de spam. Désabonnement en un clic.
         </p>
       </div>
-
-      <DiamondDivider />
     </section>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,14 +21,25 @@ const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/prevoyance"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const lastScrollY = useRef(0);
 
   const isDiagnosticPage = DIAGNOSTIC_PATHS.some((p) => pathname.startsWith(p));
 
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 0);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 0);
+
+      // Hide on scroll down, show on scroll up (only after 64px)
+      if (currentY > 64) {
+        setHidden(currentY > lastScrollY.current);
+      } else {
+        setHidden(false);
+      }
+      lastScrollY.current = currentY;
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -39,21 +50,21 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const allMenuLinks = [...NAV_LINKS, ...INFO_LINKS];
-
   return (
     <nav
-      className="sticky top-0 z-50 border-b font-body transition-all duration-200"
+      className="sticky top-0 z-50 border-b font-body"
       style={{
         backgroundColor: scrolled ? "rgba(253,250,245,0.85)" : "#FDFAF5",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottomColor: "#E5E7EB",
-        boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.04)" : "none",
+        boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.05)" : "none",
+        transform: hidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
+        transition: "transform 300ms ease, background-color 200ms ease, backdrop-filter 200ms ease, box-shadow 200ms ease",
       }}
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex items-center justify-between h-14 md:h-16">
+        <div className="flex items-center justify-between" style={{ height: 56 }}>
           {/* Left: Logo + brand */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
@@ -63,7 +74,7 @@ export default function Navbar() {
               height={40}
               style={{ height: 40, width: "auto" }}
             />
-            <span style={{ fontSize: 14, lineHeight: 1 }}>
+            <span style={{ fontSize: 15, lineHeight: 1 }}>
               <span style={{ fontWeight: 600, color: "#111827" }}>
                 Kursor
               </span>{" "}
@@ -71,7 +82,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Center: Nav links (desktop) */}
+          {/* Center: Nav links (desktop only) */}
           <div className="hidden md:flex items-center gap-6">
             {isDiagnosticPage ? (
               <Link
@@ -131,31 +142,12 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Right: CTA + hamburger */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="/#services"
-              className="rounded-lg text-white cta-btn"
-              style={{
-                backgroundColor: "#D97706",
-                fontSize: 14,
-                fontWeight: 500,
-                padding: "10px 20px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#B45309";
-                e.currentTarget.style.boxShadow =
-                  "0 0 20px rgba(217,119,6,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#D97706";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              Diagnostic gratuit
-            </Link>
+          {/* Right: hamburger only (mobile) */}
+          <div className="flex items-center">
+            {/* Desktop: 64px height spacer */}
+            <div className="hidden md:block" style={{ height: 64 }} />
 
-            {/* Hamburger (mobile only) — animated three lines ↔ X */}
+            {/* Hamburger (mobile only) */}
             {!isDiagnosticPage && (
               <button
                 type="button"
@@ -165,6 +157,7 @@ export default function Navbar() {
                 }`}
                 aria-expanded={menuOpen}
                 aria-label="Menu de navigation"
+                style={{ minWidth: 44, minHeight: 44 }}
               >
                 <svg
                   className="h-5 w-5"
@@ -186,7 +179,7 @@ export default function Navbar() {
         {!isDiagnosticPage && (
           <div
             className={`overflow-hidden transition-all duration-200 ease-in-out md:hidden ${
-              menuOpen ? "max-h-80 pb-4" : "max-h-0"
+              menuOpen ? "max-h-96 pb-4" : "max-h-0"
             }`}
           >
             <div className="flex flex-col gap-1 pt-1">
@@ -198,10 +191,9 @@ export default function Navbar() {
                     menuOpen ? "menu-item-stagger" : ""
                   }`}
                   style={{
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: 400,
-                    color:
-                      pathname === link.href ? "#D97706" : "#6B7280",
+                    color: pathname === link.href ? "#D97706" : "#111827",
                     backgroundColor:
                       pathname === link.href
                         ? "rgba(217,119,6,0.05)"
@@ -229,8 +221,7 @@ export default function Navbar() {
                   style={{
                     fontSize: 14,
                     fontWeight: 400,
-                    color:
-                      pathname === link.href ? "#D97706" : "#6B7280",
+                    color: pathname === link.href ? "#D97706" : "#6B7280",
                     backgroundColor:
                       pathname === link.href
                         ? "rgba(217,119,6,0.05)"
