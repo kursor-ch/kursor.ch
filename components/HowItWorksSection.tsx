@@ -110,9 +110,8 @@ export default function HowItWorksSection() {
                 }}
               />
               <p
-                className="font-heading italic"
+                className="font-heading italic text-[38px] sm:text-[44px]"
                 style={{
-                  fontSize: 44,
                   fontWeight: 500,
                   color: "#D97706",
                   lineHeight: 1,

@@ -21,12 +21,11 @@ export default function OpportunitySection() {
         style={{ maxWidth: 960 }}
       >
         <div
-          className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center"
+          className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center p-7 sm:p-9 lg:p-11"
           style={{
             backgroundColor: "#FFFBF0",
             border: "1px solid rgba(217,119,6,0.28)",
             borderRadius: 20,
-            padding: "44px 36px",
             boxShadow: "0 4px 24px rgba(217,119,6,0.06)",
           }}
         >

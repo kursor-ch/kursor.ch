@@ -174,7 +174,7 @@ export default function HeroSection() {
 
           {/* Stats strip */}
           <ul
-            className="animate-hero-subtitle flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 font-body"
+            className="animate-hero-subtitle flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 font-body"
             style={{
               marginTop: 36,
               animationDelay: "560ms",

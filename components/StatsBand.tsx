@@ -62,9 +62,8 @@ export default function StatsBand() {
               />
             )}
             <p
-              className="font-heading italic"
+              className="font-heading italic text-[36px] sm:text-[42px] lg:text-[44px]"
               style={{
-                fontSize: 44,
                 fontWeight: 500,
                 color: "#FFFFFF",
                 lineHeight: 1,

@@ -32,7 +32,8 @@ export default function ResourcesSection() {
 
   return (
     <section
-      className="relative px-6"
+      id="ressources"
+      className="relative px-6 scroll-mt-20"
       style={{
         backgroundColor: "#FDFAF5",
         paddingTop: 88,
