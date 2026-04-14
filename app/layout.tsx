@@ -28,9 +28,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Kursor CH — Diagnostic d'expatriation en Suisse",
+  title: "Kursor CH — La vie en Suisse, enfin simplifiée.",
   description:
-    "Évaluez la viabilité de votre projet d'expatriation professionnelle en Suisse. Diagnostic gratuit en 2 minutes.",
+    "Emploi, logement, assurances, prévoyance. Quatre diagnostics gratuits pour identifier, en 5 minutes, les décisions qui vont peser sur votre budget pendant 10 ans.",
 };
 
 export default function RootLayout({
