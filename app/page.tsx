@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import ServicesSection from "@/components/ServicesSection";
+import OpportunitySection from "@/components/OpportunitySection";
 import NewsletterSection from "@/components/NewsletterSection";
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <ProblemSection />
       <HowItWorksSection />
       <ServicesSection />
+      <OpportunitySection />
       <NewsletterSection />
     </>
   );
