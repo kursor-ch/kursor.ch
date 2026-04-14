@@ -1,117 +1,228 @@
-import Link from "next/link";
+"use client";
 
-const services = [
+import Link from "next/link";
+import {
+  BriefcaseIcon,
+  HouseKeyIcon,
+  ShieldCheckIcon,
+  PiggyBankIcon,
+} from "@/components/ui/ServiceIcons";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const tools = [
   {
-    icon: "💼",
-    title: "Emploi",
-    pain: "Trouvez un poste en Suisse et négociez au bon niveau.",
-    stat: "+40% de salaire en moyenne",
-    cta: "Faire le diagnostic →",
-    href: "/emploi",
+    Icon: BriefcaseIcon,
+    status: "Disponible" as const,
     live: true,
+    title: "Diagnostic Emploi",
+    body: "Évaluez la viabilité de votre projet professionnel en Suisse. Potentiel salaire, adéquation du CV au marché suisse, secteurs en demande.",
+    metric: "+40 000 CHF/an de potentiel moyen",
+    cta: "Faire le diagnostic",
+    href: "/emploi",
   },
   {
-    icon: "🏠",
-    title: "Logement",
-    pain: "Trouvez votre logement en Suisse romande sans stress.",
-    stat: "3 mois de caution à anticiper",
-    cta: "Bientôt disponible",
-    href: null,
+    Icon: HouseKeyIcon,
+    status: "Bientôt" as const,
     live: false,
+    title: "Diagnostic Logement",
+    body: "Estimez votre temps de recherche selon votre canton, budget, statut et préparation. Identifiez les pièges qui éliminent 80% des candidatures.",
+    metric: "Recherche optimisée à 3 semaines",
+    cta: "Bientôt disponible",
+    href: "/logement",
   },
   {
-    icon: "🛡",
-    title: "Assurance",
-    pain: "Optimisez votre couverture et évitez les surcoûts.",
-    stat: "2 400 CHF/an d'économie potentielle",
-    cta: "Bientôt disponible",
-    href: null,
+    Icon: ShieldCheckIcon,
+    status: "Bientôt" as const,
     live: false,
+    title: "Audit Assurances",
+    body: "Identifiez simultanément combien vous surpayez et où vous n\u2019êtes pas couvert. LAMal, complémentaires, perte de gain, RC privée.",
+    metric: "2 400 CHF/an d\u2019économie potentielle",
+    cta: "Bientôt disponible",
+    href: "/assurance",
   },
   {
-    icon: "🏦",
-    title: "Prévoyance",
-    pain: "Ne perdez plus une année de déduction fiscale.",
-    stat: "7 258 CHF/an de déduction 3ème pilier",
-    cta: "Bientôt disponible",
-    href: null,
+    Icon: PiggyBankIcon,
+    status: "Bientôt" as const,
     live: false,
+    title: "Audit Retraite",
+    body: "Calculez votre perte fiscale annuelle et découvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3ème pilier.",
+    metric: "36 290 CHF rattrapables en 2026",
+    cta: "Bientôt disponible",
+    href: "/prevoyance",
   },
 ];
 
-function ServiceCard({
-  service,
-}: {
-  service: (typeof services)[number];
-}) {
-  const card = (
+function ToolCard({ tool }: { tool: (typeof tools)[number] }) {
+  const inner = (
     <div
-      className={`bg-white border rounded-xl px-6 py-7 transition-all ${
-        service.live
-          ? "border-gray-200 border-t-2 border-t-amber hover:border-amber hover:shadow-sm cursor-pointer"
-          : "border-gray-200 opacity-[0.85]"
-      } relative`}
+      className={`relative h-full flex flex-col bg-white rounded-xl ${
+        tool.live ? "service-card-live" : "service-card-soon stripe-pattern"
+      }`}
+      style={{
+        border: "1px solid #E2E8F0",
+        borderTopWidth: tool.live ? 2 : 1,
+        borderTopColor: tool.live ? "#D97706" : "#E2E8F0",
+        padding: "26px 24px 22px",
+      }}
     >
-      {!service.live && (
-        <span className="absolute top-3 right-3 font-outfit text-[10px] uppercase tracking-[0.05em] text-gray-400 bg-gray-100 rounded-full px-2 py-0.5">
-          Bientôt
-        </span>
-      )}
-
-      <span className="text-[32px] block mb-3" role="img">
-        {service.icon}
+      {/* Status pill */}
+      <span
+        className="absolute font-body uppercase"
+        style={{
+          top: 16,
+          right: 16,
+          fontSize: 10,
+          fontWeight: 600,
+          letterSpacing: "0.08em",
+          color: tool.live ? "#15803D" : "#94A3B8",
+          backgroundColor: tool.live
+            ? "rgba(21,128,61,0.10)"
+            : "#F1F5F9",
+          padding: "4px 9px",
+          borderRadius: 6,
+        }}
+      >
+        {tool.status}
       </span>
 
-      <h3 className="font-outfit font-semibold text-[18px] text-gray-900 mb-1.5">
-        {service.title}
-      </h3>
+      <div className="flex items-center gap-3">
+        <div
+          className="shrink-0 flex items-center justify-center"
+          style={{
+            width: 44,
+            height: 44,
+            backgroundColor: "rgba(217,119,6,0.08)",
+            border: "1px solid rgba(217,119,6,0.18)",
+            borderRadius: 10,
+          }}
+        >
+          <tool.Icon size={22} />
+        </div>
+        <h3
+          className="font-heading"
+          style={{
+            fontSize: 19,
+            fontWeight: 600,
+            color: "#0F172A",
+            lineHeight: 1.3,
+          }}
+        >
+          {tool.title}
+        </h3>
+      </div>
 
-      <p className="font-outfit font-normal text-[14px] text-gray-500 leading-[1.6] mb-3">
-        {service.pain}
+      <p
+        className="font-body flex-1"
+        style={{
+          fontSize: 14.5,
+          fontWeight: 400,
+          color: "#475569",
+          lineHeight: 1.65,
+          marginTop: 14,
+        }}
+      >
+        {tool.body}
       </p>
 
-      <p className="font-outfit font-semibold text-[13px] text-amber mb-4">
-        {service.stat}
+      <p
+        className="font-body"
+        style={{
+          fontSize: 13,
+          fontWeight: 600,
+          color: "#D97706",
+          marginTop: 14,
+        }}
+      >
+        {tool.metric}
       </p>
 
       <span
-        className={`font-outfit font-medium text-[14px] ${
-          service.live ? "text-amber" : "text-gray-400 text-[13px]"
+        className={`font-body inline-flex items-center gap-1 ${
+          tool.live ? "card-cta-link" : ""
         }`}
+        style={{
+          marginTop: 16,
+          fontSize: 14,
+          fontWeight: 500,
+          color: tool.live ? "#D97706" : "#94A3B8",
+        }}
       >
-        {service.cta}
+        <span className="card-cta-text">{tool.cta}</span>
+        {tool.live && <span className="card-cta-arrow">→</span>}
       </span>
     </div>
   );
 
-  if (service.live && service.href) {
-    return <Link href={service.href}>{card}</Link>;
+  if (tool.live) {
+    return (
+      <Link href={tool.href} className="card-cta-link h-full">
+        {inner}
+      </Link>
+    );
   }
 
-  return card;
+  return inner;
 }
 
 export default function ServicesSection() {
+  const { ref, isVisible } = useScrollReveal(0.1);
+
   return (
-    <section id="services" className="bg-creme px-6 py-[60px]">
-      <div className="max-w-2xl mx-auto">
+    <section
+      id="outils"
+      className="relative px-6 scroll-mt-20"
+      style={{
+        backgroundColor: "#FDFAF5",
+        paddingTop: 88,
+        paddingBottom: 88,
+        borderTop: "1px solid #E2E8F0",
+      }}
+    >
+      <div
+        ref={ref}
+        className={`relative mx-auto scroll-reveal ${isVisible ? "visible" : ""}`}
+        style={{ maxWidth: 1120 }}
+      >
         {/* Header */}
-        <div className="text-center mb-8">
-          <span className="block font-outfit text-[12px] uppercase tracking-[0.1em] text-amber mb-2">
+        <div className="text-center mx-auto" style={{ maxWidth: 720 }}>
+          <span
+            className="inline-block font-body uppercase"
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              color: "#D97706",
+            }}
+          >
             Nos diagnostics
           </span>
-          <h2 className="font-heading font-semibold text-[28px] text-gray-900 mb-2">
-            Quel est votre projet ?
+          <h2
+            className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]"
+            style={{
+              fontWeight: 600,
+              color: "#0F172A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+              marginTop: 14,
+            }}
+          >
+            Quatre outils. Une vie suisse.
+            <br />
+            <span
+              className="font-heading italic"
+              style={{ color: "#D97706", fontWeight: 500 }}
+            >
+              Cinq minutes par diagnostic.
+            </span>
           </h2>
-          <p className="font-outfit font-normal text-[15px] text-gray-400">
-            Choisissez le diagnostic adapté à votre situation.
-          </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto"
+          style={{ marginTop: 56, maxWidth: 960 }}
+        >
+          {tools.map((t) => (
+            <ToolCard key={t.title} tool={t} />
           ))}
         </div>
       </div>
