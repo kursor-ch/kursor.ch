@@ -9,6 +9,7 @@ import OpportunitySection from "@/components/OpportunitySection";
 import StatsBand from "@/components/StatsBand";
 import ResourcesSection from "@/components/ResourcesSection";
 import NewsletterSection from "@/components/NewsletterSection";
+import FinalCtaSection from "@/components/FinalCtaSection";
 
 export default function HomePage() {
   // iOS Safari :active fix (preserved from previous implementation)
@@ -26,6 +27,7 @@ export default function HomePage() {
       <StatsBand />
       <ResourcesSection />
       <NewsletterSection />
+      <FinalCtaSection />
     </>
   );
 }
