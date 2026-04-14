@@ -7,6 +7,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import ServicesSection from "@/components/ServicesSection";
 import OpportunitySection from "@/components/OpportunitySection";
 import StatsBand from "@/components/StatsBand";
+import ResourcesSection from "@/components/ResourcesSection";
 import NewsletterSection from "@/components/NewsletterSection";
 
 export default function HomePage() {
@@ -23,6 +24,7 @@ export default function HomePage() {
       <ServicesSection />
       <OpportunitySection />
       <StatsBand />
+      <ResourcesSection />
       <NewsletterSection />
     </>
   );
