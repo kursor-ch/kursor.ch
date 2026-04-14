@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import HeroSection from "@/components/HeroSection";
+import ProblemSection from "@/components/ProblemSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
@@ -223,6 +224,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+
+      <ProblemSection />
 
       {/* Transitional: old service cards grid — replaced in a later commit */}
       <section className="relative bg-creme px-6" style={{ paddingBottom: 48 }}>
