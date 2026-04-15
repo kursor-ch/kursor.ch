@@ -726,6 +726,22 @@
   }
 }
 
+/* ===== Logement desktop hero — single fade-in on mount ===== */
+@keyframes heroDesktopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-hero-desktop-in {
+  opacity: 0;
+  animation: heroDesktopIn 300ms ease-out forwards;
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -741,7 +757,8 @@
   .animate-hero-badge,
   .animate-hero-subtitle,
   .animate-hero-separator,
-  .scroll-reveal {
+  .scroll-reveal,
+  .animate-hero-desktop-in {
     opacity: 1 !important;
     transform: none !important;
   }

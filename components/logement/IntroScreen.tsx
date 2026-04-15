@@ -1,7 +1,26 @@
 "use client";
 
+// ---------------------------------------------------------------------------
+// Dual-tree layout — maintenance note
+// ---------------------------------------------------------------------------
+// This component renders TWO separate DOM trees for the hero:
+//   1) Mobile (<1024px) — visible via `lg:hidden`. Preserves the original
+//      single-column centered layout byte-identical to the pre-refactor state
+//      so SEO/social-link visual regressions are zero on phones.
+//   2) Tablet + Desktop (≥768px) — visible via `hidden md:grid`. Two-column
+//      grid with the interactive Q1 teaser card on the right.
+//
+// ANY FUTURE COPY CHANGE (headline wording, subtitle, urgency line, trust
+// labels, CTA text, compliance line) MUST be applied to BOTH trees to prevent
+// drift. If you find yourself tempted to deduplicate, first confirm the
+// "byte-identical mobile" requirement is still in force.
+// ---------------------------------------------------------------------------
+
 import { useMemo } from "react";
 import Link from "next/link";
+import { KBullet } from "@/components/shared/KBullet";
+import { KWatermark } from "@/components/shared/KWatermark";
+import InteractiveTeaserCard from "@/components/logement/InteractiveTeaserCard";
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -19,8 +38,134 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
 
   return (
     <>
+      {/* =====================================================================
+          DESKTOP + TABLET HERO (≥768px) — two-column grid
+          ===================================================================== */}
+      <section
+        className="hidden md:grid relative overflow-hidden w-full min-h-[560px] lg:min-h-[640px] xl:min-h-[720px] grid-cols-12 gap-x-8 px-6 lg:px-10 py-16 lg:py-20 animate-hero-desktop-in"
+        aria-label="Diagnostic Logement — introduction"
+      >
+        {/* Soft atmospheric wash (desktop-only) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 50% at 85% 15%, rgba(217,119,6,0.08) 0%, transparent 55%), radial-gradient(ellipse 50% 35% at 10% 90%, rgba(217,119,6,0.03) 0%, transparent 55%)",
+          }}
+        />
+
+        {/* K watermark — component handles its own responsive + positioning */}
+        <KWatermark position="top-right" size="lg" offset={80} />
+
+        {/* Left column */}
+        <div className="relative z-10 col-span-12 md:col-span-7 lg:col-span-6 lg:col-start-2 flex flex-col justify-center max-w-[620px]">
+          <p className="hero-eyebrow text-[12px] font-semibold uppercase tracking-[0.1em] text-amber mb-6 flex items-center">
+            <span>DIAGNOSTIC GRATUIT</span>
+            <KBullet color="#D97706" />
+            <span>ROMANDIE</span>
+          </p>
+
+          <h1 className="hero-headline font-heading text-[36px] md:text-[44px] lg:text-[56px] font-medium leading-[1.1] text-gray-900 mb-6">
+            Combien de semaines pour trouver votre{" "}
+            <span className="hero-noun text-amber italic">logement</span>
+            &nbsp;?
+          </h1>
+
+          <p className="hero-sub text-[16px] lg:text-[18px] text-gray-600 max-w-[480px] mb-4 leading-relaxed">
+            Estimez la difficulté de votre recherche en Suisse romande et
+            identifiez les pièges qui éliminent 80% des dossiers.
+          </p>
+
+          <p className="hero-urgency text-[16px] italic text-amber mb-8">
+            Sans méthode, la majorité des candidats perdent plus de 10 semaines.
+          </p>
+
+          <div className="mb-8">
+            <button
+              type="button"
+              onClick={onStart}
+              className="group inline-flex items-center gap-3 bg-amber text-white px-8 py-5 text-base font-bold tracking-wide rounded-xl shadow-lg shadow-amber/20 ring-1 ring-amber/20 transition-all duration-300 hover:brightness-110 hover:shadow-2xl hover:shadow-amber/30 hover:-translate-y-0.5"
+            >
+              Commencer mon diagnostic
+              <span className="arrow inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-base transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </div>
+
+          <div className="hero-trust flex flex-wrap items-center text-[13px] text-gray-500 mb-4">
+            <span className="inline-flex items-center gap-1.5">
+              <svg
+                className="w-4 h-4 text-amber"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+              2 minutes
+            </span>
+            <KBullet />
+            <span className="inline-flex items-center gap-1.5">
+              <svg
+                className="w-4 h-4 text-amber"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+              Estimation en semaines
+            </span>
+            <KBullet />
+            <span className="inline-flex items-center gap-1.5">
+              <svg
+                className="w-4 h-4 text-amber"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+                />
+              </svg>
+              Confidentiel
+            </span>
+          </div>
+        </div>
+
+        {/* Right column — interactive Q1 teaser */}
+        <div className="relative z-10 col-span-12 md:col-span-5 lg:col-span-5 flex items-center">
+          <div className="w-full">
+            <InteractiveTeaserCard />
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          MOBILE HERO (<1024px but actually <768px via lg:hidden wrapper below
+          on the original tree; we gate it with block md:hidden so tablet gets
+          the new two-column layout above).
+          ===================================================================== */}
       {/* Hero — full viewport */}
-      <div className="relative flex flex-col items-center min-h-[calc(100vh-60px)] justify-center text-center px-6 py-4 md:py-10 overflow-hidden">
+      <div className="relative flex flex-col items-center min-h-[calc(100vh-60px)] justify-center text-center px-6 py-4 md:py-10 overflow-hidden block md:hidden">
         {/* Layered atmospheric background */}
         <div
           className="pointer-events-none absolute inset-0"
