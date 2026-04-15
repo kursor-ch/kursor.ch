@@ -34,6 +34,10 @@ import {
   sendWebhook,
 } from "@/lib/shared/webhookClient";
 import { buildLogementPayload } from "@/lib/logement/webhook";
+import {
+  LOGEMENT_Q1_STORAGE_KEY,
+  isValidQ1OptionKey,
+} from "@/components/logement/InteractiveTeaserCard";
 
 declare global {
   interface Window {
@@ -95,6 +99,108 @@ export default function LogementApp() {
 
   useEffect(() => {
     retryPendingWebhooks();
+  }, []);
+
+  // Q1 pre-fill hydration on mount.
+  //
+  // Sources (in priority order):
+  //   1) URL param  ?q1=<key>     — used by fresh teaser clicks and shareable
+  //                                  deep links (cross-device, social share).
+  //   2) localStorage              — used when the user returns after a partial
+  //                                  session (resume path; "Reprendre le
+  //                                  diagnostic" in the teaser).
+  //
+  // Both sources are validated against the canonical Q1 option whitelist
+  // (`isValidQ1OptionKey`) to prevent blind trust of URL input.
+  //
+  // If the value came from a URL param, it is mirrored into localStorage so
+  // subsequent same-device visits can show the "Reprendre le diagnostic"
+  // resume UI on the teaser.
+  //
+  // After seeding the answer, soft-exit resolution runs — frontalier and
+  // futur_resident_exploration route directly to their soft-exit screens
+  // (preserves qualification logic). Otherwise we advance to the first
+  // non-skipped active question after Q1 (respects Q1bis skipWhen, which
+  // means Persona C lands on Q1bis, not Q2).
+  //
+  // localStorage is intentionally NOT cleared here — it is cleared only on
+  // webhook submission success (`handleSubmit`) or the teaser's "Recommencer"
+  // button. This preserves the resume-after-bounce feature.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const q1FromUrl = new URLSearchParams(window.location.search).get("q1");
+    const q1FromStorage = (() => {
+      try {
+        return localStorage.getItem(LOGEMENT_Q1_STORAGE_KEY);
+      } catch {
+        return null;
+      }
+    })();
+    const prefill = q1FromUrl ?? q1FromStorage;
+
+    // Always strip ?q1= from the URL on mount — even if invalid — so a bad
+    // param doesn't persist in the address bar.
+    if (q1FromUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("q1");
+      url.searchParams.delete("resume");
+      window.history.replaceState({}, "", url.pathname + url.search);
+    }
+
+    if (!prefill || !isValidQ1OptionKey(prefill)) return;
+
+    // Mirror URL-param pre-fills into localStorage so cross-device shares
+    // benefit from the resume UI on subsequent same-device visits.
+    if (q1FromUrl) {
+      try {
+        localStorage.setItem(LOGEMENT_Q1_STORAGE_KEY, q1FromUrl);
+      } catch {
+        /* no-op */
+      }
+    }
+
+    setAnswers((prev) => ({ ...prev, q1_statut: prefill }));
+
+    const seededAnswers = { q1_statut: prefill } as Partial<LogementAnswers>;
+    const softExit = resolveSoftExit(seededAnswers);
+
+    if (softExit === "frontalier") {
+      trackEvent("Soft Exit Shown", {
+        funnel: "logement",
+        reason: softExit,
+        source: "prefill",
+      });
+      bumpScreen(SOFT_EXIT_FRONTALIER);
+      return;
+    }
+    if (softExit === "exploration") {
+      trackEvent("Soft Exit Shown", {
+        funnel: "logement",
+        reason: softExit,
+        source: "prefill",
+      });
+      bumpScreen(SOFT_EXIT_EXPLORATION);
+      return;
+    }
+    if (softExit === "low_budget") {
+      trackEvent("Soft Exit Shown", {
+        funnel: "logement",
+        reason: softExit,
+        source: "prefill",
+      });
+      bumpScreen(SOFT_EXIT_LOW_BUDGET);
+      return;
+    }
+
+    // Advance to the first non-skipped active question after Q1 (e.g. Q1bis
+    // for Persona C, Q2 otherwise).
+    trackEvent("Diagnostic Started", {
+      funnel: "logement",
+      source: "prefill",
+    });
+    const nextIdx = nextQuestionIndex(0, { q1_statut: prefill });
+    bumpScreen(nextIdx === -1 ? CONTACT_SCREEN : nextIdx + 1);
   }, []);
 
   const handleAnswer = useCallback((questionId: string, value: string) => {
@@ -222,6 +328,15 @@ export default function LogementApp() {
       });
 
       await sendWebhook(payload, leadIdRef.current);
+
+      // Diagnostic completed successfully — clear the teaser resume key so a
+      // post-submission return to the landing page shows the fresh teaser,
+      // not the stale "Reprendre" state.
+      try {
+        localStorage.removeItem(LOGEMENT_Q1_STORAGE_KEY);
+      } catch {
+        /* no-op */
+      }
     } catch (err) {
       // Build/validation errors: don't block the user from seeing results;
       // the diagnostic ran client-side. Log and continue.
