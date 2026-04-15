@@ -11,7 +11,12 @@ export function resolveSoftExit(
 ): SoftExitReason | null {
   if (answers.q1_statut === "frontalier") return "frontalier";
   if (answers.q1_statut === "futur_resident_exploration") return "exploration";
-  if (answers.q1bis_offer_confirmed === "offer_confirmed_no")
+  // Q1bis only applies to Persona C — ignore stale answers if Q1 was changed
+  // back to a non-Persona-C option via the Retour button.
+  if (
+    answers.q1_statut === "futur_resident_offre_confirmee" &&
+    answers.q1bis_offer_confirmed === "offer_confirmed_no"
+  )
     return "exploration";
   if (answers.q4_budget === "lt1600") return "low_budget";
   return null;

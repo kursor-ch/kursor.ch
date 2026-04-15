@@ -147,7 +147,7 @@ export default function LogementApp() {
       if (nextIdx === -1) {
         // No more questions → pre-compute persona/score/priority so the
         // ContactScreen can gate phone requirement correctly.
-        const typedAnswers = answers as LogementAnswers;
+        const typedAnswers = answers as unknown as LogementAnswers;
         const resolvedPersona = resolvePersona(typedAnswers);
         if (resolvedPersona) {
           const result = computeLogementScore(
@@ -212,7 +212,7 @@ export default function LogementApp() {
           partner_share_optin: optIns.partner_share_optin,
           newsletter_optin: optIns.newsletter_optin,
         },
-        answers: answers as LogementAnswers,
+        answers: answers as unknown as LogementAnswers,
         persona,
         score: scoreResult,
         verdict,
@@ -290,7 +290,7 @@ export default function LogementApp() {
               verdict={verdict}
               persona={persona}
               prenom={contact.prenom}
-              answers={answers as LogementAnswers}
+              answers={answers as unknown as LogementAnswers}
             />
           )}
 
