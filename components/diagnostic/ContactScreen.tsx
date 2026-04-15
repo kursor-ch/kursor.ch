@@ -220,8 +220,7 @@ export default function ContactScreen({
           </div>
           <div>
             <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              Je souhaite être mis en relation avec les partenaires Kursor
-              (recrutement, assurances, prévoyance, fiscalité, immobilier).
+              Je souhaite être mis en relation avec les partenaires recrutement de Kursor.
               Gratuit et sans engagement.
             </span>
             <input
