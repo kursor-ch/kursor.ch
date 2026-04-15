@@ -85,9 +85,10 @@ export default function HowItWorksSection() {
               maxWidth: 640,
             }}
           >
-            Kursor est gratuit pour vous. Nous sommes rémunérés par notre
-            réseau de partenaires spécialisés quand votre dossier aboutit. Vous
-            ne payez rien, jamais.
+            Kursor vous propose ses ressources gratuitement et sans engagement.
+            Si vous souhaitez un accompagnement personnalisé afin d&rsquo;aboutir
+            vos projets, nous vous mettons en relation directement avec notre
+            réseau de partenaires professionnelles à travers la Suisse.
           </p>
         </div>
 
