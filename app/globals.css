@@ -637,6 +637,62 @@
   );
 }
 
+/* ===== K Motif System ===== */
+
+/* --- KWatermark ---
+ * Tablet (768–1023px) uses a fixed 200px height and the tablet offset.
+ * Desktop (≥1024px) uses the size/offset values set inline by the component.
+ * Mobile is hidden via Tailwind's `hidden md:block` on the component itself.
+ */
+.k-watermark {
+  --k-watermark-h: 200px;
+}
+.k-watermark--top-right {
+  top: var(--k-watermark-offset-tablet);
+  right: var(--k-watermark-offset-tablet);
+}
+.k-watermark--top-left {
+  top: var(--k-watermark-offset-tablet);
+  left: var(--k-watermark-offset-tablet);
+}
+.k-watermark--bottom-right {
+  bottom: var(--k-watermark-offset-tablet);
+  right: var(--k-watermark-offset-tablet);
+}
+.k-watermark--bottom-left {
+  bottom: var(--k-watermark-offset-tablet);
+  left: var(--k-watermark-offset-tablet);
+}
+@media (min-width: 1024px) {
+  .k-watermark {
+    --k-watermark-h: var(--k-watermark-size-desktop);
+  }
+  .k-watermark--top-right {
+    top: var(--k-watermark-offset-desktop);
+    right: var(--k-watermark-offset-desktop);
+    bottom: auto;
+    left: auto;
+  }
+  .k-watermark--top-left {
+    top: var(--k-watermark-offset-desktop);
+    left: var(--k-watermark-offset-desktop);
+    bottom: auto;
+    right: auto;
+  }
+  .k-watermark--bottom-right {
+    bottom: var(--k-watermark-offset-desktop);
+    right: var(--k-watermark-offset-desktop);
+    top: auto;
+    left: auto;
+  }
+  .k-watermark--bottom-left {
+    bottom: var(--k-watermark-offset-desktop);
+    left: var(--k-watermark-offset-desktop);
+    top: auto;
+    right: auto;
+  }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
