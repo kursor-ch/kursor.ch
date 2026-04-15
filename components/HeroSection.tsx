@@ -52,9 +52,29 @@ export default function HeroSection() {
       className="relative bg-creme px-6 grain-overlay"
       style={{ paddingTop: 64, paddingBottom: 64 }}
     >
+      {/* Subtle Alps silhouette watermark — subliminal Swiss landscape anchor */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[100px] md:h-[180px]"
+        style={{ zIndex: 0 }}
+      >
+        <svg
+          viewBox="0 0 1280 180"
+          preserveAspectRatio="none"
+          width="100%"
+          height="100%"
+          style={{ display: "block", opacity: 0.08 }}
+        >
+          <path
+            d="M 0 180 L 0 150 L 120 80 L 200 110 L 320 50 L 440 90 L 620 10 L 720 120 L 860 60 L 980 100 L 1100 85 L 1280 150 L 1280 180 Z"
+            fill="#D97706"
+          />
+        </svg>
+      </div>
+
       <div
         className="relative mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center"
-        style={{ maxWidth: 1120 }}
+        style={{ maxWidth: 1120, zIndex: 10 }}
       >
         {/* Left column — copy */}
         <div className="text-center lg:text-left">
