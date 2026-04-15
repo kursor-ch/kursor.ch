@@ -149,6 +149,24 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
               Confidentiel
             </span>
           </div>
+
+          {/* Compliance trust signal — nLPD + Swiss hosting */}
+          <p className="hero-compliance flex items-center gap-2 text-[12px] text-gray-400">
+            <svg
+              className="w-[14px] h-[14px] flex-shrink-0"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+            >
+              <rect width="32" height="32" rx="3" fill="#DC2626" />
+              <rect x="13" y="6" width="6" height="20" fill="#FFFFFF" />
+              <rect x="6" y="13" width="20" height="6" fill="#FFFFFF" />
+            </svg>
+            <span>
+              Conformité nLPD{" "}
+              <span aria-hidden="true">·</span>{" "}
+              Données hébergées en Suisse
+            </span>
+          </p>
         </div>
 
         {/* Right column — interactive Q1 teaser */}
