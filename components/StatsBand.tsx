@@ -13,6 +13,21 @@ export default function StatsBand() {
   const { ref, isVisible } = useScrollReveal(0.15);
 
   return (
+    <>
+      <div style={{ backgroundColor: "#FDFAF5" }}>
+        <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>
+          <p
+            className="font-body text-center uppercase tracking-widest text-[11px] md:text-[12px]"
+            style={{
+              fontWeight: 500,
+              color: "#D97706",
+              marginBottom: 16,
+            }}
+          >
+            Présent à : Genève · Vaud · Valais · Neuchâtel · Fribourg · Jura
+          </p>
+        </div>
+      </div>
     <section
       ref={ref}
       className={`relative w-full scroll-reveal ${isVisible ? "visible" : ""}`}
@@ -89,5 +104,6 @@ export default function StatsBand() {
         ))}
       </div>
     </section>
+    </>
   );
 }

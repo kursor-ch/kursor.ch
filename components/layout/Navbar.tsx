@@ -69,6 +69,17 @@ export default function Navbar() {
               </span>{" "}
               <span style={{ fontWeight: 400, color: "#9CA3AF" }}>CH</span>
             </span>
+            <svg
+              viewBox="0 0 32 32"
+              width="16"
+              height="16"
+              aria-hidden="true"
+              style={{ borderRadius: 2, display: "block" }}
+            >
+              <rect width="32" height="32" fill="#DA291C" />
+              <rect x="13" y="6" width="6" height="20" fill="#FFFFFF" />
+              <rect x="6" y="13" width="20" height="6" fill="#FFFFFF" />
+            </svg>
           </Link>
 
           {/* Center: Nav links (desktop) */}
