@@ -72,7 +72,7 @@ export default function HeroSection() {
               borderRadius: 20,
             }}
           >
-            Plateforme romande de diagnostic gratuit
+            Diagnostic gratuit · Romandie
           </span>
 
           {/* Headline */}
@@ -172,9 +172,9 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          {/* Stats strip */}
+          {/* Stats grid */}
           <ul
-            className="animate-hero-subtitle flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 font-body"
+            className="animate-hero-subtitle grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-x-6 lg:gap-x-8 lg:gap-y-3 font-body justify-items-center lg:justify-items-start"
             style={{
               marginTop: 36,
               animationDelay: "560ms",
@@ -183,18 +183,16 @@ export default function HeroSection() {
               color: "#64748B",
             }}
           >
-            {stats.map((stat, i) => (
+            {stats.map((stat) => (
               <li key={stat} className="flex items-center gap-2">
-                {i === 0 && (
-                  <span
-                    className="inline-block rounded-full animate-green-pulse"
-                    style={{
-                      width: 7,
-                      height: 7,
-                      backgroundColor: "#15803D",
-                    }}
-                  />
-                )}
+                <span
+                  className="inline-block rounded-full animate-green-pulse shrink-0"
+                  style={{
+                    width: 7,
+                    height: 7,
+                    backgroundColor: "#15803D",
+                  }}
+                />
                 <span>{stat}</span>
               </li>
             ))}
