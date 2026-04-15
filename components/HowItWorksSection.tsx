@@ -88,7 +88,7 @@ export default function HowItWorksSection() {
             Kursor vous propose ses ressources gratuitement et sans engagement.
             Si vous souhaitez un accompagnement personnalisé afin d&rsquo;aboutir
             vos projets, nous vous mettons en relation directement avec notre
-            réseau de partenaires professionnelles à travers la Suisse.
+            réseau de partenaires professionnels à travers la Suisse.
           </p>
         </div>
 
