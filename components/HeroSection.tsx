@@ -72,7 +72,7 @@ export default function HeroSection() {
               borderRadius: 20,
             }}
           >
-            Plateforme romande de diagnostic gratuit
+            Diagnostic gratuit · Romandie
           </span>
 
           {/* Headline */}
