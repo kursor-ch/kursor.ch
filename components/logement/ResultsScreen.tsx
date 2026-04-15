@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import DonutChart from "@/components/ui/DonutChart";
+import DifficultyGauge from "./DifficultyGauge";
 import type { LogementScoreResult } from "@/lib/logement/scoring";
 import type { LogementAnswers } from "@/lib/logement/scoring";
 import type { LogementVerdict } from "@/lib/logement/verdicts";
@@ -33,55 +32,42 @@ export default function ResultsScreen({
   prenom,
   answers,
 }: ResultsScreenProps) {
-  const [legendVisible, setLegendVisible] = useState(false);
-
-  const handleDonutComplete = useCallback(() => {
-    setLegendVisible(true);
-  }, []);
-
   const risks = detectLogementRisks(answers, persona.code);
 
   return (
     <div className="animate-screen-in space-y-8 text-center">
-      <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">
+      {/* Eyebrow — diagnostic label */}
+      <p className="text-[12px] font-body uppercase tracking-[0.1em] text-gray-500">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-px" />
-        {prenom ? `${prenom}, ` : ""}votre score de difficulté
+        {prenom ? `${prenom.toUpperCase()}, ` : ""}VOTRE DIAGNOSTIC
       </p>
 
-      <DonutChart
-        total={score.final}
-        categories={[
-          { label: "Difficulté", score: score.final, color: verdict.color },
-        ]}
-        verdictLabel={verdict.label}
-        verdictColor={verdict.color}
-        onAnimationComplete={handleDonutComplete}
-      />
-
-      {/* Estimated weeks */}
-      <div
-        className="max-w-sm mx-auto transition-all duration-500"
-        style={{
-          opacity: legendVisible ? 1 : 0,
-          transform: legendVisible ? "translateY(0)" : "translateY(8px)",
-        }}
-      >
-        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 mb-2">
+      {/* Hero — timeline */}
+      <div className="space-y-3">
+        <p className="text-[11px] font-body uppercase tracking-[0.15em] text-gray-500">
           Durée estimée de recherche
         </p>
-        <p
-          className="text-4xl font-heading font-bold leading-none"
-          style={{ color: verdict.color }}
+        <h1
+          className="font-heading font-medium leading-[1.1] text-amber"
+          style={{ fontSize: "clamp(40px, 8vw, 56px)" }}
         >
           {verdict.weeksLabel}
-        </p>
+        </h1>
       </div>
 
-      {/* Summary paragraph */}
-      <div className="max-w-[520px] mx-auto">
+      {/* Verdict copy */}
+      <div className="max-w-[560px] mx-auto">
         <p className="text-base text-gray-600 leading-[1.75] text-center">
           {verdict.summary}
         </p>
+      </div>
+
+      {/* Verdict tier badge + difficulty gauge */}
+      <div>
+        <p className="text-[11px] font-body font-semibold uppercase tracking-[0.1em] text-amber mb-2">
+          {verdict.label}
+        </p>
+        <DifficultyGauge score={score.final} tier={verdict.key} />
       </div>
 
       {/* Risks */}
