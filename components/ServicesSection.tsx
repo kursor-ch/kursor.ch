@@ -22,12 +22,12 @@ const tools = [
   },
   {
     Icon: HouseKeyIcon,
-    status: "Bientôt" as const,
-    live: false,
+    status: "Disponible" as const,
+    live: true,
     title: "Diagnostic Logement",
     body: "Estimez votre temps de recherche selon votre canton, budget, statut et préparation. Identifiez les pièges qui éliminent 80% des candidatures.",
     metric: "Recherche optimisée à 3 semaines",
-    cta: "Bientôt disponible",
+    cta: "Faire le diagnostic",
     href: "/logement",
   },
   {
