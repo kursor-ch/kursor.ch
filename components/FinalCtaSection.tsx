@@ -4,16 +4,20 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-async function submitEmail(email: string) {
+async function submitEmail(email: string, newsletterOptIn: boolean) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
   if (webhookUrl) {
     await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, source: "lp_final_cta" }),
+      body: JSON.stringify({
+        email,
+        source: "lp_final_cta",
+        newsletter_optin: newsletterOptIn,
+      }),
     });
   } else {
-    console.log("Final CTA email:", email);
+    console.log("Final CTA email:", email, "newsletter_optin:", newsletterOptIn);
   }
 }
 
@@ -21,6 +25,7 @@ export default function FinalCtaSection() {
   const router = useRouter();
   const { ref, isVisible } = useScrollReveal(0.12);
   const [loading, setLoading] = useState(false);
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,7 +35,7 @@ export default function FinalCtaSection() {
 
     setLoading(true);
     try {
-      await submitEmail(email);
+      await submitEmail(email, newsletterOptIn);
     } catch {
       // Proceed to the diagnostic anyway — email capture is best-effort
     }
@@ -141,13 +146,42 @@ export default function FinalCtaSection() {
           </button>
         </form>
 
+        <label
+          htmlFor="final-cta-newsletter"
+          className="font-body inline-flex items-center gap-2 cursor-pointer mx-auto"
+          style={{
+            marginTop: 14,
+            fontSize: 13,
+            fontWeight: 400,
+            color: "#64748B",
+            letterSpacing: "0.01em",
+          }}
+        >
+          <input
+            id="final-cta-newsletter"
+            type="checkbox"
+            checked={newsletterOptIn}
+            onChange={(e) => setNewsletterOptIn(e.target.checked)}
+            style={{
+              width: 16,
+              height: 16,
+              border: "1px solid #E5E7EB",
+              borderRadius: 4,
+              accentColor: "#D97706",
+              cursor: "pointer",
+              flexShrink: 0,
+            }}
+          />
+          <span>Recevoir aussi nos conseils hebdomadaires sur la vie en Suisse.</span>
+        </label>
+
         <p
           className="font-body"
           style={{
             fontSize: 13,
             fontWeight: 400,
             color: "#94A3B8",
-            marginTop: 18,
+            marginTop: 14,
             letterSpacing: "0.01em",
           }}
         >

@@ -8,7 +8,6 @@ import ServicesSection from "@/components/ServicesSection";
 import OpportunitySection from "@/components/OpportunitySection";
 import StatsBand from "@/components/StatsBand";
 import ResourcesSection from "@/components/ResourcesSection";
-import NewsletterSection from "@/components/NewsletterSection";
 import FinalCtaSection from "@/components/FinalCtaSection";
 
 export default function HomePage() {
@@ -26,7 +25,6 @@ export default function HomePage() {
       <OpportunitySection />
       <StatsBand />
       <ResourcesSection />
-      <NewsletterSection />
       <FinalCtaSection />
     </>
   );

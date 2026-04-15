@@ -67,20 +67,9 @@ function ToolCard({ tool }: { tool: (typeof tools)[number] }) {
     >
       {/* Status pill */}
       <span
-        className="absolute font-body uppercase"
-        style={{
-          top: 16,
-          right: 16,
-          fontSize: 10,
-          fontWeight: 600,
-          letterSpacing: "0.08em",
-          color: tool.live ? "#15803D" : "#94A3B8",
-          backgroundColor: tool.live
-            ? "rgba(21,128,61,0.10)"
-            : "#F1F5F9",
-          padding: "4px 9px",
-          borderRadius: 6,
-        }}
+        className={`absolute top-4 right-4 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase font-body ${
+          tool.live ? "bg-vert/10 text-vert" : "bg-gray-100 text-gray-500"
+        }`}
       >
         {tool.status}
       </span>
