@@ -107,48 +107,57 @@ export default function DiagnosticApp() {
       )}
 
       {/* Content */}
-      <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
-        {screen === 0 && <IntroScreen onStart={goNext} />}
+      {screen === 0 ? (
+        // IntroScreen manages its own layout widths: its desktop hero needs
+        // to span the viewport (breaks out of the funnel's max-w-xl cap) and
+        // its mobile branch + below-the-fold sections re-apply the same
+        // max-w-xl wrapper internally so <768px rendering is byte-identical
+        // to the pre-refactor state. See IntroScreen.tsx for the inner wrapper.
+        <div key={screenKey}>
+          <IntroScreen onStart={goNext} />
+        </div>
+      ) : (
+        <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
+          {screen >= 1 && screen <= 3 && (
+            <QuestionScreen
+              screen={questionScreens[screen - 1]}
+              answers={answers}
+              onAnswer={handleAnswer}
+              onNext={goNext}
+              onBack={goBack}
+              canProceed={canProceedFromQuestionScreen(screen - 1)}
+            />
+          )}
 
-        {screen >= 1 && screen <= 3 && (
-          <QuestionScreen
-            screen={questionScreens[screen - 1]}
-            answers={answers}
-            onAnswer={handleAnswer}
-            onNext={goNext}
-            onBack={goBack}
-            canProceed={canProceedFromQuestionScreen(screen - 1)}
-          />
-        )}
+          {screen === 4 && (
+            <ContactScreen
+              contact={contact}
+              onChange={setContact}
+              onSubmit={handleSubmit}
+              onBack={goBack}
+            />
+          )}
 
-        {screen === 4 && (
-          <ContactScreen
-            contact={contact}
-            onChange={setContact}
-            onSubmit={handleSubmit}
-            onBack={goBack}
-          />
-        )}
+          {screen === 5 && (
+            <LoadingScreen
+              onComplete={() => {
+                setScreen(6);
+                setScreenKey((k) => k + 1);
+                window.scrollTo({ top: 0, behavior: "instant" });
+              }}
+            />
+          )}
 
-        {screen === 5 && (
-          <LoadingScreen
-            onComplete={() => {
-              setScreen(6);
-              setScreenKey((k) => k + 1);
-              window.scrollTo({ top: 0, behavior: "instant" });
-            }}
-          />
-        )}
-
-        {screen === 6 && scores && verdict && (
-          <ResultsScreen
-            scores={scores}
-            verdict={verdict}
-            prenom={contact.prenom}
-            answers={answers}
-          />
-        )}
-      </div>
+          {screen === 6 && scores && verdict && (
+            <ResultsScreen
+              scores={scores}
+              verdict={verdict}
+              prenom={contact.prenom}
+              answers={answers}
+            />
+          )}
+        </div>
+      )}
     </main>
   );
 }
