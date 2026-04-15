@@ -35,7 +35,7 @@ export default function ResultsScreen({
   const risks = detectLogementRisks(answers, persona.code);
 
   return (
-    <div className="animate-screen-in space-y-8 text-center">
+    <section className="relative animate-screen-in space-y-8 text-center">
       {/* Eyebrow — diagnostic label */}
       <p className="text-[12px] font-body uppercase tracking-[0.1em] text-gray-500">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-px" />
@@ -141,6 +141,6 @@ export default function ResultsScreen({
           Sans engagement. Un expert analyse votre dossier et vous oriente.
         </p>
       </div>
-    </div>
+    </section>
   );
 }
