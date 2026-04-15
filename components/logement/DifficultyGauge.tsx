@@ -12,8 +12,8 @@ const TIERS: { key: LogementTier; label: string; color: string }[] = [
   { key: "faisable", label: "Faisable", color: "#86A789" },
   { key: "moderee", label: "Modérée", color: "#B8C99D" },
   { key: "difficile", label: "Difficile", color: "#E8B86D" },
-  { key: "tres_difficile", label: "Très diff.", color: "#D97706" },
-  { key: "quasi_impossible", label: "Quasi imp.", color: "#B45309" },
+  { key: "tres_difficile", label: "Très difficile", color: "#D97706" },
+  { key: "quasi_impossible", label: "Quasi-impossible", color: "#B45309" },
 ];
 
 export default function DifficultyGauge({ score, tier }: DifficultyGaugeProps) {
@@ -25,16 +25,13 @@ export default function DifficultyGauge({ score, tier }: DifficultyGaugeProps) {
 
   const clampedScore = Math.max(0, Math.min(100, Math.round(score)));
   const activeTier = TIERS.find((t) => t.key === tier) ?? TIERS[1];
+  const markerLeft = mounted ? clampedScore : 0;
 
   return (
     <div
       role="img"
       aria-label={`Difficulté de votre recherche : ${activeTier.label}, ${clampedScore} sur 100`}
-      className="mx-auto w-full max-w-[520px] transition-opacity ease-out"
-      style={{
-        opacity: mounted ? 1 : 0,
-        transitionDuration: "400ms",
-      }}
+      className="mx-auto w-full max-w-[600px]"
     >
       {/* Track + marker */}
       <div className="relative">
@@ -52,26 +49,29 @@ export default function DifficultyGauge({ score, tier }: DifficultyGaugeProps) {
           ))}
         </div>
 
-        {/* Marker line — 3px wide, 8px overhang top/bottom */}
+        {/* Marker line — 3px wide, 8px overhang top/bottom.
+            Animates from 0% to the target score on mount (800ms ease-out). */}
         <div
           className="absolute w-[3px] pointer-events-none"
           style={{
-            left: `${clampedScore}%`,
+            left: `${markerLeft}%`,
             top: "-8px",
             bottom: "-8px",
             transform: "translateX(-50%)",
             backgroundColor: "#1F2937",
+            transition: "left 800ms ease-out",
           }}
         />
 
-        {/* Marker circle — 10px, sits on top of bar */}
+        {/* Marker circle — 10px, sits on top of bar. Animates with the line. */}
         <div
           className="absolute w-[10px] h-[10px] rounded-full pointer-events-none"
           style={{
-            left: `${clampedScore}%`,
+            left: `${markerLeft}%`,
             top: "6px",
             transform: "translate(-50%, -50%)",
             backgroundColor: "#1F2937",
+            transition: "left 800ms ease-out",
           }}
         />
       </div>
