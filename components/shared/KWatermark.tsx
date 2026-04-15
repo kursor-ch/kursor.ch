@@ -41,7 +41,7 @@ export function KWatermark({
   size = "lg",
   offset = 80,
   className,
-}: KWatermarkProps): JSX.Element {
+}: KWatermarkProps) {
   const desktopPx = SIZE_PX[size];
   const tabletOffset = Math.max(40, offset);
 

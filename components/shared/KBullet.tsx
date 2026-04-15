@@ -20,7 +20,7 @@ export function KBullet({
   color = "currentColor",
   size = 12,
   className,
-}: KBulletProps): JSX.Element {
+}: KBulletProps) {
   return (
     <span
       className={className}

@@ -43,7 +43,7 @@ export function KNegativeSpace({
   size = 36,
   children,
   className,
-}: KNegativeSpaceProps): JSX.Element {
+}: KNegativeSpaceProps) {
   return (
     <div
       className={`relative k-negspace k-negspace--${corner}${
