@@ -637,6 +637,95 @@
   );
 }
 
+/* ===== K Motif System ===== */
+
+/* --- KWatermark ---
+ * Tablet (768–1023px) uses a fixed 200px height and the tablet offset.
+ * Desktop (≥1024px) uses the size/offset values set inline by the component.
+ * Mobile is hidden via Tailwind's `hidden md:block` on the component itself.
+ */
+.k-watermark {
+  --k-watermark-h: 200px;
+}
+.k-watermark--top-right {
+  top: var(--k-watermark-offset-tablet);
+  right: var(--k-watermark-offset-tablet);
+}
+.k-watermark--top-left {
+  top: var(--k-watermark-offset-tablet);
+  left: var(--k-watermark-offset-tablet);
+}
+.k-watermark--bottom-right {
+  bottom: var(--k-watermark-offset-tablet);
+  right: var(--k-watermark-offset-tablet);
+}
+.k-watermark--bottom-left {
+  bottom: var(--k-watermark-offset-tablet);
+  left: var(--k-watermark-offset-tablet);
+}
+@media (min-width: 1024px) {
+  .k-watermark {
+    --k-watermark-h: var(--k-watermark-size-desktop);
+  }
+  .k-watermark--top-right {
+    top: var(--k-watermark-offset-desktop);
+    right: var(--k-watermark-offset-desktop);
+    bottom: auto;
+    left: auto;
+  }
+  .k-watermark--top-left {
+    top: var(--k-watermark-offset-desktop);
+    left: var(--k-watermark-offset-desktop);
+    bottom: auto;
+    right: auto;
+  }
+  .k-watermark--bottom-right {
+    bottom: var(--k-watermark-offset-desktop);
+    right: var(--k-watermark-offset-desktop);
+    top: auto;
+    left: auto;
+  }
+  .k-watermark--bottom-left {
+    bottom: var(--k-watermark-offset-desktop);
+    left: var(--k-watermark-offset-desktop);
+    top: auto;
+    right: auto;
+  }
+}
+
+/* --- KNegativeSpace ---
+ * Absolutely-positioned K sits in the chosen corner, filled with the page
+ * background color to create the illusion of a K-shaped cut. See the JSDoc
+ * on the component for why we subtract instead of masking.
+ * Below 768px the cut is hidden; the card renders with normal corners.
+ */
+.k-negspace__cut {
+  position: absolute;
+  pointer-events: none;
+  line-height: 0;
+}
+.k-negspace--top-right .k-negspace__cut {
+  top: 0;
+  right: 0;
+}
+.k-negspace--top-left .k-negspace__cut {
+  top: 0;
+  left: 0;
+}
+.k-negspace--bottom-right .k-negspace__cut {
+  bottom: 0;
+  right: 0;
+}
+.k-negspace--bottom-left .k-negspace__cut {
+  bottom: 0;
+  left: 0;
+}
+@media (max-width: 767px) {
+  .k-negspace__cut {
+    display: none;
+  }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
