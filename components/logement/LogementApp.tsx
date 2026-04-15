@@ -367,52 +367,61 @@ export default function LogementApp() {
         <ProgressBar current={currentStep} total={totalSteps} />
       )}
 
-      <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
-        {screen === 0 && <IntroScreen onStart={goNext} />}
-
-        {screen >= 1 && screen <= MAX_QUESTION_INDEX && (
-          <QuestionScreen
-            screen={logementQuestionScreens[screen - 1]}
-            answers={answers}
-            onAnswer={handleAnswer}
-            onNext={goNext}
-            onBack={goBack}
-            canProceed={canProceedFromQuestion(screen)}
-            canGoBack={screen > 1}
-          />
-        )}
-
-        {screen === CONTACT_SCREEN && (
-          <ContactScreen
-            contact={contact}
-            onChange={setContact}
-            onSubmit={handleSubmit}
-            onBack={goBack}
-            phoneRequired={priority === "hot" || priority === "very_hot"}
-          />
-        )}
-
-        {screen === LOADING_SCREEN && (
-          <LoadingScreen onComplete={() => bumpScreen(RESULTS_SCREEN)} />
-        )}
-
-        {screen === RESULTS_SCREEN &&
-          scoreResult &&
-          verdict &&
-          persona && (
-            <ResultsScreen
-              score={scoreResult}
-              verdict={verdict}
-              persona={persona}
-              prenom={contact.prenom}
-              answers={answers as unknown as LogementAnswers}
+      {screen === 0 ? (
+        // IntroScreen manages its own layout widths: its desktop hero needs
+        // to span the viewport (breaks out of the funnel's max-w-xl cap) and
+        // its mobile branch + below-the-fold sections re-apply the same
+        // max-w-xl wrapper internally to stay byte-identical to the pre-Step-2
+        // rendering. See IntroScreen.tsx for the inner wrapper.
+        <div key={screenKey}>
+          <IntroScreen onStart={goNext} />
+        </div>
+      ) : (
+        <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
+          {screen >= 1 && screen <= MAX_QUESTION_INDEX && (
+            <QuestionScreen
+              screen={logementQuestionScreens[screen - 1]}
+              answers={answers}
+              onAnswer={handleAnswer}
+              onNext={goNext}
+              onBack={goBack}
+              canProceed={canProceedFromQuestion(screen)}
+              canGoBack={screen > 1}
             />
           )}
 
-        {screen === SOFT_EXIT_FRONTALIER && <SoftExitFrontalier />}
-        {screen === SOFT_EXIT_EXPLORATION && <SoftExitExploration />}
-        {screen === SOFT_EXIT_LOW_BUDGET && <SoftExitLowBudget />}
-      </div>
+          {screen === CONTACT_SCREEN && (
+            <ContactScreen
+              contact={contact}
+              onChange={setContact}
+              onSubmit={handleSubmit}
+              onBack={goBack}
+              phoneRequired={priority === "hot" || priority === "very_hot"}
+            />
+          )}
+
+          {screen === LOADING_SCREEN && (
+            <LoadingScreen onComplete={() => bumpScreen(RESULTS_SCREEN)} />
+          )}
+
+          {screen === RESULTS_SCREEN &&
+            scoreResult &&
+            verdict &&
+            persona && (
+              <ResultsScreen
+                score={scoreResult}
+                verdict={verdict}
+                persona={persona}
+                prenom={contact.prenom}
+                answers={answers as unknown as LogementAnswers}
+              />
+            )}
+
+          {screen === SOFT_EXIT_FRONTALIER && <SoftExitFrontalier />}
+          {screen === SOFT_EXIT_EXPLORATION && <SoftExitExploration />}
+          {screen === SOFT_EXIT_LOW_BUDGET && <SoftExitLowBudget />}
+        </div>
+      )}
     </main>
   );
 }

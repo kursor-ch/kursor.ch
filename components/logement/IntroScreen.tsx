@@ -178,10 +178,16 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
       </section>
 
       {/* =====================================================================
-          MOBILE HERO (<1024px but actually <768px via lg:hidden wrapper below
-          on the original tree; we gate it with block md:hidden so tablet gets
-          the new two-column layout above).
+          MOBILE HERO + below-the-fold sections.
+          The desktop grid above lives at the viewport root so it can span the
+          full width. The mobile hero, Calendly CTA, and footer re-enter the
+          funnel's `max-w-xl mx-auto px-6 py-4 md:py-14` wrapper here — the
+          exact same wrapper that previously lived in LogementApp around the
+          whole IntroScreen — so mobile rendering is byte-identical to the
+          pre-Step-2 state and the Calendly/footer widths on desktop stay at
+          576px centered as before.
           ===================================================================== */}
+      <div className="max-w-xl mx-auto px-6 py-4 md:py-14">
       {/* Hero — full viewport */}
       <div className="relative flex flex-col items-center min-h-[calc(100vh-60px)] justify-center text-center px-6 py-4 md:py-10 overflow-hidden block md:hidden">
         {/* Layered atmospheric background */}
@@ -444,6 +450,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
           </Link>
         </p>
       </footer>
+      </div>
     </>
   );
 }
