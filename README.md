@@ -10,10 +10,10 @@ Interactive diagnostics that score and qualify French-speaking professionals con
 
 | Funnel | Route | Status |
 |--------|-------|--------|
-| Work (Salarié) | `/diagnostic/work` | Active |
-| Logement | `/diagnostic/logement` | Planned |
-| Assurance | `/diagnostic/assurance` | Planned |
-| Retraite | `/diagnostic/retraite` | Planned |
+| Emploi (Salarié) | `/emploi` | Active |
+| Logement | `/logement` | Active |
+| Assurance | `/assurance` | Planned (stub live) |
+| Prévoyance | `/prevoyance` | Planned (stub live) |
 | Entrepreneur | `/diagnostic/entrepreneur` | Planned |
 
 ## Tech stack
@@ -45,7 +45,18 @@ npm run lint       # ESLint check
 ## Environment variables
 
 ```
+# Main diagnostic submission endpoint (v1.0 schema). Used by Logement and
+# all future funnels conforming to docs/WEBHOOK_SCHEMA.md.
+NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL=https://n8n.kursor.ch/webhook/diagnostic-submission
+
+# Legacy endpoint still used by the Emploi funnel. Logement falls back to this
+# if NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL is unset.
 NEXT_PUBLIC_WEBHOOK_URL=https://[n8n-instance].app.n8n.cloud/webhook/kursor-lead
+
+# Lightweight soft-exit captures (newsletter-only from Logement soft-exits).
+# If unset, soft-exit captures are silent no-ops.
+NEXT_PUBLIC_SOFT_EXIT_WEBHOOK_URL=https://n8n.kursor.ch/webhook/soft-exit-capture
+
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=kursor.ch
 ```
 
