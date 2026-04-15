@@ -145,7 +145,7 @@ export default function Navbar() {
           {/* Right: CTA + hamburger */}
           <div className="flex items-center gap-3">
             <Link
-              href="/#services"
+              href="/#outils"
               className="rounded-lg text-white cta-btn"
               style={{
                 backgroundColor: "#D97706",
@@ -163,7 +163,7 @@ export default function Navbar() {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              Diagnostic gratuit
+              Évaluer mon projet
             </Link>
 
             {/* Hamburger (mobile only) — animated three lines ↔ X */}
