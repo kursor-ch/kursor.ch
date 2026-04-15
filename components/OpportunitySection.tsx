@@ -23,10 +23,10 @@ export default function OpportunitySection() {
         <div
           className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center p-7 sm:p-9 lg:p-11"
           style={{
-            backgroundColor: "#FFFBF0",
-            border: "1px solid rgba(217,119,6,0.28)",
+            backgroundColor: "rgba(254,243,199,0.4)",
+            border: "1px solid rgba(217,119,6,0.30)",
             borderRadius: 20,
-            boxShadow: "0 4px 24px rgba(217,119,6,0.06)",
+            boxShadow: "0 4px 24px rgba(217,119,6,0.08)",
           }}
         >
           {/* Left: copy */}
@@ -35,7 +35,7 @@ export default function OpportunitySection() {
             <span
               className="inline-flex items-center gap-2 font-body uppercase"
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 color: "#B91C1C",
@@ -46,10 +46,10 @@ export default function OpportunitySection() {
               }}
             >
               <span
-                className="inline-block rounded-full"
+                className="inline-block rounded-full animate-green-pulse"
                 style={{
-                  width: 6,
-                  height: 6,
+                  width: 8,
+                  height: 8,
                   backgroundColor: "#DC2626",
                 }}
               />
