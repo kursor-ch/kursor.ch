@@ -6,15 +6,15 @@ import Link from "next/link";
 const diagnosticLinks = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
-  { label: "Assurance", href: "/assurance" },
+  { label: "Assurances", href: "/assurance" },
   { label: "Prévoyance", href: "/prevoyance" },
 ];
 
 const ressourceLinks = [
+  { label: "Guides", href: "/#ressources" },
   { label: "Comment ça marche", href: "/comment-ca-marche" },
   { label: "À propos", href: "/a-propos" },
   { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
-  { label: "Contact", href: "mailto:equipe@kursor.ch" },
 ];
 
 export default function Footer() {

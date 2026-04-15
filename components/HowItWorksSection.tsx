@@ -1,78 +1,152 @@
+"use client";
+
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const steps = [
   {
-    number: "1",
-    title: "Répondez au diagnostic",
-    description:
-      "8 questions sur votre situation. 2 minutes. Aucune inscription préalable.",
+    number: "01",
+    title: "Diagnostic gratuit",
+    body: "Vous répondez à 6 à 9 questions ciblées sur votre situation. 5 minutes maximum, aucun engagement, aucune carte bancaire.",
   },
   {
-    number: "2",
-    title: "Recevez votre rapport",
-    description:
-      "Score personnalisé, points forts, risques identifiés et chiffres clés — directement dans votre boîte email.",
+    number: "02",
+    title: "Bilan personnalisé",
+    body: "Vous recevez par email un bilan chiffré avec les arbitrages prioritaires pour votre profil. Ce document vous appartient, que vous alliez plus loin ou non.",
   },
   {
-    number: "3",
-    title: "Accédez aux bons experts",
-    description:
-      "Recruteurs, courtiers, conseillers — nos partenaires spécialisés vous accompagnent. Gratuit et sans engagement.",
+    number: "03",
+    title: "Mise en relation qualifiée",
+    body: "Si vous le souhaitez, nous transmettons votre dossier au partenaire spécialisé adapté à votre situation. Premier contact garanti sous 48h ouvrées.",
+  },
+  {
+    number: "04",
+    title: "Accompagnement partenaire",
+    body: "Notre partenaire gère votre dossier de bout en bout. Vous validez chaque étape. Nous restons disponibles en cas de friction.",
   },
 ];
 
 export default function HowItWorksSection() {
-  return (
-    <section className="bg-creme px-6 pt-[60px] pb-[60px]">
-      {/* Top separator */}
-      <div className="max-w-2xl mx-auto">
-        <div className="border-t border-gray-200 mb-[60px]" />
-      </div>
+  const { ref, isVisible } = useScrollReveal(0.1);
 
-      <div className="max-w-2xl mx-auto">
+  return (
+    <section
+      className="relative px-6"
+      style={{
+        backgroundColor: "#FFFFFF",
+        paddingTop: 88,
+        paddingBottom: 88,
+      }}
+    >
+      <div
+        ref={ref}
+        className={`relative mx-auto scroll-reveal ${isVisible ? "visible" : ""}`}
+        style={{ maxWidth: 1120 }}
+      >
         {/* Header */}
-        <div className="text-center mb-[40px]">
-          <span className="block font-outfit text-[12px] uppercase tracking-[0.1em] text-amber mb-2">
-            Comment ça marche
+        <div className="text-center mx-auto" style={{ maxWidth: 720 }}>
+          <span
+            className="inline-block font-body uppercase"
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              color: "#D97706",
+            }}
+          >
+            Notre méthode
           </span>
-          <h2 className="font-heading font-semibold text-[28px] text-gray-900">
-            Simple, rapide, gratuit.
+          <h2
+            className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]"
+            style={{
+              fontWeight: 600,
+              color: "#0F172A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+              marginTop: 14,
+            }}
+          >
+            Quatre étapes pour passer
+            <br />
+            <span
+              className="font-heading italic"
+              style={{ color: "#D97706", fontWeight: 500 }}
+            >
+              de l&rsquo;incertitude à la clarté.
+            </span>
           </h2>
+          <p
+            className="font-body mx-auto"
+            style={{
+              fontWeight: 400,
+              fontSize: 16,
+              color: "#475569",
+              lineHeight: 1.65,
+              marginTop: 18,
+              maxWidth: 640,
+            }}
+          >
+            Kursor est gratuit pour vous. Nous sommes rémunérés par notre
+            réseau de partenaires spécialisés quand votre dossier aboutit. Vous
+            ne payez rien, jamais.
+          </p>
         </div>
 
-        {/* Steps */}
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Desktop dotted connector line */}
-          <div
-            className="hidden md:block absolute top-[20px] left-[calc(16.666%+20px)] right-[calc(16.666%+20px)] border-t-2 border-dashed border-amber/25"
-            aria-hidden="true"
-          />
-
-          {/* Mobile vertical dotted connector line */}
-          <div
-            className="md:hidden absolute left-1/2 -translate-x-1/2 top-[40px] bottom-[40px] border-l-2 border-dashed border-amber/25"
-            aria-hidden="true"
-          />
-
+        {/* Steps grid */}
+        <ol
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10"
+          style={{ marginTop: 64 }}
+        >
           {steps.map((step) => (
-            <div key={step.number} className="relative text-center">
-              {/* Number circle */}
-              <div className="relative z-10 w-[40px] h-[40px] rounded-full bg-[#FEF3C7] flex items-center justify-center mx-auto mb-4">
-                <span className="font-outfit font-semibold text-[16px] text-amber leading-none">
-                  {step.number}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="font-outfit font-semibold text-[16px] text-gray-900 mb-2">
+            <li key={step.number} className="relative">
+              {/* Top divider line (amber, short) */}
+              <div
+                aria-hidden="true"
+                style={{
+                  width: 32,
+                  height: 2,
+                  backgroundColor: "#D97706",
+                  borderRadius: 1,
+                  marginBottom: 14,
+                }}
+              />
+              <p
+                className="font-heading italic text-[38px] sm:text-[44px]"
+                style={{
+                  fontWeight: 500,
+                  color: "#D97706",
+                  lineHeight: 1,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {step.number}
+              </p>
+              <h3
+                className="font-heading"
+                style={{
+                  fontSize: 19,
+                  fontWeight: 600,
+                  color: "#0F172A",
+                  lineHeight: 1.3,
+                  marginTop: 12,
+                }}
+              >
                 {step.title}
               </h3>
-
-              {/* Description */}
-              <p className="font-outfit font-normal text-[14px] text-gray-500 leading-[1.6]">
-                {step.description}
+              <p
+                className="font-body"
+                style={{
+                  fontSize: 14.5,
+                  fontWeight: 400,
+                  color: "#475569",
+                  lineHeight: 1.65,
+                  marginTop: 10,
+                }}
+              >
+                {step.body}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
