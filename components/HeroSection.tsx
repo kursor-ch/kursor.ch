@@ -8,6 +8,7 @@ import {
   PiggyBankIcon,
 } from "@/components/ui/ServiceIcons";
 import { KBullet } from "@/components/shared/KBullet";
+import { KNegativeSpace } from "@/components/shared/KNegativeSpace";
 import { KWatermark } from "@/components/shared/KWatermark";
 
 const dashboardItems = [
@@ -244,6 +245,7 @@ export default function HeroSection() {
             }}
           />
 
+          <KNegativeSpace corner="top-right" size={36}>
           <div
             className="relative bg-white rounded-2xl"
             style={{
@@ -385,6 +387,7 @@ export default function HeroSection() {
               </span>
             </div>
           </div>
+          </KNegativeSpace>
         </div>
       </div>
     </section>
