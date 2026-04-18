@@ -8,6 +8,7 @@ import {
   PiggyBankIcon,
 } from "@/components/ui/ServiceIcons";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { KWatermark } from "@/components/shared/KWatermark";
 
 const tools = [
   {
@@ -167,6 +168,8 @@ export default function ServicesSection() {
         borderTop: "1px solid #E2E8F0",
       }}
     >
+      <KWatermark position="top-right" size="lg" offset={80} />
+
       <div
         ref={ref}
         className={`relative mx-auto scroll-reveal ${isVisible ? "visible" : ""}`}

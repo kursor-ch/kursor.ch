@@ -7,6 +7,9 @@ import {
   ShieldCheckIcon,
   PiggyBankIcon,
 } from "@/components/ui/ServiceIcons";
+import { KBullet } from "@/components/shared/KBullet";
+import { KNegativeSpace } from "@/components/shared/KNegativeSpace";
+import { KWatermark } from "@/components/shared/KWatermark";
 
 const dashboardItems = [
   {
@@ -52,6 +55,8 @@ export default function HeroSection() {
       className="relative bg-creme px-6 grain-overlay"
       style={{ paddingTop: 64, paddingBottom: 64 }}
     >
+      <KWatermark position="top-right" size="lg" offset={80} />
+
       {/* Subtle Alps silhouette watermark — subliminal Swiss landscape anchor */}
       <div
         aria-hidden="true"
@@ -92,7 +97,9 @@ export default function HeroSection() {
               borderRadius: 20,
             }}
           >
-            Diagnostic gratuit · Romandie
+            <span>Diagnostic gratuit</span>
+            <KBullet color="#D97706" />
+            <span>Romandie</span>
           </span>
 
           {/* Headline */}
@@ -238,6 +245,7 @@ export default function HeroSection() {
             }}
           />
 
+          <KNegativeSpace corner="top-right" size={36}>
           <div
             className="relative bg-white rounded-2xl"
             style={{
@@ -379,6 +387,7 @@ export default function HeroSection() {
               </span>
             </div>
           </div>
+          </KNegativeSpace>
         </div>
       </div>
     </section>

@@ -1,12 +1,23 @@
 "use client";
 
+import { Fragment } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { KBullet } from "@/components/shared/KBullet";
 
 const stats = [
   { figure: "3 155", label: "diagnostics réalisés" },
   { figure: "6", label: "cantons romands couverts" },
   { figure: "4", label: "partenaires spécialisés" },
   { figure: "100%", label: "gratuit" },
+];
+
+const CANTONS = [
+  "Genève",
+  "Vaud",
+  "Valais",
+  "Neuchâtel",
+  "Fribourg",
+  "Jura",
 ];
 
 export default function StatsBand() {
@@ -24,7 +35,13 @@ export default function StatsBand() {
               marginBottom: 16,
             }}
           >
-            Présent à : Genève · Vaud · Valais · Neuchâtel · Fribourg · Jura
+            Présent à :{" "}
+            {CANTONS.map((canton, i) => (
+              <Fragment key={canton}>
+                {i > 0 && <KBullet />}
+                {canton}
+              </Fragment>
+            ))}
           </p>
         </div>
       </div>

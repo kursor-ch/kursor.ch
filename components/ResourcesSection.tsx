@@ -2,27 +2,31 @@
 
 import Link from "next/link";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { KBullet } from "@/components/shared/KBullet";
 
 const resources = [
   {
     category: "Prévoyance",
     title:
       "Guide Retraite 2026 : pourquoi les expatriés perdent en moyenne 180 000 CHF",
-    meta: "Kursor CH · 12 min de lecture",
+    source: "Kursor CH",
+    reading: "12 min de lecture",
     href: "#",
   },
   {
     category: "Assurances",
     title:
       "Guide Audit Assurances 2026 : les 7 erreurs qui coûtent le plus cher",
-    meta: "Kursor CH · 10 min de lecture",
+    source: "Kursor CH",
+    reading: "10 min de lecture",
     href: "#",
   },
   {
     category: "Logement",
     title:
       "Guide Logement Suisse romande : le dossier qui passe du premier coup",
-    meta: "Kursor CH · 8 min de lecture",
+    source: "Kursor CH",
+    reading: "8 min de lecture",
     href: "#",
   },
 ];
@@ -184,7 +188,9 @@ export default function ResourcesSection() {
                     letterSpacing: "0.01em",
                   }}
                 >
-                  {r.meta}
+                  <span>{r.source}</span>
+                  <KBullet />
+                  <span>{r.reading}</span>
                 </p>
               </Link>
             </li>
