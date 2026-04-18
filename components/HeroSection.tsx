@@ -7,6 +7,7 @@ import {
   ShieldCheckIcon,
   PiggyBankIcon,
 } from "@/components/ui/ServiceIcons";
+import { KBullet } from "@/components/shared/KBullet";
 
 const dashboardItems = [
   {
@@ -92,7 +93,9 @@ export default function HeroSection() {
               borderRadius: 20,
             }}
           >
-            Diagnostic gratuit · Romandie
+            <span>Diagnostic gratuit</span>
+            <KBullet color="#D97706" />
+            <span>Romandie</span>
           </span>
 
           {/* Headline */}

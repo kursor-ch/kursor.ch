@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { KBullet } from "@/components/shared/KBullet";
 
 async function submitEmail(email: string, newsletterOptIn: boolean) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
@@ -185,7 +186,11 @@ export default function FinalCtaSection() {
             letterSpacing: "0.01em",
           }}
         >
-          Pas de carte bancaire · Diagnostic gratuit · Résultats immédiats
+          <span>Pas de carte bancaire</span>
+          <KBullet />
+          <span>Diagnostic gratuit</span>
+          <KBullet />
+          <span>Résultats immédiats</span>
         </p>
       </div>
     </section>
