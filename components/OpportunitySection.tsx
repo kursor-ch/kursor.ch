@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { KWatermark } from "@/components/shared/KWatermark";
 
 export default function OpportunitySection() {
   const { ref, isVisible } = useScrollReveal(0.1);
@@ -15,6 +16,8 @@ export default function OpportunitySection() {
         paddingBottom: 88,
       }}
     >
+      <KWatermark position="top-right" size="lg" offset={80} />
+
       <div
         ref={ref}
         className={`relative mx-auto scroll-reveal ${isVisible ? "visible" : ""}`}

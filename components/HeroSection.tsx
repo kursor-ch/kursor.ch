@@ -8,6 +8,7 @@ import {
   PiggyBankIcon,
 } from "@/components/ui/ServiceIcons";
 import { KBullet } from "@/components/shared/KBullet";
+import { KWatermark } from "@/components/shared/KWatermark";
 
 const dashboardItems = [
   {
@@ -53,6 +54,8 @@ export default function HeroSection() {
       className="relative bg-creme px-6 grain-overlay"
       style={{ paddingTop: 64, paddingBottom: 64 }}
     >
+      <KWatermark position="top-right" size="lg" offset={80} />
+
       {/* Subtle Alps silhouette watermark — subliminal Swiss landscape anchor */}
       <div
         aria-hidden="true"
