@@ -110,7 +110,7 @@ export default function LogementSuissePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              {"Avec 61 % de locataires dans la population, la Suisse est le pays europ\u00E9en o\u00F9 l\u2019on loue le plus. Pourtant, d\u00E9nicher un appartement y reste un v\u00E9ritable parcours du combattant : march\u00E9 sous tension, loyers \u00E9lev\u00E9s, dossiers exigeants et codes culturels sp\u00E9cifiques. Que vous soyez expatri\u00E9, frontalier ou r\u00E9sident suisse en qu\u00EAte d\u2019un nouveau chez-vous, ce guide vous livre toutes les cl\u00E9s pour louer sereinement, du premier clic sur une annonce \u00E0 la remise des cl\u00E9s."}
+              Avec <strong style={{ color: "#111827" }}>61 % de locataires</strong> dans la population, la Suisse est le pays europ{"\u00E9"}en o{"\u00F9"} l{"\u2019"}on loue le plus. Pourtant, d{"\u00E9"}nicher un appartement y reste un v{"\u00E9"}ritable <strong style={{ color: "#111827" }}>parcours du combattant</strong> : march{"\u00E9"} sous tension, <strong style={{ color: "#111827" }}>loyers {"\u00E9"}lev{"\u00E9"}s</strong>, dossiers exigeants et codes culturels sp{"\u00E9"}cifiques. Que vous soyez <strong style={{ color: "#111827" }}>expatri{"\u00E9"}</strong>, <strong style={{ color: "#111827" }}>frontalier</strong> ou r{"\u00E9"}sident suisse en qu{"\u00EA"}te d{"\u2019"}un nouveau chez-vous, ce guide vous livre toutes les cl{"\u00E9"}s pour <strong style={{ color: "#111827" }}>louer sereinement</strong>, du premier clic sur une annonce {"\u00E0"} la remise des cl{"\u00E9"}s.
             </p>
 
             {/* First A retenir */}
@@ -134,7 +134,7 @@ export default function LogementSuissePage() {
             {/* === Section 1 === */}
             <h2 id="qui-peut-louer" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Qui peut louer un appartement en Suisse ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Contrairement \u00E0 une id\u00E9e re\u00E7ue, louer en Suisse est accessible aux \u00E9trangers, \u00E0 condition de disposer d\u2019un titre de s\u00E9jour valide. Trois permis ouvrent largement les portes du march\u00E9 locatif :"}
+              Contrairement {"\u00E0"} une id{"\u00E9"}e re{"\u00E7"}ue, <strong style={{ color: "#111827" }}>louer en Suisse est accessible aux {"\u00E9"}trangers</strong>, {"\u00E0"} condition de disposer d{"\u2019"}un <strong style={{ color: "#111827" }}>titre de s{"\u00E9"}jour valide</strong>. Trois permis ouvrent largement les portes du march{"\u00E9"} locatif :
             </p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 16 }}>
               {[
@@ -149,16 +149,16 @@ export default function LogementSuissePage() {
               ))}
             </ul>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Les non-r\u00E9sidents, eux, se heurtent \u00E0 la Lex Koller, qui restreint fortement l\u2019acc\u00E8s au logement longue dur\u00E9e. Pour une installation rapide, les locations meubl\u00E9es temporaires ou les plateformes de courte dur\u00E9e (jusqu\u2019\u00E0 90 jours) offrent une solution de repli le temps de finaliser son statut."}
+              Les non-r{"\u00E9"}sidents, eux, se heurtent {"\u00E0"} la <strong style={{ color: "#111827" }}>Lex Koller</strong>, qui restreint fortement l{"\u2019"}acc{"\u00E8"}s au logement longue dur{"\u00E9"}e. Pour une installation rapide, les <strong style={{ color: "#111827" }}>locations meubl{"\u00E9"}es temporaires</strong> ou les plateformes de courte dur{"\u00E9"}e (jusqu{"\u2019"}{"\u00E0"} 90 jours) offrent une solution de repli le temps de finaliser son statut.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              {"C\u00F4t\u00E9 langue, les contrats sont r\u00E9dig\u00E9s en allemand, fran\u00E7ais ou italien selon le canton. Si vous ne ma\u00EEtrisez pas la langue locale, faites traduire le bail avant signature : un mot mal interpr\u00E9t\u00E9 peut co\u00FBter cher."}
+              C{"\u00F4"}t{"\u00E9"} langue, les contrats sont r{"\u00E9"}dig{"\u00E9"}s en allemand, fran{"\u00E7"}ais ou italien selon le canton. Si vous ne ma{"\u00EE"}trisez pas la langue locale, <strong style={{ color: "#111827" }}>faites traduire le bail avant signature</strong> : un mot mal interpr{"\u00E9"}t{"\u00E9"} peut co{"\u00FB"}ter cher.
             </p>
 
             {/* === Section 2 === */}
             <h2 id="combien-ca-coute" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>{"Combien co\u00FBte une location en Suisse ?"}</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              {"Le co\u00FBt d\u2019un logement varie consid\u00E9rablement d\u2019une r\u00E9gion \u00E0 l\u2019autre. Les cantons de Zoug et Zurich tiennent le haut du classement, tandis que le Jura et le Tessin offrent les loyers les plus accessibles."}
+              Le co{"\u00FB"}t d{"\u2019"}un logement varie consid{"\u00E9"}rablement d{"\u2019"}une r{"\u00E9"}gion {"\u00E0"} l{"\u2019"}autre. Les cantons de <strong style={{ color: "#111827" }}>Zoug et Zurich</strong> tiennent le haut du classement, tandis que le <strong style={{ color: "#111827" }}>Jura et le Tessin</strong> offrent les loyers les plus accessibles.
             </p>
 
             {/* Table */}
@@ -229,7 +229,7 @@ export default function LogementSuissePage() {
             {/* === Section 3 === */}
             <h2 id="loyer-charges-caution" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Loyer net, charges et caution : ce que vous payez vraiment</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"En Suisse, la plupart des annonces affichent un loyer net (Kaltmiete / loyer hors charges). Les frais annexes s\u2019ajoutent et peuvent alourdir la facture de 200 \u00E0 300 CHF par mois."}
+              En Suisse, la plupart des annonces affichent un <strong style={{ color: "#111827" }}>loyer net</strong> (Kaltmiete / loyer hors charges). Les frais annexes s{"\u2019"}ajoutent et peuvent alourdir la facture de <strong style={{ color: "#111827" }}>200 {"\u00E0"} 300 CHF par mois</strong>.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>Les charges locatives autoris\u00E9es couvrent uniquement :</p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 20 }}>
@@ -240,18 +240,18 @@ export default function LogementSuissePage() {
               ))}
             </ul>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Les travaux d\u2019entretien ou de r\u00E9paration ne peuvent jamais \u00EAtre factur\u00E9s au locataire. Depuis 1998, les frais de chauffage et d\u2019eau chaude doivent \u00EAtre calcul\u00E9s \u00E0 la consommation dans les constructions neuves."}
+              Les <strong style={{ color: "#111827" }}>travaux d{"\u2019"}entretien ou de r{"\u00E9"}paration ne peuvent jamais {"\u00EA"}tre factur{"\u00E9"}s au locataire</strong>. Depuis 1998, les frais de chauffage et d{"\u2019"}eau chaude doivent {"\u00EA"}tre calcul{"\u00E9"}s {"\u00E0"} la consommation dans les constructions neuves.
             </p>
 
             <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12, marginTop: 24 }}>{"La caution : un d\u00E9p\u00F4t encadr\u00E9 par la loi"}</h3>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              {"\u00C0 la signature du bail, le propri\u00E9taire exige une garantie de loyer plafonn\u00E9e \u00E0 trois mois de loyer brut. Ce montant est bloqu\u00E9 sur un compte bancaire \u00E0 votre nom, jusqu\u2019\u00E0 restitution en fin de bail. Il prot\u00E8ge le bailleur contre d\u2019\u00E9ventuels impay\u00E9s ou d\u00E9gradations, mais il vous appartient : les int\u00E9r\u00EAts vous reviennent."}
+              {"\u00C0"} la signature du bail, le propri{"\u00E9"}taire exige une <strong style={{ color: "#111827" }}>garantie de loyer plafonn{"\u00E9"}e {"\u00E0"} trois mois de loyer brut</strong>. Ce montant est bloqu{"\u00E9"} sur un <strong style={{ color: "#111827" }}>compte bancaire {"\u00E0"} votre nom</strong>, jusqu{"\u2019"}{"\u00E0"} restitution en fin de bail. Il prot{"\u00E8"}ge le bailleur contre d{"\u2019"}{"\u00E9"}ventuels impay{"\u00E9"}s ou d{"\u00E9"}gradations, mais il vous appartient : les int{"\u00E9"}r{"\u00EA"}ts vous reviennent.
             </p>
 
             {/* === Section 4 === */}
             <h2 id="trouver-appartement" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comment trouver la perle rare ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Le march\u00E9 locatif suisse \u00E9tant satur\u00E9, multiplier les canaux de recherche est indispensable."}
+              Le march{"\u00E9"} locatif suisse {"\u00E9"}tant satur{"\u00E9"}, <strong style={{ color: "#111827" }}>multiplier les canaux de recherche</strong> est indispensable.
             </p>
             <h3 className="font-heading" style={{ fontSize: 18, fontWeight: 600, color: "#111827", marginBottom: 10 }}>Plateformes incontournables :</h3>
             <div className="flex flex-wrap gap-2" style={{ marginBottom: 16 }}>
@@ -329,7 +329,7 @@ export default function LogementSuissePage() {
             {/* === Section 7 === */}
             <h2 id="resiliation" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>{"R\u00E9siliation et d\u00E9part : les r\u00E8gles \u00E0 conna\u00EEtre"}</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Le d\u00E9lai de r\u00E9siliation l\u00E9gal est de trois mois, avec une particularit\u00E9 suisse : les dates de r\u00E9siliation officielles sont fix\u00E9es par canton (g\u00E9n\u00E9ralement fin mars, fin juin et fin septembre). Hors de ces dates, la r\u00E9siliation est refus\u00E9e\u2026 sauf si vous proposez trois candidats solvables pr\u00EAts \u00E0 reprendre le bail."}
+              Le <strong style={{ color: "#111827" }}>d{"\u00E9"}lai de r{"\u00E9"}siliation l{"\u00E9"}gal est de trois mois</strong>, avec une particularit{"\u00E9"} suisse : les <strong style={{ color: "#111827" }}>dates de r{"\u00E9"}siliation officielles sont fix{"\u00E9"}es par canton</strong> (g{"\u00E9"}n{"\u00E9"}ralement fin mars, fin juin et fin septembre). Hors de ces dates, la r{"\u00E9"}siliation est refus{"\u00E9"}e{"\u2026"} sauf si vous proposez <strong style={{ color: "#111827" }}>trois candidats solvables</strong> pr{"\u00EA"}ts {"\u00E0"} reprendre le bail.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               {"La r\u00E9siliation doit \u00EAtre \u00E9crite et sign\u00E9e par tous les titulaires du bail. Vous disposez ensuite de 30 jours pour contester une r\u00E9siliation \u00E9manant du bailleur."}
