@@ -43,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${ibmPlexSans.variable} ${fraunces.variable} ${outfit.variable}`}>
       <head>
+        <meta name="google-site-verification" content="6hLQbxoNFJS31MuJUJPMV6MvhbGk47qHTVBYCC9i4LE" />
         {plausibleDomain && (
           <Script
             defer
