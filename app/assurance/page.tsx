@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     "Audit LAMal, complémentaires, perte de gain et RC privée pour résidents et frontaliers. Bientôt disponible.",
 };
 
-const AssuranceLanding = dynamic(
-  () => import("@/components/assurance/AssuranceLanding"),
+const AssuranceApp = dynamic(
+  () => import("@/components/assurance/AssuranceApp"),
   {
     loading: () => (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -19,5 +19,5 @@ const AssuranceLanding = dynamic(
 );
 
 export default function AssurancePage() {
-  return <AssuranceLanding />;
+  return <AssuranceApp />;
 }
