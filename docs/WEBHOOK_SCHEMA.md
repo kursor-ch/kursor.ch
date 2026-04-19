@@ -230,7 +230,7 @@ Required when the lead is a frontalier (permis G). Captures the data specific to
 
 | Field | Type | Description |
 |---|---|---|
-| `decision_window_status` | enum | `"in_window_3m"`, `"window_expired_lamal_default"`, `"chose_lamal_installed"`, `"chose_cmu_installed"`. |
+| `decision_window_status` | enum | `"in_window_3m"`, `"window_expired_lamal_default"`, `"chose_lamal_installed"`, `"chose_cmu_installed"`, `"unknown"`. |
 | `rfr_n_minus_2_eur_bracket` | enum | Income bracket for CMU calculation: `"lt15k"`, `"15k_30k"`, `"30k_50k"`, `"50k_80k"`, `"gt80k"`, `"unknown"`. |
 | `swiss_salary_chf_bracket` | enum | Current Swiss salary: `"lt60k"`, `"60k_100k"`, `"100k_150k"`, `"gt150k"`. |
 | `current_coverage` | enum | `"lamal_active"`, `"cmu_active"`, `"none_pending"`, `"none_expired"`. |
@@ -384,6 +384,7 @@ To prevent breaking the live Emploi funnel when extending the schema for Logemen
 | Version | Date | Changes |
 |---|---|---|
 | 1.0 | 2026-04-15 | Initial schema. Supports Emploi (live), Logement, Assurances, Retraite. Includes Persona C for Logement (futur résident avec offre confirmée). |
+| 1.0 | 2026-04-19 | Additive: `frontalier_data.decision_window_status` gains `"unknown"`. Soft-exit capture gains `"sans_activite"` reason (used by Assurances funnel). No breaking changes — schema_version unchanged. |
 
 ---
 
