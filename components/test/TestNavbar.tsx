@@ -8,7 +8,7 @@ const MENU = [
   {
     label: "S'installer",
     items: [
-      { name: "Logement & Relocation", href: "/logement-suisse", cta: "Trouver mon logement" },
+      { name: "Logement & Relocation", href: "/test/logement-en-suisse", cta: "Trouver mon logement" },
       { name: "Assurances & LAMal", href: "/assurances-suisse", cta: "Comparer les offres" },
       { name: "Guide Permis B & G", href: "/permis-suisse", cta: "Diagnostic Statut" },
     ],
