@@ -44,7 +44,22 @@ export interface VerdictDifficulty {
   summary: string;
 }
 
-export type Verdict = VerdictScore | VerdictDifficulty;
+export interface VerdictCoverageAudit {
+  type: "coverage_audit";
+  score: {
+    surcout_annuel_chf: number;
+    trous_couverture_count: number;
+  };
+  tier:
+    | "optimal"
+    | "ajustements_mineurs"
+    | "surcouts_significatifs"
+    | "couverture_critique";
+  label: string;
+  summary: string;
+}
+
+export type Verdict = VerdictScore | VerdictDifficulty | VerdictCoverageAudit;
 
 export interface Persona {
   code: "A" | "B" | "C" | "D" | "E";
@@ -91,6 +106,49 @@ export interface HousingData {
   future_resident_arrival_window: "lt3m" | "3m_6m" | "gt6m" | "not_applicable";
 }
 
+export interface AssuranceData {
+  branch: "resident" | "frontalier";
+  current_caisse_known: boolean;
+  franchise_chf: 300 | 500 | 1000 | 1500 | 2000 | 2500 | null;
+  model: "libre" | "medecin_famille" | "hmo" | "telmed" | "unknown";
+  ijm_status:
+    | "covered_employer_full"
+    | "echelle_berne_only"
+    | "unknown"
+    | "independant_no_ijm"
+    | "independant_with_ijm";
+  complementaires_count: number;
+  estimated_surcout_annuel_chf: number;
+  trous_couverture_identified: string[];
+}
+
+export interface FrontalierData {
+  decision_window_status:
+    | "in_window_3m"
+    | "window_expired_lamal_default"
+    | "chose_lamal_installed"
+    | "chose_cmu_installed"
+    | "unknown";
+  rfr_n_minus_2_eur_bracket:
+    | "lt15k"
+    | "15k_30k"
+    | "30k_50k"
+    | "50k_80k"
+    | "gt80k"
+    | "unknown";
+  swiss_salary_chf_bracket: "lt60k" | "60k_100k" | "100k_150k" | "gt150k";
+  current_coverage:
+    | "lamal_active"
+    | "cmu_active"
+    | "none_pending"
+    | "none_expired";
+  residence_zone:
+    | "frontalier_proche_consult_fr"
+    | "frontalier_proche_consult_ch"
+    | "frontalier_loin_consult_fr"
+    | "installation_en_cours";
+}
+
 export interface WebhookPayloadV1 {
   schema_version: "1.0";
   funnel_id: FunnelId;
@@ -106,6 +164,8 @@ export interface WebhookPayloadV1 {
   cross_sell: CrossSell;
   metadata: Metadata;
   housing_data?: HousingData;
+  assurance_data?: AssuranceData;
+  frontalier_data?: FrontalierData;
 }
 
 // Lightweight soft-exit capture payload. Fires to a separate n8n endpoint
@@ -113,7 +173,11 @@ export interface WebhookPayloadV1 {
 // bloating schema v1.0 with incomplete-flow variants.
 export interface SoftExitPayload {
   funnel_id: FunnelId;
-  soft_exit_reason: "frontalier" | "exploration" | "low_budget";
+  soft_exit_reason:
+    | "frontalier"
+    | "exploration"
+    | "low_budget"
+    | "sans_activite";
   contact: {
     prenom?: string;
     email: string;
