@@ -44,6 +44,19 @@ export default function RootLayout({
     <html lang="fr" className={`${ibmPlexSans.variable} ${fraunces.variable} ${outfit.variable}`}>
       <head>
         <meta name="google-site-verification" content="6hLQbxoNFJS31MuJUJPMV6MvhbGk47qHTVBYCC9i4LE" />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-DL8PGLDKRF"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DL8PGLDKRF');
+          `}
+        </Script>
         {plausibleDomain && (
           <Script
             defer
