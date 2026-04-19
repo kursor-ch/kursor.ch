@@ -17,6 +17,11 @@ const config: Config = {
         },
         creme: "#FDFAF5",
         vert: "#15803D",
+        "vert-assurance": {
+          DEFAULT: "#86A789",
+          light: "#E6EFE6",
+          hover: "#6F8E72",
+        },
         orange: "#EA580C",
         rouge: "#DC2626",
       },
