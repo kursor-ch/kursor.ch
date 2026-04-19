@@ -10,7 +10,7 @@ const MENU = [
     items: [
       { name: "Logement & Relocation", href: "/test/logement-en-suisse", cta: "Trouver mon logement" },
       { name: "Assurances & LAMal", href: "/test/assurance-maladie", cta: "Comparer les offres" },
-      { name: "Guide Permis B & G", href: "/permis-suisse", cta: "Diagnostic Statut" },
+      { name: "Guide Permis B & G", href: "/test/permis-suisse", cta: "Diagnostic Statut" },
     ],
   },
   {
