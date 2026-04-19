@@ -290,7 +290,7 @@ export default function PermisSuissePage() {
             <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
               {ERREURS.map((err) => (
                 <div key={err.title} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span style={{ color: "#DC2626", fontSize: 16, shrink: 0 }}>{"\u26A0"}</span>
+                  <span style={{ color: "#DC2626", fontSize: 16, flexShrink: 0 }}>{"\u26A0"}</span>
                   <div>
                     <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{err.title}</p>
                     <p style={{ fontSize: 14, color: "#64748B", marginTop: 2 }}>{err.desc}</p>
