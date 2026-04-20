@@ -1,23 +1,32 @@
-/* ───────── DATA ───────── */
+"use client";
 
-const PAIN_POINTS = [
-  { icon: "\u{1F3E0}", title: "Logement introuvable", desc: "Le marche locatif francais est l'un des plus competitifs d'Europe. Sans garant francais, trouver un appartement peut prendre 6 mois.", stat: "8 mois de recherche en moyenne sans accompagnement" },
-  { icon: "\u{1F4CB}", title: "Jungle administrative", desc: "Titre de sejour, numero fiscal, securite sociale, ouverture de compte... La liste est longue et les delais imprevisibles sans methode claire.", stat: "23 demarches administratives en moyenne a l'arrivee" },
-  { icon: "\u{1F4C4}", title: "CV inadapte au marche", desc: "Les recruteurs francais ont des attentes tres specifiques. Un CV etranger non adapte est ignore en quelques secondes.", stat: "78% des CV etrangers elimines des la preselection" },
-  { icon: "\u{1F4B0}", title: "Erreurs fiscales couteuses", desc: "Double imposition, conventions meconnues, declarations manquees \u2014 les erreurs fiscales des primo-arrivants peuvent couter tres cher.", stat: "4 500\u20AC perdus en moyenne par les expatries non guides" },
-];
+import { BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon } from "@/components/ui/ServiceIcons";
+import { K_PATH_D, K_TRANSFORM, K_VIEWBOX } from "@/components/shared/k-path";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+function KMark({ position = "top-right" }: { position?: "top-right" | "bottom-right" }) {
+  const posStyle: React.CSSProperties = {
+    position: "absolute",
+    pointerEvents: "none",
+    zIndex: 0,
+    ...(position === "top-right" ? { top: 80, right: 80 } : { bottom: 80, right: 80 }),
+  };
+  return (
+    <div style={posStyle} aria-hidden="true" suppressHydrationWarning>
+      <svg viewBox={K_VIEWBOX} style={{ height: 280, width: "auto", display: "block" }} role="presentation" focusable="false" suppressHydrationWarning>
+        <g transform={K_TRANSFORM}><path d={K_PATH_D} fill="#D97706" fillOpacity={0.06} /></g>
+      </svg>
+    </div>
+  );
+}
+
+/* ───────── DATA ───────── */
 
 const STEPS = [
   { num: "01", title: "Diagnostic gratuit", desc: "Repondez a 10 questions sur votre situation. On identifie vos risques et priorites en 2 minutes." },
   { num: "02", title: "Plan personnalise", desc: "Recevez une roadmap complete avec les demarches dans le bon ordre, selon votre profil." },
   { num: "03", title: "Formation & outils", desc: "Accedez aux modules adaptes a votre situation \u2014 visa, emploi, logement, fiscalite." },
   { num: "04", title: "Suivi conseiller", desc: "Un expert vous accompagne sur les points bloquants et repond a vos questions." },
-];
-
-const PROGRAMS = [
-  { icon: "\u{1F6C2}", tag: null, title: "Visa & Titre de sejour", subtitle: "Maitrisez chaque etape de votre dossier prefecture sans vous perdre.", items: ["Types de visas long sejour", "Constitution du dossier parfait", "Gestion des delais et recours", "Renouvellement & naturalisation"] },
-  { icon: "\u{1F3E0}", tag: "Le plus populaire", title: "Logement a Paris & grandes villes", subtitle: "Trouvez votre appartement en moins de 30 jours avec nos strategies.", items: ["Dossier beton sans garant francais", "Plateformes & reseaux efficaces", "Garant en ligne & alternatives", "Negociation et contrat de bail"] },
-  { icon: "\u{1F4BC}", tag: null, title: "Emploi & CV a la francaise", subtitle: "Adaptez votre profil au marche francais et decrochez des entretiens.", items: ["CV & lettre de motivation francais", "Reseaux professionnels en France", "Simulation d'entretien culturel", "Negociation salariale"] },
 ];
 
 const STATS = [
@@ -36,12 +45,22 @@ const ARTICLES = [
 /* ───────── PAGE ───────── */
 
 export default function TestPage() {
+  const hero = useScrollReveal(0.1);
+  const problem = useScrollReveal(0.1);
+  const howItWorks = useScrollReveal(0.1);
+  const diagnostics = useScrollReveal(0.1);
+  const opportunity = useScrollReveal(0.1);
+  const stats = useScrollReveal(0.1);
+  const blog = useScrollReveal(0.1);
+  const finalCta = useScrollReveal(0.1);
+
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative px-6 bg-creme" style={{ paddingTop: 64, paddingBottom: 64 }}>
+      <section className="relative px-6 bg-creme overflow-hidden" style={{ paddingTop: 64, paddingBottom: 64 }}>
+        <KMark position="top-right" />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 70% 30%, rgba(217,119,6,0.06) 0%, transparent 60%)" }} />
-        <div className="relative mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center" style={{ maxWidth: 1120 }}>
+        <div ref={hero.ref} className={`relative mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center scroll-reveal ${hero.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
 
           {/* Left */}
           <div className="text-center lg:text-left">
@@ -60,10 +79,10 @@ export default function TestPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
-              <button className="font-body rounded-xl text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
-                Faire mon diagnostic gratuit
-              </button>
-              <span className="font-body cursor-pointer" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les formations</span>
+              <a href="/emploi" className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
+                Commencer mon diagnostic <span>{"\u2192"}</span>
+              </a>
+              <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
             </div>
 
             {/* Mini stats */}
@@ -82,57 +101,48 @@ export default function TestPage() {
           </div>
 
           {/* Right \u2014 dashboard card */}
-          <div className="relative mx-auto w-full" style={{ maxWidth: 480 }}>
-            <div className="absolute inset-0 -z-10 blur-3xl" style={{ background: "radial-gradient(ellipse at 30% 40%, rgba(217,119,6,0.12) 0%, transparent 60%)" }} />
-            <div className="bg-white rounded-2xl" style={{ border: "1px solid #E2E8F0", boxShadow: "0 24px 48px -12px rgba(15,23,42,0.08)", padding: 24 }}>
+          <div className="relative mx-auto w-full" style={{ maxWidth: 520 }}>
+            <div className="relative bg-white rounded-2xl" style={{ border: "1px solid #E2E8F0", boxShadow: "0 24px 48px -12px rgba(15,23,42,0.08)", padding: "28px 28px 20px" }}>
 
-              {/* Dossier */}
-              <div style={{ marginBottom: 16 }}>
-                <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-                  <div className="flex items-center justify-center" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.10)", borderRadius: 8 }}>
-                    {"\u{1F4CB}"}
-                  </div>
-                  <div>
-                    <p className="font-body uppercase" style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706" }}>Visa long sejour</p>
-                    <p className="font-heading" style={{ fontSize: 15, fontWeight: 600, color: "#0F172A" }}>Dossier de demande</p>
-                  </div>
-                </div>
-                <p className="font-body" style={{ fontSize: 12, color: "#64748B", marginBottom: 6 }}>Progression de votre dossier prefecture.</p>
-                <div className="flex items-center justify-between" style={{ marginBottom: 4 }}>
-                  <p className="font-body" style={{ fontSize: 12, color: "#475569" }}>Documents soumis</p>
-                  <p className="font-body" style={{ fontSize: 12, fontWeight: 600, color: "#D97706" }}>70%</p>
-                </div>
-                <div style={{ height: 4, backgroundColor: "#E2E8F0", borderRadius: 4 }}>
-                  <div style={{ width: "70%", height: "100%", backgroundColor: "#D97706", borderRadius: 4 }} />
-                </div>
-              </div>
-
-              {/* Checklist */}
-              <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.2)", padding: 16, marginBottom: 12 }}>
-                <p className="font-body uppercase" style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.1em", color: "#15803D" }}>Checklist integration</p>
-                <p className="font-heading" style={{ fontSize: 15, fontWeight: 600, color: "#0F172A", marginTop: 4 }}>Vos prochaines etapes</p>
-                <div className="flex flex-wrap gap-2" style={{ marginTop: 12 }}>
-                  {["Compte bancaire \u2713", "Secu sociale \u2713", "Recherche logement"].map((item, i) => (
-                    <span key={item} className="font-body rounded-full" style={{ fontSize: 11, fontWeight: 500, padding: "5px 12px", backgroundColor: i < 2 ? "rgba(21,128,61,0.08)" : "rgba(217,119,6,0.08)", color: i < 2 ? "#15803D" : "#D97706", border: `1px solid ${i < 2 ? "rgba(21,128,61,0.2)" : "rgba(217,119,6,0.2)"}` }}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Conseiller */}
-              <div className="rounded-xl flex items-center gap-3" style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", padding: "14px 16px" }}>
-                <div className="flex items-center justify-center shrink-0" style={{ width: 36, height: 36, backgroundColor: "#FFF", borderRadius: 8, border: "1px solid #E2E8F0" }}>
-                  {"\u{1F464}"}
-                </div>
+              {/* Header */}
+              <div className="flex items-start justify-between" style={{ marginBottom: 24 }}>
                 <div>
-                  <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>Conseiller dedie</p>
-                  <p className="font-body" style={{ fontSize: 12, color: "#64748B" }}>Sarah repond sous 2h en moyenne</p>
-                  <span className="inline-flex items-center gap-1.5" style={{ marginTop: 4 }}>
-                    <span className="rounded-full" style={{ width: 6, height: 6, backgroundColor: "#15803D" }} />
-                    <span className="font-body" style={{ fontSize: 11, fontWeight: 500, color: "#15803D" }}>En ligne</span>
-                  </span>
+                  <p className="font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706" }}>Tableau de bord</p>
+                  <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#0F172A", marginTop: 4 }}>Vos 4 diagnostics</p>
                 </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full font-body" style={{ fontSize: 12, fontWeight: 600, color: "#15803D", backgroundColor: "rgba(21,128,61,0.06)", border: "1px solid rgba(21,128,61,0.15)", padding: "5px 14px" }}>
+                  <span className="rounded-full" style={{ width: 7, height: 7, backgroundColor: "#15803D" }} />
+                  En ligne
+                </span>
+              </div>
+
+              {/* Diagnostic items */}
+              <div className="flex flex-col gap-3">
+                {[
+                  { Icon: BriefcaseIcon, title: "Diagnostic Emploi", desc: "\u00C9valuez votre potentiel salaire suisse", progress: 85 },
+                  { Icon: HouseKeyIcon, title: "Diagnostic Logement", desc: "Estimez votre temps de recherche", progress: 70 },
+                  { Icon: ShieldCheckIcon, title: "Audit Assurances", desc: "Identifiez vos surco\u00FBts et trous de couverture", progress: 60 },
+                  { Icon: PiggyBankIcon, title: "Audit Retraite", desc: "Calculez votre perte fiscale annuelle", progress: 45 },
+                ].map((d) => (
+                  <div key={d.title} className="rounded-xl flex items-center gap-3" style={{ border: "1px solid #E2E8F0", padding: "14px 16px" }}>
+                    <div className="flex items-center justify-center shrink-0" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", borderRadius: 10 }}>
+                      <d.Icon size={20} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#0F172A" }}>{d.title}</p>
+                      <p className="font-body italic" style={{ fontSize: 13, color: "#64748B", marginTop: 2 }}>{d.desc}</p>
+                      <div style={{ height: 3, backgroundColor: "#E2E8F0", borderRadius: 3, marginTop: 8 }}>
+                        <div style={{ width: `${d.progress}%`, height: "100%", backgroundColor: "#D97706", borderRadius: 3 }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-center justify-between font-body" style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #F1F5F9" }}>
+                <p style={{ fontSize: 13, color: "#64748B" }}>5 minutes par diagnostic</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#15803D" }}>100% gratuit</p>
               </div>
             </div>
           </div>
@@ -141,8 +151,9 @@ export default function TestPage() {
 
 
       {/* ===== PROBLEM ===== */}
-      <section className="px-6 bg-creme" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <div className="mx-auto" style={{ maxWidth: 1120 }}>
+      <section className="relative px-6 bg-creme overflow-hidden" style={{ paddingTop: 80, paddingBottom: 80 }}>
+        <KMark position="bottom-right" />
+        <div ref={problem.ref} className={`relative mx-auto scroll-reveal ${problem.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Le probleme</span>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
             {"S\u2019expatrier en France,"}<br />
@@ -152,14 +163,23 @@ export default function TestPage() {
             {"Sans les bonnes informations, chaque erreur administrative peut vous couter des semaines et des milliers d\u2019euros."}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5" style={{ marginTop: 40 }}>
-            {PAIN_POINTS.map((p) => (
-              <div key={p.title} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 28 }}>
-                <div className="flex items-center justify-center" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", borderRadius: 10, marginBottom: 16, fontSize: 20 }}>
-                  {p.icon}
+            {[
+              { Icon: BriefcaseIcon, title: "Un march\u00E9 qui filtre vite", body: "Les recruteurs suisses lisent un CV en 6 secondes. Sans structure locale, le v\u00F4tre est \u00E9limin\u00E9 avant d\u2019\u00EAtre lu. Ceux qui connaissent les codes d\u00E9crochent en moyenne 40 000 CHF de plus par an.", metric: "\u2191 +40 000 CHF/an de diff\u00E9rence salariale" },
+              { Icon: HouseKeyIcon, title: "Un dossier qui doit \u00EAtre irr\u00E9prochable", body: "Taux de vacance \u00E0 Gen\u00E8ve et Lausanne sous 1%. Sans attestation de non-poursuite, 3 mois de caution, et dossier conforme aux exigences des r\u00E9gies, la recherche s\u2019\u00E9tale sur 3 \u00E0 6 mois.", metric: "\u2191 3 \u00E0 6 mois de recherche sans m\u00E9thode" },
+              { Icon: ShieldCheckIcon, title: "Un syst\u00E8me qui punit l\u2019inertie", body: "Primes LAMal +184% depuis 1997. Franchise mal calibr\u00E9e, mod\u00E8le inadapt\u00E9, compl\u00E9mentaires inutilis\u00E9es \u2014 la plupart des r\u00E9sidents surpaient 2 000 \u00E0 3 000 CHF par an sans le savoir.", metric: "\u2191 2 400 CHF/an de surco\u00FBt moyen" },
+              { Icon: PiggyBankIcon, title: "Un syst\u00E8me \u00E0 trois piliers que 70% ignorent", body: "Chaque ann\u00E9e sans 3\u00E8me pilier, c\u2019est 1 500 \u00E0 3 500 CHF d\u2019imp\u00F4ts perdus. D\u00E9finitivement. En 2026, une nouvelle loi permet de rattraper jusqu\u2019\u00E0 10 ans de versements manqu\u00E9s \u2014 personne n\u2019en parle encore.", metric: "\u2191 36 290 CHF rattrapables en 2026" },
+            ].map((p) => (
+              <div key={p.title} className="relative flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", padding: "26px 24px 20px", boxShadow: "0 2px 10px rgba(15,23,42,0.04)" }}>
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 flex items-center justify-center" style={{ width: 48, height: 48, backgroundColor: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.18)", borderRadius: 10 }}>
+                    <p.Icon size={24} />
+                  </div>
+                  <h3 className="font-heading" style={{ fontSize: 19, fontWeight: 600, color: "#0F172A", lineHeight: 1.3 }}>{p.title}</h3>
                 </div>
-                <h3 className="font-body" style={{ fontSize: 17, fontWeight: 600, color: "#111827" }}>{p.title}</h3>
-                <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginTop: 8 }}>{p.desc}</p>
-                <p className="font-body" style={{ fontSize: 13, fontWeight: 500, color: "#D97706", marginTop: 14 }}>{"\u2192 " + p.stat}</p>
+                <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginTop: 14 }}>{p.body}</p>
+                <span className="inline-flex items-center self-start font-body" style={{ marginTop: 18, fontSize: 12.5, fontWeight: 600, letterSpacing: "0.01em", color: "#B45309", backgroundColor: "#FEF3C7", border: "1px solid rgba(217,119,6,0.25)", padding: "6px 12px", borderRadius: 999 }}>
+                  {p.metric}
+                </span>
               </div>
             ))}
           </div>
@@ -168,7 +188,7 @@ export default function TestPage() {
 
       {/* ===== HOW IT WORKS ===== */}
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#FFFFFF" }}>
-        <div className="mx-auto text-center" style={{ maxWidth: 1120 }}>
+        <div ref={howItWorks.ref} className={`mx-auto text-center scroll-reveal ${howItWorks.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Comment ca marche</span>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
             4 etapes pour une<br />
@@ -189,44 +209,93 @@ export default function TestPage() {
         </div>
       </section>
 
-      {/* ===== FORMATIONS ===== */}
-      <section className="px-6 bg-creme" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <div className="mx-auto" style={{ maxWidth: 1120 }}>
-          <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Nos formations</span>
-          <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
-            {"Tout ce qu\u2019il faut pour"}<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>{"s\u2019installer en France"}</span>
-          </h2>
-          <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 12 }}>Des programmes concus par des experts qui ont accompagne plus de 4 000 expatries.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginTop: 40 }}>
-            {PROGRAMS.map((p) => (
-              <div key={p.title} className="rounded-xl bg-white flex flex-col relative" style={{ border: p.tag ? "2px solid #D97706" : "1px solid #E2E8F0", padding: 28, boxShadow: p.tag ? "0 8px 32px rgba(217,119,6,0.10)" : "none" }}>
-                {p.tag && (
-                  <span className="absolute font-body uppercase" style={{ top: -12, left: "50%", transform: "translateX(-50%)", fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", color: "#FFFFFF", backgroundColor: "#D97706", padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap" }}>{p.tag}</span>
-                )}
-                <div className="flex items-center justify-center" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", borderRadius: 10, marginBottom: 16, fontSize: 20 }}>
-                  {p.icon}
+      {/* ===== NOS DIAGNOSTICS ===== */}
+      <section id="outils" className="relative px-6 overflow-hidden scroll-mt-20" style={{ backgroundColor: "#FDFAF5", paddingTop: 88, paddingBottom: 88, borderTop: "1px solid #E2E8F0" }}>
+        <KMark position="top-right" />
+        <div ref={diagnostics.ref} className={`relative mx-auto scroll-reveal ${diagnostics.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
+          <div className="text-center mx-auto" style={{ maxWidth: 720 }}>
+            <span className="inline-block font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>Nos diagnostics</span>
+            <h2 className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]" style={{ fontWeight: 600, color: "#0F172A", lineHeight: 1.15, letterSpacing: "-0.01em", marginTop: 14 }}>
+              Quatre outils. Une vie suisse.<br />
+              <span className="font-heading italic" style={{ color: "#D97706", fontWeight: 500 }}>Cinq minutes par diagnostic.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto" style={{ marginTop: 56, maxWidth: 960 }}>
+            {[
+              { Icon: BriefcaseIcon, title: "Diagnostic Emploi", body: "\u00C9valuez la viabilit\u00E9 de votre projet professionnel en Suisse. Potentiel salaire, ad\u00E9quation du CV au march\u00E9 suisse, secteurs en demande.", metric: "+40 000 CHF/an de potentiel moyen", cta: "Faire le diagnostic", href: "/emploi" },
+              { Icon: HouseKeyIcon, title: "Diagnostic Logement", body: "Estimez votre temps de recherche selon votre canton, budget, statut et pr\u00E9paration. Identifiez les pi\u00E8ges qui \u00E9liminent 80% des candidatures.", metric: "Recherche optimis\u00E9e \u00E0 3 semaines", cta: "Faire le diagnostic", href: "/logement" },
+              { Icon: ShieldCheckIcon, title: "Audit Assurances", body: "Identifiez simultan\u00E9ment combien vous surpayez et o\u00F9 vous n\u2019\u00EAtes pas couvert. LAMal, compl\u00E9mentaires, perte de gain, RC priv\u00E9e.", metric: "2 400 CHF/an d\u2019\u00E9conomie potentielle", cta: "Faire le diagnostic", href: "/assurance" },
+              { Icon: PiggyBankIcon, title: "Audit Retraite", body: "Calculez votre perte fiscale annuelle et d\u00E9couvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3\u00E8me pilier.", metric: "36 290 CHF rattrapables en 2026", cta: "Faire le diagnostic", href: "/prevoyance" },
+            ].map((t) => (
+              <a key={t.title} href={t.href} className="block no-underline" style={{ color: "inherit" }}>
+                <div className="relative h-full flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", borderTop: "2px solid #D97706", padding: "26px 24px 22px" }}>
+                  <span className="absolute top-4 right-4 px-2.5 py-1 rounded-full font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.05em", backgroundColor: "rgba(21,128,61,0.10)", color: "#15803D" }}>Disponible</span>
+                  <div className="flex items-center gap-3">
+                    <div className="shrink-0 flex items-center justify-center" style={{ width: 44, height: 44, backgroundColor: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.18)", borderRadius: 10 }}><t.Icon size={22} /></div>
+                    <h3 className="font-heading" style={{ fontSize: 19, fontWeight: 600, color: "#0F172A", lineHeight: 1.3 }}>{t.title}</h3>
+                  </div>
+                  <p className="font-body flex-1" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginTop: 14 }}>{t.body}</p>
+                  <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#D97706", marginTop: 14 }}>{t.metric}</p>
+                  <span className="font-body inline-flex items-center gap-1" style={{ marginTop: 16, fontSize: 14, fontWeight: 500, color: "#D97706" }}>
+                    {t.cta} <span>{"\u2192"}</span>
+                  </span>
                 </div>
-                <h3 className="font-body" style={{ fontSize: 18, fontWeight: 600, color: "#111827" }}>{p.title}</h3>
-                <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginTop: 6 }}>{p.subtitle}</p>
-                <ul className="mt-5 list-none p-0">
-                  {p.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 font-body mb-2.5">
-                      <span style={{ color: "#D97706", fontWeight: 600, fontSize: 13 }}>{"\u2713"}</span>
-                      <span style={{ fontSize: 13, color: "#475569" }}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-auto font-body cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706", marginTop: 20 }}>{"Decouvrir la formation \u2192"}</p>
-              </div>
+              </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== OPPORTUNITE FISCALE 2026 ===== */}
+      <section className="relative px-6 overflow-hidden" style={{ backgroundColor: "#FFFFFF", paddingTop: 88, paddingBottom: 88 }}>
+        <KMark position="top-right" />
+        <div ref={opportunity.ref} className={`relative mx-auto scroll-reveal ${opportunity.isVisible ? "visible" : ""}`} style={{ maxWidth: 960 }}>
+          <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center p-7 sm:p-9 lg:p-11" style={{ backgroundColor: "rgba(254,243,199,0.4)", border: "1px solid rgba(217,119,6,0.30)", borderRadius: 20, boxShadow: "0 4px 24px rgba(217,119,6,0.08)" }}>
+            {/* Left */}
+            <div>
+              <span className="inline-flex items-center gap-2 font-body uppercase" style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", color: "#B91C1C", backgroundColor: "rgba(220,38,38,0.08)", border: "1px solid rgba(220,38,38,0.25)", padding: "5px 12px", borderRadius: 999 }}>
+                <span className="inline-block rounded-full" style={{ width: 8, height: 8, backgroundColor: "#DC2626" }} />
+                {"Opportunit\u00E9 fiscale 2026"}
+              </span>
+
+              <h2 className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]" style={{ fontWeight: 600, color: "#0F172A", lineHeight: 1.15, letterSpacing: "-0.01em", marginTop: 16 }}>
+                La loi qui va faire parler<br />
+                <span className="font-heading italic" style={{ color: "#D97706", fontWeight: 500 }}>pendant 12 mois.</span>
+              </h2>
+
+              <p className="font-body" style={{ fontSize: 15.5, color: "#475569", lineHeight: 1.7, marginTop: 20 }}>
+                {"Depuis le 1er janvier 2026, la loi suisse permet aux r\u00E9sidents de rattraper r\u00E9troactivement les versements 3\u00E8me pilier non effectu\u00E9s pendant les 10 derni\u00E8res ann\u00E9es. Un rattrapage qui peut atteindre "}
+                <span style={{ fontWeight: 600, color: "#0F172A" }}>36 290 CHF de versements</span>
+                {", et g\u00E9n\u00E9rer jusqu\u2019\u00E0 "}
+                <span style={{ fontWeight: 600, color: "#0F172A" }}>{"13 000 CHF d\u2019\u00E9conomie fiscale imm\u00E9diate"}</span>.
+              </p>
+
+              <p className="font-body" style={{ fontSize: 15.5, color: "#475569", lineHeight: 1.7, marginTop: 14 }}>
+                {"La majorit\u00E9 des r\u00E9sidents francophones en Suisse n\u2019ont jamais entendu parler de cette r\u00E9forme. Ceux qui agissent avant 2027 prendront plusieurs longueurs d\u2019avance sur leur patrimoine retraite."}
+              </p>
+
+              <a href="/prevoyance" className="font-body inline-flex items-center gap-2 no-underline" style={{ marginTop: 28, backgroundColor: "#D97706", color: "#FFFFFF", fontSize: 15, fontWeight: 500, padding: "13px 24px", borderRadius: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.22)" }}>
+                Calculer mon rattrapage <span>{"\u2192"}</span>
+              </a>
+            </div>
+
+            {/* Right: numeric visual */}
+            <div aria-hidden="true" className="hidden lg:flex flex-col items-center justify-center shrink-0" style={{ width: 220, padding: "24px 20px", backgroundColor: "#FFFFFF", border: "1px solid rgba(217,119,6,0.25)", borderRadius: 16, boxShadow: "0 8px 20px rgba(15,23,42,0.05)" }}>
+              <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", color: "#94A3B8", marginBottom: 10 }}>Rattrapage max.</p>
+              <p className="font-heading italic" style={{ fontSize: 40, fontWeight: 500, color: "#D97706", lineHeight: 1, letterSpacing: "-0.02em" }}>36 290</p>
+              <p className="font-body" style={{ fontSize: 12, fontWeight: 500, color: "#475569", marginTop: 4, letterSpacing: "0.02em" }}>CHF sur 10 ans</p>
+              <div style={{ width: "100%", height: 1, backgroundColor: "#E2E8F0", margin: "16px 0" }} />
+              <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.1em", color: "#94A3B8", marginBottom: 6 }}>{"\u00C9conomie fiscale"}</p>
+              <p className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#0F172A", lineHeight: 1 }}>{"jusqu\u2019\u00E0 13 000 CHF"}</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ===== STATS BAND ===== */}
       <section style={{ backgroundColor: "#D97706", paddingTop: 56, paddingBottom: 56 }}>
-        <div className="mx-auto px-6 grid grid-cols-2 lg:grid-cols-4" style={{ maxWidth: 900, gap: 24 }}>
+        <div ref={stats.ref} className={`mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 scroll-reveal ${stats.isVisible ? "visible" : ""}`} style={{ maxWidth: 900, gap: 24 }}>
           {STATS.map((stat, i) => (
             <div key={stat.label} className="text-center relative">
               {i > 0 && (
@@ -241,7 +310,7 @@ export default function TestPage() {
 
       {/* ===== BLOG ===== */}
       <section className="px-6 bg-creme" style={{ paddingTop: 80, paddingBottom: 80 }}>
-        <div className="mx-auto" style={{ maxWidth: 1120 }}>
+        <div ref={blog.ref} className={`mx-auto scroll-reveal ${blog.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <div className="flex items-end justify-between">
             <div>
               <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Blog</span>
@@ -275,17 +344,17 @@ export default function TestPage() {
 
       {/* ===== FINAL CTA ===== */}
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#F9FAFB" }}>
-        <div className="mx-auto text-center" style={{ maxWidth: 560 }}>
+        <div ref={finalCta.ref} className={`mx-auto text-center scroll-reveal ${finalCta.isVisible ? "visible" : ""}`} style={{ maxWidth: 560 }}>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            Commencez votre projet en France<br />
+            Commencez votre projet en Suisse<br />
             <span className="font-heading italic" style={{ color: "#D97706" }}>{"aujourd\u2019hui"}</span>
           </h2>
-          <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16 }}>2 minutes de diagnostic. Un plan clair. Des experts disponibles.</p>
+          <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16 }}>5 minutes de diagnostic. Un plan clair. 100% gratuit.</p>
           <div className="flex items-center justify-center gap-3" style={{ marginTop: 32 }}>
             <input type="email" placeholder="Votre adresse email" className="font-body rounded-lg bg-white" style={{ border: "1px solid #E2E8F0", padding: "14px 18px", fontSize: 14, width: 280, outline: "none" }} />
-            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "14px 24px" }}>Demarrer gratuitement</button>
+            <a href="/emploi" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "14px 24px" }}>{"Commencer mon diagnostic \u2192"}</a>
           </div>
-          <p className="font-body" style={{ fontSize: 12, color: "#94A3B8", marginTop: 14 }}>{"Pas de carte bancaire \u00B7 Diagnostic gratuit \u00B7 Resultats immediats"}</p>
+          <p className="font-body" style={{ fontSize: 12, color: "#94A3B8", marginTop: 14 }}>{"Pas de carte bancaire \u00B7 Diagnostic gratuit \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
         </div>
       </section>
 
