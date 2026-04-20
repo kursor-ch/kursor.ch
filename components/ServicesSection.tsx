@@ -33,12 +33,12 @@ const tools = [
   },
   {
     Icon: ShieldCheckIcon,
-    status: "Bientôt" as const,
-    live: false,
+    status: "Disponible" as const,
+    live: true,
     title: "Audit Assurances",
     body: "Identifiez simultanément combien vous surpayez et où vous n\u2019êtes pas couvert. LAMal, complémentaires, perte de gain, RC privée.",
     metric: "2 400 CHF/an d\u2019économie potentielle",
-    cta: "Bientôt disponible",
+    cta: "Faire le diagnostic",
     href: "/assurance",
   },
   {
