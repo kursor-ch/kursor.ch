@@ -44,7 +44,6 @@ const MENU = [
   {
     label: "Ressources",
     items: [
-      { name: "Blog", href: "/test/blog", cta: "" },
       { name: "Guide", href: "/test/guide", cta: "" },
       { name: "Actualit\u00E9s", href: "/test/actualite", cta: "" },
     ],
