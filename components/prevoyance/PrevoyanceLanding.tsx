@@ -11,7 +11,15 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type WaitlistState = "idle" | "form" | "submitting" | "done";
 
-export default function PrevoyanceLanding() {
+interface PrevoyanceLandingProps {
+  // When provided, the hero CTA starts the diagnostic instead of opening the
+  // waitlist capture form. The landing page remains visually identical.
+  onStart?: () => void;
+}
+
+export default function PrevoyanceLanding({
+  onStart,
+}: PrevoyanceLandingProps = {}) {
   const [waitlist, setWaitlist] = useState<WaitlistState>("idle");
   const [email, setEmail] = useState("");
   const [newsletterOptin, setNewsletterOptin] = useState(true);
@@ -50,23 +58,35 @@ export default function PrevoyanceLanding() {
       );
     }
 
+    const diagnosticMode = typeof onStart === "function";
+    const primaryLabel = diagnosticMode
+      ? "Démarrer le diagnostic"
+      : "Être notifié au lancement";
+    const primarySubText = diagnosticMode
+      ? "2 minutes · 100% gratuit · sans engagement"
+      : "Audit gratuit disponible prochainement";
+
     return (
       <>
         <button
           type="button"
-          onClick={() => setWaitlist(waitlist === "idle" ? "form" : "idle")}
+          onClick={() => {
+            if (diagnosticMode) {
+              onStart!();
+              return;
+            }
+            setWaitlist(waitlist === "idle" ? "form" : "idle");
+          }}
           className="group inline-flex items-center gap-3 bg-amber text-white px-8 py-5 text-base font-bold tracking-wide rounded-xl shadow-lg shadow-amber/20 ring-1 ring-amber/20 transition-all duration-300 hover:brightness-110 hover:shadow-2xl hover:shadow-amber/30 hover:-translate-y-0.5"
         >
-          Être notifié au lancement
+          {primaryLabel}
           <span className="arrow inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 text-white text-base transition-transform duration-300 group-hover:translate-x-1">
             →
           </span>
         </button>
-        <p className="text-[13px] text-gray-400 mt-2">
-          Audit gratuit disponible prochainement
-        </p>
+        <p className="text-[13px] text-gray-400 mt-2">{primarySubText}</p>
 
-        {(waitlist === "form" || waitlist === "submitting") && (
+        {!diagnosticMode && (waitlist === "form" || waitlist === "submitting") && (
           <div className={`mt-4 space-y-3 ${mobile ? "w-full" : "max-w-sm"}`}>
             <input
               type="email"
