@@ -16,37 +16,37 @@ const MENU = [
   {
     label: "Travailler",
     items: [
-      { name: "Trouver un emploi en Suisse", href: "/emploi-suisse", cta: "D\u00E9poser mon CV" },
-      { name: "Simulateur de Salaire", href: "/salaire-suisse", cta: "Estimer mon net" },
-      { name: "Coaching", href: "/coaching-carriere", cta: "Booster mon profil" },
+      { name: "Trouver un emploi en Suisse", href: "/test/emploi-suisse", cta: "D\u00E9poser mon CV" },
+      { name: "Simulateur de Salaire", href: "/test/salaire-suisse", cta: "Estimer mon net" },
+      { name: "Coaching", href: "/test/coaching-carriere", cta: "Booster mon profil" },
     ],
   },
   {
     label: "Entreprendre",
     items: [
-      { name: "Cr\u00E9ation de Soci\u00E9t\u00E9", href: "/creation-entreprise", cta: "Parler \u00E0 une fiduciaire" },
-      { name: "Optimisation Fiscale", href: "/fiscalite-business", cta: "Demander un audit" },
+      { name: "Cr\u00E9ation de Soci\u00E9t\u00E9", href: "/test/creation-entreprise", cta: "Parler \u00E0 une fiduciaire" },
+      { name: "Optimisation Fiscale", href: "/test/fiscalite-business", cta: "Demander un audit" },
     ],
   },
   {
     label: "Patrimoine",
     items: [
-      { name: "Retraite & 3\u00E8me Pilier", href: "/retraite-suisse", cta: "Faire mon bilan" },
-      { name: "Analyse du 2\u00E8me Pilier (LPP)", href: "/analyse-lpp", cta: "Optimiser mon capital" },
+      { name: "Retraite & 3\u00E8me Pilier", href: "/test/retraite-suisse", cta: "Faire mon bilan" },
+      { name: "Analyse du 2\u00E8me Pilier (LPP)", href: "/test/analyse-lpp", cta: "Optimiser mon capital" },
     ],
   },
   {
     label: "Acad\u00E9mie",
     items: [
-      { name: "La Formation Compl\u00E8te", href: "/formation-suisse", cta: "Acc\u00E9der \u00E0 l'App" },
+      { name: "La Formation Compl\u00E8te", href: "/test/formation-suisse", cta: "Acc\u00E9der \u00E0 l'App" },
     ],
   },
   {
     label: "Ressources",
     items: [
-      { name: "Blog", href: "/blog", cta: "" },
-      { name: "Guide", href: "/guide", cta: "" },
-      { name: "Actualit\u00E9s", href: "/actualite", cta: "" },
+      { name: "Blog", href: "/test/blog", cta: "" },
+      { name: "Guide", href: "/test/guide", cta: "" },
+      { name: "Actualit\u00E9s", href: "/test/actualite", cta: "" },
     ],
   },
 ];
