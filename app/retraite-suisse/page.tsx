@@ -192,9 +192,9 @@ export default function RetraiteSuissePage() {
       {/* BREADCRUMB */}
       <div className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 20, paddingBottom: 20 }}>
         <nav className="font-body flex items-center gap-2" style={{ fontSize: 13, color: "#94A3B8" }}>
-          <Link href="/test" style={{ color: "#94A3B8" }}>Accueil</Link>
+          <Link href="/" style={{ color: "#94A3B8" }}>Accueil</Link>
           <span>/</span>
-          <Link href="/test" style={{ color: "#94A3B8" }}>Patrimoine</Link>
+          <Link href="/" style={{ color: "#94A3B8" }}>Patrimoine</Link>
           <span>/</span>
           <span style={{ color: "#6B7280" }}>Retraite &amp; 3{"\u00E8"}me Pilier</span>
         </nav>

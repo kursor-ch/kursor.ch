@@ -8,44 +8,44 @@ const MENU = [
   {
     label: "S'installer",
     items: [
-      { name: "Logement & Relocation", href: "/test/logement-en-suisse", cta: "Trouver mon logement" },
-      { name: "Assurances & LAMal", href: "/test/assurance-maladie", cta: "Comparer les offres" },
-      { name: "Guide Permis B & G", href: "/test/permis-suisse", cta: "Diagnostic Statut" },
+      { name: "Logement & Relocation", href: "/logement-en-suisse", cta: "Trouver mon logement" },
+      { name: "Assurances & LAMal", href: "/assurance-maladie", cta: "Comparer les offres" },
+      { name: "Guide Permis B & G", href: "/permis-suisse", cta: "Diagnostic Statut" },
     ],
   },
   {
     label: "Travailler",
     items: [
-      { name: "Trouver un emploi en Suisse", href: "/test/emploi-suisse", cta: "D\u00E9poser mon CV" },
-      { name: "Simulateur de Salaire", href: "/test/salaire-suisse", cta: "Estimer mon net" },
-      { name: "Coaching", href: "/test/coaching-carriere", cta: "Booster mon profil" },
+      { name: "Trouver un emploi en Suisse", href: "/emploi-suisse", cta: "D\u00E9poser mon CV" },
+      { name: "Simulateur de Salaire", href: "/salaire-suisse", cta: "Estimer mon net" },
+      { name: "Coaching", href: "/coaching-carriere", cta: "Booster mon profil" },
     ],
   },
   {
     label: "Entreprendre",
     items: [
-      { name: "Cr\u00E9ation de Soci\u00E9t\u00E9", href: "/test/creation-entreprise", cta: "Parler \u00E0 une fiduciaire" },
-      { name: "Optimisation Fiscale", href: "/test/fiscalite-business", cta: "Demander un audit" },
+      { name: "Cr\u00E9ation de Soci\u00E9t\u00E9", href: "/creation-entreprise", cta: "Parler \u00E0 une fiduciaire" },
+      { name: "Optimisation Fiscale", href: "/fiscalite-business", cta: "Demander un audit" },
     ],
   },
   {
     label: "Patrimoine",
     items: [
-      { name: "Retraite & 3\u00E8me Pilier", href: "/test/retraite-suisse", cta: "Faire mon bilan" },
-      { name: "Analyse du 2\u00E8me Pilier (LPP)", href: "/test/analyse-lpp", cta: "Optimiser mon capital" },
+      { name: "Retraite & 3\u00E8me Pilier", href: "/retraite-suisse", cta: "Faire mon bilan" },
+      { name: "Analyse du 2\u00E8me Pilier (LPP)", href: "/analyse-lpp", cta: "Optimiser mon capital" },
     ],
   },
   {
     label: "Acad\u00E9mie",
     items: [
-      { name: "La Formation Compl\u00E8te", href: "/test/formation-suisse", cta: "Acc\u00E9der \u00E0 l'App" },
+      { name: "La Formation Compl\u00E8te", href: "/formation-suisse", cta: "Acc\u00E9der \u00E0 l'App" },
     ],
   },
   {
     label: "Ressources",
     items: [
-      { name: "Guide", href: "/test/guide", cta: "" },
-      { name: "Actualit\u00E9s", href: "/test/actualite", cta: "" },
+      { name: "Guide", href: "/guide", cta: "" },
+      { name: "Actualit\u00E9s", href: "/actualite", cta: "" },
     ],
   },
 ];
@@ -62,7 +62,7 @@ export default function TestNavbar() {
       <div className="mx-auto px-4 sm:px-6" style={{ maxWidth: 1120 }}>
         <div className="flex items-center justify-between" style={{ height: 60 }}>
           {/* Logo */}
-          <Link href="/test" className="flex items-center gap-2 shrink-0">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image src="/kursor-logo-amber.png" alt="Kursor" width={36} height={36} style={{ height: 36, width: "auto" }} />
             <span style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>Kursor</span>
             <span style={{ fontSize: 10, fontWeight: 400, color: "#9CA3AF" }}>CH</span>
