@@ -67,7 +67,7 @@ export default function SoftExitSansActivite() {
           francs.
         </p>
         <Link
-          href="/prevoyance"
+          href="/retraite"
           className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
           style={{ backgroundColor: ACCENT }}
           onMouseEnter={(e) =>

@@ -23,22 +23,22 @@ const dashboardItems = [
     Icon: HouseKeyIcon,
     title: "Diagnostic Logement",
     subtitle: "Estimez votre temps de recherche",
-    progress: 65,
-    live: false,
+    progress: 100,
+    live: true,
   },
   {
     Icon: ShieldCheckIcon,
     title: "Audit Assurances",
     subtitle: "Identifiez vos surcoûts et trous de couverture",
-    progress: 40,
-    live: false,
+    progress: 100,
+    live: true,
   },
   {
     Icon: PiggyBankIcon,
     title: "Audit Retraite",
     subtitle: "Calculez votre perte fiscale annuelle",
-    progress: 25,
-    live: false,
+    progress: 100,
+    live: true,
   },
 ];
 

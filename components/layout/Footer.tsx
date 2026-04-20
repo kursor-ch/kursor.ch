@@ -7,7 +7,7 @@ const diagnosticLinks = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
   { label: "Assurances", href: "/assurance" },
-  { label: "Prévoyance", href: "/prevoyance" },
+  { label: "Retraite", href: "/retraite" },
 ];
 
 const ressourceLinks = [

@@ -1,6 +1,6 @@
 // Audit Retraite — answer keys MUST match docs/Tunnel_Retraite_Audit_Spec_Verrouillee
-// and the question definitions in questions.ts exactly. Route is /prevoyance,
-// internal funnel_id is "retraite" — intentionally divergent.
+// and the question definitions in questions.ts exactly. Route is /retraite,
+// internal funnel_id is "retraite".
 
 export type Q1Statut =
   | "salarie_suisse"

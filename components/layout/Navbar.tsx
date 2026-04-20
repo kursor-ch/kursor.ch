@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Emploi", href: "/emploi" },
   { label: "Logement", href: "/logement" },
   { label: "Assurance", href: "/assurance" },
-  { label: "Prévoyance", href: "/prevoyance" },
+  { label: "Retraite", href: "/retraite" },
 ];
 
 const INFO_LINKS = [
@@ -17,7 +17,7 @@ const INFO_LINKS = [
   { label: "À propos", href: "/a-propos" },
 ];
 
-const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/prevoyance"];
+const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/retraite"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
