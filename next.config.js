@@ -3,6 +3,15 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/prevoyance",
+        destination: "/retraite",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

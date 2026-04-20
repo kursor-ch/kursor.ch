@@ -43,13 +43,13 @@ const tools = [
   },
   {
     Icon: PiggyBankIcon,
-    status: "Bientôt" as const,
-    live: false,
+    status: "Disponible" as const,
+    live: true,
     title: "Audit Retraite",
     body: "Calculez votre perte fiscale annuelle et découvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3ème pilier.",
     metric: "36 290 CHF rattrapables en 2026",
-    cta: "Bientôt disponible",
-    href: "/prevoyance",
+    cta: "Faire le diagnostic",
+    href: "/retraite",
   },
 ];
 
@@ -145,7 +145,7 @@ function ToolCard({ tool }: { tool: (typeof tools)[number] }) {
 
   if (tool.live) {
     return (
-      <Link href={tool.href} className="card-cta-link h-full">
+      <Link href={tool.href} className="card-cta-link block h-full">
         {inner}
       </Link>
     );

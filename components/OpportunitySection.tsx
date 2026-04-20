@@ -120,7 +120,7 @@ export default function OpportunitySection() {
             </p>
 
             <Link
-              href="/prevoyance"
+              href="/retraite"
               className="font-body cta-btn group"
               style={{
                 display: "inline-flex",

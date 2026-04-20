@@ -12,8 +12,8 @@ Interactive diagnostics that score and qualify French-speaking professionals con
 |--------|-------|--------|
 | Emploi (Salarié) | /emploi | Active |
 | Logement | /logement | Active |
-| Assurance | /assurance | Planned (stub live) |
-| Prévoyance | /prevoyance | Planned (stub live) |
+| Assurance | /assurance | Active |
+| Retraite | /retraite | Active |
 | Entrepreneur | /diagnostic/entrepreneur | Planned |
 
 ## Tech stack

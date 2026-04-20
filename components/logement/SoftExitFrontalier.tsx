@@ -83,10 +83,10 @@ export default function SoftExitFrontalier() {
           Faire l&apos;Audit Assurances →
         </Link>
         <Link
-          href="/prevoyance"
+          href="/retraite"
           className="flex-1 inline-flex items-center justify-center rounded-xl border-2 border-stone-300 text-gray-700 font-semibold px-6 py-4 hover:border-amber/40 hover:bg-amber/5 transition-all duration-200"
         >
-          Faire l&apos;Audit Prévoyance →
+          Faire l&apos;Audit Retraite →
         </Link>
       </div>
 
