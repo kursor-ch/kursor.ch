@@ -46,18 +46,6 @@ const LOYER_TABLE = [
 export default function LogementSuissePage() {
   return (
     <div className="bg-creme">
-
-      {/* ===== BREADCRUMB ===== */}
-      <div className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 20, paddingBottom: 20 }}>
-        <nav className="font-body flex items-center gap-2" style={{ fontSize: 13, color: "#94A3B8" }}>
-          <Link href="/" style={{ color: "#94A3B8" }}>Accueil</Link>
-          <span>/</span>
-          <Link href="/" style={{ color: "#94A3B8" }}>{"S'installer"}</Link>
-          <span>/</span>
-          <span style={{ color: "#6B7280" }}>Logement en Suisse</span>
-        </nav>
-      </div>
-
       {/* ===== HERO ===== */}
       <section style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
         <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>

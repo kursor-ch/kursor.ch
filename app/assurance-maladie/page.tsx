@@ -70,18 +70,6 @@ const TAGS = ["Assurance maladie", "LAMal", "Caisse maladie", "Primes", "Suisse"
 export default function AssuranceMaladiePage() {
   return (
     <div className="bg-creme">
-
-      {/* ===== BREADCRUMB ===== */}
-      <div className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 20, paddingBottom: 20 }}>
-        <nav className="font-body flex items-center gap-2" style={{ fontSize: 13, color: "#94A3B8" }}>
-          <Link href="/" style={{ color: "#94A3B8" }}>Accueil</Link>
-          <span>/</span>
-          <Link href="/" style={{ color: "#94A3B8" }}>{"S'installer"}</Link>
-          <span>/</span>
-          <span style={{ color: "#6B7280" }}>Assurance maladie</span>
-        </nav>
-      </div>
-
       {/* ===== HERO ===== */}
       <section style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
         <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>

@@ -77,18 +77,6 @@ const ARTICLES = [
 export default function ActualitePage() {
   return (
     <div className="bg-creme">
-
-      {/* BREADCRUMB */}
-      <div className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 20, paddingBottom: 20 }}>
-        <nav className="font-body flex items-center gap-2" style={{ fontSize: 13, color: "#94A3B8" }}>
-          <Link href="/" style={{ color: "#94A3B8" }}>Accueil</Link>
-          <span>/</span>
-          <Link href="/" style={{ color: "#94A3B8" }}>Ressources</Link>
-          <span>/</span>
-          <span style={{ color: "#6B7280" }}>{"Actualités"}</span>
-        </nav>
-      </div>
-
       {/* HERO */}
       <section
         style={{

@@ -10,18 +10,6 @@ export const metadata: Metadata = {
 export default function FormationSuissePage() {
   return (
     <div className="bg-creme" style={{ minHeight: "100vh" }}>
-
-      {/* BREADCRUMB */}
-      <div className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 20, paddingBottom: 20 }}>
-        <nav className="font-body flex items-center gap-2" style={{ fontSize: 13, color: "#94A3B8" }}>
-          <Link href="/" style={{ color: "#94A3B8" }}>Accueil</Link>
-          <span>/</span>
-          <Link href="/" style={{ color: "#94A3B8" }}>{"Académie"}</Link>
-          <span>/</span>
-          <span style={{ color: "#6B7280" }}>Formation</span>
-        </nav>
-      </div>
-
       {/* MAIN */}
       <section style={{ paddingTop: 80, paddingBottom: 120 }}>
         <div className="mx-auto px-6 text-center" style={{ maxWidth: 600 }}>
