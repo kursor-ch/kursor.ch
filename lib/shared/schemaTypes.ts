@@ -59,7 +59,19 @@ export interface VerdictCoverageAudit {
   summary: string;
 }
 
-export type Verdict = VerdictScore | VerdictDifficulty | VerdictCoverageAudit;
+export interface VerdictFiscalLoss {
+  type: "fiscal_loss";
+  score: number;
+  tier: "negligeable" | "significatif" | "eleve" | "critique";
+  label: string;
+  summary: string;
+}
+
+export type Verdict =
+  | VerdictScore
+  | VerdictDifficulty
+  | VerdictCoverageAudit
+  | VerdictFiscalLoss;
 
 export interface Persona {
   code: "A" | "B" | "C" | "D" | "E";
@@ -122,6 +134,23 @@ export interface AssuranceData {
   trous_couverture_identified: string[];
 }
 
+export interface RetraiteData {
+  year_arrival_switzerland: number | null;
+  years_eligible_for_rachat_retroactif: number;
+  estimated_rattrapage_max_chf: number;
+  estimated_tax_savings_chf: number;
+  current_3a_status:
+    | "none"
+    | "has_some_below_max"
+    | "maxes_each_year"
+    | "unsure";
+  professional_status:
+    | "salarie_lpp"
+    | "salarie_no_lpp"
+    | "independant_ri"
+    | "independant_sarl_sa";
+}
+
 export interface FrontalierData {
   decision_window_status:
     | "in_window_3m"
@@ -166,6 +195,7 @@ export interface WebhookPayloadV1 {
   housing_data?: HousingData;
   assurance_data?: AssuranceData;
   frontalier_data?: FrontalierData;
+  retraite_data?: RetraiteData;
 }
 
 // Lightweight soft-exit capture payload. Fires to a separate n8n endpoint
@@ -177,7 +207,9 @@ export interface SoftExitPayload {
     | "frontalier"
     | "exploration"
     | "low_budget"
-    | "sans_activite";
+    | "sans_activite"
+    | "pre_retraite"
+    | "jeune_horizon";
   contact: {
     prenom?: string;
     email: string;
