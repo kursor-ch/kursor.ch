@@ -30,10 +30,10 @@ const STEPS = [
 ];
 
 const STATS = [
-  { figure: "4 200+", label: "Expatries accompagnes" },
+  { figure: "4 200+", label: "Residents accompagn\u00E9s" },
   { figure: "92%", label: "Taux de satisfaction client" },
   { figure: "3 sem.", label: "Pour trouver un logement" },
-  { figure: "12", label: "Pays accompagnes" },
+  { figure: "26", label: "Cantons couverts" },
 ];
 
 const ARTICLES = [
@@ -75,7 +75,7 @@ export default function HomePage() {
             </h1>
 
             <p className="font-body mx-auto lg:mx-0" style={{ fontSize: 16, color: "#475569", lineHeight: 1.65, marginTop: 20, maxWidth: 480 }}>
-              {"Visa, logement, emploi, fiscalite \u2014 on vous guide pas a pas pour eviter les erreurs qui coutent des mois et des milliers d\u2019euros."}
+              {"Emploi, logement, assurances, pr\u00E9voyance \u2014 on vous guide pas \u00E0 pas pour \u00E9viter les erreurs qui co\u00FBtent des mois et des milliers de francs."}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
@@ -88,9 +88,9 @@ export default function HomePage() {
             {/* Mini stats */}
             <div className="flex items-center justify-center lg:justify-start" style={{ marginTop: 40, gap: 0 }}>
               {[
-                { val: "4 200+", label: "expatries accompagnes" },
+                { val: "4 200+", label: "r\u00E9sidents accompagn\u00E9s" },
                 { val: "92%", label: "taux de satisfaction" },
-                { val: "12", label: "pays accompagnes" },
+                { val: "26", label: "cantons couverts" },
               ].map((s, i) => (
                 <div key={s.label} className="text-center lg:text-left" style={{ paddingLeft: i > 0 ? 24 : 0, paddingRight: 24, borderLeft: i > 0 ? "1px solid #E2E8F0" : "none" }}>
                   <p className="font-heading" style={{ fontSize: 24, fontWeight: 600, color: "#111827" }}>{s.val}</p>
@@ -192,7 +192,7 @@ export default function HomePage() {
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Comment ca marche</span>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
             4 etapes pour une<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>expatriation reussie</span>
+            <span className="font-heading italic" style={{ color: "#D97706" }}>installation r\u00E9ussie</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left" style={{ marginTop: 48 }}>
             {STEPS.map((s) => (
@@ -316,7 +316,7 @@ export default function HomePage() {
               <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Blog</span>
               <h2 className="font-heading" style={{ fontSize: 36, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
                 Conseils & ressources<br />
-                <span className="font-heading italic" style={{ color: "#D97706" }}>pour votre expatriation</span>
+                <span className="font-heading italic" style={{ color: "#D97706" }}>pour votre installation</span>
               </h2>
             </div>
             <span className="font-body hidden md:inline cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \u2192"}</span>
