@@ -2,476 +2,297 @@
 
 import { useState } from "react";
 
-/* ───────── TYPES ───────── */
+/* ───────── TAUX ───────── */
 
-type Canton = keyof typeof IMPOT_RATES;
-type Statut = "resident" | "frontalier";
-type SituationFamiliale = "celibataire" | "marie" | "marie_enfants";
-
-/* ───────── TAUX APPROXIMATIFS ───────── */
-
-// AVS/AI/APG: 5.3%, AC: 1.1%, AC suppl. si > 148 200: 0.5%
 const AVS_RATE = 0.053;
 const AC_RATE = 0.011;
-const AC_SUPPL_RATE = 0.005;
-const AC_SUPPL_THRESHOLD = 148200;
-
-// LPP (estimation employé) : palier simplifié par tranche d'âge — on utilise 7% par défaut
-const LPP_RATE = 0.07;
-
-// Taux d'imposition à la source estimés par canton et situation (salaire annuel moyen ~80 kCHF)
-// Ces taux sont indicatifs et couvrent l'impôt fédéral + cantonal + communal
-const IMPOT_RATES: Record<
-  string,
-  Record<SituationFamiliale, number>
-> = {
-  Genève:          { celibataire: 0.195, marie: 0.155, marie_enfants: 0.130 },
-  Vaud:            { celibataire: 0.180, marie: 0.145, marie_enfants: 0.120 },
-  Zurich:          { celibataire: 0.165, marie: 0.135, marie_enfants: 0.110 },
-  Berne:           { celibataire: 0.190, marie: 0.150, marie_enfants: 0.125 },
-  Fribourg:        { celibataire: 0.175, marie: 0.140, marie_enfants: 0.115 },
-  Valais:          { celibataire: 0.158, marie: 0.128, marie_enfants: 0.105 },
-  Neuchâtel:       { celibataire: 0.185, marie: 0.148, marie_enfants: 0.122 },
-  Jura:            { celibataire: 0.192, marie: 0.152, marie_enfants: 0.128 },
-  "Bâle-Ville":    { celibataire: 0.200, marie: 0.160, marie_enfants: 0.135 },
-  "Bâle-Campagne": { celibataire: 0.178, marie: 0.143, marie_enfants: 0.118 },
-  Soleure:         { celibataire: 0.172, marie: 0.138, marie_enfants: 0.113 },
-  Argovie:         { celibataire: 0.162, marie: 0.132, marie_enfants: 0.108 },
+const LPP_RATES: Record<string, number> = {
+  "25-34": 0.07,
+  "35-44": 0.10,
+  "45-54": 0.15,
+  "55-65": 0.18,
 };
 
-// Bonus frontalier : pas d'impôt cantonal/communal dans certains cantons (accord fiscal FR/CH)
-// Simplifié : les frontaliers paient un impôt à la source réduit (~4.5% pour GE, tarif spécifique)
-// On applique un coefficient de réduction selon le canton
-const FRONTALIER_COEFF: Record<string, number> = {
-  Genève: 0.25,       // Accord spécial : 4.5% redistribué à la France
-  Vaud: 0.65,
-  Zurich: 0.80,
-  Berne: 0.80,
-  Fribourg: 0.70,
-  Valais: 0.60,
-  "Neuchâtel": 0.65,
-  Jura: 0.65,
-  "Bâle-Ville": 0.75,
-  "Bâle-Campagne": 0.70,
-  Soleure: 0.75,
-  Argovie: 0.78,
+const CANTONS = [
+  "Gen\u00E8ve", "Vaud", "Neuch\u00E2tel", "Fribourg", "Valais", "Jura",
+  "Berne", "B\u00E2le-Ville", "B\u00E2le-Campagne", "Zurich", "Soleure", "Argovie",
+];
+
+const IMPOT: Record<string, Record<string, number>> = {
+  "Gen\u00E8ve":       { celibataire: 0.155, marie: 0.125, marie_enfants: 0.105 },
+  "Vaud":            { celibataire: 0.145, marie: 0.115, marie_enfants: 0.095 },
+  "Neuch\u00E2tel":     { celibataire: 0.150, marie: 0.120, marie_enfants: 0.100 },
+  "Fribourg":        { celibataire: 0.140, marie: 0.112, marie_enfants: 0.092 },
+  "Valais":          { celibataire: 0.128, marie: 0.100, marie_enfants: 0.085 },
+  "Jura":            { celibataire: 0.155, marie: 0.125, marie_enfants: 0.105 },
+  "Berne":           { celibataire: 0.152, marie: 0.122, marie_enfants: 0.102 },
+  "B\u00E2le-Ville":    { celibataire: 0.162, marie: 0.130, marie_enfants: 0.110 },
+  "B\u00E2le-Campagne": { celibataire: 0.145, marie: 0.115, marie_enfants: 0.095 },
+  "Zurich":          { celibataire: 0.135, marie: 0.108, marie_enfants: 0.088 },
+  "Soleure":         { celibataire: 0.140, marie: 0.112, marie_enfants: 0.092 },
+  "Argovie":         { celibataire: 0.130, marie: 0.105, marie_enfants: 0.085 },
 };
 
-/* ───────── CALCUL ───────── */
+// Genève : impôt à la source en Suisse. Autres cantons signataires 1983 : imposition en France
+const CANTONS_SOURCE_SUISSE = ["Gen\u00E8ve"];
 
-function calculer(
-  brut: number,
-  canton: Canton,
-  statut: Statut,
-  situation: SituationFamiliale
-) {
-  // Cotisations sociales
-  const avs = Math.round(brut * AVS_RATE);
-  const ac = Math.round(brut * AC_RATE);
-  const acSuppl =
-    brut > AC_SUPPL_THRESHOLD
-      ? Math.round((brut - AC_SUPPL_THRESHOLD) * AC_SUPPL_RATE)
-      : 0;
-  const lpp = Math.round(brut * LPP_RATE);
-
-  // Impôt à la source
-  const tauxBase = IMPOT_RATES[canton][situation];
-  const coeff = statut === "frontalier" ? FRONTALIER_COEFF[canton] ?? 0.75 : 1;
-  const tauxImpot = tauxBase * coeff;
-  const impot = Math.round(brut * tauxImpot);
-
-  const totalDeductions = avs + ac + acSuppl + lpp + impot;
-  const net = brut - totalDeductions;
-
-  return {
-    avs,
-    ac,
-    acSuppl,
-    lpp,
-    impot,
-    tauxImpot,
-    totalDeductions,
-    net,
-    netMensuel: Math.round(net / 12),
-  };
+function getLppRate(age: number) {
+  if (age < 25) return 0;
+  if (age <= 34) return LPP_RATES["25-34"];
+  if (age <= 44) return LPP_RATES["35-44"];
+  if (age <= 54) return LPP_RATES["45-54"];
+  return LPP_RATES["55-65"];
 }
 
-/* ───────── FORMATAGE ───────── */
-
 function fmt(n: number) {
-  return n.toLocaleString("fr-CH", { minimumFractionDigits: 0 });
+  return n.toLocaleString("fr-CH", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
 /* ───────── COMPOSANT ───────── */
 
-const CANTONS = Object.keys(IMPOT_RATES) as Canton[];
+type Resultat = {
+  brutAnnuel: number;
+  brutMensuel: number;
+  avs: number;
+  ac: number;
+  lpp: number;
+  impot: number;
+  tauxImpot: number;
+  totalRetenues: number;
+  netAnnuel: number;
+  netMensuel: number;
+  impositionSuisse: boolean;
+};
 
 export default function SalaireCalculator() {
-  const [brut, setBrut] = useState(80000);
-  const [canton, setCanton] = useState<Canton>("Genève");
-  const [statut, setStatut] = useState<Statut>("frontalier");
-  const [situation, setSituation] = useState<SituationFamiliale>("celibataire");
+  const [brutMensuel, setBrutMensuel] = useState("");
+  const [age, setAge] = useState("");
+  const [canton, setCanton] = useState("Gen\u00E8ve");
+  const [situation, setSituation] = useState("celibataire");
+  const [statut, setStatut] = useState("frontalier");
+  const [resultat, setResultat] = useState<Resultat | null>(null);
+  const [showResult, setShowResult] = useState(false);
 
-  const result = calculer(brut, canton, statut, situation);
+  function calculer() {
+    const brut = parseFloat(brutMensuel) || 0;
+    const ageNum = parseInt(age) || 30;
+    const brutAn = brut * 12;
+
+    const avs = Math.round(brutAn * AVS_RATE);
+    const ac = Math.round(brutAn * AC_RATE);
+    const lppRate = getLppRate(ageNum);
+    const lpp = Math.round(brutAn * lppRate);
+
+    const tauxImpot = IMPOT[canton]?.[situation] ?? 0.14;
+    const impositionSuisse = statut === "resident" || CANTONS_SOURCE_SUISSE.includes(canton);
+    const impot = impositionSuisse ? Math.round(brutAn * tauxImpot) : 0;
+
+    const totalRetenues = avs + ac + lpp + impot;
+    const netAnnuel = brutAn - totalRetenues;
+
+    setResultat({
+      brutAnnuel: brutAn,
+      brutMensuel: brut,
+      avs, ac, lpp, impot, tauxImpot,
+      totalRetenues,
+      netAnnuel,
+      netMensuel: Math.round(netAnnuel / 12),
+      impositionSuisse,
+    });
+    setShowResult(true);
+  }
 
   const inputStyle: React.CSSProperties = {
     fontFamily: "inherit",
-    fontSize: 14,
+    fontSize: 15,
     color: "#111827",
     backgroundColor: "#FFFFFF",
     border: "1px solid #E2E8F0",
-    borderRadius: 10,
-    padding: "11px 14px",
+    borderRadius: 8,
+    padding: "12px 14px",
     width: "100%",
     outline: "none",
-    boxSizing: "border-box",
+    boxSizing: "border-box" as const,
   };
 
   const labelStyle: React.CSSProperties = {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 600,
-    color: "#64748B",
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
+    color: "#475569",
     marginBottom: 6,
     display: "block",
   };
 
-  const lineStyle: React.CSSProperties = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px 0",
-    borderBottom: "1px solid #F1F5F9",
-    fontSize: 14,
-    color: "#475569",
-  };
-
   return (
-    <div
-      className="rounded-2xl"
-      style={{
-        backgroundColor: "#FFFFFF",
-        border: "1px solid #E2E8F0",
-        overflow: "hidden",
-        marginBottom: 40,
-      }}
-    >
-      {/* En-tête calculateur */}
-      <div
-        style={{
-          backgroundColor: "#FFFBF0",
-          borderBottom: "1px solid rgba(217,119,6,0.2)",
-          padding: "20px 28px",
-        }}
-      >
-        <p
-          style={{
-            fontSize: 12,
-            fontWeight: 700,
-            color: "#D97706",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            marginBottom: 4,
-          }}
-        >
-          Simulateur
+    <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFFFF" }}>
+      {/* Header */}
+      <div style={{ backgroundColor: "#D97706", padding: "22px 28px" }}>
+        <p className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", margin: 0 }}>
+          Calculateur Brut Net Suisse
         </p>
-        <h2 style={{ fontSize: 20, fontWeight: 600, color: "#111827", margin: 0 }}>
-          Calculez votre salaire net en Suisse
-        </h2>
-        <p style={{ fontSize: 13, color: "#64748B", marginTop: 4 }}>
-          Estimation basée sur les taux 2026 &mdash; r&eacute;sultat indicatif
+        <p className="font-body" style={{ fontSize: 13, color: "rgba(255,255,255,0.8)", marginTop: 4 }}>
+          Estimez votre salaire net en quelques clics
         </p>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 0,
-        }}
-        className="flex-col md:grid"
-      >
-        {/* Colonne INPUTS */}
-        <div style={{ padding: "28px", borderRight: "1px solid #F1F5F9" }}>
-          <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Salaire brut annuel (CHF)</label>
-            <input
-              type="number"
-              min={10000}
-              max={500000}
-              step={1000}
-              value={brut}
-              onChange={(e) => setBrut(Number(e.target.value))}
-              style={inputStyle}
-            />
-            <div
-              style={{
-                display: "flex",
-                gap: 8,
-                marginTop: 8,
-                flexWrap: "wrap",
-              }}
-            >
-              {[60000, 80000, 100000, 120000, 150000].map((v) => (
-                <button
-                  key={v}
-                  onClick={() => setBrut(v)}
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 500,
-                    color: brut === v ? "#FFFFFF" : "#64748B",
-                    backgroundColor: brut === v ? "#D97706" : "#F1F5F9",
-                    border: "none",
-                    borderRadius: 6,
-                    padding: "5px 10px",
-                    cursor: "pointer",
-                  }}
-                >
-                  {(v / 1000).toFixed(0)}k
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Canton de travail</label>
-            <select
-              value={canton}
-              onChange={(e) => setCanton(e.target.value as Canton)}
-              style={inputStyle}
-            >
-              {CANTONS.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Statut</label>
-            <div style={{ display: "flex", gap: 10 }}>
-              {(
-                [
-                  { value: "frontalier", label: "Frontalier" },
-                  { value: "resident", label: "R\u00E9sident" },
-                ] as { value: Statut; label: string }[]
-              ).map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => setStatut(opt.value)}
-                  style={{
-                    flex: 1,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    color: statut === opt.value ? "#FFFFFF" : "#475569",
-                    backgroundColor:
-                      statut === opt.value ? "#D97706" : "#F8FAFC",
-                    border: `1px solid ${statut === opt.value ? "#D97706" : "#E2E8F0"}`,
-                    borderRadius: 8,
-                    padding: "10px 0",
-                    cursor: "pointer",
-                  }}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label style={labelStyle}>Situation familiale</label>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {(
-                [
-                  { value: "celibataire", label: "C\u00E9libataire" },
-                  { value: "marie", label: "Mari\u00E9(e) sans enfant" },
-                  {
-                    value: "marie_enfants",
-                    label: "Mari\u00E9(e) avec enfant(s)",
-                  },
-                ] as { value: SituationFamiliale; label: string }[]
-              ).map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => setSituation(opt.value)}
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: situation === opt.value ? "#D97706" : "#475569",
-                    backgroundColor:
-                      situation === opt.value
-                        ? "rgba(217,119,6,0.07)"
-                        : "#F8FAFC",
-                    border: `1px solid ${situation === opt.value ? "rgba(217,119,6,0.4)" : "#E2E8F0"}`,
-                    borderRadius: 8,
-                    padding: "10px 14px",
-                    cursor: "pointer",
-                    textAlign: "left",
-                  }}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
+      {/* Formulaire */}
+      <div style={{ padding: "24px 28px" }}>
+        <div style={{ marginBottom: 18 }}>
+          <label style={labelStyle}>Salaire brut mensuel en CHF</label>
+          <input
+            type="number"
+            placeholder="Ex: 6000"
+            value={brutMensuel}
+            onChange={(e) => { setBrutMensuel(e.target.value); setShowResult(false); }}
+            style={inputStyle}
+          />
         </div>
 
-        {/* Colonne RÉSULTATS */}
-        <div style={{ padding: "28px", backgroundColor: "#FAFAFA" }}>
-          {/* Net annuel */}
-          <div
-            style={{
-              backgroundColor: "#111827",
-              borderRadius: 12,
-              padding: "20px 22px",
-              marginBottom: 20,
-              textAlign: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: 11,
-                fontWeight: 600,
-                color: "rgba(255,255,255,0.5)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: 6,
-              }}
-            >
-              Salaire net annuel estim&eacute;
-            </p>
-            <p
-              style={{
-                fontSize: 34,
-                fontWeight: 700,
-                color: "#FFFFFF",
-                letterSpacing: "-0.5px",
-              }}
-            >
-              {fmt(result.net)}&nbsp;
-              <span style={{ fontSize: 18, fontWeight: 400, color: "rgba(255,255,255,0.6)" }}>
-                CHF
-              </span>
-            </p>
-            <p style={{ fontSize: 13, color: "#D97706", marginTop: 4, fontWeight: 600 }}>
-              soit {fmt(result.netMensuel)} CHF / mois
-            </p>
-          </div>
+        <div style={{ marginBottom: 18 }}>
+          <label style={labelStyle}>{"\u00C2"}ge en ann{"\u00E9"}es</label>
+          <input
+            type="number"
+            placeholder="Ex: 35"
+            value={age}
+            onChange={(e) => { setAge(e.target.value); setShowResult(false); }}
+            style={inputStyle}
+          />
+        </div>
 
-          {/* D&eacute;tail d&eacute;ductions */}
-          <p
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: "#94A3B8",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              marginBottom: 10,
-            }}
-          >
-            D&eacute;tail des retenues
-          </p>
-
-          <div style={lineStyle}>
-            <span>Salaire brut</span>
-            <span style={{ fontWeight: 600, color: "#111827" }}>
-              {fmt(brut)} CHF
-            </span>
-          </div>
-          <div style={lineStyle}>
-            <span>AVS / AI / APG (5,3&nbsp;%)</span>
-            <span style={{ color: "#DC2626" }}>&minus;&nbsp;{fmt(result.avs)} CHF</span>
-          </div>
-          <div style={lineStyle}>
-            <span>Assurance ch&ocirc;mage (1,1&nbsp;%)</span>
-            <span style={{ color: "#DC2626" }}>&minus;&nbsp;{fmt(result.ac)} CHF</span>
-          </div>
-          {result.acSuppl > 0 && (
-            <div style={lineStyle}>
-              <span>AC suppl. tranche haute (0,5&nbsp;%)</span>
-              <span style={{ color: "#DC2626" }}>
-                &minus;&nbsp;{fmt(result.acSuppl)} CHF
-              </span>
-            </div>
-          )}
-          <div style={lineStyle}>
-            <span>LPP &mdash; 2e pilier (&asymp;&nbsp;7&nbsp;%)</span>
-            <span style={{ color: "#DC2626" }}>&minus;&nbsp;{fmt(result.lpp)} CHF</span>
-          </div>
-          <div style={{ ...lineStyle, borderBottom: "2px solid #E2E8F0" }}>
-            <span>
-              Imp&ocirc;t &agrave; la source
-              <span
+        <div style={{ marginBottom: 18 }}>
+          <label style={labelStyle}>Statut</label>
+          <div style={{ display: "flex", gap: 8 }}>
+            {[
+              { value: "frontalier", label: "Frontalier" },
+              { value: "resident", label: "R\u00E9sident" },
+            ].map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => { setStatut(opt.value); setShowResult(false); }}
                 style={{
-                  fontSize: 11,
-                  color: "#94A3B8",
-                  marginLeft: 6,
+                  flex: 1, fontSize: 14, fontWeight: 600, cursor: "pointer",
+                  color: statut === opt.value ? "#FFFFFF" : "#475569",
+                  backgroundColor: statut === opt.value ? "#D97706" : "#F8FAFC",
+                  border: `1px solid ${statut === opt.value ? "#D97706" : "#E2E8F0"}`,
+                  borderRadius: 8, padding: "10px 0",
                 }}
               >
-                ({canton} &middot;{" "}
-                {(result.tauxImpot * 100).toFixed(1)}&nbsp;%)
-              </span>
-            </span>
-            <span style={{ color: "#DC2626" }}>
-              &minus;&nbsp;{fmt(result.impot)} CHF
-            </span>
+                {opt.label}
+              </button>
+            ))}
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "14px 0 4px",
-              fontSize: 15,
-              fontWeight: 700,
-              color: "#111827",
-            }}
-          >
-            <span>Total retenues</span>
-            <span style={{ color: "#DC2626" }}>
-              &minus;&nbsp;{fmt(result.totalDeductions)} CHF
-            </span>
-          </div>
-
-          {statut === "frontalier" && (
-            <div
-              style={{
-                backgroundColor: "rgba(217,119,6,0.07)",
-                border: "1px solid rgba(217,119,6,0.25)",
-                borderRadius: 8,
-                padding: "10px 14px",
-                marginTop: 16,
-                fontSize: 12,
-                color: "#92400E",
-                lineHeight: 1.55,
-              }}
-            >
-              <strong>Frontalier :</strong> l&rsquo;imp&ocirc;t &agrave; la
-              source est pr&eacute;lev&eacute; en Suisse. Selon votre canton,
-              une partie peut &ecirc;tre redistribute &agrave; votre pays de
-              r&eacute;sidence (accord fiscal franco-suisse pour Gen&egrave;ve).
-            </div>
-          )}
         </div>
+
+        <div style={{ marginBottom: 18 }}>
+          <label style={labelStyle}>Situation familiale</label>
+          <select
+            value={situation}
+            onChange={(e) => { setSituation(e.target.value); setShowResult(false); }}
+            style={inputStyle}
+          >
+            <option value="celibataire">C{"\u00E9"}libataire</option>
+            <option value="marie">Mari{"\u00E9"}(e) sans enfant</option>
+            <option value="marie_enfants">Mari{"\u00E9"}(e) avec enfant(s)</option>
+          </select>
+        </div>
+
+        <div style={{ marginBottom: 24 }}>
+          <label style={labelStyle}>Canton de travail</label>
+          <select
+            value={canton}
+            onChange={(e) => { setCanton(e.target.value); setShowResult(false); }}
+            style={inputStyle}
+          >
+            {CANTONS.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={calculer}
+          style={{
+            width: "100%",
+            fontSize: 16,
+            fontWeight: 600,
+            color: "#FFFFFF",
+            backgroundColor: "#D97706",
+            border: "none",
+            borderRadius: 10,
+            padding: "14px 0",
+            cursor: "pointer",
+            boxShadow: "0 4px 16px rgba(217,119,6,0.25)",
+          }}
+        >
+          Calculer le salaire
+        </button>
       </div>
 
-      {/* Note bas calculateur */}
-      <div
-        style={{
-          padding: "14px 28px",
-          borderTop: "1px solid #F1F5F9",
-          fontSize: 12,
-          color: "#94A3B8",
-          backgroundColor: "#FAFAFA",
-        }}
-      >
-        Estimation indicative &mdash; taux 2026. LPP bas&eacute; sur un taux
-        moyen ; votre caisse de pension peut varier. Consultez un conseiller
-        fiscal pour un calcul pr&eacute;cis.
-      </div>
+      {/* Résultats */}
+      {showResult && resultat && (
+        <div style={{ borderTop: "2px solid #D97706" }}>
+          {/* Net */}
+          <div style={{ backgroundColor: "#111827", padding: "22px 28px", textAlign: "center" }}>
+            <p style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+              Salaire net estim{"\u00E9"}
+            </p>
+            <p style={{ fontSize: 36, fontWeight: 700, color: "#FFFFFF", letterSpacing: "-0.5px" }}>
+              {fmt(resultat.netMensuel)}{" "}
+              <span style={{ fontSize: 18, fontWeight: 400, color: "rgba(255,255,255,0.6)" }}>CHF/mois</span>
+            </p>
+            <p style={{ fontSize: 14, color: "#D97706", marginTop: 4, fontWeight: 600 }}>
+              soit {fmt(resultat.netAnnuel)} CHF/an
+            </p>
+          </div>
+
+          {/* Détail */}
+          <div style={{ padding: "20px 28px" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
+              D{"\u00E9"}tail des retenues annuelles
+            </p>
+
+            {[
+              { label: "Salaire brut annuel", val: `${fmt(resultat.brutAnnuel)} CHF`, color: "#111827", bold: true },
+              { label: "AVS / AI / APG (5,3 %)", val: `\u2212 ${fmt(resultat.avs)} CHF`, color: "#DC2626", bold: false },
+              { label: "Assurance ch\u00F4mage (1,1 %)", val: `\u2212 ${fmt(resultat.ac)} CHF`, color: "#DC2626", bold: false },
+              { label: `LPP \u2014 2e pilier`, val: `\u2212 ${fmt(resultat.lpp)} CHF`, color: "#DC2626", bold: false },
+              ...(resultat.impositionSuisse ? [{
+                label: `Imp\u00F4t \u00E0 la source (${(resultat.tauxImpot * 100).toFixed(1)} %)`,
+                val: `\u2212 ${fmt(resultat.impot)} CHF`,
+                color: "#DC2626",
+                bold: false,
+              }] : []),
+            ].map((row) => (
+              <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "9px 0", borderBottom: "1px solid #F1F5F9", fontSize: 14 }}>
+                <span style={{ color: "#475569" }}>{row.label}</span>
+                <span style={{ fontWeight: row.bold ? 700 : 600, color: row.color }}>{row.val}</span>
+              </div>
+            ))}
+
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "12px 0 4px", fontSize: 15, fontWeight: 700 }}>
+              <span style={{ color: "#111827" }}>Salaire net annuel</span>
+              <span style={{ color: "#D97706" }}>{fmt(resultat.netAnnuel)} CHF</span>
+            </div>
+
+            {!resultat.impositionSuisse && (
+              <div style={{ backgroundColor: "rgba(217,119,6,0.07)", border: "1px solid rgba(217,119,6,0.25)", borderRadius: 8, padding: "10px 14px", marginTop: 14, fontSize: 12, color: "#92400E", lineHeight: 1.55 }}>
+                <strong>Frontalier ({canton}) :</strong> l{"\u2019"}imp{"\u00F4"}t est d{"\u00FB"} en France (accord fiscal 1983). Le net affich{"\u00E9"} est avant imp{"\u00F4"}t fran{"\u00E7"}ais.
+              </div>
+            )}
+
+            {resultat.impositionSuisse && statut === "frontalier" && (
+              <div style={{ backgroundColor: "rgba(217,119,6,0.07)", border: "1px solid rgba(217,119,6,0.25)", borderRadius: 8, padding: "10px 14px", marginTop: 14, fontSize: 12, color: "#92400E", lineHeight: 1.55 }}>
+                <strong>Frontalier Gen{"\u00E8"}ve :</strong> l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source est pr{"\u00E9"}lev{"\u00E9"} directement en Suisse.
+              </div>
+            )}
+          </div>
+
+          <div style={{ padding: "10px 28px 16px", fontSize: 11, color: "#94A3B8" }}>
+            Estimation indicative {"\u2014"} taux 2026. Consultez un conseiller fiscal pour un calcul pr{"\u00E9"}cis.
+          </div>
+        </div>
+      )}
     </div>
   );
 }
