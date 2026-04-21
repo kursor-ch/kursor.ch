@@ -37,9 +37,9 @@ const STATS = [
 ];
 
 const ARTICLES = [
-  { icon: "\u{1F3DB}", tag: "VISA & ADMIN", title: "Titre de sejour : les 7 erreurs qui retardent votre dossier", desc: "Un dossier incomplet peut vous couter 3 a 6 mois. Voici ce que 80% oublient.", author: "Sarah M.", date: "12 mars 2026", readTime: "5 min" },
-  { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Trouver un appart a Paris sans garant francais : guide 2026", desc: "Visale, garant en ligne, colocation... toutes les solutions pour securiser un logement.", author: "Karim D.", date: "5 mars 2026", readTime: "8 min" },
-  { icon: "\u{1F4B0}", tag: "FISCALITE", title: "Imposition des non-residents : ce qu'il faut savoir avant d'arriver", desc: "Convention fiscale, revenus etrangers, declaration annuelle \u2014 comprendre son statut.", author: "Lucie R.", date: "28 fev. 2026", readTime: "6 min" },
+  { icon: "\u{1F3DB}", tag: "PERMIS", title: "Permis de s\u00E9jour en Suisse : les 7 erreurs qui retardent votre dossier", desc: "Un dossier incomplet peut vous co\u00FBter 3 \u00E0 6 mois. Voici ce que 80% oublient.", author: "Sarah M.", date: "12 mars 2026", readTime: "5 min" },
+  { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Trouver un appartement en Suisse : guide 2026", desc: "Attestation de non-poursuite, dossier locatif, r\u00E9gies... toutes les cl\u00E9s pour d\u00E9crocher un logement.", author: "Karim D.", date: "5 mars 2026", readTime: "8 min" },
+  { icon: "\u{1F4B0}", tag: "FISCALIT\u00C9", title: "3\u00E8me pilier suisse : ce que la loi 2026 change pour vous", desc: "Rattrapage r\u00E9troactif, plafonds, \u00E9conomie fiscale \u2014 tout comprendre en 6 minutes.", author: "Lucie R.", date: "28 f\u00E9v. 2026", readTime: "6 min" },
 ];
 
 /* ───────── PAGE ───────── */
@@ -66,7 +66,7 @@ export default function HomePage() {
           <div className="text-center lg:text-left">
             <span className="inline-flex items-center gap-2 font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>
               <span className="inline-block rounded-full" style={{ width: 7, height: 7, backgroundColor: "#15803D" }} />
-              Specialiste expatriation en France
+              Specialiste expatriation en Suisse
             </span>
 
             <h1 className="font-heading" style={{ fontSize: 52, fontWeight: 600, color: "#111827", lineHeight: 1.08, marginTop: 24 }}>
@@ -156,11 +156,11 @@ export default function HomePage() {
         <div ref={problem.ref} className={`relative mx-auto scroll-reveal ${problem.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Le probleme</span>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
-            {"S\u2019expatrier en France,"}<br />
+            {"S\u2019installer en Suisse,"}<br />
             <span className="font-heading italic" style={{ color: "#D97706" }}>{"c\u2019est un parcours du combattant."}</span>
           </h2>
           <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16, maxWidth: 560 }}>
-            {"Sans les bonnes informations, chaque erreur administrative peut vous couter des semaines et des milliers d\u2019euros."}
+            {"Sans les bonnes informations, chaque erreur administrative peut vous co\u00FBter des semaines et des milliers de francs."}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5" style={{ marginTop: 40 }}>
             {[
