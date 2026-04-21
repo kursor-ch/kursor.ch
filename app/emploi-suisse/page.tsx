@@ -270,12 +270,17 @@ export default function EmploiSuissePage() {
 
             {/* Section 7 — FAQ */}
             <h2 id="faq" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>FAQ</h2>
-            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
+            <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
               {FAQ.map((item) => (
-                <div key={item.q} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "20px 24px" }}>
-                  <h3 className="font-heading" style={{ fontSize: 17, fontWeight: 600, color: "#111827", marginBottom: 8 }}>{item.q}</h3>
-                  <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: item.a }} />
-                </div>
+                <details key={item.q} className="rounded-xl bg-white group" style={{ border: "1px solid #E2E8F0" }}>
+                  <summary className="font-heading cursor-pointer list-none flex items-center justify-between" style={{ fontSize: 17, fontWeight: 600, color: "#111827", padding: "18px 24px" }}>
+                    {item.q}
+                    <span className="font-body shrink-0 transition-transform duration-200 group-open:rotate-45" style={{ fontSize: 22, color: "#D97706", marginLeft: 12 }}>+</span>
+                  </summary>
+                  <div style={{ padding: "0 24px 20px" }}>
+                    <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: item.a }} />
+                  </div>
+                </details>
               ))}
             </div>
 
