@@ -2,91 +2,81 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Trouver un emploi en Suisse en 2026 : conseils et astuces",
-  description: "Guide complet pour trouver un travail en Suisse : CV suisse, portails d\u2019emploi, salaires, permis de travail, secteurs qui recrutent et erreurs \u00E0 \u00E9viter.",
+  title: "Trouver un travail en Suisse : guide 2026 et m\u00E9tiers",
+  description: "Guide complet pour trouver un emploi en Suisse en 2026 : m\u00E9tiers qui recrutent, permis de travail, CV suisse, canaux de recherche, salaires et FAQ.",
 };
 
 /* ───────── DATA ───────── */
 
 const TOC = [
-  { id: "marche-travail", label: "Le march\u00E9 du travail suisse" },
-  { id: "cv-suisse", label: "R\u00E9diger un CV suisse" },
-  { id: "lettre-motivation", label: "La lettre de motivation" },
-  { id: "portails-emploi", label: "Portails d\u2019emploi incontournables" },
-  { id: "salaires", label: "Salaires et conditions" },
-  { id: "permis-travail", label: "Permis de travail n\u00E9cessaires" },
-  { id: "secteurs", label: "Secteurs qui recrutent" },
-  { id: "erreurs", label: "Erreurs \u00E0 \u00E9viter" },
+  { id: "marche-emploi", label: "Le march\u00E9 de l\u2019emploi en 2026" },
+  { id: "metiers-recrutent", label: "Les m\u00E9tiers qui recrutent" },
+  { id: "conditions", label: "Conditions pour travailler" },
+  { id: "canaux", label: "Trouver un emploi : les bons canaux" },
+  { id: "candidature", label: "Adapter sa candidature" },
+  { id: "sans-diplome", label: "Travailler sans dipl\u00F4me" },
+  { id: "faq", label: "FAQ" },
 ];
 
 const SECTEURS = [
   {
-    name: "Finance & Banque",
-    subtitle: "Zurich, Gen\u00E8ve",
-    desc: "La Suisse abrite les plus grands groupes bancaires mondiaux : <strong>UBS, Credit Suisse (devenu UBS), Julius B\u00E4r</strong>. Les profils en gestion de patrimoine, compliance, fintech et analyse financi\u00E8re sont tr\u00E8s recherch\u00E9s. Niveau de salaire parmi les plus \u00E9lev\u00E9s du pays.",
+    num: "1",
+    name: "Sant\u00E9 et soin \u00E0 la personne",
+    desc: "C\u2019est le secteur num\u00E9ro un de la p\u00E9nurie. Les <strong>infirmiers et infirmi\u00E8res</strong> arrivent en t\u00EAte des professions les plus recherch\u00E9es, suivis des m\u00E9decins, aides-soignants, physioth\u00E9rapeutes et personnels sp\u00E9cialis\u00E9s des blocs op\u00E9ratoires. Le vieillissement d\u00E9mographique et la saturation des EMS tirent la demande vers le haut dans toute la Conf\u00E9d\u00E9ration. Attention, ces m\u00E9tiers sont r\u00E9glement\u00E9s : une <strong>reconnaissance de dipl\u00F4me via la Croix-Rouge suisse (CRS) ou la MEBEKO</strong> est obligatoire.",
   },
   {
-    name: "Pharma & Biotech",
-    subtitle: "B\u00E2le, Zurich",
-    desc: "Avec <strong>Novartis, Roche, Lonza et Ferring</strong>, la r\u00E9gion b\u00E2loise est le centre mondial de l\u2019industrie pharmaceutique. Chimistes, biologistes, ing\u00E9nieurs proc\u00E9d\u00E9s et chefs de projet r\u00E9glementaire sont en forte demande.",
+    num: "2",
+    name: "Construction, b\u00E2timent et m\u00E9tiers techniques",
+    desc: "Juste derri\u00E8re la sant\u00E9, on trouve des profils manuels tr\u00E8s demand\u00E9s : <strong>\u00E9lectriciens et menuisiers</strong> occupent les deuxi\u00E8me et troisi\u00E8me places des m\u00E9tiers les plus recherch\u00E9s. Charpentiers, plombiers, conducteurs de travaux et chefs de chantier compl\u00E8tent le tableau. La r\u00E9novation \u00E9nerg\u00E9tique, port\u00E9e par la Strat\u00E9gie \u00E9nerg\u00E9tique 2050, alimente durablement ces besoins.",
   },
   {
-    name: "Technologie & IT",
-    subtitle: "Zurich, Lausanne, Zoug",
-    desc: "La \u00AB<strong>Silicon Valley suisse</strong>\u00BB attire startups et g\u00E9ants : Google Zurich, IBM, Oracle. Les d\u00E9veloppeurs, ingr\u00E9nieurs data, experts cloud et sp\u00E9cialistes cybos\u00E9curit\u00E9 sont tr\u00E8s demand\u00E9s. L\u2019EPFL et l\u2019EPFZ alimentent un \u00E9cosyst\u00E8me d\u2019innovation dense.",
+    num: "3",
+    name: "Informatique, IA et cybers\u00E9curit\u00E9",
+    desc: "La digitalisation acc\u00E9l\u00E9r\u00E9e du tissu bancaire et industriel suisse a transform\u00E9 les profils tech en or. <strong>Ing\u00E9nieurs cloud, data scientists, experts en cybers\u00E9curit\u00E9, d\u00E9veloppeurs full-stack</strong> et sp\u00E9cialistes de l\u2019intelligence artificielle trouvent facilement preneur, notamment dans l\u2019arc l\u00E9manique et dans le grand Zurich.",
   },
   {
-    name: "Sant\u00E9 & M\u00E9decine",
-    subtitle: "Toute la Suisse",
-    desc: "M\u00E9decins, infirmiers, pharmaciens et sp\u00E9cialistes en soins sont recherch\u00E9s dans toutes les r\u00E9gions. La reconnaissance des dipl\u00F4mes europ\u00E9ens facilite l\u2019int\u00E9gration des professionnels de sant\u00E9 UE/AELE. Les <strong>h\u00F4pitaux universitaires</strong> de B\u00E2le, Berne, Gen\u00E8ve et Zurich recrutent en continu.",
+    num: "4",
+    name: "Ing\u00E9nierie et industrie de pr\u00E9cision",
+    desc: "Horlogerie, pharma, biotech, m\u00E9canique de pr\u00E9cision, chimie : la Suisse reste une <strong>puissance industrielle</strong> qui absorbe chaque ann\u00E9e des milliers d\u2019ing\u00E9nieurs \u2014 g\u00E9nie civil, m\u00E9canique, \u00E9lectrique, qualit\u00E9, proc\u00E9d\u00E9s.",
   },
   {
-    name: "H\u00F4tellerie & Tourisme",
-    subtitle: "Valais, Grisons, Gen\u00E8ve",
-    desc: "Le secteur touristique recrute chefs cuisiniers, directeurs d\u2019h\u00F4tel et professionnels du service. Les \u00E9coles h\u00F4teli\u00E8res de r\u00E9putation mondiale (EHL, Les Roches) forment des talents qui restent souvent en Suisse.",
+    num: "5",
+    name: "H\u00F4tellerie-restauration et tourisme",
+    desc: "Cuisiniers, serveurs, chefs de partie, r\u00E9ceptionnistes, gouvernantes : le secteur souffre d\u2019un turnover \u00E9lev\u00E9 et reste structurellement d\u00E9ficitaire. L\u2019avantage pour les candidats : beaucoup de postes restent <strong>accessibles sans dipl\u00F4me suisse</strong>, avec une r\u00E9mun\u00E9ration souvent meilleure qu\u2019en France.",
+  },
+  {
+    num: "6",
+    name: "Finance, compliance et banque priv\u00E9e",
+    desc: "Gen\u00E8ve et Zurich concentrent l\u2019essentiel des opportunit\u00E9s. Les profils recherch\u00E9s \u00E9voluent : moins de traders, plus de <strong>sp\u00E9cialistes de la conformit\u00E9 r\u00E9glementaire</strong>, de la gestion des risques et de l\u2019investissement durable (ESG, capital-investissement).",
   },
 ];
 
-const PORTAILS = [
-  { name: "jobs.ch", desc: "Le leader du march\u00E9 suisse avec plus de <strong>100\u2019000 offres</strong> actives. Interface en fran\u00E7ais, allemand et anglais. Cr\u00E9ez une alerte email pour \u00EAtre notifi\u00E9 en temps r\u00E9el." },
-  { name: "jobup.ch", desc: "Sp\u00E9cialis\u00E9 sur la <strong>Romandie</strong> (Suisse francophone). Id\u00E9al pour Genf-ve, Vaud, Valais et Fribourg. Bonne couverture des postes PME et grands comptes." },
-  { name: "LinkedIn", desc: "Indispensable pour le <strong>networking et les candidatures spontan\u00E9es</strong>. Beaucoup de recruteurs suisses utilisent LinkedIn pour sourcer des profils. Assurez-vous que votre profil est complet et en anglais." },
-  { name: "Indeed.ch", desc: "Agr\u00E9gateur d\u2019offres couvrant <strong>toutes les r\u00E9gions linguistiques</strong>. Pratique pour une recherche exhaustive, notamment pour les postes moins visibles sur les portails nationaux." },
-  { name: "Seco / ch.ch", desc: "Le <strong>service public de l\u2019emploi</strong>. Les ORP (offices r\u00E9gionaux de placement) proposent des offres non publi\u00E9es ailleurs et un accompagnement personnalis\u00E9, notamment pour les demandeurs d\u2019emploi." },
-  { name: "Glassdoor.ch", desc: "Utile pour consulter les <strong>avis d\u2019employ\u00E9s et les fourchettes de salaires</strong> avant un entretien. Compl\u00E9mentaire des portails d\u2019offres classiques." },
+const PERMIS = [
+  { name: "Permis L", desc: "Autorisation de courte dur\u00E9e, jusqu\u2019\u00E0 12 mois" },
+  { name: "Permis B", desc: "Autorisation de s\u00E9jour pour un contrat de plus d\u2019un an" },
+  { name: "Permis G", desc: "Statut de frontalier, pour ceux qui r\u00E9sident en France et travaillent en Suisse" },
+  { name: "Permis C", desc: "Autorisation d\u2019\u00E9tablissement, apr\u00E8s 5 ou 10 ans selon la nationalit\u00E9" },
 ];
 
-const CV_ETAPES = [
-  { num: "1", title: "Format et longueur", desc: "1 page pour moins de 10 ans d\u2019exp\u00E9rience, 2 pages maximum au-del\u00E0. La Suisse appr\u00E9cie les CV concis, structur\u00E9s et visuellement soign\u00E9s. \u00C9vitez les fonds color\u00E9s trop agressifs." },
-  { num: "2", title: "Photo obligatoire", desc: "Contrairement \u00E0 la France ou au Canada, la <strong>photo est attendue</strong> sur un CV suisse. Elle doit \u00EAtre professionnelle, sourire naturel, fond neutre ou blanc." },
-  { num: "3", title: "Langues avec niveaux CECR", desc: "Indiquez vos langues avec les niveaux officiels (A1 \u00E0 C2). Le multilinguisme est un atout majeur en Suisse. Fran\u00E7ais + allemand + anglais = profil tr\u00E8s recherch\u00E9." },
-  { num: "4", title: "Chronologie invers\u00E9e", desc: "Les exp\u00E9riences les plus r\u00E9centes en premier. Incluez : nom de l\u2019employeur, canton/ville, dates, intitul\u00E9 de poste et 3\u20135 r\u00E9alisations chiffr\u00E9es." },
-  { num: "5", title: "R\u00E9f\u00E9rences disponibles", desc: "Mentionnez \u00AB R\u00E9f\u00E9rences disponibles sur demande \u00BB. Les recruteurs suisses en demandent syst\u00E9matiquement. Pr\u00E9venez vos anciens employeurs." },
+const PLATEFORMES = [
+  { name: "Jobup.ch", desc: "Leader en Suisse romande" },
+  { name: "Jobs.ch", desc: "R\u00E9f\u00E9rence en Suisse al\u00E9manique" },
+  { name: "Indeed.ch et Monster.ch", desc: "G\u00E9n\u00E9ralistes" },
+  { name: "Jobscout24", desc: "Surtout en Suisse allemande" },
 ];
 
-const SALAIRES = [
-  { poste: "D\u00E9veloppeur logiciel", salaire: "95\u2013130\u2019000 CHF/an", region: "Zurich, Zoug" },
-  { poste: "Ing\u00E9nieur pharma", salaire: "90\u2013120\u2019000 CHF/an", region: "B\u00E2le" },
-  { poste: "Analyste financier", salaire: "100\u2013145\u2019000 CHF/an", region: "Gen\u00E8ve, Zurich" },
-  { poste: "Infirmier(e)", salaire: "70\u201390\u2019000 CHF/an", region: "Toute la Suisse" },
-  { poste: "Chef de projet IT", salaire: "110\u2013140\u2019000 CHF/an", region: "Zurich, Berne" },
-  { poste: "Comptable", salaire: "75\u2013100\u2019000 CHF/an", region: "Toute la Suisse" },
-  { poste: "H\u00F4tellerie (manager)", salaire: "65\u201390\u2019000 CHF/an", region: "Valais, Gen\u00E8ve" },
+const CV_POINTS = [
+  { label: "Longueur", desc: "2 \u00E0 3 pages sont accept\u00E9es, voire attendues" },
+  { label: "Photo", desc: "Quasi syst\u00E9matique et professionnelle" },
+  { label: "D\u00E9tail", desc: "Dates pr\u00E9cises (jour/mois/ann\u00E9e), r\u00E9f\u00E9rences nomm\u00E9es, certificats de travail joints" },
+  { label: "Ton", desc: "Factuel, sans fioritures, orient\u00E9 r\u00E9sultats concrets" },
 ];
 
-const PERMIS_TRAVAIL = [
-  { name: "Ressortissant UE/AELE", desc: "Libre circulation des personnes. Un simple <strong>contrat de travail suffit</strong> pour obtenir un permis B ou L. Annonce \u00E0 la commune dans les 14 jours." },
-  { name: "Ressortissant hors UE/AELE", desc: "Soumis aux <strong>contingents f\u00E9d\u00E9raux</strong>. L\u2019employeur doit prouver qu\u2019aucun candidat suisse ou europ\u00E9en n\u2019est disponible (priorit\u00E9 nationale)." },
-  { name: "Frontalier (permis G)", desc: "Pour les personnes r\u00E9sidant dans un pays limitrophe (France, Allemagne, Italie, Autriche) et travaillant en Suisse. Retour au domicile au moins <strong>une fois par semaine</strong>." },
-  { name: "Travailleur ind\u00E9pendant", desc: "Activit\u00E9 en nom propre ou raison individuelle possible avec un permis B ou C. Pour les ressortissants tiers : <strong>business plan solide</strong> et preuves de viabilit\u00E9 financi\u00E8re requis." },
-];
-
-const ERREURS = [
-  { title: "Envoyer un CV fran\u00E7ais non adapt\u00E9", desc: "Un CV fran\u00E7ais classique (sans photo, trop long, sans niveau de langue CECR) sera souvent \u00E9limin\u00E9 en pr\u00E9-s\u00E9lection. Adaptez-le aux codes suisses." },
-  { title: "N\u00E9gliger le r\u00E9seau", desc: "En Suisse, une grande partie des postes se pourvoit de mani\u00E8re informelle. LinkedIn, \u00E9v\u00E9nements sectoriels et recommandations sont essentiels." },
-  { title: "Ignorer les diff\u00E9rences r\u00E9gionales", desc: "La Suisse a quatre r\u00E9gions linguistiques. Un poste \u00E0 Zurich peut exiger l\u2019allemand ; Gen\u00E8ve le fran\u00E7ais. Cibler sa r\u00E9gion \u00E9vite des d\u00E9ceptions." },
-  { title: "Sous-estimer le co\u00FBt de la vie", desc: "Les salaires suisses sont \u00E9lev\u00E9s, mais les loyers, assurance maladie et imp\u00F4ts aussi. Calculez votre pouvoir d\u2019achat r\u00E9el avant d\u2019accepter une offre." },
-  { title: "Oublier la lettre de motivation", desc: "En Suisse, une lettre de motivation personnalis\u00E9e est quasi-obligatoire. Une lettre g\u00E9n\u00E9rique est per\u00E7ue comme un manque d\u2019int\u00E9r\u00EAt pour le poste." },
+const FAQ = [
+  { q: "Quel salaire esp\u00E9rer pour un travail en Suisse ?", a: "Le salaire m\u00E9dian brut en Suisse se situe autour de <strong>6 800 CHF par mois</strong> (environ 7 200 \u20AC). Les fourchettes varient fortement selon le canton, le secteur et l\u2019exp\u00E9rience." },
+  { q: "Combien de temps pour trouver un emploi en Suisse depuis la France ?", a: "Comptez en moyenne <strong>3 \u00E0 6 mois</strong> pour un poste qualifi\u00E9. Les m\u00E9tiers en p\u00E9nurie (sant\u00E9, \u00E9lectricit\u00E9, IT) peuvent se conclure en quelques semaines." },
+  { q: "Faut-il vivre en Suisse pour postuler ?", a: "Non. De nombreux employeurs recrutent des candidats r\u00E9sidant en France, notamment les frontaliers. Les entretiens se font souvent en visio dans un premier temps." },
+  { q: "Les dipl\u00F4mes fran\u00E7ais sont-ils reconnus en Suisse ?", a: "Pour les m\u00E9tiers non r\u00E9glement\u00E9s, oui. Pour les professions r\u00E9glement\u00E9es (sant\u00E9, enseignement, droit), une <strong>reconnaissance formelle</strong> est obligatoire via les autorit\u00E9s comp\u00E9tentes (CRS, MEBEKO, SEFRI)." },
 ];
 
 const SIMILAR_ARTICLES = [
@@ -101,7 +91,7 @@ const RELATED_ARTICLES = [
   { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Colocation en Suisse : droits, contrats et bons plans", author: "Julie M.", date: "12 mars 2026", readTime: "7 min" },
 ];
 
-const TAGS = ["Emploi Suisse", "CV suisse", "Salaires", "Permis de travail", "March\u00E9 du travail", "Expatri\u00E9"];
+const TAGS = ["Emploi Suisse", "CV suisse", "Salaires", "Permis de travail", "March\u00E9 du travail", "M\u00E9tiers qui recrutent"];
 
 /* ───────── PAGE ───────── */
 
@@ -114,13 +104,13 @@ export default function EmploiSuissePage() {
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>TRAVAILLER</span>
           <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
             Trouver un travail en Suisse :<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>le guide complet pour d{"\u00E9"}crocher votre poste</span>
+            <span className="font-heading italic" style={{ color: "#D97706" }}>guide 2026 et m{"\u00E9"}tiers qui recrutent</span>
           </h1>
           <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
             <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
             <div>
               <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{"\u00C9"}quipe Kursor</p>
-              <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\u00B7"} 13 min de lecture</p>
+              <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\u00B7"} 15 min de lecture</p>
             </div>
           </div>
         </div>
@@ -154,206 +144,137 @@ export default function EmploiSuissePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Trouver un travail en Suisse est l{"\u2019"}objectif de milliers d{"\u2019"}expatri{"\u00E9"}s chaque ann{"\u00E9"}e. Salaires parmi les plus {"\u00E9"}lev{"\u00E9"}s d{"\u2019"}Europe, march{"\u00E9"} du travail dynamique, cadre de vie exceptionnel : les raisons ne manquent pas. Mais le march{"\u00E9"} de l{"\u2019"}emploi suisse a ses propres codes &mdash; <strong style={{ color: "#111827" }}>CV diff{"\u00E9"}rent</strong>, importance du r{"\u00E9"}seau, ma{"\u00EE"}trise des langues, permis de travail &mdash; que ce guide vous aide {"\u00E0"} ma{"\u00EE"}triser.
+              Avec un taux de ch{"\u00F4"}mage national de <strong style={{ color: "#111827" }}>3,1 % en mars 2026</strong> et plus de 225 000 offres d{"\u2019"}emploi recens{"\u00E9"}es {"\u00E0"} travers la Conf{"\u00E9"}d{"\u00E9"}ration, la Suisse reste l{"\u2019"}une des destinations professionnelles les plus attractives d{"\u2019"}Europe. Salaires {"\u00E9"}lev{"\u00E9"}s, qualit{"\u00E9"} de vie, stabilit{"\u00E9"} {"\u00E9"}conomique : les raisons de tenter l{"\u2019"}exp{"\u00E9"}rience ne manquent pas. Mais trouver un travail en Suisse demande m{"\u00E9"}thode et pr{"\u00E9"}paration, surtout dans un march{"\u00E9"} o{"\u00F9"} les r{"\u00E8"}gles diff{"\u00E8"}rent sensiblement de celles de la France. Ce guide vous donne les cl{"\u00E9"}s pour identifier les m{"\u00E9"}tiers qui recrutent en Suisse, cibler les bons canaux et construire une candidature efficace.
+            </p>
+
+            {/* Section 1 — Marché de l'emploi */}
+            <h2 id="marche-emploi" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>{"L\u2019\u00E9tat du march\u00E9 de l\u2019emploi suisse en 2026"}</h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Le march{"\u00E9"} du travail helv{"\u00E9"}tique traverse une phase de r{"\u00E9"}{"\u00E9"}quilibrage. Apr{"\u00E8"}s des ann{"\u00E9"}es de plein emploi, le ch{"\u00F4"}mage est remont{"\u00E9"} {"\u00E0"} <strong style={{ color: "#111827" }}>3,1 % en mars 2026</strong>, soit 146 255 personnes inscrites aux offices r{"\u00E9"}gionaux de placement. Une hausse mod{"\u00E9"}r{"\u00E9"}e qui refl{"\u00E8"}te un ralentissement {"\u00E9"}conomique, mais qui reste parmi les taux les plus bas d{"\u2019"}Europe.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Les {"\u00E9"}carts entre cantons sont importants : <strong style={{ color: "#111827" }}>Appenzell Rhodes-Int{"\u00E9"}rieures</strong> affiche le taux le plus bas avec 0,9 %, tandis que le <strong style={{ color: "#111827" }}>Jura</strong> atteint 5,5 %. La Suisse romande reste plus touch{"\u00E9"}e que la Suisse al{"\u00E9"}manique, avec Vaud {"\u00E0"} 4,9 % et Gen{"\u00E8"}ve traditionnellement au-dessus de 4 %.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+              Point important pour les candidats {"\u00E9"}trangers : la <strong style={{ color: "#111827" }}>p{"\u00E9"}nurie de main-d{"\u2019"}{"\u0153"}uvre qualifi{"\u00E9"}e</strong> persiste dans quatre grandes cat{"\u00E9"}gories {"\u2014"} professions de sant{"\u00E9"}, encadrement dans la construction, techniciens sp{"\u00E9"}cialis{"\u00E9"}s et m{"\u00E9"}tiers de l{"\u2019"}{"\u00E9"}lectronique. Dans ces secteurs, les employeurs peinent {"\u00E0"} recruter et ouvrent grand leurs portes aux profils internationaux.
             </p>
 
             {/* À retenir 1 */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0"} retenir</p>
-              <ul className="list-none p-0 m-0">
-                {[
-                  "La Suisse affiche un taux de ch\u00F4mage inf\u00E9rieur \u00E0 <strong>3 %</strong>, l\u2019un des plus bas au monde.",
-                  "Le salaire m\u00E9dian suisse est d\u2019environ <strong>6\u2019500 CHF brut par mois</strong> (salaire annuel ~78\u2019000 CHF).",
-                  "Le multilinguisme est un avantage concurrentiel majeur : fran\u00E7ais, allemand et anglais ouvrent le plus de portes.",
-                  "Les ressortissants <strong>UE/AELE</strong> b\u00E9n\u00E9ficient de la libre circulation et peuvent travailler librement.",
-                  "Le march\u00E9 de l\u2019emploi suisse valorise les profils <strong>qualifi\u00E9s, stables et bien int\u00E9gr\u00E9s</strong> culturellement.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\u2022"}</span>
-                    <span dangerouslySetInnerHTML={{ __html: item }} />
-                  </li>
-                ))}
-              </ul>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0 retenir"}</p>
+              <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
+                En 2026, la Suisse compte environ <strong style={{ color: "#111827" }}>146 000 ch{"\u00F4"}meurs mais plus de 225 000 postes {"\u00E0"} pourvoir</strong>. Cette asym{"\u00E9"}trie profite directement aux candidats qualifi{"\u00E9"}s dans les secteurs en tension : sant{"\u00E9"}, construction, ing{"\u00E9"}nierie et {"\u00E9"}lectronique.
+              </p>
             </div>
 
-            {/* Section 1 — Marché du travail */}
-            <h2 id="marche-travail" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Le march{"\u00E9"} du travail suisse</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La Suisse est une {"\u00E9"}conomie de plein emploi. Avec un taux de ch{"\u00F4"}mage structurellement bas, les entreprises peinent souvent {"\u00E0"} trouver les comp{"\u00E9"}tences dont elles ont besoin &mdash; ce qui joue en votre faveur en tant que candidat qualifi{"\u00E9"}.
-            </p>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>Trois {"\u00E9"}l{"\u00E9"}ments structurent le march{"\u00E9"} suisse :</p>
-            <ul className="list-none p-0 m-0" style={{ marginBottom: 16 }}>
-              {[
-                "<strong>La d\u00E9centralisation cantonale</strong> : chaque canton a ses propres dynamiques \u00E9conomiques. Zurich domine la finance et l\u2019IT, B\u00E2le la pharma, Gen\u00E8ve les organisations internationales.",
-                "<strong>Le plurilinguisme</strong> : la Suisse compte quatre langues nationales (allemand 63 %, fran\u00E7ais 23 %, italien 8 %, romanche). L\u2019anglais s\u2019impose dans les multinationales.",
-                "<strong>Le mod\u00E8le de formation duale</strong> : l\u2019apprentissage est valoris\u00E9 autant que l\u2019universit\u00E9. Les dipl\u00F4mes professionnels suisses (CFC, brevet f\u00E9d\u00E9ral) ouvrent des portes.",
-              ].map((item) => (
-                <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 6 }}>
-                  <span style={{ color: "#D97706" }}>{"\u2022"}</span>
-                  <span dangerouslySetInnerHTML={{ __html: item }} />
-                </li>
-              ))}
-            </ul>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              La <strong style={{ color: "#111827" }}>culture d{"\u2019"}entreprise suisse</strong> valorise la ponctualit{"\u00E9"}, la pr{"\u00E9"}cision, la discr{"\u00E9"}tion et l{"\u2019"}autonomie. Lors des entretiens, mettez en avant votre capacit{"\u00E9"} {"\u00E0"} travailler de fa{"\u00E7"}on ind{"\u00E9"}pendante et vos r{"\u00E9"}alisations mesurables.
-            </p>
-
-            {/* Section 2 — CV suisse */}
-            <h2 id="cv-suisse" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>R{"\u00E9"}diger un CV suisse qui convainc</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>Le CV suisse ob{"\u00E9"}it {"\u00E0"} des conventions pr{"\u00E9"}cises, diff{"\u00E9"}rentes du CV fran{"\u00E7"}ais ou belge. Voici les cinq points essentiels :</p>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 16 }}>
-              {CV_ETAPES.map((step) => (
-                <div key={step.num} className="flex items-start gap-4 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{step.num}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{step.title}</p>
-                    <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginTop: 2 }} dangerouslySetInnerHTML={{ __html: step.desc }} />
+            {/* Section 2 — Métiers qui recrutent */}
+            <h2 id="metiers-recrutent" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les m{"\u00E9"}tiers qui recrutent en Suisse : le top des secteurs porteurs</h2>
+            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
+              {SECTEURS.map((s) => (
+                <div key={s.name} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "24px" }}>
+                  <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
+                    <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{s.num}</span>
+                    <span className="font-heading" style={{ fontSize: 18, fontWeight: 700, color: "#111827" }}>{s.name}</span>
                   </div>
-                </div>
-              ))}
-            </div>
-            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 32 }}>Conseil pratique : utilisez un mod{"\u00E8"}le <strong style={{ color: "#111827" }}>Europass adapt{"\u00E9"}</strong> ou les mod{"\u00E8"}les propos{"\u00E9"}s par jobs.ch pour vous aligner sur les attentes locales.</p>
-
-            {/* Section 3 — Lettre de motivation */}
-            <h2 id="lettre-motivation" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>La lettre de motivation : un exercice incontournable</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              En Suisse, la lettre de motivation n{"\u2019"}est pas une formalit{"\u00E9"} : elle est lue attentivement et d{"\u00E9"}partage souvent des candidats de niveau {"\u00E9"}gal. Elle doit {"\u00EA"}tre <strong style={{ color: "#111827" }}>courte (une page max)</strong>, personnalis{"\u00E9"}e pour chaque offre et r{"\u00E9"}dig{"\u00E9"}e dans la langue de l{"\u2019"}annonce.
-            </p>
-            <div className="flex flex-col gap-2" style={{ marginBottom: 16 }}>
-              {[
-                "<strong>En-t\u00EAte</strong> : vos coordonn\u00E9es, date, nom et adresse compl\u00E8te du recruteur.",
-                "<strong>Introduction</strong> : r\u00E9f\u00E9rence au poste, source de l\u2019annonce et phrase d\u2019accroche qui donne envie de lire la suite.",
-                "<strong>Corps</strong> : pourquoi vous, pourquoi cette entreprise, quelle valeur vous apportez. Utilisez des exemples concrets et des chiffres.",
-                "<strong>Conclusion</strong> : manifestez votre envie d\u2019un entretien, remerciez et signez de votre main (si envoi postal).",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "12px 18px" }}>
-                  <span style={{ color: "#D97706", fontWeight: 600, flexShrink: 0 }}>{"\u2713"}</span>
-                  <span style={{ fontSize: 14, color: "#475569" }} dangerouslySetInnerHTML={{ __html: item }} />
+                  <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: s.desc }} />
                 </div>
               ))}
             </div>
 
             {/* À retenir 2 */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0"} retenir</p>
-              <ul className="list-none p-0 m-0">
-                {[
-                  "En Suisse all\u00E9manique, les lettres de motivation peuvent \u00EAtre <strong>\u00E9crites \u00E0 la main</strong> pour certains postes traditionnels.",
-                  "Mentionnez toujours le <strong>num\u00E9ro de r\u00E9f\u00E9rence de l\u2019offre</strong> : les grandes entreprises traitent des centaines de candidatures.",
-                  "Le ton doit \u00EAtre <strong>professionnel mais pas froid</strong> : les Suisses appr\u00E9cient la sinc\u00E9rit\u00E9 et l\u2019authenticit\u00E9.",
-                  "R\u00E9digez dans la <strong>langue officielle du canton</strong> du si\u00E8ge social, sauf indication contraire dans l\u2019annonce.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\u2022"}</span>
-                    <span dangerouslySetInnerHTML={{ __html: item }} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Section 4 — Portails d'emploi */}
-            <h2 id="portails-emploi" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les portails d{"\u2019"}emploi incontournables</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>La Suisse dispose d{"\u2019"}un {"\u00E9"}cosyst{"\u00E8"}me de plateformes d{"\u2019"}offres d{"\u2019"}emploi solide. Voici les six sites {"\u00E0"} conna{"\u00EE"}tre absolument :</p>
-            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
-              {PORTAILS.map((p) => (
-                <div key={p.name} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "20px 24px" }}>
-                  <div className="flex items-center gap-3" style={{ marginBottom: 8 }}>
-                    <span className="font-heading" style={{ fontSize: 16, fontWeight: 700, color: "#D97706" }}>{p.name}</span>
-                  </div>
-                  <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: p.desc }} />
-                </div>
-              ))}
-            </div>
-
-            {/* Section 5 — Salaires */}
-            <h2 id="salaires" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Salaires et conditions de travail</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Les salaires suisses sont parmi les plus {"\u00E9"}lev{"\u00E9"}s du monde, mais le co{"\u00FB"}t de la vie l{"\u2019"}est aussi. Il n{"\u2019"}y a pas de <strong style={{ color: "#111827" }}>salaire minimum f{"\u00E9"}d{"\u00E9"}ral national</strong> &mdash; certains cantons ont le leur (Gen{"\u00E8"}ve : 24 CHF/h, Berne : 21 CHF/h) &mdash; mais les salaires sont g{"\u00E9"}n{"\u00E9"}ralement encadr{"\u00E9"}s par des conventions collectives sectorielles.
-            </p>
-            <div className="flex flex-col gap-2" style={{ marginBottom: 16 }}>
-              <div className="flex items-center gap-3 rounded-lg font-body" style={{ backgroundColor: "rgba(217,119,6,0.08)", padding: "10px 18px", border: "1px solid rgba(217,119,6,0.2)" }}>
-                <span style={{ fontWeight: 700, color: "#D97706", fontSize: 13, minWidth: 200 }}>Poste</span>
-                <span style={{ fontWeight: 700, color: "#D97706", fontSize: 13, minWidth: 180 }}>Fourchette annuelle</span>
-                <span style={{ fontWeight: 700, color: "#D97706", fontSize: 13 }}>R{"\u00E9"}gion</span>
-              </div>
-              {SALAIRES.map((s) => (
-                <div key={s.poste} className="flex items-center gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "12px 18px" }}>
-                  <span style={{ fontSize: 14, color: "#111827", fontWeight: 600, minWidth: 200 }}>{s.poste}</span>
-                  <span style={{ fontSize: 14, color: "#D97706", fontWeight: 700, minWidth: 180 }}>{s.salaire}</span>
-                  <span style={{ fontSize: 13, color: "#64748B" }}>{s.region}</span>
-                </div>
-              ))}
-            </div>
-            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 32 }}>
-              Note : ces fourchettes sont indicatives et varient selon l{"\u2019"}exp{"\u00E9"}rience, le canton, la taille de l{"\u2019"}entreprise et les comp{"\u00E9"}tences linguistiques. Consultez <strong style={{ color: "#111827" }}>salarium.ch</strong>, l{"\u2019"}outil officiel de l{"\u2019"}Office f{"\u00E9"}d{"\u00E9"}ral de la statistique, pour des donn{"\u00E9"}es personnalis{"\u00E9"}es.
-            </p>
-
-            {/* Section 6 — Permis de travail */}
-            <h2 id="permis-travail" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Permis de travail : ce qu{"\u2019"}il faut savoir</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Votre <strong style={{ color: "#111827" }}>nationalit{"\u00E9"}</strong> d{"\u00E9"}termine directement votre acc{"\u00E8"}s au march{"\u00E9"} du travail suisse. Voici les quatre situations principales :
-            </p>
-            <div className="flex flex-col gap-4" style={{ marginBottom: 16 }}>
-              {PERMIS_TRAVAIL.map((p) => (
-                <div key={p.name} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span style={{ color: "#D97706", fontSize: 18, flexShrink: 0 }}>{"🪪"}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{p.name}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }} dangerouslySetInnerHTML={{ __html: p.desc }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0 retenir"}</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Pour en savoir plus sur les types de permis (B, C, L, G), consultez notre <strong style={{ color: "#D97706" }}>guide complet des permis de s{"\u00E9"}jour suisses</strong>.
+                Les quatre secteurs o{"\u00F9"} la p{"\u00E9"}nurie est structurelle en Suisse en 2026 : <strong style={{ color: "#111827" }}>sant{"\u00E9"}, construction, m{"\u00E9"}tiers techniques/{"\u00E9"}lectronique et ing{"\u00E9"}nierie</strong>. C{"\u2019"}est dans ces domaines que les candidats {"\u00E9"}trangers ont le plus de chances d{"\u2019"}obtenir rapidement un contrat et un permis de travail.
               </p>
             </div>
 
-            {/* Section 7 — Secteurs qui recrutent */}
-            <h2 id="secteurs" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les secteurs qui recrutent en 2026</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>Cinq secteurs concentrent la majorit{"\u00E9"} des opportunit{"\u00E9"}s pour les profils {"\u00E9"}trangers qualifi{"\u00E9"}s :</p>
-            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
-              {SECTEURS.map((s) => (
-                <div key={s.name} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "24px" }}>
-                  <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
-                    <span className="font-heading" style={{ fontSize: 16, fontWeight: 700, color: "#D97706" }}>{s.name}</span>
-                    <span style={{ fontSize: 13, color: "#94A3B8" }}>{"\u2014"}</span>
-                    <span className="font-body italic" style={{ fontSize: 14, color: "#64748B" }}>{s.subtitle}</span>
-                  </div>
-                  <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: s.desc }} />
+            {/* Section 3 — Conditions */}
+            <h2 id="conditions" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les conditions pour travailler en Suisse</h2>
+
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Le permis de travail selon votre profil</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Pour les ressortissants de l{"\u2019"}UE/AELE, l{"\u2019"}acc{"\u00E8"}s au march{"\u00E9"} suisse est relativement fluide gr{"\u00E2"}ce aux accords bilat{"\u00E9"}raux. Les permis les plus courants sont :
+            </p>
+            <div className="flex flex-col gap-2" style={{ marginBottom: 16 }}>
+              {PERMIS.map((p) => (
+                <div key={p.name} className="flex items-center gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "12px 18px" }}>
+                  <span style={{ fontWeight: 700, color: "#D97706", fontSize: 13, minWidth: 90 }}>{p.name}</span>
+                  <span style={{ fontSize: 14, color: "#475569" }}>{p.desc}</span>
+                </div>
+              ))}
+            </div>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+              Pour les <strong style={{ color: "#111827" }}>ressortissants hors UE</strong>, la proc{"\u00E9"}dure est plus stricte et soumise {"\u00E0"} des quotas annuels : l{"\u2019"}employeur doit d{"\u00E9"}montrer qu{"\u2019"}aucun candidat suisse ou europ{"\u00E9"}en ne correspond au profil.
+            </p>
+
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>La langue, une condition souvent d{"\u00E9"}terminante</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              La Suisse compte quatre langues officielles, mais trois concernent le march{"\u00E9"} de l{"\u2019"}emploi : le <strong style={{ color: "#111827" }}>fran{"\u00E7"}ais</strong> (Romandie), l{"\u2019"}<strong style={{ color: "#111827" }}>allemand et le suisse-allemand</strong> (Suisse al{"\u00E9"}manique) et l{"\u2019"}<strong style={{ color: "#111827" }}>italien</strong> (Tessin). Ma{"\u00EE"}triser la langue de la r{"\u00E9"}gion vis{"\u00E9"}e est g{"\u00E9"}n{"\u00E9"}ralement indispensable, sauf dans certains environnements internationaux (finance, pharma, ONG genevoises) o{"\u00F9"} l{"\u2019"}anglais suffit.
+            </p>
+
+            {/* Section 4 — Canaux */}
+            <h2 id="canaux" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comment trouver un emploi en Suisse : les bons canaux</h2>
+
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Les plateformes d{"\u2019"}offres d{"\u2019"}emploi</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>Quatre sites concentrent l{"\u2019"}essentiel du march{"\u00E9"} :</p>
+            <div className="flex flex-col gap-2" style={{ marginBottom: 24 }}>
+              {PLATEFORMES.map((p) => (
+                <div key={p.name} className="flex items-center gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "12px 18px" }}>
+                  <span style={{ fontWeight: 700, color: "#D97706", fontSize: 14 }}>{p.name}</span>
+                  <span style={{ fontSize: 14, color: "#475569" }}>{p.desc}</span>
                 </div>
               ))}
             </div>
 
-            {/* À retenir 3 */}
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0"} retenir</p>
-              <ul className="list-none p-0 m-0">
-                {[
-                  "La Suisse manque de <strong>m\u00E9decins, infirmiers et sp\u00E9cialistes de sant\u00E9</strong> : le secteur recrute massivement \u00E0 l\u2019\u00E9tranger.",
-                  "Le secteur IT cherche des <strong>d\u00E9veloppeurs, data scientists et experts cloud</strong> dans toutes les r\u00E9gions.",
-                  "Les <strong>organisations internationales</strong> (ONU, OMS, CICR \u00E0 Gen\u00E8ve) publient leurs postes sur impunity-watch.org et careers.un.org.",
-                  "La construction, l\u2019artisanat et l\u2019agriculture offrent des opportunit\u00E9s saisonni\u00E8res ou \u00E0 l\u2019ann\u00E9e dans les r\u00E9gions rurales.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\u2022"}</span>
-                    <span dangerouslySetInnerHTML={{ __html: item }} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Les r{"\u00E9"}seaux sociaux professionnels</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+              <strong style={{ color: "#111827" }}>LinkedIn</strong> domine largement en Romandie et dans les milieux internationaux. En Suisse al{"\u00E9"}manique, <strong style={{ color: "#111827" }}>Xing</strong> garde une place solide pour les recrutements locaux. Un profil soign{"\u00E9"} et r{"\u00E9"}guli{"\u00E8"}rement mis {"\u00E0"} jour est aujourd{"\u2019"}hui incontournable.
+            </p>
 
-            {/* Section 8 — Erreurs */}
-            <h2 id="erreurs" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Erreurs {"\u00E0"} {"\u00E9"}viter absolument</h2>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
-              {ERREURS.map((err) => (
-                <div key={err.title} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span style={{ color: "#DC2626", fontSize: 16, flexShrink: 0 }}>{"\u26A0"}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{err.title}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 2 }}>{err.desc}</p>
-                  </div>
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Les agences de placement et cabinets de recrutement</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+              Adecco, Manpower, Michael Page, Hays, Robert Walters, Interiman{"\u2026"} Les agences jouent un r{"\u00F4"}le <strong style={{ color: "#111827" }}>beaucoup plus central qu{"\u2019"}en France</strong>. Elles g{"\u00E8"}rent une part importante des recrutements, y compris pour des CDI, et constituent un canal privil{"\u00E9"}gi{"\u00E9"} pour les candidats {"\u00E9"}trangers.
+            </p>
+
+            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Les candidatures spontan{"\u00E9"}es</h3>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              Les grands employeurs (<strong style={{ color: "#111827" }}>Migros, Coop, Nestl{"\u00E9"}, Novartis, Roche, La Poste, CFF</strong>, les h{"\u00F4"}pitaux cantonaux) acceptent volontiers les candidatures spontan{"\u00E9"}es via leurs portails carri{"\u00E8"}re. C{"\u2019"}est souvent plus efficace que de passer par une annonce.
+            </p>
+
+            {/* Section 5 — Candidature */}
+            <h2 id="candidature" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Adapter sa candidature aux standards suisses</h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Un CV suisse ne ressemble pas {"\u00E0"} un CV fran{"\u00E7"}ais. Les diff{"\u00E9"}rences essentielles :
+            </p>
+            <div className="flex flex-col gap-2" style={{ marginBottom: 16 }}>
+              {CV_POINTS.map((p) => (
+                <div key={p.label} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "14px 18px" }}>
+                  <span style={{ fontWeight: 700, color: "#D97706", fontSize: 14, minWidth: 90 }}>{p.label}</span>
+                  <span style={{ fontSize: 14, color: "#475569" }}>{p.desc}</span>
+                </div>
+              ))}
+            </div>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              La <strong style={{ color: "#111827" }}>lettre de motivation</strong> reste importante, surtout en Romandie, mais doit {"\u00EA"}tre courte (une page) et cibl{"\u00E9"}e. En Suisse al{"\u00E9"}manique, elle est parfois remplac{"\u00E9"}e par un formulaire en ligne.
+            </p>
+
+            {/* Section 6 — Sans diplôme */}
+            <h2 id="sans-diplome" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Travailler en Suisse sans dipl{"\u00F4"}me : est-ce possible ?</h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Oui, et c{"\u2019"}est m{"\u00EA"}me fr{"\u00E9"}quent dans plusieurs secteurs. L{"\u2019"}<strong style={{ color: "#111827" }}>h{"\u00F4"}tellerie-restauration</strong>, la grande distribution (Migros, Coop, Manor, Lidl), la logistique, le nettoyage industriel, certaines fonctions dans la construction ou le recyclage accueillent r{"\u00E9"}guli{"\u00E8"}rement des profils sans qualification formelle.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              L{"\u2019"}exp{"\u00E9"}rience, la motivation et la disponibilit{"\u00E9"} comptent souvent davantage que le titre acad{"\u00E9"}mique. L{"\u2019"}<strong style={{ color: "#111827" }}>int{"\u00E9"}rim</strong> constitue une excellente porte d{"\u2019"}entr{"\u00E9"}e : les recruteurs suisses valorisent l{"\u2019"}exp{"\u00E9"}rience de terrain et un premier contrat temporaire d{"\u00E9"}bouche souvent sur une embauche stable.
+            </p>
+
+            {/* Section 7 — FAQ */}
+            <h2 id="faq" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>FAQ</h2>
+            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
+              {FAQ.map((item) => (
+                <div key={item.q} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "20px 24px" }}>
+                  <h3 className="font-heading" style={{ fontSize: 17, fontWeight: 600, color: "#111827", marginBottom: 8 }}>{item.q}</h3>
+                  <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: item.a }} />
                 </div>
               ))}
             </div>
@@ -362,15 +283,7 @@ export default function EmploiSuissePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#111827", padding: "32px 28px", marginBottom: 40 }}>
               <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>{"Pr\u00EAt \u00E0 d\u00E9crocher votre emploi en Suisse ?"}</h3>
               <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>{"Nos experts \u00E9valuent votre profil et vous orientent vers les meilleures opportunit\u00E9s. Diagnostic gratuit."}</p>
-              <Link href="/emploi" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>{"Évaluer mon potentiel \u2192"}</Link>
-            </div>
-
-            {/* En résumé */}
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En r{"\u00E9"}sum{"\u00E9"}</p>
-              <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Trouver un travail en Suisse demande une pr{"\u00E9"}paration rigoureuse : <strong style={{ color: "#111827" }}>CV adapt{"\u00E9"}</strong>, lettre de motivation personnalis{"\u00E9"}e, ma{"\u00EE"}trise des portails locaux et compr{"\u00E9"}hension des r{"\u00E8"}gles sur les permis. Le march{"\u00E9"} est porteur pour les profils qualifi{"\u00E9"}s, multilingues et mobiles. Avec la bonne strat{"\u00E9"}gie, votre recherche d{"\u2019"}emploi peut aboutir bien plus vite que vous ne le pensez.
-              </p>
+              <Link href="/emploi" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
             </div>
 
             {/* Tags + Share */}
@@ -398,9 +311,9 @@ export default function EmploiSuissePage() {
           <aside className="hidden lg:block">
             <div className="sticky" style={{ top: 80 }}>
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>{"Évaluer mon potentiel"}</p>
-                <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>{"Découvrez en 2 min quelles opportunités d\u2019emploi correspondent \u00E0 votre profil en Suisse."}</p>
-                <Link href="/emploi" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>{"Évaluer mon potentiel \u2192"}</Link>
+                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>{"\u00C9valuer mon potentiel"}</p>
+                <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>{"D\u00E9couvrez en 2 min quelles opportunit\u00E9s d\u2019emploi correspondent \u00E0 votre profil en Suisse."}</p>
+                <Link href="/emploi" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \u00B7 2 minutes \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
               </div>
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
