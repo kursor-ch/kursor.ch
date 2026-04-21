@@ -14,14 +14,17 @@ export default function SalaireSuissePage() {
       {/* HERO — H1 gauche + Simulateur droite */}
       <section style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
         <div className="mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 items-start" style={{ maxWidth: 1120 }}>
-          {/* Left — H1 */}
+          {/* Left — H1 + intro */}
           <div>
             <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>TRAVAILLER</span>
             <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
               Calcul salaire net Suisse frontalier :<br />
               <span className="font-heading italic" style={{ color: "#D97706" }}>comprendre votre fiche de paie en 2026</span>
             </h1>
-            <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.7, marginTop: 20 }}>
+              Convertir un salaire brut suisse en salaire net puis en euros ne se r{"\u00E9"}sume pas {"\u00E0"} une simple soustraction. Entre les cotisations sociales, l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source, le 2e pilier et le taux de change CHF/EUR, le calcul du salaire net d{"\u2019"}un frontalier suisse r{"\u00E9"}unit plusieurs param{"\u00E8"}tres qui m{"\u00E9"}ritent d{"\u2019"}{"\u00EA"}tre compris un par un.
+            </p>
+            <div className="flex items-center gap-3" style={{ marginTop: 20 }}>
               <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
               <div>
                 <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{"\u00C9"}quipe Kursor</p>
@@ -47,10 +50,6 @@ export default function SalaireSuissePage() {
 
           {/* CONTENU */}
           <article>
-            <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Convertir un salaire brut suisse en salaire net puis en euros ne se r{"\u00E9"}sume pas {"\u00E0"} une simple soustraction. Entre les cotisations sociales, l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source, le 2e pilier et le taux de change CHF/EUR, le calcul du salaire net d{"\u2019"}un frontalier suisse r{"\u00E9"}unit plusieurs param{"\u00E8"}tres qui m{"\u00E9"}ritent d{"\u2019"}{"\u00EA"}tre compris un par un. Ce guide complet vous explique comment passer du brut au net en Suisse, quels pr{"\u00E9"}l{"\u00E8"}vements s{"\u2019"}appliquent selon votre canton de travail et comment utiliser efficacement notre simulateur ci-contre.
-            </p>
-
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\u00C0 retenir"}</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
