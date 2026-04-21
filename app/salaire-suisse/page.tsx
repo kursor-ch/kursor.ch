@@ -11,34 +11,41 @@ export const metadata: Metadata = {
 export default function SalaireSuissePage() {
   return (
     <div className="bg-creme">
-      {/* HERO */}
+      {/* HERO — H1 gauche + Simulateur droite */}
       <section style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
-        <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>
-          <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>TRAVAILLER</span>
-          <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            Calcul salaire net Suisse frontalier :<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>comprendre votre fiche de paie en 2026</span>
-          </h1>
-          <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
-            <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
-            <div>
-              <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{"\u00C9"}quipe Kursor</p>
-              <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\u00B7"} 12 min de lecture</p>
+        <div className="mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 items-start" style={{ maxWidth: 1120 }}>
+          {/* Left — H1 */}
+          <div>
+            <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>TRAVAILLER</span>
+            <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
+              Calcul salaire net Suisse frontalier :<br />
+              <span className="font-heading italic" style={{ color: "#D97706" }}>comprendre votre fiche de paie en 2026</span>
+            </h1>
+            <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
+              <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
+              <div>
+                <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{"\u00C9"}quipe Kursor</p>
+                <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\u00B7"} 12 min de lecture</p>
+              </div>
             </div>
+          </div>
+          {/* Right — Simulateur (desktop) */}
+          <div className="hidden lg:block">
+            <SalaireCalculator />
           </div>
         </div>
       </section>
 
-      {/* MOBILE — Simulateur en haut sur mobile */}
+      {/* MOBILE — Simulateur */}
       <div className="block lg:hidden px-6 mx-auto" style={{ maxWidth: 1120, paddingTop: 32 }}>
         <SalaireCalculator />
       </div>
 
-      {/* SIMULATEUR + CONTENU */}
+      {/* CONTENU SEO */}
       <section className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 40, paddingBottom: 48 }}>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 items-start">
+        <div style={{ maxWidth: 700 }}>
 
-          {/* LEFT — CONTENU SEO */}
+          {/* CONTENU */}
           <article>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
               Convertir un salaire brut suisse en salaire net puis en euros ne se r{"\u00E9"}sume pas {"\u00E0"} une simple soustraction. Entre les cotisations sociales, l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source, le 2e pilier et le taux de change CHF/EUR, le calcul du salaire net d{"\u2019"}un frontalier suisse r{"\u00E9"}unit plusieurs param{"\u00E8"}tres qui m{"\u00E9"}ritent d{"\u2019"}{"\u00EA"}tre compris un par un. Ce guide complet vous explique comment passer du brut au net en Suisse, quels pr{"\u00E9"}l{"\u00E8"}vements s{"\u2019"}appliquent selon votre canton de travail et comment utiliser efficacement notre simulateur ci-contre.
@@ -213,13 +220,6 @@ export default function SalaireSuissePage() {
               </div>
             </div>
           </article>
-
-          {/* RIGHT — SIMULATEUR STICKY (desktop) */}
-          <div className="hidden lg:block">
-            <div className="sticky" style={{ top: 80 }}>
-              <SalaireCalculator />
-            </div>
-          </div>
         </div>
       </section>
 
