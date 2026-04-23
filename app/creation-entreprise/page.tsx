@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Créer une société en Suisse : guide complet 2026",
-  description: "Guide complet pour créer une société en Suisse : Sàrl, SA, raison individuelle, démarches, coûts, fiscalité, obligations et erreurs à éviter.",
+  title: "Créer une société en Suisse : guide complet pour Français 2026",
+  description: "Vous êtes Français et souhaitez créer une société en Suisse ? Sàrl, SA ou Raison Individuelle : découvrez les démarches, coûts et délais en 2026.",
 };
 
 /* ───────── DATA ───────── */
