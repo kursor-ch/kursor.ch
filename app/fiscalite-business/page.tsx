@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Optimisation fiscale en Suisse : guide complet 2026",
-  description: "Réduisez votre charge fiscale en Suisse : 3e pilier, rachat LPP, immobilier, échelonnement retraite, frontaliers, entrepreneurs. Stratégies légales 2026.",
+  title: "Optimisation fiscale Suisse 2026 : 6 leviers pour payer moins",
+  description: "Découvrez les 6 leviers d'optimisation fiscale en Suisse 2026 : prévoyance, immobilier, retraite, dividendes. Économisez des milliers de francs légalement.",
 };
 
 /* ───────── DATA ───────── */
