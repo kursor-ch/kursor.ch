@@ -269,7 +269,7 @@ export default function CreationEntreprisePage() {
 
             <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Les assurances sociales</h3>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              L'AVS (assurance vieillesse) est obligatoire pour tous les employeurs, avec un taux global de <strong style={{ color: "#111827" }}>10,6 %</strong> partagé entre employeur et salarié. La LPP (prévoyance professionnelle) devient obligatoire dès qu’un salarié gagne plus de 22 050 CHF bruts annuels. Les assurances accidents (AAP et AANP) sont également imposées par la loi.
+              L{"\u2019"}AVS (assurance vieillesse) est obligatoire pour tous les employeurs, avec un taux global de <strong style={{ color: "#111827" }}>10,6 %</strong> partagé entre employeur et salarié. La LPP (prévoyance professionnelle) devient obligatoire dès qu{"\u2019"}un salarié gagne plus de 22 050 CHF bruts annuels. Les assurances accidents (AAP et AANP) sont également imposées par la loi.
             </p>
 
             <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>L’affiliation à la TVA</h3>
