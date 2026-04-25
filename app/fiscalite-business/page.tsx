@@ -83,7 +83,7 @@ export default function FiscaliteBusinessPage() {
           {/* MAIN CONTENT */}
           <article>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              La Suisse offre l’un des cadres fiscaux les plus favorables d’Europe, mais ses subtilités cantonales et fédérales rendent l’optimisation difficile sans méthode. Entre prévoyance, immobilier, choix de domicile et statuts spécifiques, les leviers existent — encore faut-il les actionner au bon moment et dans le bon ordre. Ce guide rassemble les stratégies réellement efficaces en 2026, du résident suisse au frontalier genevois en passant par l’expatrié français et le dirigeant de PME.
+              La Suisse offre l’un des cadres fiscaux les plus favorables d’Europe, mais ses subtilités cantonales et fédérales rendent l’optimisation difficile sans méthode. Entre prévoyance, immobilier, choix de domicile et statuts spécifiques, les leviers existent, encore faut-il les actionner au bon moment et dans le bon ordre. Ce guide rassemble les stratégies réellement efficaces en 2026, du résident suisse au frontalier genevois en passant par l’expatrié français et le dirigeant de PME.
             </p>
 
             {/* À retenir */}
@@ -121,7 +121,7 @@ export default function FiscaliteBusinessPage() {
               Le <strong style={{ color: "#111827" }}>3e pilier A</strong> reste le geste le plus rentable accessible à tous. Chaque franc versé est déduit du revenu imposable au niveau fédéral et cantonal. Pour un contribuable au taux marginal de 35 %, un versement de 7 258 CHF représente une économie immédiate d’environ <strong style={{ color: "#111827" }}>2 540 CHF</strong>.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La nouveauté 2026 — la possibilité de <strong style={{ color: "#111827" }}>rattraper les années où vous n’avez pas versé le maximum</strong> — démultiplie ce levier pour quiconque a sous-utilisé son pilier 3a par le passé.
+              La nouveauté 2026, soit la possibilité de <strong style={{ color: "#111827" }}>rattraper les années où vous n’avez pas versé le maximum</strong>, démultiplie ce levier pour quiconque a sous-utilisé son pilier 3a par le passé.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               Le <strong style={{ color: "#111827" }}>rachat dans la caisse de pension (LPP)</strong> complète idéalement le dispositif. Particulièrement utile dans les 5 à 10 ans précédant la retraite, il convertit un revenu lourdement taxé en capital de prévoyance qui sera retiré plus tard à un taux réduit. Trois précautions : respecter le <strong style={{ color: "#111827" }}>délai de blocage de 3 ans</strong> avant tout retrait, échelonner les rachats pour maximiser l’effet de progressivité, et vérifier le potentiel de rachat sur le certificat LPP annuel.
@@ -153,7 +153,7 @@ export default function FiscaliteBusinessPage() {
             {/* Section 5 */}
             <h2 id="entrepreneurs" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Entrepreneurs : équilibrer salaire et dividende</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Les détenteurs d’au moins <strong style={{ color: "#111827" }}>10 % du capital</strong> d’une SA ou Sàrl bénéficient d’une imposition partielle des dividendes : 70 % seulement sont imposés au fédéral, et certains cantons descendent à 50 %. Couplé à l’absence de cotisations sociales sur les dividendes, l’avantage est réel — mais conditionné à un salaire conforme aux usages du marché, faute de quoi l’autorité fiscale requalifie le dividende en revenu salarial.
+              Les détenteurs d’au moins <strong style={{ color: "#111827" }}>10 % du capital</strong> d’une SA ou Sàrl bénéficient d’une imposition partielle des dividendes : 70 % seulement sont imposés au fédéral, et certains cantons descendent à 50 %. Couplé à l’absence de cotisations sociales sur les dividendes, l’avantage est réel, mais conditionné à un salaire conforme aux usages du marché, faute de quoi l’autorité fiscale requalifie le dividende en revenu salarial.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               Avant une cession d’entreprise, deux réflexes : transformer une raison individuelle en société de capitaux <strong style={{ color: "#111827" }}>au moins 5 ans avant la vente</strong> (sinon, les réserves latentes seront imposées rétroactivement), et utiliser le potentiel de rachat LPP pour transférer la fortune non nécessaire à l’exploitation vers la prévoyance privée.
@@ -162,7 +162,7 @@ export default function FiscaliteBusinessPage() {
             {/* Section 6 */}
             <h2 id="frontaliers" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Profils internationaux : frontaliers et expatriés</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Les frontaliers genevois ont une option stratégique : le <strong style={{ color: "#111827" }}>statut de quasi-résident (TOU)</strong>. Si plus de 90 % de vos revenus mondiaux proviennent de Suisse, vous pouvez déduire le 3e pilier A, les frais de transport réels, les frais de garde et les frais médicaux — exactement comme un résident. La demande doit être déposée <strong style={{ color: "#111827" }}>avant le 31 mars</strong> de l’année suivant l’imposition.
+              Les frontaliers genevois ont une option stratégique : le <strong style={{ color: "#111827" }}>statut de quasi-résident (TOU)</strong>. Si plus de 90 % de vos revenus mondiaux proviennent de Suisse, vous pouvez déduire le 3e pilier A, les frais de transport réels, les frais de garde et les frais médicaux, exactement comme un résident. La demande doit être déposée <strong style={{ color: "#111827" }}>avant le 31 mars</strong> de l’année suivant l’imposition.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               Les résidents français fortunés peuvent négocier un <strong style={{ color: "#111827" }}>forfait fiscal</strong> dans plusieurs cantons (Vaud, Valais, Genève sous conditions, Tessin) : l’impôt est calculé sur les dépenses de train de vie, pas sur les revenus réels. À l’inverse, lors d’un retrait de capital de prévoyance après un retour en France, l’impôt à la source suisse peut être intégralement récupéré sur preuve de l’imposition française.
@@ -189,7 +189,7 @@ export default function FiscaliteBusinessPage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En résumé</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Optimiser sa fiscalité en Suisse n’est pas une question d’astuce isolée mais d’une <strong style={{ color: "#111827" }}>stratégie cohérente étalée sur l’année et sur la vie</strong>. La prévoyance vieillesse (3a + rachats LPP) reste le levier universel ; l’échelonnement des retraits de capital fait économiser des dizaines de milliers de francs ; le choix du canton et du statut fiscal peut transformer durablement votre charge. Anticipez : la réforme de la valeur locative prévue dès 2028 et les nouveautés 2026 sur le rattrapage du 3a redessinent déjà le paysage. Pour les situations complexes — entrepreneurs, expatriés, propriétaires multi-cantonaux — un fiduciaire ou conseiller fiscal rentabilise très vite ses honoraires.
+                Optimiser sa fiscalité en Suisse n’est pas une question d’astuce isolée mais d’une <strong style={{ color: "#111827" }}>stratégie cohérente étalée sur l’année et sur la vie</strong>. La prévoyance vieillesse (3a + rachats LPP) reste le levier universel ; l’échelonnement des retraits de capital fait économiser des dizaines de milliers de francs ; le choix du canton et du statut fiscal peut transformer durablement votre charge. Anticipez : la réforme de la valeur locative prévue dès 2028 et les nouveautés 2026 sur le rattrapage du 3a redessinent déjà le paysage. Pour les situations complexes, notamment les entrepreneurs, expatriés et propriétaires multi-cantonaux, un fiduciaire ou conseiller fiscal rentabilise très vite ses honoraires.
               </p>
             </div>
 

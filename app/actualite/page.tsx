@@ -115,7 +115,7 @@ export default function ActualitePage() {
             className="font-body"
             style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, maxWidth: 560 }}
           >
-            {"Lois, réformes sociales, évolutions du marché — restez informé de tout ce qui"}{" "}
+            {"Lois, réformes sociales, évolutions du marché : restez informé de tout ce qui"}{" "}
             {"impacte votre vie en Suisse. Nos analyses claires, sans jargon."}
           </p>
         </div>

@@ -329,7 +329,7 @@ export default function RetraiteSuissePage() {
               Entr{"\é"}e en vigueur le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la modification de l{"\’"}Ordonnance OPP3 permet d{"\é"}sormais de <strong style={{ color: "#111827" }}>combler les ann{"\é"}es de pilier 3a non utilis{"\é"}es</strong> depuis 2017. C{"\’"}est une r{"\é"}volution pour tous ceux qui n{"\’"}ont pas cotis{"\é"} ou cotis{"\é"} partiellement.
             </p>
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 20 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir — Rattrapage r{"\é"}troactif</p>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir : Rattrapage r{"\é"}troactif</p>
               <ul className="list-none p-0 m-0">
                 {[
                   "Rattrapage possible sur les <strong>10 derni\ères ann\ées</strong> (ann\ées 2017\–2025).",
@@ -436,7 +436,7 @@ export default function RetraiteSuissePage() {
             </div>
             <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Strat{"\é"}gie de retrait {"\é"}chelonn{"\é"}</h3>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              L{"\’"}imp{"\ô"}t sur le capital 3a est progressif mais s{"\é"}par{"\é"} du revenu ordinaire. En d{"\é"}tenant <strong style={{ color: "#111827" }}>plusieurs comptes 3a</strong> (ouverts dans diff{"\é"}rents {"\é"}tablissements), vous pouvez les retirer l{"\’"}un apr{"\è"}s l{"\’"}autre sur plusieurs ann{"\é"}es {"\—"} r{"\é"}duisant ainsi consid{"\é"}rablement la charge fiscale globale. Exemple : retirer 50{"\’"}000 CHF deux fois de suite co{"\û"}te fiscalement moins que retirer 100{"\’"}000 CHF d{"\’"}un coup.
+              L{"\’"}imp{"\ô"}t sur le capital 3a est progressif mais s{"\é"}par{"\é"} du revenu ordinaire. En d{"\é"}tenant <strong style={{ color: "#111827" }}>plusieurs comptes 3a</strong> (ouverts dans diff{"\é"}rents {"\é"}tablissements), vous pouvez les retirer l{"\’"}un apr{"\è"}s l{"\’"}autre sur plusieurs ann{"\é"}es, ce qui r{"\é"}duit consid{"\é"}rablement la charge fiscale globale. Exemple : retirer 50{"\’"}000 CHF deux fois de suite co{"\û"}te fiscalement moins que retirer 100{"\’"}000 CHF d{"\’"}un coup.
             </p>
 
             {/* Section 8 — Comment ouvrir */}

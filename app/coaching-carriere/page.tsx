@@ -209,7 +209,7 @@ export default function CoachingCarrierePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Le march{"\é"} du travail suisse est exigeant, comp{"\é"}titif et tr{"\è"}s codifi{"\é"}. Un CV mal adapt{"\é"}, un entretien rat{"\é"} ou une n{"\é"}gociation salariale b{"\â"}cl{"\é"}e peuvent vous co{"\û"}ter plusieurs mois de recherche — et des milliers de francs de salaire. Le <strong style={{ color: "#111827" }}>coaching carri{"\è"}re</strong> est l{"\’"}outil le plus efficace pour reprendre le contr{"\ô"}le de votre trajectoire professionnelle, que vous cherchiez un nouvel emploi, une promotion ou une r{"\é"}orientation compl{"\è"}te.
+              Le march{"\é"} du travail suisse est exigeant, comp{"\é"}titif et tr{"\è"}s codifi{"\é"}. Un CV mal adapt{"\é"}, un entretien rat{"\é"} ou une n{"\é"}gociation salariale b{"\â"}cl{"\é"}e peuvent vous co{"\û"}ter plusieurs mois de recherche et des milliers de francs de salaire. Le <strong style={{ color: "#111827" }}>coaching carri{"\è"}re</strong> est l{"\’"}outil le plus efficace pour reprendre le contr{"\ô"}le de votre trajectoire professionnelle, que vous cherchiez un nouvel emploi, une promotion ou une r{"\é"}orientation compl{"\è"}te.
             </p>
 
             {/* A retenir */}
@@ -234,7 +234,7 @@ export default function CoachingCarrierePage() {
             {/* Section 1 — Pourquoi */}
             <h2 id="pourquoi-coaching" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Pourquoi faire appel {"\à"} un coach carri{"\è"}re en Suisse ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La Suisse est l{"\’"}un des march{"\é"}s du travail les plus attract ifs au monde — mais aussi l{"\’"}un des plus s{"\é"}lectifs. Les codes culturels varient selon les r{"\é"}gions linguistiques, les entreprises attendent des candidats structur{"\é"}s et pr{"\é"}cis, et les salaires peuvent {"\ê"}tre jusqu{"\’"}\à deux fois sup{"\é"}rieurs \à ceux des pays voisins — \à condition de savoir les n\égocier.
+              La Suisse est l{"\’"}un des march{"\é"}s du travail les plus attract ifs au monde, mais aussi l{"\’"}un des plus s{"\é"}lectifs. Les codes culturels varient selon les r{"\é"}gions linguistiques, les entreprises attendent des candidats structur{"\é"}s et pr{"\é"}cis, et les salaires peuvent {"\ê"}tre jusqu{"\’"}\à deux fois sup{"\é"}rieurs \à ceux des pays voisins, \à condition de savoir les n\égocier.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>Vous avez besoin d{"\’"}un coach si vous :</p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 32 }}>

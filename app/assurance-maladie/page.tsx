@@ -167,7 +167,7 @@ export default function AssuranceMaladiePage() {
             {CAISSES.map((c) => (
               <div key={c.id}>
                 <h2 id={c.id} className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 8, scrollMarginTop: 80 }}>
-                  {c.num}. {c.name} — <span className="italic" style={{ color: "#D97706" }}>{c.subtitle}</span>
+                  {c.num}. {c.name} : <span className="italic" style={{ color: "#D97706" }}>{c.subtitle}</span>
                 </h2>
                 <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }} dangerouslySetInnerHTML={{ __html: c.desc }} />
                 <div className="rounded-lg" style={{ backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0", padding: "16px 20px", marginBottom: 8 }}>

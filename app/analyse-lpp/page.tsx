@@ -168,7 +168,7 @@ export default function AnalyseLppPage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Le <strong style={{ color: "#111827" }}>2{"\è"}me pilier</strong>, ou <strong style={{ color: "#111827" }}>LPP</strong> (Loi sur la pr{"\é"}voyance professionnelle), constitue le c{"\œ"}ur de la retraite suisse pour les salari{"\é"}s. Pourtant, la grande majorit{"\é"} des assur{"\é"}s ignore ce que leur caisse de pension fait r{"\é"}ellement de leur argent — et combien ils laissent sur la table faute d{"\’"}optimisation. Rachat LPP, choix de la caisse, retrait anticip{"\é"}, taux de conversion : ce guide d{"\é"}crypte tout.
+              Le <strong style={{ color: "#111827" }}>2{"\è"}me pilier</strong>, ou <strong style={{ color: "#111827" }}>LPP</strong> (Loi sur la pr{"\é"}voyance professionnelle), constitue le c{"\œ"}ur de la retraite suisse pour les salari{"\é"}s. Pourtant, la grande majorit{"\é"} des assur{"\é"}s ignore ce que leur caisse de pension fait r{"\é"}ellement de leur argent, et combien ils laissent sur la table faute d{"\’"}optimisation. Rachat LPP, choix de la caisse, retrait anticip{"\é"}, taux de conversion : ce guide d{"\é"}crypte tout.
             </p>
 
             {/* A retenir 1 */}
@@ -193,7 +193,7 @@ export default function AnalyseLppPage() {
             {/* Section 1 — Fonctionnement */}
             <h2 id="fonctionnement" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Fonctionnement du 2{"\è"}me pilier (LPP)</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La LPP repose sur un principe simple : chaque mois, employeur et employ{"\é"} versent des cotisations dans une caisse de pension. Ces avoirs sont investis, g{"\é"}n{"\è"}rent un rendement, et financent une <strong style={{ color: "#111827" }}>rente de vieillesse</strong> — ou un capital — au moment de la retraite.
+              La LPP repose sur un principe simple : chaque mois, employeur et employ{"\é"} versent des cotisations dans une caisse de pension. Ces avoirs sont investis, g{"\é"}n{"\è"}rent un rendement, et financent une <strong style={{ color: "#111827" }}>rente de vieillesse</strong> ou un capital au moment de la retraite.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Le syst{"\è"}me comprend deux couches :
@@ -216,7 +216,7 @@ export default function AnalyseLppPage() {
             {/* Section 2 — Cotisations */}
             <h2 id="cotisations" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Cotisations et bonifications de vieillesse</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Les cotisations LPP augmentent avec l{"\’"}{"\â"}ge. Plus vous approchez de la retraite, plus votre taux de bonification est {"\é"}lev{"\é"} — et plus chaque ann{"\é"}e de cotisation compte :
+              Les cotisations LPP augmentent avec l{"\’"}{"\â"}ge. Plus vous approchez de la retraite, plus votre taux de bonification est {"\é"}lev{"\é"}, et plus chaque ann{"\é"}e de cotisation compte :
             </p>
 
             {/* Table bonifications */}
@@ -236,7 +236,7 @@ export default function AnalyseLppPage() {
             </div>
 
             <p className="font-body" style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65, marginBottom: 32 }}>
-              Ces taux s{"\’"}appliquent au <strong style={{ color: "#111827" }}>salaire coordonn{"\é"}</strong>. L{"\’"}employeur prend en charge au moins la moiti{"\é"} des cotisations totales — souvent plus selon les plans de pr{"\é"}voyance.
+              Ces taux s{"\’"}appliquent au <strong style={{ color: "#111827" }}>salaire coordonn{"\é"}</strong>. L{"\’"}employeur prend en charge au moins la moiti{"\é"} des cotisations totales, souvent davantage selon les plans de pr{"\é"}voyance.
             </p>
 
             {/* Section 3 — Taux de conversion */}
@@ -264,7 +264,7 @@ export default function AnalyseLppPage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 8 }}>{"\À"} retenir</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Le taux de conversion <strong style={{ color: "#111827" }}>ne s{"\’"}applique qu{"\’"}{"\à"} la part obligatoire</strong> de l{"\’"}avoir. Pour la part sur-obligatoire — qui repr{"\é"}sente souvent la moiti{"\é"} ou plus de l{"\’"}avoir total — la caisse fixe librement son taux. Lisez attentivement le r{"\è"}glement de votre caisse.
+                Le taux de conversion <strong style={{ color: "#111827" }}>ne s{"\’"}applique qu{"\’"}{"\à"} la part obligatoire</strong> de l{"\’"}avoir. Pour la part sur-obligatoire, qui repr{"\é"}sente souvent la moiti{"\é"} ou plus de l{"\’"}avoir total, la caisse fixe librement son taux. Lisez attentivement le r{"\è"}glement de votre caisse.
               </p>
             </div>
 
@@ -305,7 +305,7 @@ export default function AnalyseLppPage() {
               {[
                 { label: "Compte de libre passage bancaire", desc: "Taux d\’int\ér\êt variable, faible rendement, mais capital garanti et disponible" },
                 { label: "Police de libre passage (assurance)", desc: "Couverture d\’invalidit\é et de d\éc\ès int\égr\ée, rendement d\épendant des b\én\éfices" },
-                { label: "Compte de libre passage avec placement", desc: "Certaines institutions proposent des fonds de placement — rendement potentiellement plus \élev\é" },
+                { label: "Compte de libre passage avec placement", desc: "Certaines institutions proposent des fonds de placement, avec un rendement potentiellement plus \élev\é" },
               ].map((item) => (
                 <div key={item.label} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "12px 18px" }}>
                   <span style={{ fontWeight: 700, color: "#D97706", fontSize: 18, lineHeight: 1, flexShrink: 0, marginTop: 1 }}>{"\•"}</span>
@@ -327,7 +327,7 @@ export default function AnalyseLppPage() {
             {/* Section 6 — Comparaison caisses */}
             <h2 id="comparaison-caisses" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comparer les caisses de pension</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Toutes les caisses ne se valent pas. Si votre employeur vous laisse le choix de la caisse collective — fr{"\é"}quent chez les ind{"\é"}pendants, les associations ou les PME — voici les crit{"\è"}res d{"\é"}terminants :
+              Toutes les caisses ne se valent pas. Si votre employeur vous laisse le choix de la caisse collective, ce qui est fr{"\é"}quent chez les ind{"\é"}pendants, les associations ou les PME, voici les crit{"\è"}res d{"\é"}terminants :
             </p>
 
             <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
@@ -368,7 +368,7 @@ export default function AnalyseLppPage() {
 
             {/* A retenir 3 */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir — Rente ou capital ?</p>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir : Rente ou capital ?</p>
               <ul className="list-none p-0 m-0">
                 {[
                   "<strong>Rente</strong> : revenu garanti \à vie, couverture du risque de long\évit\é, mais irr\éversible. Favoris\é si vous \êtes en bonne sant\é et n\’avez pas d\’autres actifs.",
@@ -438,7 +438,7 @@ export default function AnalyseLppPage() {
             <div className="sticky" style={{ top: 80 }}>
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
                 <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>Simuler mon 2{"\è"}me pilier</p>
-                <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>Rachat LPP, projection de rente, optimisation fiscale — en 3 minutes.</p>
+                <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>Rachat LPP, projection de rente, optimisation fiscale. R{"\é"}sultats en 3 minutes.</p>
                 <input type="email" placeholder="Votre adresse email" className="font-body rounded-lg w-full bg-white" style={{ border: "1px solid #E2E8F0", padding: "10px 14px", fontSize: 13, marginBottom: 10, outline: "none" }} />
                 <button className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>{"Lancer ma simulation \→"}</button>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \· 3 minutes \· Sans engagement"}</p>

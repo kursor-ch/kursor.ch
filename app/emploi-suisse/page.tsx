@@ -37,7 +37,7 @@ const SECTEURS = [
   {
     num: "4",
     name: "Ing\u00E9nierie et industrie de pr\u00E9cision",
-    desc: "Horlogerie, pharma, biotech, m\u00E9canique de pr\u00E9cision, chimie : la Suisse reste une <strong>puissance industrielle</strong> qui absorbe chaque ann\u00E9e des milliers d\u2019ing\u00E9nieurs \u2014 g\u00E9nie civil, m\u00E9canique, \u00E9lectrique, qualit\u00E9, proc\u00E9d\u00E9s.",
+    desc: "Horlogerie, pharma, biotech, m\u00E9canique de pr\u00E9cision, chimie : la Suisse reste une <strong>puissance industrielle</strong> qui absorbe chaque ann\u00E9e des milliers d\u2019ing\u00E9nieurs, notamment en g\u00E9nie civil, m\u00E9canique, \u00E9lectrique, qualit\u00E9 et proc\u00E9d\u00E9s.",
   },
   {
     num: "5",
