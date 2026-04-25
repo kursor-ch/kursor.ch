@@ -1,8 +1,70 @@
 "use client";
 
+import { useState } from "react";
 import { BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon } from "@/components/ui/ServiceIcons";
 import { K_PATH_D, K_TRANSFORM, K_VIEWBOX } from "@/components/shared/k-path";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+async function submitNewsletterEmail(email: string) {
+  const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
+  if (webhookUrl) {
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, source: "lp_final_cta" }),
+    });
+  } else {
+    console.log("Newsletter signup:", email);
+  }
+}
+
+function FinalNewsletterCta() {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const email = new FormData(e.currentTarget).get("email") as string;
+    if (!email) return;
+    setLoading(true);
+    try {
+      await submitNewsletterEmail(email);
+    } catch {
+      // Show confirmation anyway per spec
+    }
+    setLoading(false);
+    setSubmitted(true);
+  }
+
+  if (submitted) {
+    return (
+      <p className="font-body" style={{ fontSize: 14, fontWeight: 500, color: "#15803D", marginTop: 32 }}>
+        {"✓ Vous êtes inscrit(e). À bientôt dans votre boîte mail."}
+      </p>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center justify-center gap-3" style={{ marginTop: 32 }}>
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="Votre adresse email"
+        className="font-body rounded-lg bg-white"
+        style={{ border: "1px solid #E2E8F0", padding: "14px 18px", fontSize: 14, width: 280, outline: "none" }}
+      />
+      <button
+        type="submit"
+        disabled={loading}
+        className="font-body rounded-lg text-white"
+        style={{ backgroundColor: loading ? "#B45309" : "#D97706", fontSize: 14, fontWeight: 500, padding: "14px 24px", border: "none", cursor: loading ? "wait" : "pointer" }}
+      >
+        {"S’inscrire →"}
+      </button>
+    </form>
+  );
+}
 
 function KMark({ position = "top-right" }: { position?: "top-right" | "bottom-right" }) {
   const posStyle: React.CSSProperties = {
@@ -33,7 +95,7 @@ const STATS = [
   { figure: "4 200+", label: "Residents accompagn\u00E9s" },
   { figure: "92%", label: "Taux de satisfaction client" },
   { figure: "3 sem.", label: "Pour trouver un logement" },
-  { figure: "26", label: "Cantons couverts" },
+  { figure: "6", label: "Cantons couverts" },
 ];
 
 const ARTICLES = [
@@ -66,7 +128,7 @@ export default function HomePage() {
           <div className="text-center lg:text-left">
             <span className="inline-flex items-center gap-2 font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>
               <span className="inline-block rounded-full" style={{ width: 7, height: 7, backgroundColor: "#15803D" }} />
-              Specialiste expatriation en Suisse
+              Specialiste administratif Suisse
             </span>
 
             <h1 className="font-heading" style={{ fontSize: 52, fontWeight: 600, color: "#111827", lineHeight: 1.08, marginTop: 24 }}>
@@ -79,7 +141,7 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
-              <a href="/emploi" className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
+              <a href="#outils" className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
                 Commencer mon diagnostic <span>{"\u2192"}</span>
               </a>
               <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
@@ -90,7 +152,7 @@ export default function HomePage() {
               {[
                 { val: "4 200+", label: "r\u00E9sidents accompagn\u00E9s" },
                 { val: "92%", label: "taux de satisfaction" },
-                { val: "26", label: "cantons couverts" },
+                { val: "6", label: "cantons couverts" },
               ].map((s, i) => (
                 <div key={s.label} className="text-center lg:text-left" style={{ paddingLeft: i > 0 ? 24 : 0, paddingRight: 24, borderLeft: i > 0 ? "1px solid #E2E8F0" : "none" }}>
                   <p className="font-heading" style={{ fontSize: 24, fontWeight: 600, color: "#111827" }}>{s.val}</p>
@@ -154,10 +216,9 @@ export default function HomePage() {
       <section className="relative px-6 bg-creme overflow-hidden" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <KMark position="bottom-right" />
         <div ref={problem.ref} className={`relative mx-auto scroll-reveal ${problem.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
-          <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Le probleme</span>
-          <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
-            {"S\u2019installer en Suisse,"}<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>{"c\u2019est un parcours du combattant."}</span>
+          <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
+            {"L\u2019administratif en Suisse,"}<br />
+            <span className="font-heading italic" style={{ color: "#D97706" }}>{"c\u2019est un parcours de combattant."}</span>
           </h2>
           <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16, maxWidth: 560 }}>
             {"Sans les bonnes informations, chaque erreur administrative peut vous co\u00FBter des semaines et des milliers de francs."}
@@ -186,35 +247,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
-      <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#FFFFFF" }}>
-        <div ref={howItWorks.ref} className={`mx-auto text-center scroll-reveal ${howItWorks.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
-          <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.08)", padding: "5px 14px" }}>Comment ca marche</span>
-          <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15, marginTop: 16 }}>
-            4 etapes pour une<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>installation r\u00E9ussie</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left" style={{ marginTop: 48 }}>
-            {STEPS.map((s) => (
-              <div key={s.num} className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFDF8" }}>
-                <div style={{ height: 4, backgroundColor: "#D97706" }} />
-                <div style={{ padding: "24px 24px 28px" }}>
-                  <p className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#D97706", lineHeight: 1 }}>{s.num}</p>
-                  <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", marginTop: 16 }}>{s.title}</h3>
-                  <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginTop: 8 }}>{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ===== NOS DIAGNOSTICS ===== */}
       <section id="outils" className="relative px-6 overflow-hidden scroll-mt-20" style={{ backgroundColor: "#FDFAF5", paddingTop: 88, paddingBottom: 88, borderTop: "1px solid #E2E8F0" }}>
         <KMark position="top-right" />
         <div ref={diagnostics.ref} className={`relative mx-auto scroll-reveal ${diagnostics.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <div className="text-center mx-auto" style={{ maxWidth: 720 }}>
-            <span className="inline-block font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>Nos diagnostics</span>
+            <span className="inline-block font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>Nos solutions</span>
             <h2 className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]" style={{ fontWeight: 600, color: "#0F172A", lineHeight: 1.15, letterSpacing: "-0.01em", marginTop: 14 }}>
               Quatre outils. Une vie suisse.<br />
               <span className="font-heading italic" style={{ color: "#D97706", fontWeight: 500 }}>Cinq minutes par diagnostic.</span>
@@ -242,6 +280,28 @@ export default function HomePage() {
                   </span>
                 </div>
               </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== HOW IT WORKS ===== */}
+      <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#FFFFFF" }}>
+        <div ref={howItWorks.ref} className={`mx-auto text-center scroll-reveal ${howItWorks.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
+          <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
+            {"4 \u00E9tapes pour "}
+            <span className="font-heading italic" style={{ color: "#D97706" }}>optimiser votre projet Suisse</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left" style={{ marginTop: 48 }}>
+            {STEPS.map((s) => (
+              <div key={s.num} className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFDF8" }}>
+                <div style={{ height: 4, backgroundColor: "#D97706" }} />
+                <div style={{ padding: "24px 24px 28px" }}>
+                  <p className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#D97706", lineHeight: 1 }}>{s.num}</p>
+                  <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", marginTop: 16 }}>{s.title}</h3>
+                  <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginTop: 8 }}>{s.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -346,15 +406,16 @@ export default function HomePage() {
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#F9FAFB" }}>
         <div ref={finalCta.ref} className={`mx-auto text-center scroll-reveal ${finalCta.isVisible ? "visible" : ""}`} style={{ maxWidth: 560 }}>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            Commencez votre projet en Suisse<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>{"aujourd\u2019hui"}</span>
+            {"Des solutions pour chaque \u00E9tape"}<br />
+            <span className="font-heading italic" style={{ color: "#D97706" }}>{"de votre vie en Suisse"}</span>
           </h2>
-          <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16 }}>5 minutes de diagnostic. Un plan clair. 100% gratuit.</p>
-          <div className="flex items-center justify-center gap-3" style={{ marginTop: 32 }}>
-            <input type="email" placeholder="Votre adresse email" className="font-body rounded-lg bg-white" style={{ border: "1px solid #E2E8F0", padding: "14px 18px", fontSize: 14, width: 280, outline: "none" }} />
-            <a href="/emploi" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "14px 24px" }}>{"Commencer mon diagnostic \u2192"}</a>
-          </div>
-          <p className="font-body" style={{ fontSize: 12, color: "#94A3B8", marginTop: 14 }}>{"Pas de carte bancaire \u00B7 Diagnostic gratuit \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
+          <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16 }}>
+            {"Recevez chaque semaine nos conseils pratiques pour r\u00E9ussir votre installation."}
+          </p>
+          <FinalNewsletterCta />
+          <p className="font-body" style={{ fontSize: 12, color: "#94A3B8", marginTop: 14 }}>
+            {"Pas de spam. D\u00E9sabonnement en un clic."}
+          </p>
         </div>
       </section>
 
