@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "3e pilier suisse 2026 : guide pour bien choisir et optimiser",
-  description: "Pilier 3a ou 3b, banque ou assurance, multi-comptes, rattrapage 2026 : tout savoir pour maximiser votre 3e pilier suisse et réduire vos impôts.",
+  title: "3e pilier suisse 2026 : guide complet pour bien le choisir",
+  description: "Pilier 3a ou 3b, banque ou assurance, multi-comptes, rattrapage 2026 : le guide complet pour optimiser votre 3e pilier suisse et économiser des milliers.",
 };
 
 /* ───────── DATA ───────── */
