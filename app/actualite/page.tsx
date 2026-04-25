@@ -7,9 +7,64 @@ export const metadata: Metadata = {
     "Suivez l'actualité suisse en matière de lois, réformes sociales et fiscales : 3e pilier, LAMal, marché immobilier, frontaliers et bien plus. Mis à jour régulièrement.",
 };
 
+type Article = {
+  icon: string;
+  tag: string;
+  title: string;
+  description: string;
+  author: string;
+  date: string;
+  readTime: string;
+  href?: string;
+};
+
 /* ───────── DATA ───────── */
 
-const ARTICLES = [
+const ARTICLES: Article[] = [
+  {
+    icon: "🎯",
+    tag: "PRÉVOYANCE",
+    title: "Rachat rétroactif 3a 2026 : rattraper jusqu'à 10 ans de cotisations manquées",
+    description:
+      "Depuis le 1er janvier 2026, l'OPP3 modifiée permet de combler les lacunes de pilier 3a sur 10 ans glissants. Conditions, plafonds, exemples chiffrés et stratégie de séquencement pour ne rien laisser sur la table.",
+    author: "Équipe Kursor",
+    date: "25 avril 2026",
+    readTime: "8 min",
+    href: "/actualite/rachat-retroactif-3a-2026-guide",
+  },
+  {
+    icon: "🏠",
+    tag: "LOGEMENT",
+    title: "Lex Koller 2026 : ce que le durcissement change pour les résidents en Suisse",
+    description:
+      "Le Conseil fédéral a annoncé le 15 avril 2026 un avant-projet qui restreint l'acquisition d'immeubles par des étrangers. Décryptage des cinq mesures et impact concret par profil — résidents, frontaliers, locataires.",
+    author: "Équipe Kursor",
+    date: "25 avril 2026",
+    readTime: "6 min",
+    href: "/actualite/lex-koller-2026-immobilier-suisse",
+  },
+  {
+    icon: "💼",
+    tag: "EMPLOI",
+    title: "« Pas de Gen Z » : une offre d'emploi en Suisse relance le débat sur les jeunes au travail",
+    description:
+      "Une entreprise zurichoise a exclu la génération Z de ses candidatures. Derrière la polémique, les vraies tensions du marché du travail suisse en 2026 et ce que cela signifie pour les candidats internationaux.",
+    author: "Équipe Kursor",
+    date: "25 avril 2026",
+    readTime: "5 min",
+    href: "/actualite/generation-z-emploi-suisse-2026",
+  },
+  {
+    icon: "🏥",
+    tag: "ASSURANCES",
+    title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse — tout ce qui change",
+    description:
+      "Plafonds 3a, seuils LAA, paramètres LPP, taux de conversion, échelle de Berne : les chiffres actualisés pour 2026 et leur impact concret sur votre budget et votre couverture.",
+    author: "Équipe Kursor",
+    date: "25 avril 2026",
+    readTime: "7 min",
+    href: "/actualite/chiffres-cles-assurance-prevoyance-2026",
+  },
   {
     icon: "🎯",
     tag: "PRÉVOYANCE",
@@ -125,107 +180,120 @@ export default function ActualitePage() {
       <section className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 56, paddingBottom: 64 }}>
 
         {/* Featured article (first card, full width) */}
-        <div
-          className="rounded-xl bg-white overflow-hidden"
-          style={{ border: "1px solid #E2E8F0", marginBottom: 32 }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px]">
-            <div
-              className="flex items-center justify-center"
-              style={{ minHeight: 160, backgroundColor: "#FFFBF0", fontSize: 56 }}
+        {(() => {
+          const featured = ARTICLES[0];
+          const FeaturedWrapper: React.ElementType = featured.href ? Link : "div";
+          const wrapperProps = featured.href ? { href: featured.href } : {};
+          return (
+            <FeaturedWrapper
+              {...wrapperProps}
+              className="rounded-xl bg-white overflow-hidden block"
+              style={{ border: "1px solid #E2E8F0", marginBottom: 32, textDecoration: "none" }}
             >
-              {ARTICLES[0].icon}
-            </div>
-            <div style={{ padding: "32px 32px" }}>
-              <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
-                <span
-                  className="inline-block font-body uppercase rounded-full"
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.08em",
-                    color: "#D97706",
-                    backgroundColor: "rgba(217,119,6,0.1)",
-                    padding: "3px 10px",
-                  }}
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px]">
+                <div
+                  className="flex items-center justify-center"
+                  style={{ minHeight: 160, backgroundColor: "#FFFBF0", fontSize: 56 }}
                 >
-                  {ARTICLES[0].tag}
-                </span>
-                <span className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>À LA UNE</span>
+                  {featured.icon}
+                </div>
+                <div style={{ padding: "32px 32px" }}>
+                  <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
+                    <span
+                      className="inline-block font-body uppercase rounded-full"
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        letterSpacing: "0.08em",
+                        color: "#D97706",
+                        backgroundColor: "rgba(217,119,6,0.1)",
+                        padding: "3px 10px",
+                      }}
+                    >
+                      {featured.tag}
+                    </span>
+                    <span className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>À LA UNE</span>
+                  </div>
+                  <h2
+                    className="font-heading"
+                    style={{ fontSize: 22, fontWeight: 600, color: "#111827", lineHeight: 1.35, marginBottom: 12 }}
+                  >
+                    {featured.title}
+                  </h2>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 14, color: "#475569", lineHeight: 1.7, marginBottom: 20 }}
+                  >
+                    {featured.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>
+                      {featured.author} · {featured.date}
+                    </p>
+                    <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>{featured.readTime}</p>
+                  </div>
+                </div>
               </div>
-              <h2
-                className="font-heading"
-                style={{ fontSize: 22, fontWeight: 600, color: "#111827", lineHeight: 1.35, marginBottom: 12 }}
-              >
-                {ARTICLES[0].title}
-              </h2>
-              <p
-                className="font-body"
-                style={{ fontSize: 14, color: "#475569", lineHeight: 1.7, marginBottom: 20 }}
-              >
-                {ARTICLES[0].description}
-              </p>
-              <div className="flex items-center justify-between">
-                <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>
-                  {ARTICLES[0].author} · {ARTICLES[0].date}
-                </p>
-                <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>{ARTICLES[0].readTime}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+            </FeaturedWrapper>
+          );
+        })()}
 
         {/* Remaining articles grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ARTICLES.slice(1).map((article) => (
-            <div
-              key={article.title}
-              className="rounded-xl bg-white overflow-hidden"
-              style={{ border: "1px solid #E2E8F0" }}
-            >
-              {/* Card header */}
-              <div
-                className="flex items-center justify-center"
-                style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 40 }}
+          {ARTICLES.slice(1).map((article) => {
+            const Wrapper: React.ElementType = article.href ? Link : "div";
+            const wrapperProps = article.href ? { href: article.href } : {};
+            return (
+              <Wrapper
+                key={article.title}
+                {...wrapperProps}
+                className="rounded-xl bg-white overflow-hidden block"
+                style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}
               >
-                {article.icon}
-              </div>
-
-              {/* Card body */}
-              <div style={{ padding: "20px 24px" }}>
-                <span
-                  className="inline-block font-body uppercase"
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 600,
-                    letterSpacing: "0.08em",
-                    color: "#D97706",
-                    marginBottom: 8,
-                  }}
+                {/* Card header */}
+                <div
+                  className="flex items-center justify-center"
+                  style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 40 }}
                 >
-                  {article.tag}
-                </span>
-                <h2
-                  className="font-body"
-                  style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4, marginBottom: 10 }}
-                >
-                  {article.title}
-                </h2>
-                <p
-                  className="font-body"
-                  style={{ fontSize: 13, color: "#475569", lineHeight: 1.65, marginBottom: 16 }}
-                >
-                  {article.description}
-                </p>
-                <div className="flex items-center justify-between" style={{ paddingTop: 12, borderTop: "1px solid #F1F5F9" }}>
-                  <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>
-                    {article.author} · {article.date}
-                  </p>
-                  <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{article.readTime}</p>
+                  {article.icon}
                 </div>
-              </div>
-            </div>
-          ))}
+
+                {/* Card body */}
+                <div style={{ padding: "20px 24px" }}>
+                  <span
+                    className="inline-block font-body uppercase"
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 600,
+                      letterSpacing: "0.08em",
+                      color: "#D97706",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {article.tag}
+                  </span>
+                  <h2
+                    className="font-body"
+                    style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4, marginBottom: 10 }}
+                  >
+                    {article.title}
+                  </h2>
+                  <p
+                    className="font-body"
+                    style={{ fontSize: 13, color: "#475569", lineHeight: 1.65, marginBottom: 16 }}
+                  >
+                    {article.description}
+                  </p>
+                  <div className="flex items-center justify-between" style={{ paddingTop: 12, borderTop: "1px solid #F1F5F9" }}>
+                    <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>
+                      {article.author} · {article.date}
+                    </p>
+                    <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{article.readTime}</p>
+                  </div>
+                </div>
+              </Wrapper>
+            );
+          })}
         </div>
       </section>
 
