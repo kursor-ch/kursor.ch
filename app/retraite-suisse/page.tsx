@@ -2,188 +2,65 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "3e pilier suisse 2026 : maximisez vos \économies fiscales",
-  description: "Guide complet 3\ème pilier suisse 2026 : plafond 3a (7\ժ258 CHF), rattrapage r\étroactif (36\ժ290 CHF), 3b, banque vs assurance, retraits, avantages fiscaux. Tout ce qu\’il faut savoir.",
+  title: "3e pilier suisse 2026 : guide pour bien choisir et optimiser",
+  description: "Pilier 3a ou 3b, banque ou assurance, multi-comptes, rattrapage 2026 : tout savoir pour maximiser votre 3e pilier suisse et réduire vos impôts.",
 };
 
-/* \─\─\─\─\─\─\─\─\─ DATA \─\─\─\─\─\─\─\─\─ */
+/* ───────── DATA ───────── */
 
 const TOC = [
-  { id: "quest-ce-que", label: "Qu\’est-ce que le 3\ème pilier ?" },
-  { id: "3a-vs-3b", label: "3a vs 3b : quelle diff\érence ?" },
-  { id: "plafonds-2026", label: "Plafonds et limites 2026" },
-  { id: "nouvelle-loi-rattrapage", label: "Nouvelle loi : rattrapage r\étroactif" },
-  { id: "avantages-fiscaux", label: "Avantages fiscaux concrets" },
-  { id: "banque-vs-assurance", label: "Banque vs assurance : que choisir ?" },
-  { id: "retrait-conditions", label: "Retrait : conditions et timing" },
-  { id: "comment-ouvrir", label: "Comment ouvrir un 3\ème pilier" },
-  { id: "erreurs", label: "Erreurs \à \éviter" },
+  { id: "indispensable", label: "Pourquoi le 3e pilier est devenu indispensable" },
+  { id: "3a-ou-3b", label: "3a ou 3b : ne pas confondre" },
+  { id: "banque-ou-assurance", label: "Banque ou assurance" },
+  { id: "multi-comptes", label: "La stratégie des multi-comptes" },
+  { id: "rattrapage-2026", label: "Nouveauté 2026 : le rattrapage" },
+  { id: "frontaliers-tou", label: "Frontaliers : le statut TOU" },
+  { id: "erreurs", label: "Les erreurs à éviter" },
 ];
 
-const COMPARAISON_3A_3B = [
-  {
-    critere: "D\éduction fiscale",
-    pilier3a: "Oui \— jusqu\’\à 7\’258 CHF/an",
-    pilier3b: "Non (sauf quelques cantons)",
-  },
-  {
-    critere: "Plafond de versement",
-    pilier3a: "7\’258 CHF (salari\é) / 36\’288 CHF (ind\ép.)",
-    pilier3b: "Aucun plafond l\égal",
-  },
-  {
-    critere: "Flexibilit\é de retrait",
-    pilier3a: "Limit\ée (conditions strictes)",
-    pilier3b: "Totale (quand vous voulez)",
-  },
-  {
-    critere: "Blocage des fonds",
-    pilier3a: "Jusqu\’\à la retraite (sauf exceptions)",
-    pilier3b: "Aucun blocage",
-  },
-  {
-    critere: "Id\éal pour",
-    pilier3a: "Optimisation fiscale maximale",
-    pilier3b: "Compl\ément \épargne libre",
-  },
-  {
-    critere: "Formes possibles",
-    pilier3a: "Compte bancaire, assurance-vie, titres",
-    pilier3b: "Assurance-vie, \épargne libre",
-  },
-];
-
-const PLAFONDS_2026 = [
-  {
-    profil: "Salari\é affili\é \à un 2\ème pilier",
-    plafond: "7\’258 CHF / an",
-    note: "Plafond standard 2026, revaloris\é chaque ann\ée",
-  },
-  {
-    profil: "Ind\épendant sans 2\ème pilier",
-    plafond: "36\’288 CHF / an",
-    note: "Soit 20\ % du revenu net, plafonn\é \à 36\’288 CHF",
-  },
-  {
-    profil: "Rattrapage r\étroactif (10 ans)",
-    plafond: "36\’290 CHF cumul\é",
-    note: "Nouveau depuis janvier 2026 \— ann\ées non utilis\ées depuis 2017",
-  },
-];
-
-const BANQUE_VS_ASSURANCE = [
-  {
-    critere: "Frais",
-    banque: "Faibles ou nuls",
-    assurance: "\Élev\és (primes, commissions)",
-    avantage: "banque",
-  },
-  {
-    critere: "Rendement",
-    banque: "Variable (taux ou titres)",
-    assurance: "Garanti minimum + part.",
-    avantage: "neutre",
-  },
-  {
-    critere: "Flexibilit\é",
-    banque: "Versements libres",
-    assurance: "Primes fixes oblig.",
-    avantage: "banque",
-  },
-  {
-    critere: "Protection d\éc\ès / invalidit\é",
-    banque: "Non incluse",
-    assurance: "Incluse dans le contrat",
-    avantage: "assurance",
-  },
-  {
-    critere: "Transfert possible",
-    banque: "Oui, vers autre \établissement",
-    assurance: "Difficult\é (rachat avec p\énalit\és)",
-    avantage: "banque",
-  },
-  {
-    critere: "Id\éal pour",
-    banque: "Investisseurs, ind\épendants",
-    assurance: "Familles, besoin couverture",
-    avantage: "neutre",
-  },
-];
-
-const CONDITIONS_RETRAIT = [
-  {
-    num: "1",
-    title: "Retraite ordinaire (64/65 ans)",
-    desc: "Le cas standard. Vous pouvez retirer vos fonds d\ès 5 ans avant l\’\âge AVS (soit \à 59 ans pour les femmes, 60 ans pour les hommes) et jusqu\’\à 5 ans apr\ès.",
-  },
-  {
-    num: "2",
-    title: "Achat immobilier en Suisse",
-    desc: "Retrait anticip\é possible pour financer l\’acquisition ou l\’amortissement d\’un logement principal en Suisse. Minimum 25\’000 CHF, tous les 5 ans.",
-  },
-  {
-    num: "3",
-    title: "D\ébut d\’une activit\é ind\épendante",
-    desc: "Vous pouvez retirer vos fonds si vous devenez ind\épendant et cessez d\’\être affili\é \à une caisse de pension LPP.",
-  },
-  {
-    num: "4",
-    title: "Quitter la Suisse d\éfinitivement",
-    desc: "D\épart hors UE/AELE : retrait int\égral autoris\é. D\épart vers un pays UE/AELE : seule la part obligatoire reste bloqu\ée.",
-  },
-  {
-    num: "5",
-    title: "Invalidit\é totale (AI)",
-    desc: "En cas d\’invalidit\é totale reconnue par l\’assurance-invalidit\é f\éd\érale, le capital peut \être lib\ér\é par anticipation.",
-  },
+const A_RETENIR = [
+  "Le plafond 2025-2026 est de <strong>7 258 CHF/an</strong> pour les salariés affiliés à une caisse de pension, et 20 % du revenu (max. 36 288 CHF) pour les indépendants sans 2e pilier.",
+  "<strong>Nouveauté 2026 :</strong> il est désormais possible de rattraper les versements 3a manqués des années précédentes, sous conditions.",
+  "Le <strong>3a (lié)</strong> offre une déduction fiscale immédiate ; le <strong>3b (libre)</strong> n'est déductible qu'à Genève et Fribourg sous conditions.",
+  "Les frontaliers ne bénéficient de la déduction qu'avec le <strong>statut de quasi-résident (TOU)</strong>, soit 90 % des revenus du foyer imposés en Suisse.",
+  "Ouvrir <strong>plusieurs comptes 3a</strong> permet d'échelonner les retraits à la retraite et d'économiser des milliers de francs d'impôts.",
+  "<strong>Banque vs assurance :</strong> la banque pour la flexibilité et le rendement, l'assurance pour la couverture décès/invalidité.",
 ];
 
 const ERREURS = [
   {
-    title: "Ne verser qu\’en fin d\’ann\ée",
-    desc: "Verser en janvier plut\ôt qu\’en d\écembre vous offre 11 mois de rendement suppl\émentaire. Sur 20 ans, l\’impact est significatif.",
+    title: "Verser à la dernière minute",
+    desc: "Un versement effectué le 28 décembre rapporte autant fiscalement qu'un versement étalé sur l'année, mais perd 12 mois d'intérêts composés. Mensualisez par ordre permanent.",
   },
   {
-    title: "Choisir une assurance sans comparer",
-    desc: "Les produits bancaires (compte ou titres 3a) affichent souvent de meilleurs rendements nets que les assurances-vie, avec moins de contraintes.",
+    title: "Garder un seul compte 3a",
+    desc: "L'erreur la plus coûteuse sur le long terme, car il est impossible d'échelonner les retraits avec un compte unique.",
   },
   {
-    title: "Tout retirer en une fois",
-    desc: "Retirer sur plusieurs ann\ées (ou depuis plusieurs comptes) r\éduit consid\érablement l\’imp\ôt sur le capital. Planifiez 5 ans avant la retraite.",
+    title: "Choisir l'assurance par réflexe",
+    desc: "Beaucoup de souscripteurs signent un 3a assurance par habitude alors que leurs besoins relèvent du bancaire. Comparez systématiquement les TER.",
   },
   {
-    title: "Oublier les ann\ées de rattrapage",
-    desc: "Depuis 2026, vous pouvez rattraper jusqu\’\à 10 ann\ées non cotis\ées pour un total de 36\’290 CHF. C\’est une opportunit\é fiscale exceptionnelle \à ne pas manquer.",
+    title: "Oublier la clause bénéficiaire",
+    desc: "L'ordre légal de succession peut être modifié pour le 3a, notamment pour protéger un concubin ou rééquilibrer entre enfants. À formaliser par écrit.",
   },
-  {
-    title: "Ne pas ouvrir plusieurs comptes 3a",
-    desc: "La loi autorise plusieurs comptes 3a dans diff\érents \établissements. Cela permet un retrait \échelonn\é et optimis\é fiscalement \à la retraite.",
-  },
-];
-
-const STEPS = [
-  { num: "1", title: "Choisir le bon prestataire", desc: "Comparez les banques (VIAC, Frankly, finpension, PostFinance) et les assurances sur la base des frais, du rendement historique et de la flexibilit\é." },
-  { num: "2", title: "Rassembler les documents", desc: "Carte d\’identit\é ou passeport, num\éro AVS, coordonn\ées bancaires et justificatif de revenu (fiche de salaire ou bilan pour ind\épendants)." },
-  { num: "3", title: "Choisir la strat\égie de placement", desc: "Compte \épargne classique (rendement limit\é), fonds \équilibr\és (40\–60\ % actions) ou portefeuille 100\ % actions pour un horizon long terme." },
-  { num: "4", title: "Effectuer le premier versement", desc: "D\éfinissez un ordre permanent mensuel ou versez un montant annuel. Le plafond 2026 est de 7\’258 CHF pour les salari\és." },
-  { num: "5", title: "D\éduire sur votre d\éclaration", desc: "Chaque ann\ée, indiquez le montant vers\é dans la rubrique \« pilier 3a \» de votre d\éclaration fiscale cantonale. L\’\établissement vous envoie automatiquement l\’attestation." },
 ];
 
 const SIMILAR_ARTICLES = [
-  { icon: "\u{1F3E6}", title: "Caisse de pension LPP : comment optimiser votre 2\ème pilier", readTime: "11 min", category: "Patrimoine" },
+  { icon: "\u{1F3E6}", title: "Caisse de pension LPP : comment optimiser votre 2e pilier", readTime: "11 min", category: "Patrimoine" },
   { icon: "\u{1F4B3}", title: "Ouvrir un compte bancaire en Suisse : guide 2026", readTime: "6 min", category: "Finances" },
-  { icon: "\u{1F3E0}", title: "Acheter un appartement en Suisse : \étapes et financement", readTime: "13 min", category: "Logement" },
+  { icon: "\u{1F3E0}", title: "Acheter un appartement en Suisse : étapes et financement", readTime: "13 min", category: "Logement" },
 ];
 
 const RELATED_ARTICLES = [
-  { icon: "\u{1F4CB}", tag: "PATRIMOINE", title: "Imp\ôts en Suisse : comment r\éduire sa facture fiscale l\également", author: "Marc L.", date: "14 avril 2026", readTime: "8 min" },
-  { icon: "\u{1F4B0}", tag: "FINANCES", title: "LPP 2025 : ce qui change pour votre 2\ème pilier", author: "Karim D.", date: "2 avril 2026", readTime: "7 min" },
-  { icon: "\u{1F3E5}", tag: "ASSURANCE", title: "Assurance-vie en Suisse : avantages, types et fiscalit\é", author: "Julie M.", date: "20 mars 2026", readTime: "9 min" },
+  { icon: "\u{1F4CB}", tag: "PATRIMOINE", title: "Impôts en Suisse : comment réduire sa facture fiscale légalement", author: "Marc L.", date: "14 avril 2026", readTime: "8 min" },
+  { icon: "\u{1F4B0}", tag: "FINANCES", title: "LPP 2025 : ce qui change pour votre 2e pilier", author: "Karim D.", date: "2 avril 2026", readTime: "7 min" },
+  { icon: "\u{1F3E5}", tag: "ASSURANCE", title: "Assurance-vie en Suisse : avantages, types et fiscalité", author: "Julie M.", date: "20 mars 2026", readTime: "9 min" },
 ];
 
-const TAGS = ["3\ème pilier", "Pilier 3a", "Pilier 3b", "Pr\évoyance", "Retraite", "Fiscalit\é", "Suisse"];
+const TAGS = ["3e pilier", "Pilier 3a", "Pilier 3b", "Prévoyance", "Retraite", "Fiscalité", "Suisse"];
 
-/* \─\─\─\─\─\─\─\─\─ PAGE \─\─\─\─\─\─\─\─\─ */
+/* ───────── PAGE ───────── */
 
 export default function RetraiteSuissePage() {
   return (
@@ -193,14 +70,17 @@ export default function RetraiteSuissePage() {
         <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>PATRIMOINE</span>
           <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            3{"\è"}me pilier suisse :<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>le guide complet pour \épargner et d\éfiscaliser</span>
+            3e pilier suisse : le guide 2026<br />
+            <span className="font-heading italic" style={{ color: "#D97706" }}>pour bien choisir et maximiser ses avantages</span>
           </h1>
+          <p className="font-body italic" style={{ fontSize: 16, color: "#64748B", marginTop: 16, lineHeight: 1.6 }}>
+            Pilier 3a, pilier 3b, banque ou assurance, stratégie multi-comptes, rattrapage des cotisations manquées : tout ce qui change en 2026.
+          </p>
           <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
             <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
             <div>
-              <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{"\É"}quipe Kursor</p>
-              <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\·"} 15 min de lecture</p>
+              <p className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>Équipe Kursor</p>
+              <p className="font-body" style={{ fontSize: 12, color: "#94A3B8" }}>Avril 2026 {"\u00B7"} 12 min de lecture</p>
             </div>
           </div>
         </div>
@@ -232,233 +112,154 @@ export default function RetraiteSuissePage() {
           {/* MAIN CONTENT */}
           <article>
 
-            {/* Intro */}
-            <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              En Suisse, la retraite repose sur trois piliers. Le premier (AVS) et le deuxi{"\è"}me (LPP) couvrent environ <strong style={{ color: "#111827" }}>60{"\ "}% du dernier salaire</strong>. Le <strong style={{ color: "#111827" }}>3{"\è"}me pilier</strong> est l{"\’"}outil privil{"\é"}gi{"\é"} pour combler l{"\’"}{"\é"}cart, tout en b{"\é"}n{"\é"}ficiant d{"\’"}une d{"\é"}duction fiscale imm{"\é"}diate. En 2026, une nouvelle loi sur le <strong style={{ color: "#111827" }}>rattrapage r{"\é"}troactif</strong> ouvre des opportunit{"\é"}s in{"\é"}dites. Ce guide vous explique tout.
-            </p>
-
-            {/* A retenir 1 */}
+            {/* À retenir */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir</p>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir</p>
               <ul className="list-none p-0 m-0">
-                {[
-                  "Le <strong>pilier 3a</strong> offre une d\éduction fiscale imm\édiate mais bloque les fonds jusqu\’\à la retraite (sauf cas exceptionnels).",
-                  "Le <strong>plafond 2026</strong> est de 7\’258 CHF pour les salari\és affili\és au 2\ème pilier.",
-                  "Depuis <strong>janvier 2026</strong>, il est possible de rattraper les ann\ées non cotis\ées depuis 2017, jusqu\’\à 36\’290 CHF.",
-                  "Une strat\égie multi-comptes permet d\’\étaler les retraits et de <strong>r\éduire l\’imp\ôt</strong> sur le capital.",
-                  "Les produits <strong>bancaires</strong> (VIAC, finpension) affichent souvent de meilleurs rendements nets que les assurances-vie.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\•"}</span>
+                {A_RETENIR.map((item, idx) => (
+                  <li key={idx} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
+                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\u2022"}</span>
                     <span dangerouslySetInnerHTML={{ __html: item }} />
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Section 1 — Qu'est-ce que */}
-            <h2 id="quest-ce-que" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Qu{"\’"}est-ce que le 3{"\è"}me pilier suisse ?</h2>
+            {/* Section 1 */}
+            <h2 id="indispensable" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              Pourquoi le 3e pilier est devenu indispensable
+            </h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le syst{"\è"}me de retraite suisse est structur{"\é"} en trois piliers compl{"\é"}mentaires :
+              Les 1er et 2e piliers ne couvrent en moyenne que <strong style={{ color: "#111827" }}>55 % à 60 % du dernier salaire</strong> une fois à la retraite. Pour les revenus supérieurs à 90 000 CHF annuels et pour les profils ayant connu des interruptions de carrière (études, expatriation, maternité, chômage), le ratio descend souvent sous 50 %. Le 3e pilier comble cet écart tout en offrant des avantages fiscaux que peu de pays accordent à leurs épargnants.
             </p>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
-              {[
-                { num: "1er pilier", label: "AVS (Assurance-vieillesse et survivants)", desc: "Obligatoire, finance la retraite de base de toute la population. Taux de remplacement\ : environ 40\ % du salaire." },
-                { num: "2\ème pilier", label: "LPP (Caisse de pension professionnelle)", desc: "Obligatoire d\ès 21\’510 CHF de salaire annuel. Compl\ète l\’AVS pour atteindre environ 60\ % du dernier salaire." },
-                { num: "3\ème pilier", label: "Pr\évoyance priv\ée individuelle", desc: "Facultatif mais fortement incit\é fiscalement. Permet de combler l\’\écart entre le niveau de vie actif et la rente." },
-              ].map((p) => (
-                <div key={p.num} className="flex items-start gap-4 rounded-xl bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "18px 22px" }}>
-                  <div className="flex items-center justify-center shrink-0 font-heading" style={{ width: 48, height: 48, borderRadius: 10, backgroundColor: "rgba(217,119,6,0.08)", color: "#D97706", fontWeight: 700, fontSize: 13, textAlign: "center", lineHeight: 1.2, padding: "6px 4px" }}>{p.num}</div>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{p.label}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }}>{p.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Le 3{"\è"}me pilier se subdivise en deux formes : le <strong style={{ color: "#111827" }}>pilier 3a</strong> (pr{"\é"}voyance li{"\é"}e, avec avantage fiscal) et le <strong style={{ color: "#111827" }}>pilier 3b</strong> (pr{"\é"}voyance libre, sans contrainte).
+              Pour un salarié au taux marginal d{"'"}imposition de 35 %, chaque versement de 7 258 CHF dans le 3a génère environ <strong style={{ color: "#111827" }}>2 540 CHF d{"'"}économie d{"'"}impôt immédiate</strong>. Sur 30 ans de carrière, c{"'"}est plus de 75 000 CHF d{"'"}impôts économisés, sans compter les intérêts capitalisés et la croissance des fonds de prévoyance.
             </p>
 
-            {/* Section 2 — 3a vs 3b */}
-            <h2 id="3a-vs-3b" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>3a vs 3b : quelle diff{"\é"}rence ?</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Les deux formes sont compl{"\é"}mentaires mais r{"\é"}pondent {"\à"} des logiques diff{"\é"}rentes :
-            </p>
-            <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", marginBottom: 32 }}>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr style={{ backgroundColor: "#F8FAFC" }}>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Crit{"\è"}re</th>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#D97706", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Pilier 3a</th>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Pilier 3b</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARAISON_3A_3B.map((row, i) => (
-                    <tr key={row.critere} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA" }}>
-                      <td className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", padding: "13px 16px", borderBottom: "1px solid #F1F5F9" }}>{row.critere}</td>
-                      <td className="font-body" style={{ fontSize: 13, color: "#475569", padding: "13px 16px", borderBottom: "1px solid #F1F5F9" }}>{row.pilier3a}</td>
-                      <td className="font-body" style={{ fontSize: 13, color: "#475569", padding: "13px 16px", borderBottom: "1px solid #F1F5F9" }}>{row.pilier3b}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Section 3 — Plafonds 2026 */}
-            <h2 id="plafonds-2026" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Plafonds et limites 2026</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Le plafond de d{"\é"}duction du pilier 3a est revalorис{"\é"} r{"\é"}guli{"\è"}rement en fonction de l{"\’"}{"\é"}volution de l{"\’"}AVS :
-            </p>
-            <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
-              {PLAFONDS_2026.map((item) => (
-                <div key={item.profil} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "20px 24px" }}>
-                  <div className="flex items-center justify-between flex-wrap gap-3" style={{ marginBottom: 8 }}>
-                    <span className="font-body" style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{item.profil}</span>
-                    <span className="font-heading rounded-full" style={{ fontSize: 15, fontWeight: 700, color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 14px" }}>{item.plafond}</span>
-                  </div>
-                  <p className="font-body" style={{ fontSize: 13, color: "#64748B" }}>{item.note}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Section 4 — Nouvelle loi rattrapage */}
-            <h2 id="nouvelle-loi-rattrapage" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Nouvelle loi : le rattrapage r{"\é"}troactif 2026</h2>
+            {/* Section 2 */}
+            <h2 id="3a-ou-3b" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              3a ou 3b : ne pas confondre les deux logiques
+            </h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Entr{"\é"}e en vigueur le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la modification de l{"\’"}Ordonnance OPP3 permet d{"\é"}sormais de <strong style={{ color: "#111827" }}>combler les ann{"\é"}es de pilier 3a non utilis{"\é"}es</strong> depuis 2017. C{"\’"}est une r{"\é"}volution pour tous ceux qui n{"\’"}ont pas cotis{"\é"} ou cotis{"\é"} partiellement.
+              Le <strong style={{ color: "#111827" }}>pilier 3a (lié)</strong> est avant tout un produit fiscal. Les versements sont plafonnés, déductibles du revenu imposable, et le capital est bloqué jusqu{"'"}à 5 ans avant l{"'"}âge légal de la retraite, sauf cas exceptionnels (achat de résidence principale, départ définitif de Suisse, passage à l{"'"}indépendance, rachat LPP). Au retrait, vous payez un impôt unique à taux réduit, séparé du reste de vos revenus.
             </p>
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 20 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir : Rattrapage r{"\é"}troactif</p>
-              <ul className="list-none p-0 m-0">
-                {[
-                  "Rattrapage possible sur les <strong>10 derni\ères ann\ées</strong> (ann\ées 2017\–2025).",
-                  "Montant maximum rattrapable\ : <strong>36\’290 CHF</strong> au total.",
-                  "La d\éduction est limit\ée au <strong>plafond annuel</strong> par ann\ée de rattrapage.",
-                  "Le rattrapage n\’est autoris\é que si vous \êtes <strong>actuellement affili\é</strong> \à un 2\ème pilier.",
-                  "Chaque versement de rattrapage est int\égralement d\éductible du revenu imposable.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\•"}</span>
-                    <span dangerouslySetInnerHTML={{ __html: item }} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Exemple concret : si vous n{"\’"}avez pas cotis{"\é"} au pilier 3a de 2017 {"\à"} 2021 (5 ans), vous pouvez verser jusqu{"\’"}{"\à"} <strong style={{ color: "#111827" }}>36{"\’"}290 CHF en une seule fois</strong> en 2026, en plus du plafond annuel ordinaire de 7{"\’"}258 CHF. L{"\’"}impact fiscal peut atteindre plusieurs milliers de francs selon votre canton et votre taux marginal d{"\’"}imposition.
-            </p>
-
-            {/* Section 5 — Avantages fiscaux */}
-            <h2 id="avantages-fiscaux" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Avantages fiscaux concrets</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le pilier 3a offre trois niveaux d{"\’"}avantage fiscal, souvent sous-estim{"\é"}s :
+              Le <strong style={{ color: "#111827" }}>pilier 3b (libre)</strong> est une enveloppe d{"'"}épargne classique : compte, assurance-vie ou placement. Aucun plafond, aucune contrainte de retrait, mais aucune déduction fiscale dans la majorité des cantons (sauf Genève et Fribourg, sous conditions). Le 3b prend tout son sens pour les épargnants ayant déjà saturé leur 3a ou souhaitant conserver une liquidité totale.
             </p>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 20 }}>
-              {[
-                { icon: "1", label: "D\éduction sur le revenu imposable", desc: "Chaque franc vers\é en 3a est d\éduit de votre revenu imposable. Selon votre canton et votre taux marginal (15\–40\ %), une cotisation de 7\’258 CHF peut g\én\érer une \économie fiscale de 1\’100 \à 2\’900 CHF." },
-                { icon: "2", label: "Exon\ération de l\’imp\ôt sur la fortune", desc: "Les fonds bloqu\és en 3a ne sont pas soumis \à l\’imp\ôt cantonal sur la fortune pendant la dur\ée de placement." },
-                { icon: "3", label: "Imp\ôt r\éduit au retrait", desc: "Le capital retrait\é est impos\é s\épar\ément du revenu ordinaire, \à un taux pr\éf\érentiel (souvent 1\–8\ % selon le canton et le montant). L\’imp\ôt sur le capital est ainsi bien inf\érieur \à l\’\économie r\éalis\ée chaque ann\ée." },
-              ].map((item) => (
-                <div key={item.icon} className="flex items-start gap-4 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{item.icon}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{item.label}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }}>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                <strong style={{ color: "#D97706" }}>R{"\è"}gle d{"\’"}or :</strong> cotiser au pilier 3a pendant 30 ans peut {"\é"}conomiser entre <strong>30{"\’"}000 et 80{"\’"}000 CHF d{"\’"}imp{"\ô"}ts</strong> sur l{"\’"}ensemble de la p{"\é"}riode, selon votre canton et votre revenu.
+                <strong style={{ color: "#D97706" }}>La règle de bon sens :</strong> on remplit le 3a en priorité, et on ouvre un 3b en complément.
               </p>
             </div>
 
-            {/* Section 6 — Banque vs Assurance */}
-            <h2 id="banque-vs-assurance" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Banque vs assurance : que choisir ?</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Le pilier 3a peut {"\ê"}tre ouvert aupr{"\è"}s d{"\’"}une banque ou d{"\’"}une compagnie d{"\’"}assurance. Les diff{"\é"}rences sont importantes :
+            {/* Section 3 */}
+            <h2 id="banque-ou-assurance" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              Banque ou assurance : deux philosophies opposées
+            </h2>
+            <div className="flex flex-col gap-4" style={{ marginBottom: 20 }}>
+              {[
+                {
+                  label: "Le 3a bancaire",
+                  desc: "Fonctionne comme un compte d'épargne ou de placement. Vous versez ce que vous voulez, quand vous voulez, jusqu'au plafond annuel. Vous pouvez investir en fonds de prévoyance (jusqu'à 99 % en actions sur certaines solutions), ce qui booste considérablement le rendement long terme. Frais annuels : généralement 0,3 à 1 % selon la stratégie de placement.",
+                },
+                {
+                  label: "Le 3a assurance",
+                  desc: "Un contrat à prime fixe sur durée déterminée, qui combine épargne et couverture risque (décès, invalidité). L'avantage : vos proches sont protégés financièrement même si vous décédez tôt. Les inconvénients : flexibilité réduite, frais d'acquisition élevés les premières années, et valeur de rachat faible en cas de résiliation anticipée.",
+                },
+              ].map((item) => (
+                <div key={item.label} className="rounded-xl bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "18px 22px" }}>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: "#111827", marginBottom: 6 }}>{item.label}</p>
+                  <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65 }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              Pour la majorité des contribuables, un <strong style={{ color: "#111827" }}>3a bancaire en fonds de prévoyance</strong> offre le meilleur rapport rendement/coût. Le 3a assurance se justifie surtout pour les familles avec enfants à charge cherchant à sécuriser un capital décès.
             </p>
-            <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", marginBottom: 32 }}>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr style={{ backgroundColor: "#F8FAFC" }}>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Crit{"\è"}re</th>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#D97706", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Banque</th>
-                    <th className="font-body" style={{ fontSize: 12, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.06em", padding: "12px 16px", textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>Assurance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {BANQUE_VS_ASSURANCE.map((row, i) => (
-                    <tr key={row.critere} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA" }}>
-                      <td className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", padding: "13px 16px", borderBottom: "1px solid #F1F5F9" }}>{row.critere}</td>
-                      <td className="font-body" style={{ fontSize: 13, color: row.avantage === "banque" ? "#059669" : "#475569", padding: "13px 16px", borderBottom: "1px solid #F1F5F9", fontWeight: row.avantage === "banque" ? 600 : 400 }}>{row.banque}</td>
-                      <td className="font-body" style={{ fontSize: 13, color: row.avantage === "assurance" ? "#059669" : "#475569", padding: "13px 16px", borderBottom: "1px solid #F1F5F9", fontWeight: row.avantage === "assurance" ? 600 : 400 }}>{row.assurance}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+
+            {/* Section 4 */}
+            <h2 id="multi-comptes" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              La stratégie des multi-comptes : le levier sous-exploité
+            </h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Au moment de la retraite, l{"'"}administration additionne tous les retraits de capital de prévoyance d{"'"}une même année pour calculer l{"'"}impôt, qui est progressif. Plus le retrait est important, plus le taux marginal grimpe.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              La parade : ouvrir <strong style={{ color: "#111827" }}>3 à 5 comptes 3a différents</strong> pendant la vie active, puis les retirer sur des années fiscales distinctes entre 60 et 70 ans. Sur un capital total de 300 000 CHF, échelonner les retraits sur 5 ans plutôt qu{"'"}en une fois peut faire économiser <strong style={{ color: "#111827" }}>15 000 à 25 000 CHF d{"'"}impôts</strong> selon le canton.
+            </p>
+            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
+              <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
+                <strong style={{ color: "#D97706" }}>À noter :</strong> on ne peut pas scinder un compte unique au moment du retrait. La planification doit se faire pendant la phase d{"'"}épargne.
+              </p>
             </div>
 
-            {/* A retenir — banque */}
+            {/* Section 5 */}
+            <h2 id="rattrapage-2026" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              Nouveauté 2026 : le rattrapage des cotisations manquées
+            </h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Jusqu{"'"}en 2025, une année de cotisation 3a non utilisée était définitivement perdue. Depuis le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la loi autorise enfin le rattrapage rétroactif des versements manqués sur les années précédentes, dans la limite du plafond annuel de chaque exercice concerné.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Un cadre qui n{"'"}a pas versé sur son 3a depuis quelques années peut, dès 2026, effectuer un versement de rattrapage cumulant plusieurs années, <strong style={{ color: "#111827" }}>entièrement déductible du revenu de l{"'"}année en cours</strong>. Pour les hauts revenus, c{"'"}est l{"'"}équivalent d{"'"}un rachat LPP plus souple, sans délai de blocage de trois ans avant retrait en capital.
+            </p>
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>{"\À"} retenir</p>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir : rattrapage rétroactif 2026</p>
               <ul className="list-none p-0 m-0">
                 {[
-                  "Les plateformes digitales comme <strong>VIAC, finpension ou Frankly</strong> proposent des fonds 3a \à faibles frais (0.3\–0.5\ %) avec une strat\égie actions.",
-                  "Une <strong>assurance-vie 3a</strong> est pertinente si vous avez des proches \à prot\éger en cas de d\éc\ès ou d\’invalidit\é.",
-                  "Ne jamais signer un contrat d\’assurance-vie 3a sans en comprendre les frais et les p\énalit\és de rachat.",
-                ].map((item) => (
-                  <li key={item} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
-                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\•"}</span>
+                  "Rattrapage autorisé sur les années précédentes, dans la limite du plafond annuel de chaque exercice.",
+                  "La déduction s'impute sur le revenu de <strong>l'année du versement de rattrapage</strong>.",
+                  "Condition : être affilié à une institution de prévoyance professionnelle au moment du versement.",
+                  "Cumulable avec le versement ordinaire de l'année en cours (7 258 CHF + rattrapage).",
+                ].map((item, idx) => (
+                  <li key={idx} className="font-body flex items-start gap-2" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65, marginBottom: 6 }}>
+                    <span style={{ color: "#D97706", fontWeight: 600 }}>{"\u2022"}</span>
                     <span dangerouslySetInnerHTML={{ __html: item }} />
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Section 7 — Retrait */}
-            <h2 id="retrait-conditions" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Retrait : conditions et timing optimal</h2>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              Les fonds du pilier 3a sont bloqu{"\é"}s par d{"\é"}faut jusqu{"\’"}{"\à"} la retraite. Cinq exceptions permettent un retrait anticip{"\é"} :
+            {/* Section 6 */}
+            <h2 id="frontaliers-tou" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              Frontaliers : le statut TOU change tout
+            </h2>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
+              Tous les frontaliers travaillant en Suisse peuvent souscrire un 3a. Mais depuis la réforme de janvier 2021, <strong style={{ color: "#111827" }}>l{"'"}avantage fiscal n{"'"}existe que pour ceux qui obtiennent le statut de quasi-résident</strong> via la Taxation Ordinaire Ultérieure (TOU).
             </p>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 24 }}>
-              {CONDITIONS_RETRAIT.map((step) => (
-                <div key={step.num} className="flex items-start gap-4 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{step.num}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{step.title}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }}>{step.desc}</p>
-                  </div>
+            <div className="flex flex-col gap-4" style={{ marginBottom: 16 }}>
+              {[
+                {
+                  label: "Condition principale",
+                  desc: "90 % des revenus mondiaux du foyer fiscal doivent être imposés en Suisse. Si le conjoint travaille en France ou si vous percevez des revenus locatifs significatifs côté français, le seuil tombe et le statut TOU devient inaccessible.",
+                },
+                {
+                  label: "Démarche et délai",
+                  desc: "La demande doit être déposée avant le 31 mars de l'année suivant l'imposition.",
+                },
+                {
+                  label: "Obligation déclarative côté français",
+                  desc: "Le 3e pilier suisse n'est pas imposé en France, mais doit être déclaré chaque année dans la rubrique \"comptes détenus à l'étranger\" (formulaire 3916).",
+                },
+              ].map((item) => (
+                <div key={item.label} className="rounded-xl bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "18px 22px" }}>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: "#111827", marginBottom: 6 }}>{item.label}</p>
+                  <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65 }}>{item.desc}</p>
                 </div>
               ))}
             </div>
-            <h3 className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Strat{"\é"}gie de retrait {"\é"}chelonn{"\é"}</h3>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              L{"\’"}imp{"\ô"}t sur le capital 3a est progressif mais s{"\é"}par{"\é"} du revenu ordinaire. En d{"\é"}tenant <strong style={{ color: "#111827" }}>plusieurs comptes 3a</strong> (ouverts dans diff{"\é"}rents {"\é"}tablissements), vous pouvez les retirer l{"\’"}un apr{"\è"}s l{"\’"}autre sur plusieurs ann{"\é"}es, ce qui r{"\é"}duit consid{"\é"}rablement la charge fiscale globale. Exemple : retirer 50{"\’"}000 CHF deux fois de suite co{"\û"}te fiscalement moins que retirer 100{"\’"}000 CHF d{"\’"}un coup.
+              Sans le statut TOU, ouvrir un 3a reste possible mais l{"'"}avantage fiscal disparaît : le versement ne sera pas déductible du revenu imposable suisse.
             </p>
 
-            {/* Section 8 — Comment ouvrir */}
-            <h2 id="comment-ouvrir" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comment ouvrir un 3{"\è"}me pilier en 5 {"\é"}tapes</h2>
-            <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
-              {STEPS.map((step) => (
-                <div key={step.num} className="flex items-start gap-4 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{step.num}</span>
-                  <div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{step.title}</p>
-                    <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }}>{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Section 9 — Erreurs */}
-            <h2 id="erreurs" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Erreurs {"\à"} {"\é"}viter absolument</h2>
+            {/* Section 7 */}
+            <h2 id="erreurs" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>
+              Les erreurs à éviter
+            </h2>
             <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
               {ERREURS.map((err) => (
                 <div key={err.title} className="flex items-start gap-3 rounded-lg bg-white font-body" style={{ border: "1px solid #E2E8F0", padding: "16px 20px" }}>
-                  <span style={{ color: "#DC2626", fontSize: 16, flexShrink: 0 }}>{"\⚠"}</span>
+                  <span style={{ color: "#DC2626", fontSize: 16, flexShrink: 0 }}>⚠</span>
                   <div>
                     <p style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>{err.title}</p>
                     <p style={{ fontSize: 14, color: "#64748B", marginTop: 4 }}>{err.desc}</p>
@@ -469,16 +270,18 @@ export default function RetraiteSuissePage() {
 
             {/* CTA */}
             <div className="rounded-xl" style={{ backgroundColor: "#111827", padding: "32px 28px", marginBottom: 40 }}>
-              <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Optimisez votre pr{"\é"}voyance avec un expert</h3>
-              <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>Pilier 3a, rattrapage r{"\é"}troactif, strat{"\é"}gie de retrait : nos experts d{"\é"}cryptent votre situation en 15 minutes.</p>
-              <Link href="/prevoyance" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>{"Consulter nos guides pr\évoyance \→"}</Link>
+              <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Optimisez votre prévoyance avec un expert</h3>
+              <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>Pilier 3a, rattrapage rétroactif, stratégie multi-comptes : nos guides décryptent chaque situation.</p>
+              <Link href="/prevoyance" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
+                Consulter nos guides prévoyance {"\u2192"}
+              </Link>
             </div>
 
             {/* En résumé */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
-              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En r{"\é"}sum{"\é"}</p>
+              <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En résumé</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Le 3{"\è"}me pilier est l{"\’"}outil de pr{"\é"}voyance le plus accessible et le plus avantageux fiscalement pour les r{"\é"}sidents suisses. En 2026, la nouvelle loi sur le <strong style={{ color: "#111827" }}>rattrapage r{"\é"}troactif</strong> offre une opportunit{"\é"} exceptionnelle de r{"\é"}cup{"\é"}rer des ann{"\é"}es non cotis{"\é"}es. Combinez <strong style={{ color: "#111827" }}>plusieurs comptes 3a</strong>, privil{"\é"}giez les <strong style={{ color: "#111827" }}>solutions bancaires {"\à"} faibles frais</strong> et planifiez vos retraits pour maximiser l{"\’"}avantage fiscal {"\à"} la retraite.
+                Le 3e pilier reste en 2026 le levier d{"'"}épargne fiscalement le plus puissant accessible aux contribuables suisses et aux frontaliers ayant le statut TOU. La règle d{"'"}or : maximiser le 3a chaque année, ouvrir plusieurs comptes pour préparer l{"'"}échelonnement des retraits, et exploiter dès maintenant la nouveauté du <strong style={{ color: "#111827" }}>rattrapage rétroactif</strong> introduite en 2026. Privilégiez le 3a bancaire en fonds de prévoyance sauf besoin spécifique de couverture risque, et faites valider votre stratégie par un conseiller en prévoyance dès que votre situation se complexifie (frontalier, indépendant, propriétaire). Plus vous commencez tôt, plus l{"'"}effet capitalisation et déduction fiscale transforme votre 3e pilier en véritable patrimoine.
               </p>
             </div>
 
@@ -507,11 +310,15 @@ export default function RetraiteSuissePage() {
           <aside className="hidden lg:block">
             <div className="sticky" style={{ top: 80 }}>
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>Calculez votre {"\é"}conomie fiscale</p>
+                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>Calculez votre économie fiscale</p>
                 <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>Entrez votre email et recevez notre calculateur 3a gratuit avec les plafonds 2026.</p>
                 <input type="email" placeholder="Votre adresse email" className="font-body rounded-lg w-full bg-white" style={{ border: "1px solid #E2E8F0", padding: "10px 14px", fontSize: 13, marginBottom: 10, outline: "none" }} />
-                <button className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>{"Recevoir le calculateur \→"}</button>
-                <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \· Mis \à jour 2026 \· Imm\édiat"}</p>
+                <button className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                  Recevoir le calculateur {"\u2192"}
+                </button>
+                <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>
+                  Gratuit {"\u00B7"} Mis à jour 2026 {"\u00B7"} Immédiat
+                </p>
               </div>
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
                 <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
@@ -521,7 +328,7 @@ export default function RetraiteSuissePage() {
                       <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>{a.icon}</div>
                       <div>
                         <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\·"} {a.category}</p>
+                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\u00B7"} {a.category}</p>
                       </div>
                     </div>
                   ))}
@@ -532,12 +339,12 @@ export default function RetraiteSuissePage() {
         </div>
       </section>
 
-      {/* A LIRE AUSSI */}
+      {/* À LIRE AUSSI */}
       <section className="px-6 bg-creme" style={{ paddingTop: 64, paddingBottom: 64, borderTop: "1px solid #E2E8F0" }}>
         <div className="mx-auto" style={{ maxWidth: 1120 }}>
           <div className="flex items-end justify-between" style={{ marginBottom: 32 }}>
-            <h2 className="font-heading" style={{ fontSize: 28, fontWeight: 600, color: "#111827" }}>A lire aussi</h2>
-            <span className="font-body cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \→"}</span>
+            <h2 className="font-heading" style={{ fontSize: 28, fontWeight: 600, color: "#111827" }}>À lire aussi</h2>
+            <span className="font-body cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>Tous les articles {"\u2192"}</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {RELATED_ARTICLES.map((a) => (
@@ -547,7 +354,7 @@ export default function RetraiteSuissePage() {
                   <span className="inline-block font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#D97706", marginBottom: 8 }}>{a.tag}</span>
                   <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</h3>
                   <div className="flex items-center justify-between" style={{ marginTop: 16 }}>
-                    <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.author} {"\·"} {a.date}</p>
+                    <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.author} {"\u00B7"} {a.date}</p>
                     <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.readTime}</p>
                   </div>
                 </div>
@@ -561,10 +368,14 @@ export default function RetraiteSuissePage() {
       <section style={{ backgroundColor: "#111827", paddingTop: 56, paddingBottom: 56 }}>
         <div className="mx-auto px-6 text-center" style={{ maxWidth: 560 }}>
           <h2 className="font-heading" style={{ fontSize: 28, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Recevez nos conseils chaque semaine</h2>
-          <p className="font-body" style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", marginTop: 8 }}>{"Pr\évoyance, fiscalit\é, investissement. Un email par semaine, z\éro superflu."}</p>
+          <p className="font-body" style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", marginTop: 8 }}>
+            Prévoyance, fiscalité, investissement. Un email par semaine, zéro superflu.
+          </p>
           <div className="flex items-center justify-center gap-3" style={{ marginTop: 24 }}>
             <input type="email" placeholder="Votre email" className="font-body rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", padding: "12px 18px", fontSize: 14, color: "#FFFFFF", width: 240, outline: "none" }} />
-            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>{"S\’inscrire \→"}</button>
+            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>
+              S{"'"}inscrire {"\u2192"}
+            </button>
           </div>
         </div>
       </section>
