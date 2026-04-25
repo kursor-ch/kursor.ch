@@ -4,12 +4,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Lex Koller 2026 : ce que le durcissement change pour les résidents en Suisse",
   description:
-    "Le Conseil fédéral veut restreindre l'acquisition d'immeubles par les étrangers. Décryptage de l'avant-projet et impact concret pour les résidents et frontaliers.",
+    "Le Conseil fédéral veut restreindre l’acquisition d’immeubles par les étrangers. Décryptage de l’avant-projet et impact concret pour les résidents et frontaliers.",
   alternates: { canonical: "/actualite/lex-koller-2026-immobilier-suisse" },
   openGraph: {
     title: "Lex Koller 2026 : ce que le durcissement change pour les résidents en Suisse",
     description:
-      "Le Conseil fédéral veut restreindre l'acquisition d'immeubles par les étrangers. Décryptage de l'avant-projet et impact concret pour les résidents et frontaliers.",
+      "Le Conseil fédéral veut restreindre l’acquisition d’immeubles par les étrangers. Décryptage de l’avant-projet et impact concret pour les résidents et frontaliers.",
     type: "article",
   },
 };
@@ -26,46 +26,46 @@ const CHANGEMENTS = [
   {
     num: "1",
     name: "Résidence principale soumise à autorisation",
-    desc: "Les ressortissants <strong>hors UE/AELE</strong> qui souhaitent acquérir leur résidence principale en Suisse devront désormais obtenir une autorisation cantonale formelle. Aujourd'hui, l'achat d'un logement habité par l'acquéreur n'était soumis à aucune procédure. L'avant-projet réintroduit un filtre administratif systématique.",
+    desc: "Les ressortissants <strong>hors UE/AELE</strong> qui souhaitent acquérir leur résidence principale en Suisse devront désormais obtenir une autorisation cantonale formelle. Aujourd’hui, l’achat d’un logement habité par l’acquéreur n’était soumis à aucune procédure. L’avant-projet réintroduit un filtre administratif systématique.",
   },
   {
     num: "2",
     name: "Obligation de revente sous deux ans",
-    desc: "Si le propriétaire quitte définitivement la Suisse ou cesse d'occuper son logement à titre principal, il devra <strong>revendre dans un délai de deux ans</strong>. Cette règle vise à éviter qu'un bien acquis en tant que résidence principale ne devienne, par défaut, une résidence secondaire ou un investissement locatif détenu depuis l'étranger.",
+    desc: "Si le propriétaire quitte définitivement la Suisse ou cesse d’occuper son logement à titre principal, il devra <strong>revendre dans un délai de deux ans</strong>. Cette règle vise à éviter qu’un bien acquis en tant que résidence principale ne devienne, par défaut, une résidence secondaire ou un investissement locatif détenu depuis l’étranger.",
   },
   {
     num: "3",
-    name: "Immobilier commercial restreint à l'usage propre",
-    desc: "L'acquisition d'immeubles commerciaux par des personnes à l'étranger ne sera autorisée que pour un usage <strong>propre et opérationnel</strong> (locaux d'exploitation). Les achats à but purement spéculatif, longtemps tolérés, sortent du champ de la légalité.",
+    name: "Immobilier commercial restreint à l’usage propre",
+    desc: "L’acquisition d’immeubles commerciaux par des personnes à l’étranger ne sera autorisée que pour un usage <strong>propre et opérationnel</strong> (locaux d’exploitation). Les achats à but purement spéculatif, longtemps tolérés, sortent du champ de la légalité.",
   },
   {
     num: "4",
     name: "Quotas de résidences secondaires resserrés",
-    desc: "Le contingent annuel de logements de vacances pouvant être vendus à des étrangers est revu à la baisse. Nouveauté : la <strong>revente d'une résidence secondaire entre deux étrangers</strong> sera désormais imputée sur le quota cantonal, ce qui réduit mécaniquement l'offre disponible pour de nouveaux acquéreurs.",
+    desc: "Le contingent annuel de logements de vacances pouvant être vendus à des étrangers est revu à la baisse. Nouveauté : la <strong>revente d’une résidence secondaire entre deux étrangers</strong> sera désormais imputée sur le quota cantonal, ce qui réduit mécaniquement l’offre disponible pour de nouveaux acquéreurs.",
   },
   {
     num: "5",
     name: "Fonds immobiliers cotés sous surveillance",
-    desc: "Les parts de fonds de placement immobilier suisses cotés en bourse, jusque-là librement accessibles, deviennent partiellement restreintes pour les investisseurs étrangers non-résidents. L'objectif : limiter l'exposition indirecte du parc immobilier suisse à des capitaux étrangers spéculatifs.",
+    desc: "Les parts de fonds de placement immobilier suisses cotés en bourse, jusque-là librement accessibles, deviennent partiellement restreintes pour les investisseurs étrangers non-résidents. L’objectif : limiter l’exposition indirecte du parc immobilier suisse à des capitaux étrangers spéculatifs.",
   },
 ];
 
 const PROFILS = [
-  { name: "UE / AELE", desc: "Français, Allemands, Italiens, Belges : les résidents UE/AELE conservent l'accès au logement en résidence principale dans les mêmes conditions qu'aujourd'hui, grâce aux accords bilatéraux." },
+  { name: "UE / AELE", desc: "Français, Allemands, Italiens, Belges : les résidents UE/AELE conservent l’accès au logement en résidence principale dans les mêmes conditions qu’aujourd’hui, grâce aux accords bilatéraux." },
   { name: "Hors UE / AELE", desc: "Permis B ou C non européens : autorisation cantonale obligatoire pour acheter une résidence principale, et obligation de revente sous deux ans en cas de départ." },
-  { name: "Frontaliers", desc: "Permis G : pas d'impact direct sur la résidence principale (qui se trouve hors de Suisse), mais accès aux logements de vacances et fonds immobiliers fortement réduit." },
-  { name: "Locataires", desc: "Aucun changement. La réforme ne porte que sur l'acquisition de biens. Le marché locatif, lui, reste régi par les mêmes règles cantonales et fédérales qu'auparavant." },
+  { name: "Frontaliers", desc: "Permis G : pas d’impact direct sur la résidence principale (qui se trouve hors de Suisse), mais accès aux logements de vacances et fonds immobiliers fortement réduit." },
+  { name: "Locataires", desc: "Aucun changement. La réforme ne porte que sur l’acquisition de biens. Le marché locatif, lui, reste régi par les mêmes règles cantonales et fédérales qu’auparavant." },
 ];
 
 const RELATED_ARTICLES = [
-  { icon: "🎯", tag: "PRÉVOYANCE", title: "Rachat rétroactif 3a 2026 : rattraper jusqu'à 10 ans de cotisations", author: "Équipe Kursor", date: "25 avril 2026", readTime: "8 min", href: "/actualite/rachat-retroactif-3a-2026-guide" },
+  { icon: "🎯", tag: "PRÉVOYANCE", title: "Rachat rétroactif 3a 2026 : rattraper jusqu’à 10 ans de cotisations", author: "Équipe Kursor", date: "25 avril 2026", readTime: "8 min", href: "/actualite/rachat-retroactif-3a-2026-guide" },
   { icon: "💼", tag: "EMPLOI", title: "Trouver un travail en Suisse : guide 2026 et métiers qui recrutent", author: "Équipe Kursor", date: "Avril 2026", readTime: "15 min", href: "/emploi-suisse" },
   { icon: "🏥", tag: "ASSURANCES", title: "Chiffres-clés 2026 : tout ce qui change en assurance et prévoyance", author: "Équipe Kursor", date: "25 avril 2026", readTime: "7 min", href: "/actualite/chiffres-cles-assurance-prevoyance-2026" },
 ];
 
 const SOURCES = [
-  { title: "Communiqué du Conseil fédéral du 15 avril 2026 — Restrictions accrues sur l'acquisition d'immeubles par des personnes à l'étranger", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
-  { title: "Avant-projet de révision de la LFAIE (Loi fédérale sur l'acquisition d'immeubles par des personnes à l'étranger)", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
+  { title: "Communiqué du Conseil fédéral du 15 avril 2026 — Restrictions accrues sur l’acquisition d’immeubles par des personnes à l’étranger", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
+  { title: "Avant-projet de révision de la LFAIE (Loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger)", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
 ];
 
 const TAGS = ["Lex Koller", "Immobilier Suisse", "Permis B", "Frontaliers", "Marché locatif", "Réforme 2026"];
@@ -121,19 +121,19 @@ export default function LexKoller2026Page() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le Conseil fédéral a annoncé le <strong style={{ color: "#111827" }}>15 avril 2026</strong> un durcissement de la loi fédérale sur l'acquisition d'immeubles par des personnes à l'étranger, mieux connue sous le nom de <strong style={{ color: "#111827" }}>Lex Koller</strong>. La consultation publique sur l'avant-projet court jusqu'au 15 juillet 2026, avec une entrée en vigueur visée pour 2027.
+              Le Conseil fédéral a annoncé le <strong style={{ color: "#111827" }}>15 avril 2026</strong> un durcissement de la loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger, mieux connue sous le nom de <strong style={{ color: "#111827" }}>Lex Koller</strong>. La consultation publique sur l’avant-projet court jusqu’au 15 juillet 2026, avec une entrée en vigueur visée pour 2027.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le contexte est connu : la Suisse fait face à une pénurie de logements aiguë, particulièrement dans les centres urbains romands. Cette réforme s'inscrit dans le paquet de mesures d'accompagnement liées à l'initiative populaire « Pas de Suisse à 10 millions », adoptée par le Parlement comme priorité politique en 2025.
+              Le contexte est connu : la Suisse fait face à une pénurie de logements aiguë, particulièrement dans les centres urbains romands. Cette réforme s’inscrit dans le paquet de mesures d’accompagnement liées à l’initiative populaire « Pas de Suisse à 10 millions », adoptée par le Parlement comme priorité politique en 2025.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pour notre audience — résidents francophones titulaires d'un permis B ou C, frontaliers, expatriés en réflexion sur leur projet d'achat — l'enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
+              Pour notre audience — résidents francophones titulaires d’un permis B ou C, frontaliers, expatriés en réflexion sur leur projet d’achat — l’enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
             </p>
 
             {/* Section 1 — Ce qui change */}
             <h2 id="ce-qui-change" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Ce qui change concrètement</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Cinq blocs de mesures structurent l'avant-projet. Chacun s'applique à un type d'acquisition différent et durcit, à des degrés divers, l'accès au foncier suisse pour les non-résidents.
+              Cinq blocs de mesures structurent l’avant-projet. Chacun s’applique à un type d’acquisition différent et durcit, à des degrés divers, l’accès au foncier suisse pour les non-résidents.
             </p>
             <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
               {CHANGEMENTS.map((c) => (
@@ -151,14 +151,14 @@ export default function LexKoller2026Page() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                L'avant-projet ne supprime pas l'accès des étrangers à la propriété, mais il <strong style={{ color: "#111827" }}>réintroduit un contrôle administratif</strong> là où il avait été allégé, et impose une logique d'occupation effective. Pour la majorité des résidents UE/AELE, l'impact direct reste limité ; pour les autres profils, il peut être significatif.
+                L’avant-projet ne supprime pas l’accès des étrangers à la propriété, mais il <strong style={{ color: "#111827" }}>réintroduit un contrôle administratif</strong> là où il avait été allégé, et impose une logique d’occupation effective. Pour la majorité des résidents UE/AELE, l’impact direct reste limité ; pour les autres profils, il peut être significatif.
               </p>
             </div>
 
             {/* Section 2 — Qui est concerné */}
             <h2 id="qui-est-concerne" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Qui est concerné ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La portée de la réforme dépend entièrement de votre statut migratoire. Voici comment chaque profil se positionne face à l'avant-projet :
+              La portée de la réforme dépend entièrement de votre statut migratoire. Voici comment chaque profil se positionne face à l’avant-projet :
             </p>
             <div className="flex flex-col gap-2" style={{ marginBottom: 24 }}>
               {PROFILS.map((p) => (
@@ -169,19 +169,19 @@ export default function LexKoller2026Page() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Une nuance essentielle, souvent occultée dans les commentaires médiatiques : la Lex Koller régit <strong style={{ color: "#111827" }}>l'achat</strong>, pas la <strong style={{ color: "#111827" }}>location</strong>. La quasi-totalité de notre audience accède au logement par le marché locatif — un terrain qui reste totalement à l'écart de la réforme.
+              Une nuance essentielle, souvent occultée dans les commentaires médiatiques : la Lex Koller régit <strong style={{ color: "#111827" }}>l’achat</strong>, pas la <strong style={{ color: "#111827" }}>location</strong>. La quasi-totalité de notre audience accède au logement par le marché locatif — un terrain qui reste totalement à l’écart de la réforme.
             </p>
 
             {/* Section 3 — Impact marché locatif */}
             <h2 id="marche-locatif" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Impact sur le marché locatif romand</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              C'est ici que l'analyse mérite d'être prudente. Restreindre les acquéreurs étrangers ne résoudra pas la crise locative qui touche la Suisse romande. Les données récentes le rappellent crûment : taux de vacance inférieur à <strong style={{ color: "#111827" }}>0,5 % à Genève</strong>, autour de <strong style={{ color: "#111827" }}>0,8 % dans le canton de Vaud</strong>, des niveaux historiquement bas que partagent Zurich et Bâle-Ville.
+              C’est ici que l’analyse mérite d’être prudente. Restreindre les acquéreurs étrangers ne résoudra pas la crise locative qui touche la Suisse romande. Les données récentes le rappellent crûment : taux de vacance inférieur à <strong style={{ color: "#111827" }}>0,5 % à Genève</strong>, autour de <strong style={{ color: "#111827" }}>0,8 % dans le canton de Vaud</strong>, des niveaux historiquement bas que partagent Zurich et Bâle-Ville.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La pénurie suisse est avant tout un problème d'offre. Délais d'autorisation de construire, recours systématiques, cherté du foncier, frilosité des investisseurs institutionnels face à la régulation des loyers : ce sont ces freins structurels qui pèsent sur la disponibilité, bien davantage que la demande des acquéreurs étrangers, statistiquement marginale dans le total des transactions.
+              La pénurie suisse est avant tout un problème d’offre. Délais d’autorisation de construire, recours systématiques, cherté du foncier, frilosité des investisseurs institutionnels face à la régulation des loyers : ce sont ces freins structurels qui pèsent sur la disponibilité, bien davantage que la demande des acquéreurs étrangers, statistiquement marginale dans le total des transactions.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pour un résident en recherche de logement, la réalité ne change pas : le marché locatif romand reste extrêmement tendu, les délais de recherche s'étirent, et les meilleures candidatures sont celles qui combinent dossier solide, réactivité et bonne connaissance des codes locaux.
+              Pour un résident en recherche de logement, la réalité ne change pas : le marché locatif romand reste extrêmement tendu, les délais de recherche s’étirent, et les meilleures candidatures sont celles qui combinent dossier solide, réactivité et bonne connaissance des codes locaux.
             </p>
 
             {/* À retenir 2 */}
@@ -282,7 +282,7 @@ export default function LexKoller2026Page() {
           <p className="font-body" style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", marginTop: 8 }}>Un email par semaine. Les pièges à éviter, les économies à faire.</p>
           <div className="flex items-center justify-center gap-3" style={{ marginTop: 24 }}>
             <input type="email" placeholder="Votre email" className="font-body rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", padding: "12px 18px", fontSize: 14, color: "#FFFFFF", width: 240, outline: "none" }} />
-            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>S'inscrire →</button>
+            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>S’inscrire →</button>
           </div>
         </div>
       </section>
