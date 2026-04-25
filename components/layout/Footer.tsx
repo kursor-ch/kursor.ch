@@ -14,7 +14,12 @@ const ressourceLinks = [
   { label: "Guides", href: "/#ressources" },
   { label: "Comment ça marche", href: "/comment-ca-marche" },
   { label: "À propos", href: "/a-propos" },
+];
+
+const legalLinks = [
+  { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
+  { label: "Politique cookies", href: "/cookies" },
 ];
 
 export default function Footer() {
@@ -26,7 +31,7 @@ export default function Footer() {
       >
         {/* Main footer */}
         <div
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5"
           style={{ paddingTop: "56px", paddingBottom: "40px" }}
         >
           {/* Column 1 — Brand */}
@@ -66,6 +71,33 @@ export default function Footer() {
               }}
             >
               Chaque étape de votre vie en Suisse, simplifiée.
+            </p>
+            <p
+              className="font-body"
+              style={{
+                fontWeight: 400,
+                fontSize: "13px",
+                color: "#9CA3AF",
+                maxWidth: "240px",
+                lineHeight: 1.5,
+                marginTop: "10px",
+              }}
+            >
+              Service de mise en relation avec des spécialistes agréés en
+              Suisse romande.
+            </p>
+            <p
+              className="font-body"
+              style={{
+                fontWeight: 400,
+                fontSize: "12px",
+                color: "#6B7280",
+                maxWidth: "240px",
+                lineHeight: 1.5,
+                marginTop: "10px",
+              }}
+            >
+              GC Consulting · 90 rue de Verdun, Carcassonne
             </p>
           </div>
 
@@ -141,7 +173,43 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — Contact */}
+          {/* Column 4 — Légal */}
+          <div>
+            <h3
+              className="font-body"
+              style={{
+                fontWeight: 600,
+                fontSize: "13px",
+                color: "#9CA3AF",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                marginBottom: "12px",
+              }}
+            >
+              Légal
+            </h3>
+            <ul className="space-y-0">
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="font-body footer-link"
+                    style={{
+                      fontWeight: 400,
+                      fontSize: "14px",
+                      color: "#D1D5DB",
+                      lineHeight: 2.0,
+                      textDecoration: "none",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5 — Contact */}
           <div>
             <h3
               className="font-body"
@@ -225,13 +293,13 @@ export default function Footer() {
             className="font-body"
             style={{ fontWeight: 400, fontSize: "12px", color: "#6B7280" }}
           >
-            &copy; 2026 Kursor CH. Tous droits réservés.
+            &copy; 2026 Kursor CH · GC Consulting · Tous droits réservés.
           </span>
           <span
             className="font-body"
             style={{ fontWeight: 400, fontSize: "12px", color: "#6B7280" }}
           >
-            Fait en Suisse{" "}
+            Conformité nLPD &amp; RGPD · Données protégées{" "}
             <span className="animate-flag-bounce">&#127464;&#127469;</span>
           </span>
         </div>

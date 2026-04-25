@@ -87,11 +87,11 @@ export default function PolitiqueConfidentialitePage() {
           kursor.ch et ses sous-domaines est :
         </p>
         <p className="font-body" style={bodyStyle}>
-          <strong style={{ color: "#111827" }}>SAVGC Consulting</strong>
+          <strong style={{ color: "#111827" }}>GC Consulting</strong>
           <br />
           Représenté par son fondateur
           <br />
-          Email : contact@kursor.ch
+          Email : equipe@kursor.ch
           <br />
           Suisse
         </p>
