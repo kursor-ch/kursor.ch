@@ -4,6 +4,9 @@ import { useState } from "react";
 import { BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon } from "@/components/ui/ServiceIcons";
 import { K_PATH_D, K_TRANSFORM, K_VIEWBOX } from "@/components/shared/k-path";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import StatsBand from "@/components/StatsBand";
+import { RecentDiagnosticTicker } from "@/components/lp/RecentDiagnosticTicker";
+import { DataTicker } from "@/components/lp/DataTicker";
 
 async function submitNewsletterEmail(email: string) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
@@ -91,13 +94,6 @@ const STEPS = [
   { num: "04", title: "Suivi conseiller", desc: "Un expert vous accompagne sur les points bloquants et repond a vos questions." },
 ];
 
-const STATS = [
-  { figure: "4 200+", label: "Residents accompagn\u00E9s" },
-  { figure: "92%", label: "Taux de satisfaction client" },
-  { figure: "3 sem.", label: "Pour trouver un logement" },
-  { figure: "6", label: "Cantons couverts" },
-];
-
 const ARTICLES = [
   { icon: "\u{1F3DB}", tag: "PERMIS", title: "Permis de s\u00E9jour en Suisse : les 7 erreurs qui retardent votre dossier", desc: "Un dossier incomplet peut vous co\u00FBter 3 \u00E0 6 mois. Voici ce que 80% oublient.", author: "Sarah M.", date: "12 mars 2026", readTime: "5 min" },
   { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Trouver un appartement en Suisse : guide 2026", desc: "Attestation de non-poursuite, dossier locatif, r\u00E9gies... toutes les cl\u00E9s pour d\u00E9crocher un logement.", author: "Karim D.", date: "5 mars 2026", readTime: "8 min" },
@@ -112,7 +108,6 @@ export default function HomePage() {
   const howItWorks = useScrollReveal(0.1);
   const diagnostics = useScrollReveal(0.1);
   const opportunity = useScrollReveal(0.1);
-  const stats = useScrollReveal(0.1);
   const blog = useScrollReveal(0.1);
   const finalCta = useScrollReveal(0.1);
 
@@ -353,20 +348,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== STATS BAND ===== */}
-      <section style={{ backgroundColor: "#D97706", paddingTop: 56, paddingBottom: 56 }}>
-        <div ref={stats.ref} className={`mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 scroll-reveal ${stats.isVisible ? "visible" : ""}`} style={{ maxWidth: 900, gap: 24 }}>
-          {STATS.map((stat, i) => (
-            <div key={stat.label} className="text-center relative">
-              {i > 0 && (
-                <div className="hidden lg:block absolute top-2 bottom-2" style={{ left: -12, width: 1, backgroundColor: "rgba(255,255,255,0.3)" }} />
-              )}
-              <p className="font-heading italic" style={{ fontSize: 44, fontWeight: 500, color: "#FFFFFF", lineHeight: 1 }}>{stat.figure}</p>
-              <p className="font-body" style={{ fontSize: 13, color: "rgba(255,255,255,0.85)", marginTop: 10 }}>{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ===== STATS BAND (live counter via /api/stats) ===== */}
+      <StatsBand />
+
+      {/* ===== RECENT DIAGNOSTIC TICKER (live, silent-fail) ===== */}
+      <RecentDiagnosticTicker />
 
       {/* ===== BLOG ===== */}
       <section className="px-6 bg-creme" style={{ paddingTop: 80, paddingBottom: 80 }}>
@@ -401,6 +387,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== SWISS DATA TICKER (ambient marquee) ===== */}
+      <DataTicker />
 
       {/* ===== FINAL CTA ===== */}
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#F9FAFB" }}>
