@@ -29,8 +29,6 @@ const RELATED_ARTICLES = [
   { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Achat immobilier en Suisse : règles, coûts et pièges", author: "Sophie R.", date: "18 mars 2026", readTime: "12 min" },
 ];
 
-const TAGS = ["Optimisation fiscale", "Impôts Suisse", "3e pilier", "LPP", "Frontalier", "Entrepreneur", "Prévoyance"];
-
 /* ───────── PAGE ───────── */
 
 export default function FiscaliteBusinessPage() {
@@ -201,24 +199,7 @@ export default function FiscaliteBusinessPage() {
             </div>
 
             {/* Tags + Partager */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            
           </article>
 
           {/* RIGHT SIDEBAR */}

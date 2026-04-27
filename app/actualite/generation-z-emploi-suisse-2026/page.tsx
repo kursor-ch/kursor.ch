@@ -44,7 +44,7 @@ const SOURCES = [
   { title: "Baromètre du marché du travail Alixio 2026", url: "https://www.alixio.fr" },
 ];
 
-const TAGS = ["Marché du travail Suisse", "Génération Z", "Discrimination", "Pénurie", "Culture du travail", "Candidats internationaux"];
+
 
 /* ───────── PAGE ───────── */
 

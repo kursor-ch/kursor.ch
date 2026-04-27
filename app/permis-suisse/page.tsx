@@ -63,8 +63,6 @@ const RELATED_ARTICLES = [
   { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Colocation en Suisse : droits, contrats et bons plans", author: "Julie M.", date: "12 mars 2026", readTime: "7 min" },
 ];
 
-const TAGS = ["Permis de s\u00E9jour", "Permis B", "Permis C", "Frontalier", "Expatri\u00E9", "Suisse"];
-
 /* ───────── PAGE ───────── */
 
 export default function PermisSuissePage() {
@@ -303,24 +301,7 @@ export default function PermisSuissePage() {
             </div>
 
             {/* Tags + Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            
           </article>
 
           {/* RIGHT SIDEBAR */}

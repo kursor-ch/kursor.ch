@@ -70,7 +70,7 @@ const SOURCES = [
   { title: "Qualibroker Swiss Risk & Care — Chiffres-clés 2026 (Prévoyance professionnelle, AVS/AI, LAA, 3ème pilier, Échelle de Berne)", url: "https://www.swissriskcare.ch" },
 ];
 
-const TAGS = ["Chiffres-clés 2026", "LPP", "LAA", "AVS", "Échelle de Berne", "3ème pilier", "Prévoyance Suisse"];
+
 
 /* ───────── PAGE ───────── */
 

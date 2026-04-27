@@ -64,7 +64,7 @@ const SOURCES = [
   { title: "Qualibroker Swiss Risk & Care — Chiffres-clés 2026 (Prévoyance professionnelle et privée)", url: "https://www.swissriskcare.ch" },
 ];
 
-const TAGS = ["3ème pilier", "Rachat rétroactif", "Prévoyance Suisse", "OPP3", "Optimisation fiscale", "Expatriés"];
+
 
 /* ───────── PAGE ───────── */
 

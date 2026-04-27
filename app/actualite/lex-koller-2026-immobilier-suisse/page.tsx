@@ -68,7 +68,7 @@ const SOURCES = [
   { title: "Avant-projet de révision de la LFAIE (Loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger)", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
 ];
 
-const TAGS = ["Lex Koller", "Immobilier Suisse", "Permis B", "Frontaliers", "Marché locatif", "Réforme 2026"];
+
 
 /* ───────── PAGE ───────── */
 

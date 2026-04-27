@@ -31,8 +31,6 @@ const RELATED_ARTICLES = [
   { icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait de poursuites : comment l'obtenir rapidement", author: "Julie M.", date: "5 mars 2026", readTime: "4 min" },
 ];
 
-const TAGS = ["Logement Suisse", "Location", "Expatri\u00E9", "Loyer", "Permis B"];
-
 const LOYER_TABLE = [
   { type: "1 pi\u00E8ce", national: "872 CHF", cher: "1 054 CHF (Zurich)", moins: "542 CHF (Jura)" },
   { type: "2 pi\u00E8ces", national: "1 182 CHF", cher: "1 465 CHF (Zoug)", moins: "762 CHF (Jura)" },
@@ -367,24 +365,7 @@ export default function LogementSuissePage() {
             </div>
 
             {/* Tags + Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            
           </article>
 
           {/* RIGHT SIDEBAR */}
