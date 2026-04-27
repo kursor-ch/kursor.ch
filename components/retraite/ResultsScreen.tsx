@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { KWatermark } from "@/components/shared/KWatermark";
 import { KBullet } from "@/components/shared/KBullet";
+import CountUp from "@/components/shared/CountUp";
 import type {
   RetraiteAnswers,
   RetraitePersona,
@@ -111,7 +112,7 @@ export default function ResultsScreen({
             className="font-heading font-medium leading-[1.05] text-amber"
             style={{ fontSize: "clamp(40px, 8vw, 56px)" }}
           >
-            {formatChf(score.perte_annuelle_3a)} CHF / an
+            <CountUp to={score.perte_annuelle_3a} suffix=" CHF / an" duration={1400} />
           </h1>
           <p className="text-sm text-gray-600 font-body max-w-md mx-auto">
             d&apos;économies fiscales perdues chaque année sur votre 3ème pilier
