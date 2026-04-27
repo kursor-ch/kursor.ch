@@ -115,6 +115,7 @@ export default function AssuranceApp() {
   const sessionStartRef = useRef<number>(Date.now());
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
+  const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
     retryPendingWebhooks();
@@ -175,6 +176,7 @@ export default function AssuranceApp() {
   };
 
   const goNext = () => {
+    directionRef.current = "forward";
     if (screen === SCREEN_INTRO) {
       trackEvent("Diagnostic Started", { funnel: "assurance" });
       bumpScreen(SCREEN_Q1);
@@ -296,6 +298,7 @@ export default function AssuranceApp() {
 
   const goBack = () => {
     usedBackRef.current = true;
+    directionRef.current = "back";
 
     if (screen === SCREEN_Q1) {
       bumpScreen(SCREEN_INTRO);
@@ -457,6 +460,7 @@ export default function AssuranceApp() {
                 onBack={goBack}
                 canProceed={canProceedFromQuestion(screen)}
                 canGoBack={screen > SCREEN_Q1}
+                direction={directionRef.current}
               />
             );
           })()}

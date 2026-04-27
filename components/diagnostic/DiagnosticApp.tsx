@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { questionScreens } from "@/lib/questions";
 import { Answers, computeScore, ScoreBreakdown } from "@/lib/scoring";
 import { getVerdict, Verdict } from "@/lib/verdicts";
@@ -42,6 +42,7 @@ export default function DiagnosticApp() {
   const [scores, setScores] = useState<ScoreBreakdown | null>(null);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [screenKey, setScreenKey] = useState(0);
+  const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
     retryPendingWebhook();
@@ -57,6 +58,7 @@ export default function DiagnosticApp() {
   };
 
   const goNext = () => {
+    directionRef.current = "forward";
     const nextScreen = screen + 1;
     setScreen(nextScreen);
     setScreenKey((k) => k + 1);
@@ -74,12 +76,14 @@ export default function DiagnosticApp() {
   };
 
   const goBack = () => {
+    directionRef.current = "back";
     setScreen((prev) => Math.max(0, prev - 1));
     setScreenKey((k) => k + 1);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const handleSubmit = async (optIns: OptIns) => {
+    directionRef.current = "forward";
     const computed = computeScore(answers);
     const v = getVerdict(computed.total);
     setScores(computed);
@@ -132,6 +136,7 @@ export default function DiagnosticApp() {
               onNext={goNext}
               onBack={goBack}
               canProceed={canProceedFromQuestionScreen(screen - 1)}
+              direction={directionRef.current}
             />
           )}
 

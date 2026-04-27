@@ -104,6 +104,7 @@ export default function RetraiteApp() {
   const sessionStartRef = useRef<number>(Date.now());
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
+  const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
     retryPendingWebhooks();
@@ -160,6 +161,7 @@ export default function RetraiteApp() {
   };
 
   const goNext = () => {
+    directionRef.current = "forward";
     if (screen === SCREEN_INTRO) {
       trackEvent("Diagnostic Started", { funnel: "retraite" });
       bumpScreen(SCREEN_Q_START);
@@ -222,6 +224,7 @@ export default function RetraiteApp() {
 
   const goBack = () => {
     usedBackRef.current = true;
+    directionRef.current = "back";
 
     if (screen === SCREEN_Q_START) {
       bumpScreen(SCREEN_INTRO);
@@ -327,6 +330,7 @@ export default function RetraiteApp() {
                   onBack={goBack}
                   canProceed={canProceedFromQuestion(screen)}
                   canGoBack={screen > SCREEN_Q_START}
+                  direction={directionRef.current}
                 />
               );
             })()}

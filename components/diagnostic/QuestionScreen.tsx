@@ -12,6 +12,7 @@ interface QuestionScreenProps {
   onNext: () => void;
   onBack: () => void;
   canProceed: boolean;
+  direction?: "forward" | "back";
 }
 
 export default function QuestionScreen({
@@ -21,9 +22,12 @@ export default function QuestionScreen({
   onNext,
   onBack,
   canProceed,
+  direction = "forward",
 }: QuestionScreenProps) {
   return (
-    <div className="animate-screen-in space-y-10">
+    <div
+      className={`${direction === "back" ? "screen-enter-back" : "screen-enter-forward"} space-y-10`}
+    >
       <div>
         <h2 className="animate-q-title text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-1">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber mr-2 -translate-y-1" />
