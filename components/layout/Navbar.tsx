@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Logement", href: "/logement" },
   { label: "Assurance", href: "/assurance" },
   { label: "Retraite", href: "/retraite" },
+  { label: "Actualités", href: "/actualite" },
 ];
 
 const INFO_LINKS = [

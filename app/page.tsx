@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon } from "@/components/ui/ServiceIcons";
 import { K_PATH_D, K_TRANSFORM, K_VIEWBOX } from "@/components/shared/k-path";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -31,10 +32,12 @@ const STEPS = [
   { num: "03", title: "Vous d\u00e9cidez", desc: "Aucun engagement. Aucun frais pour vous. Vous \u00eates libre de continuer ou non \u00e0 chaque \u00e9tape." },
 ];
 
-const ARTICLES = [
-  { icon: "\u{1F3DB}", tag: "PERMIS", title: "Permis de s\u00E9jour en Suisse : les 7 erreurs qui retardent votre dossier", desc: "Un dossier incomplet peut vous co\u00FBter 3 \u00E0 6 mois. Voici ce que 80% oublient.", author: "Sarah M.", date: "12 mars 2026", readTime: "5 min" },
-  { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Trouver un appartement en Suisse : guide 2026", desc: "Attestation de non-poursuite, dossier locatif, r\u00E9gies... toutes les cl\u00E9s pour d\u00E9crocher un logement.", author: "Karim D.", date: "5 mars 2026", readTime: "8 min" },
-  { icon: "\u{1F4B0}", tag: "FISCALIT\u00C9", title: "3\u00E8me pilier suisse : ce que la loi 2026 change pour vous", desc: "Rattrapage r\u00E9troactif, plafonds, \u00E9conomie fiscale \u2014 tout comprendre en 6 minutes.", author: "Lucie R.", date: "28 f\u00E9v. 2026", readTime: "6 min" },
+type Article = { icon: string; tag: string; title: string; desc: string; author: string; date: string; readTime: string; href: string };
+
+const ARTICLES: Article[] = [
+  { icon: "\u{1F3AF}", tag: "PR\u00C9VOYANCE", title: "Rachat r\u00E9troactif 3a 2026 : rattraper jusqu\u2019\u00E0 10 ans de cotisations manqu\u00E9es", desc: "Depuis le 1er janvier 2026, l\u2019OPP3 modifi\u00E9e permet de combler les lacunes de pilier 3a. Plafonds, exemples chiffr\u00E9s et strat\u00E9gie de s\u00E9quencement.", author: "\u00C9quipe Kursor", date: "25 avril 2026", readTime: "8 min", href: "/actualite/rachat-retroactif-3a-2026-guide" },
+  { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Lex Koller 2026 : ce que le durcissement change pour les r\u00E9sidents en Suisse", desc: "D\u00E9cryptage des cinq mesures de l\u2019avant-projet du Conseil f\u00E9d\u00E9ral et impact concret par profil \u2014 r\u00E9sidents, frontaliers, locataires.", author: "\u00C9quipe Kursor", date: "25 avril 2026", readTime: "6 min", href: "/actualite/lex-koller-2026-immobilier-suisse" },
+  { icon: "\u{1F3E5}", tag: "ASSURANCES", title: "Chiffres-cl\u00E9s 2026 : assurance, pr\u00E9voyance et salaire en Suisse", desc: "Plafonds 3a, seuils LAA, param\u00E8tres LPP, taux de conversion : les chiffres actualis\u00E9s 2026 et leur impact sur votre budget.", author: "\u00C9quipe Kursor", date: "25 avril 2026", readTime: "7 min", href: "/actualite/chiffres-cles-assurance-prevoyance-2026" },
 ];
 
 /* ───────── PAGE ───────── */
@@ -74,7 +77,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
               <a href="#outils" className="hover-cta font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
-                D\u00e9marrer mon diagnostic <span>{"\u2192"}</span>
+                {"D\u00e9marrer mon diagnostic"} <span>{"\u2192"}</span>
               </a>
               <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
             </div>
@@ -304,11 +307,12 @@ export default function HomePage() {
                 <span className="font-heading italic" style={{ color: "#D97706" }}>pour votre installation</span>
               </h2>
             </div>
-            <span className="font-body hidden md:inline cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \u2192"}</span>
+            <Link href="/actualite" className="font-body hidden md:inline no-underline" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \u2192"}</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginTop: 40 }}>
             {ARTICLES.map((a, i) => (
-              <div key={a.title} className={`scroll-reveal scroll-stagger-${i + 1} hover-lift rounded-xl bg-white overflow-hidden`} style={{ border: "1px solid #E2E8F0" }}>
+              <Link key={a.title} href={a.href} className={`block scroll-reveal scroll-stagger-${i + 1} hover-lift rounded-xl bg-white overflow-hidden no-underline`} style={{ border: "1px solid #E2E8F0", color: "inherit" }}>
+
                 <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#F8FAFC", fontSize: 40 }}>
                   {a.icon}
                 </div>
@@ -321,8 +325,11 @@ export default function HomePage() {
                     <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.readTime}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
+          </div>
+          <div className="md:hidden text-center" style={{ marginTop: 24 }}>
+            <Link href="/actualite" className="font-body no-underline" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \u2192"}</Link>
           </div>
         </div>
       </section>
