@@ -11,6 +11,7 @@ const diagnosticLinks = [
 ];
 
 const ressourceLinks = [
+  { label: "Actualités", href: "/actualite" },
   { label: "Guides", href: "/#ressources" },
   { label: "Comment ça marche", href: "/comment-ca-marche" },
   { label: "À propos", href: "/a-propos" },
