@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IBM_Plex_Sans, Fraunces, Outfit } from "next/font/google";
 import TestNavbar from "@/components/test/TestNavbar";
 import Footer from "@/components/layout/Footer";
+import { ScrollRevealProvider } from "@/components/shared/ScrollRevealProvider";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -74,6 +75,7 @@ export default function RootLayout({
         <TestNavbar />
         {children}
         <Footer />
+        <ScrollRevealProvider />
         <Analytics />
         <SpeedInsights />
       </body>
