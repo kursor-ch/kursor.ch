@@ -492,12 +492,22 @@
 .cta-btn {
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease-out, background-color 0.1s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.1s ease;
+}
+
+@media (hover: hover) {
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.25);
+  }
 }
 
 .cta-btn:active {
-  transform: scale(0.96);
+  transform: translateY(0);
   background-color: #B45309 !important;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
 }
 
 /* Ripple effect on CTA buttons */
@@ -582,14 +592,124 @@
 
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
-              transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 .scroll-reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.scroll-fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+.scroll-fade.visible {
+  opacity: 1;
+}
+
+.scroll-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.scroll-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-stagger-1 { transition-delay: 0.06s; }
+.scroll-stagger-2 { transition-delay: 0.14s; }
+.scroll-stagger-3 { transition-delay: 0.22s; }
+.scroll-stagger-4 { transition-delay: 0.30s; }
+.scroll-stagger-5 { transition-delay: 0.38s; }
+.scroll-stagger-6 { transition-delay: 0.46s; }
+
+/* ===== Diagnostic Q->Q directional enter ===== */
+@keyframes screenInForward {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes screenInBack {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.screen-enter-forward {
+  animation: screenInForward 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.screen-enter-back {
+  animation: screenInBack 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ===== Option button (single-select cards / multi-select pills) ===== */
+.option-button {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+  will-change: transform;
+}
+@media (hover: hover) {
+  .option-button:not([data-selected="true"]):hover {
+    transform: translateX(4px);
+    border-color: var(--funnel-accent, #D97706);
+    background-color: var(--funnel-accent-soft, #FEF3C7);
+  }
+}
+
+/* ===== Animated nav link underline ===== */
+.nav-link-animated {
+  position: relative;
+}
+.nav-link-animated::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #D97706;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .nav-link-animated:hover::after {
+    width: 100%;
+  }
+}
+.nav-link-animated[data-active="true"]::after {
+  width: 100%;
+}
+
+/* ===== K editorial cursor ===== */
+@keyframes kCursorBlink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes kCursorFade {
+  to { opacity: 0; }
+}
+.k-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  margin-left: 4px;
+  background-color: #D97706;
+  vertical-align: -0.05em;
+  opacity: 0;
+  animation: kCursorBlink 0.4s step-end 2 forwards,
+             kCursorFade 0.4s ease-out 0.8s forwards;
+}
+
+/* ===== K draw loader ===== */
+.k-draw-loader path {
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+              fill 0.3s ease 1.4s,
+              stroke-opacity 0.3s ease 1.4s;
 }
 
 /* ===== Mobile scroll snap on cards ===== */
@@ -758,8 +878,21 @@
   .animate-hero-subtitle,
   .animate-hero-separator,
   .scroll-reveal,
+  .scroll-fade,
+  .scroll-scale,
+  .screen-enter-forward,
+  .screen-enter-back,
+  .option-button,
   .animate-hero-desktop-in {
     opacity: 1 !important;
     transform: none !important;
+  }
+  .k-cursor {
+    display: none !important;
+  }
+  .k-draw-loader path {
+    stroke-dashoffset: 0 !important;
+    fill: #D97706 !important;
+    stroke: none !important;
   }
 }
