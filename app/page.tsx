@@ -73,7 +73,7 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
-              <a href="#outils" className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
+              <a href="#outils" className="hover-cta font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
                 D\u00e9marrer mon diagnostic <span>{"\u2192"}</span>
               </a>
               <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
@@ -161,8 +161,8 @@ export default function HomePage() {
               { Icon: HouseKeyIcon, title: "Un dossier qui doit \u00EAtre irr\u00E9prochable", body: "Taux de vacance \u00E0 Gen\u00E8ve et Lausanne sous 1%. Sans attestation de non-poursuite, 3 mois de caution, et dossier conforme aux exigences des r\u00E9gies, la recherche s\u2019\u00E9tale sur 3 \u00E0 6 mois.", metric: "\u2191 3 \u00E0 6 mois de recherche sans m\u00E9thode" },
               { Icon: ShieldCheckIcon, title: "Un syst\u00E8me qui punit l\u2019inertie", body: "Primes LAMal +184% depuis 1997. Franchise mal calibr\u00E9e, mod\u00E8le inadapt\u00E9, compl\u00E9mentaires inutilis\u00E9es \u2014 la plupart des r\u00E9sidents surpaient 2 000 \u00E0 3 000 CHF par an sans le savoir.", metric: "\u2191 2 400 CHF/an de surco\u00FBt moyen" },
               { Icon: PiggyBankIcon, title: "Un syst\u00E8me \u00E0 trois piliers que 70% ignorent", body: "Chaque ann\u00E9e sans 3\u00E8me pilier, c\u2019est 1 500 \u00E0 3 500 CHF d\u2019imp\u00F4ts perdus. D\u00E9finitivement. En 2026, une nouvelle loi permet de rattraper jusqu\u2019\u00E0 10 ans de versements manqu\u00E9s \u2014 personne n\u2019en parle encore.", metric: "\u2191 36 290 CHF rattrapables en 2026" },
-            ].map((p) => (
-              <div key={p.title} className="relative flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", padding: "26px 24px 20px", boxShadow: "0 2px 10px rgba(15,23,42,0.04)" }}>
+            ].map((p, i) => (
+              <div key={p.title} className={`scroll-reveal scroll-stagger-${i + 1} hover-lift relative flex flex-col bg-white rounded-xl`} style={{ border: "1px solid #E2E8F0", padding: "26px 24px 20px", boxShadow: "0 2px 10px rgba(15,23,42,0.04)" }}>
                 <div className="flex items-start gap-4">
                   <div className="shrink-0 flex items-center justify-center" style={{ width: 48, height: 48, backgroundColor: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.18)", borderRadius: 10 }}>
                     <p.Icon size={24} />
@@ -197,8 +197,8 @@ export default function HomePage() {
               { Icon: HouseKeyIcon, title: "Diagnostic Logement", body: "Estimez votre temps de recherche selon votre canton, budget, statut et pr\u00E9paration. Identifiez les pi\u00E8ges qui \u00E9liminent 80% des candidatures.", metric: "Recherche optimis\u00E9e \u00E0 3 semaines", cta: "Faire le diagnostic", href: "/logement" },
               { Icon: ShieldCheckIcon, title: "Audit Assurances", body: "Identifiez simultan\u00E9ment combien vous surpayez et o\u00F9 vous n\u2019\u00EAtes pas couvert. LAMal, compl\u00E9mentaires, perte de gain, RC priv\u00E9e.", metric: "2 400 CHF/an d\u2019\u00E9conomie potentielle", cta: "Faire le diagnostic", href: "/assurance" },
               { Icon: PiggyBankIcon, title: "Audit Retraite", body: "Calculez votre perte fiscale annuelle et d\u00E9couvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3\u00E8me pilier.", metric: "36 290 CHF rattrapables en 2026", cta: "Faire le diagnostic", href: "/retraite" },
-            ].map((t) => (
-              <a key={t.title} href={t.href} className="card-cta-link block no-underline" style={{ color: "inherit" }}>
+            ].map((t, i) => (
+              <a key={t.title} href={t.href} className={`card-cta-link block no-underline scroll-reveal scroll-stagger-${i + 1}`} style={{ color: "inherit" }}>
                 <div className="service-card-live relative h-full flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", borderTop: "2px solid #D97706", padding: "26px 24px 22px" }}>
                   <div className="flex items-center gap-3">
                     <div className="shrink-0 flex items-center justify-center" style={{ width: 44, height: 44, backgroundColor: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.18)", borderRadius: 10 }}><t.Icon size={22} /></div>
@@ -224,8 +224,8 @@ export default function HomePage() {
             <span className="font-heading italic" style={{ color: "#D97706" }}>{"Du diagnostic \u00E0 l\u2019action, en toute transparence."}</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-left" style={{ marginTop: 48 }}>
-            {STEPS.map((s) => (
-              <div key={s.num} className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFDF8" }}>
+            {STEPS.map((s, i) => (
+              <div key={s.num} className={`scroll-reveal scroll-stagger-${i + 1} rounded-xl overflow-hidden`} style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFDF8" }}>
                 <div style={{ height: 4, backgroundColor: "#D97706" }} />
                 <div style={{ padding: "24px 24px 28px" }}>
                   <p className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#D97706", lineHeight: 1 }}>{s.num}</p>
@@ -245,7 +245,7 @@ export default function HomePage() {
       <section className="relative px-6 overflow-hidden" style={{ backgroundColor: "#FFFFFF", paddingTop: 88, paddingBottom: 88 }}>
         <KMark position="top-right" />
         <div ref={opportunity.ref} className={`relative mx-auto scroll-reveal ${opportunity.isVisible ? "visible" : ""}`} style={{ maxWidth: 960 }}>
-          <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center p-7 sm:p-9 lg:p-11" style={{ backgroundColor: "rgba(254,243,199,0.4)", border: "1px solid rgba(217,119,6,0.30)", borderRadius: 20, boxShadow: "0 4px 24px rgba(217,119,6,0.08)" }}>
+          <div className="hover-lift relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-16 items-center p-7 sm:p-9 lg:p-11" style={{ backgroundColor: "rgba(254,243,199,0.4)", border: "1px solid rgba(217,119,6,0.30)", borderRadius: 20, boxShadow: "0 4px 24px rgba(217,119,6,0.08)" }}>
             {/* Left */}
             <div>
               <span className="inline-flex items-center gap-2 font-body uppercase" style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.12em", color: "#B91C1C", backgroundColor: "rgba(220,38,38,0.08)", border: "1px solid rgba(220,38,38,0.25)", padding: "5px 12px", borderRadius: 999 }}>
@@ -269,7 +269,7 @@ export default function HomePage() {
                 {"La majorit\u00E9 des r\u00E9sidents francophones en Suisse n\u2019ont jamais entendu parler de cette r\u00E9forme. Ceux qui agissent avant 2027 prendront plusieurs longueurs d\u2019avance sur leur patrimoine retraite."}
               </p>
 
-              <a href="/retraite" className="font-body inline-flex items-center gap-2 no-underline" style={{ marginTop: 28, backgroundColor: "#D97706", color: "#FFFFFF", fontSize: 15, fontWeight: 500, padding: "13px 24px", borderRadius: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.22)" }}>
+              <a href="/retraite" className="hover-cta font-body inline-flex items-center gap-2 no-underline" style={{ marginTop: 28, backgroundColor: "#D97706", color: "#FFFFFF", fontSize: 15, fontWeight: 500, padding: "13px 24px", borderRadius: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.22)" }}>
                 Calculer mon rattrapage <span>{"\u2192"}</span>
               </a>
             </div>
@@ -307,8 +307,8 @@ export default function HomePage() {
             <span className="font-body hidden md:inline cursor-pointer" style={{ fontSize: 14, fontWeight: 500, color: "#D97706" }}>{"Tous les articles \u2192"}</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5" style={{ marginTop: 40 }}>
-            {ARTICLES.map((a) => (
-              <div key={a.title} className="rounded-xl bg-white overflow-hidden" style={{ border: "1px solid #E2E8F0" }}>
+            {ARTICLES.map((a, i) => (
+              <div key={a.title} className={`scroll-reveal scroll-stagger-${i + 1} hover-lift rounded-xl bg-white overflow-hidden`} style={{ border: "1px solid #E2E8F0" }}>
                 <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#F8FAFC", fontSize: 40 }}>
                   {a.icon}
                 </div>
@@ -344,7 +344,7 @@ export default function HomePage() {
             href="https://calendly.com/sav-gcconsulting/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2"
+            className="hover-cta font-body rounded-xl text-white no-underline inline-flex items-center gap-2"
             style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", marginTop: 32, boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}
           >
             {"R\u00E9server mon appel"} <span>{"\u2192"}</span>

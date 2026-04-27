@@ -17,7 +17,7 @@ export default function ReportHeader({
   verdictBgLight,
 }: ReportHeaderProps) {
   return (
-    <section className="text-center space-y-6 pb-8 border-b border-gray-100">
+    <section className="scroll-reveal visible text-center space-y-6 pb-8 border-b border-gray-100">
       <div className="flex items-center justify-center gap-2">
         <Image src="/kursor-logo-amber.png" alt="Kursor" width={32} height={32} className="h-8 w-auto rounded-lg" />
         <span className="font-heading font-semibold text-sm text-amber">kursor</span>

@@ -72,7 +72,7 @@ export default function RachatRetroactif3aPage() {
   return (
     <div className="bg-creme">
       {/* HERO */}
-      <section style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
+      <section className="scroll-reveal visible" style={{ backgroundColor: "#FFFBF0", borderTop: "1px solid rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(217,119,6,0.15)", paddingTop: 48, paddingBottom: 48 }}>
         <div className="mx-auto px-6" style={{ maxWidth: 1120 }}>
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>🎯 PRÉVOYANCE</span>
           <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
@@ -127,7 +127,7 @@ export default function RachatRetroactif3aPage() {
             </p>
 
             {/* Section 1 — Ce qui a changé */}
-            <h2 id="ce-qui-a-change" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Ce qui a changé au 1er janvier 2026</h2>
+            <h2 id="ce-qui-a-change" className="scroll-reveal font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Ce qui a changé au 1er janvier 2026</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Avant 2026, la règle était brutale. Toute cotisation 3a non versée au 31 décembre était définitivement perdue : pas de rattrapage l’année suivante, pas de mécanisme de récupération. Pour un expatrié arrivé en Suisse en 2020 et ayant attendu 2024 pour ouvrir un 3a, ces quatre années sans versement étaient juridiquement irrécupérables.
             </p>
@@ -139,7 +139,7 @@ export default function RachatRetroactif3aPage() {
             </p>
 
             {/* À retenir 1 */}
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
+            <div className="scroll-reveal rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
                 Le rachat rétroactif s’applique uniquement aux lacunes <strong style={{ color: "#111827" }}>à partir de l’année 2025</strong>. Plafonds 2026 : <strong style={{ color: "#111827" }}>7 258 CHF</strong> pour les salariés affiliés à un 2ème pilier, <strong style={{ color: "#111827" }}>36 288 CHF</strong> (20 % du revenu net) pour les indépendants sans 2ème pilier.
@@ -147,7 +147,7 @@ export default function RachatRetroactif3aPage() {
             </div>
 
             {/* Section 2 — Conditions */}
-            <h2 id="conditions" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les conditions strictes du rachat</h2>
+            <h2 id="conditions" className="scroll-reveal font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Les conditions strictes du rachat</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               L’OPP3 modifiée encadre le rachat avec une rigueur qui peut surprendre. Cinq conditions cumulatives doivent être remplies :
             </p>
@@ -164,10 +164,10 @@ export default function RachatRetroactif3aPage() {
             </p>
 
             {/* Section 3 — Exemples chiffrés */}
-            <h2 id="exemples" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Exemples chiffrés</h2>
+            <h2 id="exemples" className="scroll-reveal font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Exemples chiffrés</h2>
             <div className="flex flex-col gap-4" style={{ marginBottom: 32 }}>
-              {EXEMPLES.map((e) => (
-                <div key={e.name} className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "24px" }}>
+              {EXEMPLES.map((e, i) => (
+                <div key={e.name} className={`scroll-reveal scroll-stagger-${i + 1} rounded-xl bg-white`} style={{ border: "1px solid #E2E8F0", padding: "24px" }}>
                   <div className="flex items-center gap-3" style={{ marginBottom: 10 }}>
                     <span className="flex items-center justify-center shrink-0 font-heading" style={{ width: 32, height: 32, borderRadius: 8, backgroundColor: "rgba(217,119,6,0.1)", color: "#D97706", fontWeight: 600, fontSize: 15 }}>{e.num}</span>
                     <span className="font-heading" style={{ fontSize: 18, fontWeight: 700, color: "#111827" }}>{e.name}</span>
@@ -178,7 +178,7 @@ export default function RachatRetroactif3aPage() {
             </div>
 
             {/* Section 4 — Stratégie */}
-            <h2 id="strategie" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Stratégie optimale pour les résidents de Suisse romande</h2>
+            <h2 id="strategie" className="scroll-reveal font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Stratégie optimale pour les résidents de Suisse romande</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               L’ordre des opérations détermine le bénéfice final. Une mauvaise séquence peut annuler purement et simplement la déductibilité fiscale. Voici la marche à suivre :
             </p>
@@ -198,7 +198,7 @@ export default function RachatRetroactif3aPage() {
             </p>
 
             {/* À retenir 2 */}
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
+            <div className="scroll-reveal rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
                 Pour un cadre romand au taux marginal de 35 % qui combine cotisation 3a courante (7 258 CHF) et rachat LPP (10 000 CHF) la même année, l’économie fiscale immédiate dépasse <strong style={{ color: "#111827" }}>6 000 CHF</strong>. Le rachat rétroactif vient s’ajouter à ce socle.
@@ -206,7 +206,7 @@ export default function RachatRetroactif3aPage() {
             </div>
 
             {/* Section 5 — 13ème rente AVS */}
-            <h2 id="treizieme-rente" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>La 13ème rente AVS : l’autre nouveauté 2026</h2>
+            <h2 id="treizieme-rente" className="scroll-reveal font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>La 13ème rente AVS : l’autre nouveauté 2026</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               À partir de <strong style={{ color: "#111827" }}>décembre 2026</strong>, l’AVS versera pour la première fois de son histoire une 13ème rente mensuelle, équivalente environ à un douzième supplémentaire de la rente annuelle. Pour un retraité touchant la rente maximale individuelle (2 520 CHF/mois), cela représente un complément annuel d’environ 2 520 CHF.
             </p>
@@ -215,12 +215,12 @@ export default function RachatRetroactif3aPage() {
             </p>
 
             {/* CTA finale */}
-            <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
+            <div className="scroll-reveal hover-lift rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
               <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>Combien perdez-vous chaque année sans 3ème pilier optimisé ?</p>
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
                 Notre Audit Retraite calcule votre perte fiscale cumulée et votre éligibilité au rachat rétroactif — en 2 minutes.
               </p>
-              <Link href="/prevoyance" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Calculer ma perte fiscale →</Link>
+              <Link href="/prevoyance" className="hover-cta font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Calculer ma perte fiscale →</Link>
             </div>
 
             {/* Sources */}
@@ -280,8 +280,8 @@ export default function RachatRetroactif3aPage() {
             <Link href="/actualite" className="font-body" style={{ fontSize: 14, fontWeight: 500, color: "#D97706", textDecoration: "none" }}>Tous les articles →</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {RELATED_ARTICLES.map((a) => (
-              <Link key={a.title} href={a.href} className="rounded-xl bg-white overflow-hidden" style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}>
+            {RELATED_ARTICLES.map((a, i) => (
+              <Link key={a.title} href={a.href} className={`scroll-reveal scroll-stagger-${i + 1} hover-lift rounded-xl bg-white overflow-hidden`} style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}>
                 <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>{a.icon}</div>
                 <div style={{ padding: "20px 24px" }}>
                   <span className="inline-block font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#D97706", marginBottom: 8 }}>{a.tag}</span>
@@ -298,13 +298,13 @@ export default function RachatRetroactif3aPage() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ backgroundColor: "#111827", paddingTop: 56, paddingBottom: 56 }}>
+      <section className="scroll-reveal" style={{ backgroundColor: "#111827", paddingTop: 56, paddingBottom: 56 }}>
         <div className="mx-auto px-6 text-center" style={{ maxWidth: 560 }}>
           <h2 className="font-heading" style={{ fontSize: 28, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Recevez nos conseils chaque semaine</h2>
           <p className="font-body" style={{ fontSize: 15, color: "rgba(255,255,255,0.7)", marginTop: 8 }}>Un email par semaine. Les pièges à éviter, les économies à faire.</p>
           <div className="flex items-center justify-center gap-3" style={{ marginTop: 24 }}>
             <input type="email" placeholder="Votre email" className="font-body rounded-lg" style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", padding: "12px 18px", fontSize: 14, color: "#FFFFFF", width: 240, outline: "none" }} />
-            <button className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>S’inscrire →</button>
+            <button className="hover-cta font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 20px", display: "inline-flex", alignItems: "center", gap: 6 }}>S’inscrire →</button>
           </div>
         </div>
       </section>
