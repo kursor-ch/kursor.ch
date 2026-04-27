@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
   title: "Coaching carri\ère en Suisse : boostez votre parcours",
@@ -144,11 +145,6 @@ const FAQ = [
   },
 ];
 
-const SIMILAR_ARTICLES = [
-  { icon: "\u{1F4BC}", title: "Trouver un emploi en Suisse : guide pratique", readTime: "10 min", category: "Emploi" },
-  { icon: "\u{1F4B8}", title: "Salaires en Suisse : les chiffres par secteur 2026", readTime: "8 min", category: "Salaire" },
-  { icon: "\u{1F393}", title: "Formation professionnelle en Suisse : le guide", readTime: "11 min", category: "Formation" },
-];
 
 const RELATED_ARTICLES = [
   { icon: "\u{1F4CB}", tag: "EMPLOI", title: "R\édiger un dossier de candidature en Suisse", author: "Laura B.", date: "10 avril 2026", readTime: "6 min" },
@@ -391,20 +387,7 @@ export default function CoachingCarrierePage() {
                 </button>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>Gratuit {"\·"} 30 min {"\·"} Sans engagement</p>
               </div>
-              <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
-                <div className="flex flex-col gap-3">
-                  {SIMILAR_ARTICLES.map((a) => (
-                    <div key={a.title} className="flex items-start gap-3 rounded-lg cursor-pointer" style={{ padding: "10px 12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                      <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>{a.icon}</div>
-                      <div>
-                        <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\·"} {a.category}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SidebarGuides exclude="/coaching-carriere" />
             </div>
           </aside>
         </div>

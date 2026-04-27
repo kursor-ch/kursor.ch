@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
   title: "Trouver un travail en Suisse : guide 2026 et m\u00E9tiers",
@@ -79,11 +80,6 @@ const FAQ = [
   { q: "Les dipl\u00F4mes fran\u00E7ais sont-ils reconnus en Suisse ?", a: "Pour les m\u00E9tiers non r\u00E9glement\u00E9s, oui. Pour les professions r\u00E9glement\u00E9es (sant\u00E9, enseignement, droit), une <strong>reconnaissance formelle</strong> est obligatoire via les autorit\u00E9s comp\u00E9tentes (CRS, MEBEKO, SEFRI)." },
 ];
 
-const SIMILAR_ARTICLES = [
-  { icon: "\u{1F3E0}", title: "Louer un appartement en Suisse : le guide complet", readTime: "12 min", category: "Logement" },
-  { icon: "\u{1F4C4}", title: "Permis de s\u00E9jour en Suisse : bien choisir le v\u00F4tre", readTime: "14 min", category: "S\u2019installer" },
-  { icon: "\u{1F3E5}", title: "Top 10 des meilleures caisses maladie en Suisse", readTime: "15 min", category: "Assurance" },
-];
 
 const RELATED_ARTICLES = [
   { icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait de poursuites : comment l\u2019obtenir rapidement", author: "Laura B.", date: "5 avril 2026", readTime: "4 min" },
@@ -302,20 +298,7 @@ export default function EmploiSuissePage() {
                 <Link href="/emploi" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \u00B7 2 minutes \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
               </div>
-              <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
-                <div className="flex flex-col gap-3">
-                  {SIMILAR_ARTICLES.map((a) => (
-                    <div key={a.title} className="flex items-start gap-3 rounded-lg cursor-pointer" style={{ padding: "10px 12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                      <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>{a.icon}</div>
-                      <div>
-                        <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\u00B7"} {a.category}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SidebarGuides exclude="/emploi-suisse" />
             </div>
           </aside>
         </div>

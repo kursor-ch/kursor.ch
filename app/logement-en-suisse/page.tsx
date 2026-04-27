@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
   title: "Louer un appartement en Suisse : le guide complet pour r\u00E9ussir votre location",
@@ -19,11 +20,6 @@ const TOC = [
   { id: "arnaques", label: "\u00C9viter les arnaques" },
 ];
 
-const SIMILAR_ARTICLES = [
-  { icon: "\u{1F4B0}", title: "Co\u00FBt de la vie en Suisse : budget complet 2026", readTime: "8 min", category: "Finances" },
-  { icon: "\u{1F4CB}", title: "Permis B Suisse : d\u00E9marches et d\u00E9lais", readTime: "6 min", category: "Visa & Admin" },
-  { icon: "\u{1F4BC}", title: "Trouver un emploi en Suisse : guide pratique", readTime: "10 min", category: "Emploi" },
-];
 
 const RELATED_ARTICLES = [
   { icon: "\u{1F4B0}", tag: "FINANCES", title: "Assurance m\u00E9nage en Suisse : obligatoire ou pas ?", author: "Laura B.", date: "18 mars 2026", readTime: "5 min" },
@@ -382,23 +378,7 @@ export default function LogementSuissePage() {
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \u00B7 2 minutes \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
               </div>
 
-              {/* Articles similaires */}
-              <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
-                <div className="flex flex-col gap-3">
-                  {SIMILAR_ARTICLES.map((a) => (
-                    <div key={a.title} className="flex items-start gap-3 rounded-lg cursor-pointer" style={{ padding: "10px 12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                      <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>
-                        {a.icon}
-                      </div>
-                      <div>
-                        <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\u00B7"} {a.category}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SidebarGuides exclude="/logement-en-suisse" />
             </div>
           </aside>
         </div>

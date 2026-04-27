@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
   title: "Placement Suisse 2026 : guide complet pour bien investir",
@@ -122,11 +123,6 @@ const ERREURS = [
   },
 ];
 
-const SIMILAR_ARTICLES = [
-  { icon: "\u{1F4B0}", title: "Pilier 3a : comment maximiser vos d\éductions fiscales", readTime: "10 min", category: "Retraite" },
-  { icon: "\u{1F3E6}", title: "Meilleurs comptes \épargne en Suisse 2026", readTime: "8 min", category: "Placement" },
-  { icon: "\u{1F4CB}", title: "Optimiser son 2\ème pilier : guide LPP 2026", readTime: "14 min", category: "Retraite" },
-];
 
 const RELATED_ARTICLES = [
   { icon: "\u{1F4C8}", tag: "BOURSE", title: "Investir en ETF depuis la Suisse : le guide complet", author: "\Équipe Kursor", date: "14 avril 2026", readTime: "12 min" },
@@ -364,20 +360,7 @@ export default function AnalyseLppPage() {
                 <button className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>Lancer ma simulation {"\→"}</button>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>Gratuit {"\·"} 3 minutes {"\·"} Sans engagement</p>
               </div>
-              <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
-                <div className="flex flex-col gap-3">
-                  {SIMILAR_ARTICLES.map((a) => (
-                    <div key={a.title} className="flex items-start gap-3 rounded-lg cursor-pointer" style={{ padding: "10px 12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                      <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>{a.icon}</div>
-                      <div>
-                        <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\·"} {a.category}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SidebarGuides exclude="/analyse-lpp" />
             </div>
           </aside>
         </div>

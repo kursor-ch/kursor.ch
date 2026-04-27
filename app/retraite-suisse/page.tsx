@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
   title: "3e pilier suisse 2026 : guide complet pour bien le choisir",
@@ -46,11 +47,6 @@ const ERREURS = [
   },
 ];
 
-const SIMILAR_ARTICLES = [
-  { icon: "\u{1F3E6}", title: "Caisse de pension LPP : comment optimiser votre 2e pilier", readTime: "11 min", category: "Patrimoine" },
-  { icon: "\u{1F4B3}", title: "Ouvrir un compte bancaire en Suisse : guide 2026", readTime: "6 min", category: "Finances" },
-  { icon: "\u{1F3E0}", title: "Acheter un appartement en Suisse : étapes et financement", readTime: "13 min", category: "Logement" },
-];
 
 const RELATED_ARTICLES = [
   { icon: "\u{1F4CB}", tag: "PATRIMOINE", title: "Impôts en Suisse : comment réduire sa facture fiscale légalement", author: "Marc L.", date: "14 avril 2026", readTime: "8 min" },
@@ -301,20 +297,7 @@ export default function RetraiteSuissePage() {
                   Gratuit {"\u00B7"} Mis à jour 2026 {"\u00B7"} Immédiat
                 </p>
               </div>
-              <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20 }}>
-                <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 16 }}>Articles similaires</p>
-                <div className="flex flex-col gap-3">
-                  {SIMILAR_ARTICLES.map((a) => (
-                    <div key={a.title} className="flex items-start gap-3 rounded-lg cursor-pointer" style={{ padding: "10px 12px", backgroundColor: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                      <div className="flex items-center justify-center shrink-0 rounded-lg" style={{ width: 40, height: 40, backgroundColor: "rgba(217,119,6,0.08)", fontSize: 18 }}>{a.icon}</div>
-                      <div>
-                        <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</p>
-                        <p className="font-body" style={{ fontSize: 11, color: "#94A3B8", marginTop: 4 }}>{a.readTime} {"\u00B7"} {a.category}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <SidebarGuides exclude="/retraite-suisse" />
             </div>
           </aside>
         </div>
