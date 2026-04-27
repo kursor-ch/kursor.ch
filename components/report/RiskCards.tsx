@@ -37,7 +37,7 @@ const SEVERITY_COLORS: Record<string, string> = {
 
 export default function RiskCards() {
   return (
-    <section className="space-y-6 py-8 border-b border-gray-100">
+    <section className="scroll-reveal space-y-6 py-8 border-b border-gray-100">
       <h2 className="text-xl font-heading font-semibold text-gray-900">
         Les risques les plus fréquents
       </h2>
@@ -46,10 +46,10 @@ export default function RiskCards() {
         Suisse.
       </p>
       <div className="space-y-4">
-        {GENERAL_RISKS.map((risk) => (
+        {GENERAL_RISKS.map((risk, i) => (
           <div
             key={risk.title}
-            className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm"
+            className={`scroll-reveal scroll-stagger-${i + 1} hover-lift bg-white rounded-xl p-5 border border-gray-100 shadow-sm`}
             style={{ borderLeftWidth: "4px", borderLeftColor: SEVERITY_COLORS[risk.severity] }}
           >
             <div className="flex items-center gap-2 mb-1">

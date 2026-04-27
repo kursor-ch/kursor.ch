@@ -10,7 +10,7 @@ const ICONS: Record<string, string> = {
 
 export default function PartnerCards() {
   return (
-    <section className="space-y-6 py-8 border-b border-gray-100">
+    <section className="scroll-reveal space-y-6 py-8 border-b border-gray-100">
       <h2 className="text-xl font-heading font-semibold text-gray-900">
         Nos partenaires
       </h2>
@@ -19,10 +19,10 @@ export default function PartnerCards() {
         expatriation.
       </p>
       <div className="space-y-4">
-        {partners.map((p) => (
+        {partners.map((p, i) => (
           <div
             key={p.id}
-            className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            className={`scroll-reveal scroll-stagger-${(i % 6) + 1} hover-lift bg-white rounded-xl p-5 border border-gray-100 shadow-sm`}
           >
             <div className="flex items-start gap-4">
               <span className="text-2xl flex-shrink-0 mt-0.5">

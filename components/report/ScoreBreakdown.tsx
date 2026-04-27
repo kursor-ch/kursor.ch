@@ -25,7 +25,7 @@ export default function ScoreBreakdown({
   ];
 
   return (
-    <section className="space-y-6 py-8 border-b border-gray-100">
+    <section className="scroll-reveal space-y-6 py-8 border-b border-gray-100">
       <h2 className="text-xl font-heading font-semibold text-gray-900">
         Votre score
       </h2>
