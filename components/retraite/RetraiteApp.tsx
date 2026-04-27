@@ -297,7 +297,13 @@ export default function RetraiteApp() {
     screen >= SCREEN_Q_START && screen <= SCREEN_Q_END;
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#7C3AED",
+        "--funnel-accent-soft": "#EDE9FE",
+      } as React.CSSProperties}
+    >
       {showProgress && (
         <RetraiteProgressBar current={currentStep} total={totalSteps} />
       )}

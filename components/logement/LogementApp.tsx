@@ -362,7 +362,13 @@ export default function LogementApp() {
     (screen >= 1 && screen <= MAX_QUESTION_INDEX) || screen === CONTACT_SCREEN;
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#D97706",
+        "--funnel-accent-soft": "#FEF3C7",
+      } as React.CSSProperties}
+    >
       {showProgress && (
         <ProgressBar current={currentStep} total={totalSteps} />
       )}

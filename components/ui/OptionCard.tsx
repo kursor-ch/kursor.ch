@@ -15,10 +15,11 @@ export default function OptionCard({
     <button
       type="button"
       onClick={onClick}
-      className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200 text-[15px] font-medium flex items-center gap-3 bg-white shadow-sm ${
+      data-selected={selected ? "true" : undefined}
+      className={`option-button w-full text-left px-5 py-4 rounded-xl border-2 text-[15px] font-medium flex items-center gap-3 bg-white shadow-sm ${
         selected
           ? "border-amber bg-[#FEF3C7] text-gray-900 shadow-md"
-          : "border-stone-200 text-gray-700 hover:border-amber/40 hover:shadow-md hover:-translate-y-px"
+          : "border-stone-200 text-gray-700"
       }`}
     >
       {/* Radio dot */}

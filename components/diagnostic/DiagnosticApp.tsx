@@ -100,7 +100,13 @@ export default function DiagnosticApp() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#D97706",
+        "--funnel-accent-soft": "#FEF3C7",
+      } as React.CSSProperties}
+    >
       {/* Progress bar (shown during question screens) */}
       {screen > 0 && screen <= 4 && (
         <ProgressBar current={screen} total={TOTAL_STEPS} />

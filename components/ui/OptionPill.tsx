@@ -15,10 +15,11 @@ export default function OptionPill({
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex items-center px-4 py-2.5 rounded-full border-2 transition-all duration-200 text-sm font-medium shadow-sm ${
+      data-selected={selected ? "true" : undefined}
+      className={`option-button inline-flex items-center px-4 py-2.5 rounded-full border-2 text-sm font-medium shadow-sm ${
         selected
           ? "border-amber bg-amber text-white scale-105"
-          : "border-stone-200 bg-white text-gray-700 hover:border-amber"
+          : "border-stone-200 bg-white text-gray-700"
       }`}
     >
       {label}

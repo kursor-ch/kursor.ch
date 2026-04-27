@@ -425,7 +425,13 @@ export default function AssuranceApp() {
       screen <= SCREEN_FRONTALIER_START + 5);
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#86A789",
+        "--funnel-accent-soft": "#E6EFE6",
+      } as React.CSSProperties}
+    >
       {showProgress && (
         <AssuranceProgressBar current={currentStep} total={totalSteps} />
       )}
