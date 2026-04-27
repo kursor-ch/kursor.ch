@@ -199,17 +199,17 @@ export default function HomePage() {
               { Icon: ShieldCheckIcon, title: "Audit Assurances", body: "Identifiez simultan\u00E9ment combien vous surpayez et o\u00F9 vous n\u2019\u00EAtes pas couvert. LAMal, compl\u00E9mentaires, perte de gain, RC priv\u00E9e.", metric: "2 400 CHF/an d\u2019\u00E9conomie potentielle", cta: "Faire le diagnostic", href: "/assurance" },
               { Icon: PiggyBankIcon, title: "Audit Retraite", body: "Calculez votre perte fiscale annuelle et d\u00E9couvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3\u00E8me pilier.", metric: "36 290 CHF rattrapables en 2026", cta: "Faire le diagnostic", href: "/retraite" },
             ].map((t) => (
-              <a key={t.title} href={t.href} className="block no-underline" style={{ color: "inherit" }}>
-                <div className="relative h-full flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", borderTop: "2px solid #D97706", padding: "26px 24px 22px" }}>
-                  <span className="absolute top-4 right-4 px-2.5 py-1 rounded-full font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.05em", backgroundColor: "rgba(21,128,61,0.10)", color: "#15803D" }}>Disponible</span>
+              <a key={t.title} href={t.href} className="card-cta-link block no-underline" style={{ color: "inherit" }}>
+                <div className="service-card-live relative h-full flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", borderTop: "2px solid #D97706", padding: "26px 24px 22px" }}>
                   <div className="flex items-center gap-3">
                     <div className="shrink-0 flex items-center justify-center" style={{ width: 44, height: 44, backgroundColor: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.18)", borderRadius: 10 }}><t.Icon size={22} /></div>
                     <h3 className="font-heading" style={{ fontSize: 19, fontWeight: 600, color: "#0F172A", lineHeight: 1.3 }}>{t.title}</h3>
                   </div>
                   <p className="font-body flex-1" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginTop: 14 }}>{t.body}</p>
                   <p className="font-body" style={{ fontSize: 13, fontWeight: 600, color: "#D97706", marginTop: 14 }}>{t.metric}</p>
-                  <span className="font-body inline-flex items-center gap-1" style={{ marginTop: 16, fontSize: 14, fontWeight: 500, color: "#D97706" }}>
-                    {t.cta} <span>{"\u2192"}</span>
+                  <span className="font-body card-cta-button" aria-hidden="true">
+                    <span className="card-cta-text">{t.cta}</span>
+                    <span className="card-cta-arrow">{"\u2192"}</span>
                   </span>
                 </div>
               </a>
