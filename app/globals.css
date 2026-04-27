@@ -862,6 +862,22 @@
   animation: heroDesktopIn 300ms ease-out forwards;
 }
 
+/* ===== Recent diagnostic ticker — pulsing live dot ===== */
+.recent-ticker-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22C55E;
+  margin-right: 8px;
+  vertical-align: 1px;
+  animation: ticker-pulse 2s ease-in-out infinite;
+}
+@keyframes ticker-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
