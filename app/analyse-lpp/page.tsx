@@ -2,9 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Placement suisse 2026 : guide pour investir intelligemment",
-  description:
-    "Placement suisse 2026 : ETF, actions, 3e pilier, immobilier, fiscalit\é. Le guide complet pour r\ésidents et non-r\ésidents qui veulent faire fructifier leur capital.",
+  title: "Placement Suisse 2026 : guide complet pour bien investir",
+  description: "Placement suisse : fiscalité, 3e pilier, ETF, immobilier et conseils pour résidents et non-résidents. Le guide 2026 pour faire fructifier votre épargne.",
 };
 
 /* ───────── DATA ───────── */
