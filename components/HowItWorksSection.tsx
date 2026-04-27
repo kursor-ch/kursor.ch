@@ -97,8 +97,11 @@ export default function HowItWorksSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10"
           style={{ marginTop: 64 }}
         >
-          {steps.map((step) => (
-            <li key={step.number} className="relative">
+          {steps.map((step, i) => (
+            <li
+              key={step.number}
+              className={`relative scroll-fade scroll-stagger-${i + 1} ${isVisible ? "visible" : ""}`}
+            >
               {/* Top divider line (amber, short) */}
               <div
                 aria-hidden="true"

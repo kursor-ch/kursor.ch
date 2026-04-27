@@ -53,7 +53,15 @@ const tools = [
   },
 ];
 
-function ToolCard({ tool }: { tool: (typeof tools)[number] }) {
+function ToolCard({
+  tool,
+  index,
+  isVisible,
+}: {
+  tool: (typeof tools)[number];
+  index: number;
+  isVisible: boolean;
+}) {
   const inner = (
     <div
       className={`relative h-full flex flex-col bg-white rounded-xl ${
@@ -143,15 +151,20 @@ function ToolCard({ tool }: { tool: (typeof tools)[number] }) {
     </div>
   );
 
+  const wrapperClass = `scroll-scale scroll-stagger-${index + 1} ${isVisible ? "visible" : ""}`;
+
   if (tool.live) {
     return (
-      <Link href={tool.href} className="card-cta-link block h-full">
+      <Link
+        href={tool.href}
+        className={`card-cta-link block h-full ${wrapperClass}`}
+      >
         {inner}
       </Link>
     );
   }
 
-  return inner;
+  return <div className={wrapperClass}>{inner}</div>;
 }
 
 export default function ServicesSection() {
@@ -213,8 +226,8 @@ export default function ServicesSection() {
           className="grid grid-cols-1 md:grid-cols-2 gap-5 mx-auto"
           style={{ marginTop: 56, maxWidth: 960 }}
         >
-          {tools.map((t) => (
-            <ToolCard key={t.title} tool={t} />
+          {tools.map((t, i) => (
+            <ToolCard key={t.title} tool={t} index={i} isVisible={isVisible} />
           ))}
         </div>
       </div>
