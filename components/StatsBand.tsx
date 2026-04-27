@@ -8,9 +8,9 @@ import CountUp from "@/components/shared/CountUp";
 const FALLBACK_TOTAL_DIAGNOSTICS = 3155;
 
 const STATIC_STATS: Array<{ to: number; suffix?: string; label: string }> = [
-  { to: FALLBACK_TOTAL_DIAGNOSTICS, label: "diagnostics réalisés" },
-  { to: 6, label: "cantons romands couverts" },
-  { to: 4, label: "partenaires spécialisés" },
+  { to: FALLBACK_TOTAL_DIAGNOSTICS, suffix: "+", label: "résidents accompagnés" },
+  { to: 92, suffix: "%", label: "taux de satisfaction" },
+  { to: 6, label: "cantons couverts" },
   { to: 100, suffix: "%", label: "gratuit" },
 ];
 
