@@ -1,73 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { BriefcaseIcon, HouseKeyIcon, ShieldCheckIcon, PiggyBankIcon } from "@/components/ui/ServiceIcons";
 import { K_PATH_D, K_TRANSFORM, K_VIEWBOX } from "@/components/shared/k-path";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import StatsBand from "@/components/StatsBand";
 import { RecentDiagnosticTicker } from "@/components/lp/RecentDiagnosticTicker";
 import { DataTicker } from "@/components/lp/DataTicker";
-
-async function submitNewsletterEmail(email: string) {
-  const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, source: "lp_final_cta" }),
-    });
-  } else {
-    console.log("Newsletter signup:", email);
-  }
-}
-
-function FinalNewsletterCta() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const email = new FormData(e.currentTarget).get("email") as string;
-    if (!email) return;
-    setLoading(true);
-    try {
-      await submitNewsletterEmail(email);
-    } catch {
-      // Show confirmation anyway per spec
-    }
-    setLoading(false);
-    setSubmitted(true);
-  }
-
-  if (submitted) {
-    return (
-      <p className="font-body" style={{ fontSize: 14, fontWeight: 500, color: "#15803D", marginTop: 32 }}>
-        {"✓ Vous êtes inscrit(e). À bientôt dans votre boîte mail."}
-      </p>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center justify-center gap-3" style={{ marginTop: 32 }}>
-      <input
-        type="email"
-        name="email"
-        required
-        placeholder="Votre adresse email"
-        className="font-body rounded-lg bg-white"
-        style={{ border: "1px solid #E2E8F0", padding: "14px 18px", fontSize: 14, width: 280, outline: "none" }}
-      />
-      <button
-        type="submit"
-        disabled={loading}
-        className="font-body rounded-lg text-white"
-        style={{ backgroundColor: loading ? "#B45309" : "#D97706", fontSize: 14, fontWeight: 500, padding: "14px 24px", border: "none", cursor: loading ? "wait" : "pointer" }}
-      >
-        {"S’inscrire →"}
-      </button>
-    </form>
-  );
-}
 
 function KMark({ position = "top-right" }: { position?: "top-right" | "bottom-right" }) {
   const posStyle: React.CSSProperties = {
@@ -259,7 +197,7 @@ export default function HomePage() {
               { Icon: BriefcaseIcon, title: "Diagnostic Emploi", body: "\u00C9valuez la viabilit\u00E9 de votre projet professionnel en Suisse. Potentiel salaire, ad\u00E9quation du CV au march\u00E9 suisse, secteurs en demande.", metric: "+40 000 CHF/an de potentiel moyen", cta: "Faire le diagnostic", href: "/emploi" },
               { Icon: HouseKeyIcon, title: "Diagnostic Logement", body: "Estimez votre temps de recherche selon votre canton, budget, statut et pr\u00E9paration. Identifiez les pi\u00E8ges qui \u00E9liminent 80% des candidatures.", metric: "Recherche optimis\u00E9e \u00E0 3 semaines", cta: "Faire le diagnostic", href: "/logement" },
               { Icon: ShieldCheckIcon, title: "Audit Assurances", body: "Identifiez simultan\u00E9ment combien vous surpayez et o\u00F9 vous n\u2019\u00EAtes pas couvert. LAMal, compl\u00E9mentaires, perte de gain, RC priv\u00E9e.", metric: "2 400 CHF/an d\u2019\u00E9conomie potentielle", cta: "Faire le diagnostic", href: "/assurance" },
-              { Icon: PiggyBankIcon, title: "Audit Retraite", body: "Calculez votre perte fiscale annuelle et d\u00E9couvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3\u00E8me pilier.", metric: "36 290 CHF rattrapables en 2026", cta: "Faire le diagnostic", href: "/prevoyance" },
+              { Icon: PiggyBankIcon, title: "Audit Retraite", body: "Calculez votre perte fiscale annuelle et d\u00E9couvrez combien vous pouvez rattraper avec la nouvelle loi 2026 sur le 3\u00E8me pilier.", metric: "36 290 CHF rattrapables en 2026", cta: "Faire le diagnostic", href: "/retraite" },
             ].map((t) => (
               <a key={t.title} href={t.href} className="block no-underline" style={{ color: "inherit" }}>
                 <div className="relative h-full flex flex-col bg-white rounded-xl" style={{ border: "1px solid #E2E8F0", borderTop: "2px solid #D97706", padding: "26px 24px 22px" }}>
@@ -330,7 +268,7 @@ export default function HomePage() {
                 {"La majorit\u00E9 des r\u00E9sidents francophones en Suisse n\u2019ont jamais entendu parler de cette r\u00E9forme. Ceux qui agissent avant 2027 prendront plusieurs longueurs d\u2019avance sur leur patrimoine retraite."}
               </p>
 
-              <a href="/prevoyance" className="font-body inline-flex items-center gap-2 no-underline" style={{ marginTop: 28, backgroundColor: "#D97706", color: "#FFFFFF", fontSize: 15, fontWeight: 500, padding: "13px 24px", borderRadius: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.22)" }}>
+              <a href="/retraite" className="font-body inline-flex items-center gap-2 no-underline" style={{ marginTop: 28, backgroundColor: "#D97706", color: "#FFFFFF", fontSize: 15, fontWeight: 500, padding: "13px 24px", borderRadius: 10, boxShadow: "0 4px 16px rgba(217,119,6,0.22)" }}>
                 Calculer mon rattrapage <span>{"\u2192"}</span>
               </a>
             </div>
@@ -395,15 +333,23 @@ export default function HomePage() {
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#F9FAFB" }}>
         <div ref={finalCta.ref} className={`mx-auto text-center scroll-reveal ${finalCta.isVisible ? "visible" : ""}`} style={{ maxWidth: 560 }}>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            {"Des solutions pour chaque \u00E9tape"}<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>{"de votre vie en Suisse"}</span>
+            {"Besoin d\u2019un accompagnement ?"}<br />
+            <span className="font-heading italic" style={{ color: "#D97706" }}>{"Parlez \u00E0 un conseiller Kursor."}</span>
           </h2>
           <p className="font-body" style={{ fontSize: 16, color: "#475569", marginTop: 16 }}>
-            {"Recevez chaque semaine nos conseils pratiques pour r\u00E9ussir votre installation."}
+            {"Un appel de 30 minutes, gratuit et sans engagement, pour faire le point sur votre projet suisse."}
           </p>
-          <FinalNewsletterCta />
+          <a
+            href="https://calendly.com/sav-gcconsulting/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body rounded-xl text-white no-underline inline-flex items-center gap-2"
+            style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", marginTop: 32, boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}
+          >
+            {"R\u00E9server mon appel"} <span>{"\u2192"}</span>
+          </a>
           <p className="font-body" style={{ fontSize: 12, color: "#94A3B8", marginTop: 14 }}>
-            {"Pas de spam. D\u00E9sabonnement en un clic."}
+            {"30 minutes \u00B7 100% gratuit \u00B7 sans engagement."}
           </p>
         </div>
       </section>

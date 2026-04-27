@@ -64,8 +64,8 @@ export default function TestNavbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image src="/kursor-logo-amber.png" alt="Kursor" width={36} height={36} style={{ height: 36, width: "auto" }} />
-            <span style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>Kursor</span>
-            <span style={{ fontSize: 10, fontWeight: 400, color: "#9CA3AF" }}>CH</span>
+            <span className="hidden lg:inline" style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>Kursor</span>
+            <span className="hidden lg:inline" style={{ fontSize: 10, fontWeight: 400, color: "#9CA3AF" }}>CH</span>
             <svg viewBox="0 0 32 32" width="16" height="16" style={{ borderRadius: 2, display: "block" }}>
               <rect width="32" height="32" fill="#DA291C" />
               <rect x="13" y="6" width="6" height="20" fill="#FFF" />
@@ -143,8 +143,15 @@ export default function TestNavbar() {
 
           {/* CTA */}
           <Link
+            href="/#outils"
+            className="lg:hidden rounded-lg text-white"
+            style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "10px 20px" }}
+          >
+            Démarrer
+          </Link>
+          <Link
             href="/emploi"
-            className="rounded-lg text-white"
+            className="hidden lg:inline-flex rounded-lg text-white"
             style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "10px 20px" }}
           >
             Commencer mon diagnostic

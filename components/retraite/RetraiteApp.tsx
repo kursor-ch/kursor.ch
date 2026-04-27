@@ -107,6 +107,9 @@ export default function RetraiteApp() {
   const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
     retryPendingWebhooks();
   }, []);
 
