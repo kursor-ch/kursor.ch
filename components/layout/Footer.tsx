@@ -86,19 +86,6 @@ export default function Footer() {
               Service de mise en relation avec des spécialistes agréés en
               Suisse romande.
             </p>
-            <p
-              className="font-body"
-              style={{
-                fontWeight: 400,
-                fontSize: "12px",
-                color: "#6B7280",
-                maxWidth: "240px",
-                lineHeight: 1.5,
-                marginTop: "10px",
-              }}
-            >
-              GC Consulting · 90 rue de Verdun, Carcassonne
-            </p>
           </div>
 
           {/* Column 2 — Diagnostics */}

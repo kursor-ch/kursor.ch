@@ -45,6 +45,9 @@ export default function DiagnosticApp() {
   const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
     retryPendingWebhook();
   }, []);
 
