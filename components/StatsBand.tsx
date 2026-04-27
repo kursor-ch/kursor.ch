@@ -1,12 +1,14 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { KBullet } from "@/components/shared/KBullet";
 import CountUp from "@/components/shared/CountUp";
 
-const stats: Array<{ to: number; suffix?: string; label: string }> = [
-  { to: 3155, label: "diagnostics réalisés" },
+const FALLBACK_TOTAL_DIAGNOSTICS = 3155;
+
+const STATIC_STATS: Array<{ to: number; suffix?: string; label: string }> = [
+  { to: FALLBACK_TOTAL_DIAGNOSTICS, label: "diagnostics réalisés" },
   { to: 6, label: "cantons romands couverts" },
   { to: 4, label: "partenaires spécialisés" },
   { to: 100, suffix: "%", label: "gratuit" },
@@ -23,6 +25,32 @@ const CANTONS = [
 
 export default function StatsBand() {
   const { ref, isVisible } = useScrollReveal(0.15);
+  const [totalDiagnostics, setTotalDiagnostics] = useState<number>(
+    FALLBACK_TOTAL_DIAGNOSTICS,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/stats")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { total_diagnostics?: unknown } | null) => {
+        if (cancelled) return;
+        const n = data?.total_diagnostics;
+        if (typeof n === "number" && Number.isFinite(n) && n > 0) {
+          setTotalDiagnostics(Math.round(n));
+        }
+      })
+      .catch(() => {
+        // silent fail — keep fallback
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const stats = STATIC_STATS.map((s, i) =>
+    i === 0 ? { ...s, to: totalDiagnostics } : s,
+  );
 
   return (
     <>
