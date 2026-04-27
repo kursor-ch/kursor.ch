@@ -1,6 +1,6 @@
 export default function WarmCTA() {
   return (
-    <section className="py-8 text-center space-y-6">
+    <section className="scroll-reveal py-8 text-center space-y-6">
       <h2 className="text-xl font-heading font-semibold text-gray-900">
         Besoin d&apos;un accompagnement personnalisé ?
       </h2>
@@ -19,7 +19,7 @@ export default function WarmCTA() {
           href="https://calendly.com/sav-gcconsulting/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full bg-amber px-8 py-3.5 text-white font-semibold hover:bg-amber/90 transition-colors"
+          className="hover-cta inline-flex items-center justify-center rounded-full bg-amber px-8 py-3.5 text-white font-semibold hover:bg-amber/90 transition-colors"
         >
           📅 Réservez un appel gratuit de 15 minutes
         </a>

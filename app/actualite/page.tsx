@@ -134,6 +134,7 @@ export default function ActualitePage() {
     <div className="bg-creme">
       {/* HERO */}
       <section
+        className="scroll-reveal visible"
         style={{
           backgroundColor: "#FFFBF0",
           borderTop: "1px solid rgba(217,119,6,0.15)",
@@ -187,7 +188,7 @@ export default function ActualitePage() {
           return (
             <FeaturedWrapper
               {...wrapperProps}
-              className="rounded-xl bg-white overflow-hidden block"
+              className="scroll-reveal hover-lift rounded-xl bg-white overflow-hidden block"
               style={{ border: "1px solid #E2E8F0", marginBottom: 32, textDecoration: "none" }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px]">
@@ -240,14 +241,15 @@ export default function ActualitePage() {
 
         {/* Remaining articles grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ARTICLES.slice(1).map((article) => {
+          {ARTICLES.slice(1).map((article, idx) => {
             const Wrapper: React.ElementType = article.href ? Link : "div";
             const wrapperProps = article.href ? { href: article.href } : {};
+            const stagger = (idx % 6) + 1;
             return (
               <Wrapper
                 key={article.title}
                 {...wrapperProps}
-                className="rounded-xl bg-white overflow-hidden block"
+                className={`scroll-reveal scroll-stagger-${stagger} hover-lift rounded-xl bg-white overflow-hidden block`}
                 style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}
               >
                 {/* Card header */}
@@ -298,7 +300,7 @@ export default function ActualitePage() {
       </section>
 
       {/* NEWSLETTER */}
-      <section style={{ backgroundColor: "#111827", paddingTop: 56, paddingBottom: 56 }}>
+      <section className="scroll-reveal" style={{ backgroundColor: "#111827", paddingTop: 56, paddingBottom: 56 }}>
         <div className="mx-auto px-6 text-center" style={{ maxWidth: 560 }}>
           <h2
             className="font-heading"
@@ -325,7 +327,7 @@ export default function ActualitePage() {
               }}
             />
             <button
-              className="font-body rounded-lg text-white border-0 cursor-pointer"
+              className="hover-cta font-body rounded-lg text-white border-0 cursor-pointer"
               style={{
                 backgroundColor: "#D97706",
                 fontSize: 14,

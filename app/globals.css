@@ -1000,4 +1000,40 @@
     fill: currentColor !important;
     stroke-opacity: 0 !important;
   }
+  .hover-lift:hover,
+  .hover-cta:hover,
+  .hover-cta:active {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ===== Hover interactions ===== */
+
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.hover-cta {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .hover-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.25);
+  }
+}
+.hover-cta:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
 }
