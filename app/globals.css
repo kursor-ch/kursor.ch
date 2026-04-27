@@ -892,7 +892,7 @@
   }
   .k-draw-loader path {
     stroke-dashoffset: 0 !important;
-    fill: #D97706 !important;
-    stroke: none !important;
+    fill: currentColor !important;
+    stroke-opacity: 0 !important;
   }
 }
