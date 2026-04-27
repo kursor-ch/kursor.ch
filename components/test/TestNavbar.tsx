@@ -154,7 +154,7 @@ export default function TestNavbar() {
             className="hidden lg:inline-flex rounded-lg text-white"
             style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "10px 20px" }}
           >
-            Commencer mon diagnostic
+            Démarrer mon diagnostic
           </Link>
         </div>
       </div>

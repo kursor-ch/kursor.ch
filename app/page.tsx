@@ -26,10 +26,9 @@ function KMark({ position = "top-right" }: { position?: "top-right" | "bottom-ri
 /* ───────── DATA ───────── */
 
 const STEPS = [
-  { num: "01", title: "Diagnostic gratuit", desc: "Repondez a 10 questions sur votre situation. On identifie vos risques et priorites en 2 minutes." },
-  { num: "02", title: "Plan personnalise", desc: "Recevez une roadmap complete avec les demarches dans le bon ordre, selon votre profil." },
-  { num: "03", title: "Formation & outils", desc: "Accedez aux modules adaptes a votre situation \u2014 visa, emploi, logement, fiscalite." },
-  { num: "04", title: "Suivi conseiller", desc: "Un expert vous accompagne sur les points bloquants et repond a vos questions." },
+  { num: "01", title: "Diagnostic gratuit", desc: "R\u00e9pondez \u00e0 quelques questions en 2 minutes. On identifie vos risques, surco\u00fbts et opportunit\u00e9s." },
+  { num: "02", title: "Mise en relation", desc: "Si votre situation le justifie, nous vous mettons en relation avec un sp\u00e9cialiste ind\u00e9pendant agr\u00e9\u00e9, sous 48h." },
+  { num: "03", title: "Vous d\u00e9cidez", desc: "Aucun engagement. Aucun frais pour vous. Vous \u00eates libre de continuer ou non \u00e0 chaque \u00e9tape." },
 ];
 
 const ARTICLES = [
@@ -61,7 +60,7 @@ export default function HomePage() {
           <div className="text-center lg:text-left">
             <span className="inline-flex items-center gap-2 font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>
               <span className="inline-block rounded-full" style={{ width: 7, height: 7, backgroundColor: "#15803D" }} />
-              Specialiste administratif Suisse
+              SERVICE DE MISE EN RELATION SPÉCIALISÉ
             </span>
 
             <h1 className="font-heading" style={{ fontSize: 52, fontWeight: 600, color: "#111827", lineHeight: 1.08, marginTop: 24 }}>
@@ -75,7 +74,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4" style={{ marginTop: 32 }}>
               <a href="#outils" className="hover-cta font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
-                Commencer mon diagnostic <span>{"\u2192"}</span>
+                D\u00e9marrer mon diagnostic <span>{"\u2192"}</span>
               </a>
               <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
             </div>
@@ -222,10 +221,9 @@ export default function HomePage() {
       <section className="px-6" style={{ paddingTop: 80, paddingBottom: 80, backgroundColor: "#FFFFFF" }}>
         <div ref={howItWorks.ref} className={`mx-auto text-center scroll-reveal ${howItWorks.isVisible ? "visible" : ""}`} style={{ maxWidth: 1120 }}>
           <h2 className="font-heading" style={{ fontSize: 40, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
-            {"4 \u00E9tapes pour "}
-            <span className="font-heading italic" style={{ color: "#D97706" }}>optimiser votre projet Suisse</span>
+            <span className="font-heading italic" style={{ color: "#D97706" }}>{"Du diagnostic \u00E0 l\u2019action, en toute transparence."}</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left" style={{ marginTop: 48 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-left" style={{ marginTop: 48 }}>
             {STEPS.map((s, i) => (
               <div key={s.num} className={`scroll-reveal scroll-stagger-${i + 1} rounded-xl overflow-hidden`} style={{ border: "1px solid #E2E8F0", backgroundColor: "#FFFDF8" }}>
                 <div style={{ height: 4, backgroundColor: "#D97706" }} />
@@ -237,6 +235,9 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <p className="font-body italic mx-auto" style={{ fontSize: 14, color: "#6B7280", lineHeight: 1.6, marginTop: 32, maxWidth: 640 }}>
+            {"Notre service est gratuit pour vous. Nous sommes r\u00E9mun\u00E9r\u00E9s par nos partenaires lorsqu\u2019ils concluent avec vous. Vous restez libre \u00E0 chaque \u00E9tape."}
+          </p>
         </div>
       </section>
 
