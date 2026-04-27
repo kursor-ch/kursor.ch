@@ -10,6 +10,7 @@ import {
 import { KBullet } from "@/components/shared/KBullet";
 import { KNegativeSpace } from "@/components/shared/KNegativeSpace";
 import { KWatermark } from "@/components/shared/KWatermark";
+import KCursor from "@/components/shared/KCursor";
 
 const dashboardItems = [
   {
@@ -122,6 +123,7 @@ export default function HeroSection() {
             >
               enfin simplifiée.
             </span>
+            <KCursor />
           </h1>
 
           {/* Sub */}

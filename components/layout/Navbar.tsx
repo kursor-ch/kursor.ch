@@ -109,33 +109,15 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="relative transition-colors duration-200 pb-1"
+                    data-active={isActive ? "true" : undefined}
+                    className="nav-link-animated transition-colors duration-200 pb-1"
                     style={{
                       fontSize: 14,
                       fontWeight: 400,
                       color: isActive ? "#D97706" : "#6B7280",
                     }}
-                    onMouseEnter={(e) => {
-                      if (!isActive)
-                        e.currentTarget.style.color = "#111827";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive)
-                        e.currentTarget.style.color = "#6B7280";
-                    }}
                   >
                     {link.label}
-                    {isActive && (
-                      <span
-                        className="absolute left-1/2 -translate-x-1/2 rounded-full"
-                        style={{
-                          bottom: -4,
-                          width: 4,
-                          height: 4,
-                          backgroundColor: "#D97706",
-                        }}
-                      />
-                    )}
                   </Link>
                 );
               })

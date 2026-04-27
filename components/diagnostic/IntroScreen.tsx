@@ -21,6 +21,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { KBullet } from "@/components/shared/KBullet";
 import { KWatermark } from "@/components/shared/KWatermark";
+import KCursor from "@/components/shared/KCursor";
 import SalaryPreviewCard from "@/components/diagnostic/SalaryPreviewCard";
 
 interface IntroScreenProps {
@@ -70,6 +71,7 @@ export default function IntroScreen({ onStart }: IntroScreenProps) {
           <h1 className="hero-headline font-heading text-[36px] md:text-[44px] lg:text-[56px] font-medium leading-[1.1] text-gray-900 mb-6">
             Êtes-vous prêt pour la{" "}
             <span className="hero-noun text-amber italic">Suisse</span>
+            <KCursor />
             &nbsp;?
           </h1>
 

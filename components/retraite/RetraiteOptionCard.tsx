@@ -18,12 +18,19 @@ export default function RetraiteOptionCard({
     <button
       type="button"
       onClick={onClick}
-      className="w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200 text-[15px] font-medium flex items-center gap-3 bg-white shadow-sm"
-      style={{
-        borderColor: selected ? ACCENT : "#E7E5E4",
-        backgroundColor: selected ? ACCENT_LIGHT : "#FFFFFF",
-        color: selected ? "#111827" : "#374151",
-      }}
+      data-selected={selected ? "true" : undefined}
+      className={`option-button w-full text-left px-5 py-4 rounded-xl border-2 text-[15px] font-medium flex items-center gap-3 shadow-sm ${
+        selected ? "" : "bg-white text-gray-700 border-stone-200"
+      }`}
+      style={
+        selected
+          ? {
+              borderColor: ACCENT,
+              backgroundColor: ACCENT_LIGHT,
+              color: "#111827",
+            }
+          : undefined
+      }
     >
       <span
         className="flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-200"

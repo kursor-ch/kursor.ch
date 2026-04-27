@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import KDrawLoader from "@/components/shared/KDrawLoader";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -43,10 +44,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
       <div className="mb-10">
-        <span className="relative flex h-5 w-5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber/40" />
-          <span className="relative inline-flex h-5 w-5 rounded-full bg-amber" />
-        </span>
+        <KDrawLoader size={120} color="#D97706" durationMs={1500} />
       </div>
 
       <div className="h-16 flex items-center justify-center mb-10">

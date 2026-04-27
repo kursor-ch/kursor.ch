@@ -115,6 +115,7 @@ export default function AssuranceApp() {
   const sessionStartRef = useRef<number>(Date.now());
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
+  const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
     retryPendingWebhooks();
@@ -175,6 +176,7 @@ export default function AssuranceApp() {
   };
 
   const goNext = () => {
+    directionRef.current = "forward";
     if (screen === SCREEN_INTRO) {
       trackEvent("Diagnostic Started", { funnel: "assurance" });
       bumpScreen(SCREEN_Q1);
@@ -296,6 +298,7 @@ export default function AssuranceApp() {
 
   const goBack = () => {
     usedBackRef.current = true;
+    directionRef.current = "back";
 
     if (screen === SCREEN_Q1) {
       bumpScreen(SCREEN_INTRO);
@@ -425,7 +428,13 @@ export default function AssuranceApp() {
       screen <= SCREEN_FRONTALIER_START + 5);
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#86A789",
+        "--funnel-accent-soft": "#E6EFE6",
+      } as React.CSSProperties}
+    >
       {showProgress && (
         <AssuranceProgressBar current={currentStep} total={totalSteps} />
       )}
@@ -451,6 +460,7 @@ export default function AssuranceApp() {
                 onBack={goBack}
                 canProceed={canProceedFromQuestion(screen)}
                 canGoBack={screen > SCREEN_Q1}
+                direction={directionRef.current}
               />
             );
           })()}

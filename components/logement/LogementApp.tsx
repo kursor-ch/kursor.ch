@@ -96,6 +96,7 @@ export default function LogementApp() {
   const sessionStartRef = useRef<number>(Date.now());
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
+  const directionRef = useRef<"forward" | "back">("forward");
 
   useEffect(() => {
     retryPendingWebhooks();
@@ -223,6 +224,7 @@ export default function LogementApp() {
   };
 
   const goNext = () => {
+    directionRef.current = "forward";
     if (screen === 0) {
       trackEvent("Diagnostic Started", { funnel: "logement" });
       // First question index (0) → screen index 1
@@ -274,6 +276,7 @@ export default function LogementApp() {
 
   const goBack = () => {
     usedBackRef.current = true;
+    directionRef.current = "back";
 
     if (screen >= 1 && screen <= MAX_QUESTION_INDEX) {
       const prevIdx = prevQuestionIndex(screen - 1, answers);
@@ -362,7 +365,13 @@ export default function LogementApp() {
     (screen >= 1 && screen <= MAX_QUESTION_INDEX) || screen === CONTACT_SCREEN;
 
   return (
-    <main className="min-h-screen">
+    <main
+      className="min-h-screen"
+      style={{
+        "--funnel-accent": "#D97706",
+        "--funnel-accent-soft": "#FEF3C7",
+      } as React.CSSProperties}
+    >
       {showProgress && (
         <ProgressBar current={currentStep} total={totalSteps} />
       )}
@@ -387,6 +396,7 @@ export default function LogementApp() {
               onBack={goBack}
               canProceed={canProceedFromQuestion(screen)}
               canGoBack={screen > 1}
+              direction={directionRef.current}
             />
           )}
 

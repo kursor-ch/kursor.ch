@@ -3,12 +3,13 @@
 import { Fragment } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { KBullet } from "@/components/shared/KBullet";
+import CountUp from "@/components/shared/CountUp";
 
-const stats = [
-  { figure: "3 155", label: "diagnostics réalisés" },
-  { figure: "6", label: "cantons romands couverts" },
-  { figure: "4", label: "partenaires spécialisés" },
-  { figure: "100%", label: "gratuit" },
+const stats: Array<{ to: number; suffix?: string; label: string }> = [
+  { to: 3155, label: "diagnostics réalisés" },
+  { to: 6, label: "cantons romands couverts" },
+  { to: 4, label: "partenaires spécialisés" },
+  { to: 100, suffix: "%", label: "gratuit" },
 ];
 
 const CANTONS = [
@@ -72,7 +73,7 @@ export default function StatsBand() {
         {stats.map((stat, i) => (
           <div
             key={stat.label}
-            className="text-center lg:text-left relative"
+            className={`text-center lg:text-left relative scroll-fade scroll-stagger-${i + 1} ${isVisible ? "visible" : ""}`}
             style={
               i > 0
                 ? {
@@ -102,7 +103,7 @@ export default function StatsBand() {
                 letterSpacing: "-0.02em",
               }}
             >
-              {stat.figure}
+              <CountUp to={stat.to} suffix={stat.suffix ?? ""} duration={1400} />
             </p>
             <p
               className="font-body"

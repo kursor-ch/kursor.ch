@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { KBullet } from "@/components/shared/KBullet";
 import { KWatermark } from "@/components/shared/KWatermark";
+import KCursor from "@/components/shared/KCursor";
 import AssurancePreviewCard from "@/components/assurance/AssurancePreviewCard";
 import { sendSoftExitWebhook } from "@/lib/shared/webhookClient";
 
@@ -165,8 +166,8 @@ export default function AssuranceLanding({ onStart }: AssuranceLandingProps = {}
 
           <h1 className="hero-headline font-heading text-[36px] md:text-[44px] lg:text-[56px] font-medium leading-[1.1] text-gray-900 mb-6">
             Combien vous coûte votre{" "}
-            <span className="hero-noun text-amber italic">assurance</span> de
-            trop&nbsp;?
+            <span className="hero-noun text-amber italic">assurance</span>
+            <KCursor /> de trop&nbsp;?
           </h1>
 
           <p className="hero-sub text-[16px] lg:text-[18px] text-gray-600 max-w-[480px] mb-4 leading-relaxed">

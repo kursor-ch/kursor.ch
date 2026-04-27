@@ -2,6 +2,7 @@
 
 import { KWatermark } from "@/components/shared/KWatermark";
 import { KBullet } from "@/components/shared/KBullet";
+import CountUp from "@/components/shared/CountUp";
 import SurcoutBreakdownBar from "./SurcoutBreakdownBar";
 import TrousList from "./TrousList";
 import type {
@@ -47,7 +48,7 @@ export default function ResultsScreenResident({
             className="font-heading font-medium leading-[1.05] text-amber"
             style={{ fontSize: "clamp(40px, 8vw, 56px)" }}
           >
-            +{surcout.total_annuel.toLocaleString("fr-CH")} CHF / an
+            <CountUp to={surcout.total_annuel} prefix="+" suffix=" CHF / an" duration={1400} />
           </h1>
           <p className="text-sm text-gray-500 font-body">
             soit{" "}
