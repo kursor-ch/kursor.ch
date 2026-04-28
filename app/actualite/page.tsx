@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -16,6 +17,7 @@ type Article = {
   date: string;
   readTime: string;
   href?: string;
+  image?: string;
 };
 
 /* ───────── DATA ───────── */
@@ -31,6 +33,7 @@ const ARTICLES: Article[] = [
     date: "25 avril 2026",
     readTime: "8 min",
     href: "/actualite/rachat-retroactif-3a-2026-guide",
+    image: "/images/articles/rachat-3a-2026.jpg",
   },
   {
     icon: "🏠",
@@ -42,6 +45,7 @@ const ARTICLES: Article[] = [
     date: "25 avril 2026",
     readTime: "6 min",
     href: "/actualite/lex-koller-2026-immobilier-suisse",
+    image: "/images/articles/lex-koller-2026.jpg",
   },
   {
     icon: "💼",
@@ -53,6 +57,7 @@ const ARTICLES: Article[] = [
     date: "25 avril 2026",
     readTime: "5 min",
     href: "/actualite/generation-z-emploi-suisse-2026",
+    image: "/images/articles/gen-z-emploi-2026.jpg",
   },
   {
     icon: "🏥",
@@ -64,6 +69,7 @@ const ARTICLES: Article[] = [
     date: "25 avril 2026",
     readTime: "7 min",
     href: "/actualite/chiffres-cles-assurance-prevoyance-2026",
+    image: "/images/articles/chiffres-cles-2026.jpg",
   },
   {
     icon: "🎯",
@@ -192,12 +198,25 @@ export default function ActualitePage() {
               style={{ border: "1px solid #E2E8F0", marginBottom: 32, textDecoration: "none" }}
             >
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px]">
-                <div
-                  className="flex items-center justify-center"
-                  style={{ minHeight: 160, backgroundColor: "#FFFBF0", fontSize: 56 }}
-                >
-                  {featured.icon}
-                </div>
+                {featured.image ? (
+                  <div className="relative" style={{ minHeight: 240, backgroundColor: "#FFFBF0" }}>
+                    <Image
+                      src={featured.image}
+                      alt={featured.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 720px"
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="flex items-center justify-center"
+                    style={{ minHeight: 160, backgroundColor: "#FFFBF0", fontSize: 56 }}
+                  >
+                    {featured.icon}
+                  </div>
+                )}
                 <div style={{ padding: "32px 32px" }}>
                   <div className="flex items-center gap-3" style={{ marginBottom: 12 }}>
                     <span
@@ -253,12 +272,24 @@ export default function ActualitePage() {
                 style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}
               >
                 {/* Card header */}
-                <div
-                  className="flex items-center justify-center"
-                  style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 40 }}
-                >
-                  {article.icon}
-                </div>
+                {article.image ? (
+                  <div className="relative aspect-[16/9]" style={{ backgroundColor: "#FFFBF0" }}>
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="flex items-center justify-center"
+                    style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 40 }}
+                  >
+                    {article.icon}
+                  </div>
+                )}
 
                 {/* Card body */}
                 <div style={{ padding: "20px 24px" }}>
