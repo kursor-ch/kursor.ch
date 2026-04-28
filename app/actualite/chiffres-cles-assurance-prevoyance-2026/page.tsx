@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArticleHeroImage } from "@/components/articles/ArticleHeroImage";
 
 export const metadata: Metadata = {
   title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse — tout ce qui change",
@@ -11,6 +12,14 @@ export const metadata: Metadata = {
     description:
       "Plafonds 3a, franchise LAMal, LAA, LPP, Échelle de Berne : les chiffres actualisés pour 2026 et ce qu’ils signifient pour votre budget.",
     type: "article",
+    images: [
+      {
+        url: "/images/articles/chiffres-cles-2026.jpg",
+        width: 1200,
+        height: 514,
+        alt: "Documents d'assurance et de prévoyance — chiffres-clés 2026 Suisse",
+      },
+    ],
   },
 };
 
@@ -72,6 +81,7 @@ const SOURCES = [
 
 
 
+
 /* ───────── PAGE ───────── */
 
 export default function ChiffresCles2026Page() {
@@ -120,6 +130,13 @@ export default function ChiffresCles2026Page() {
 
           {/* MAIN CONTENT */}
           <article>
+
+            <ArticleHeroImage
+              src="/images/articles/chiffres-cles-2026.jpg"
+              alt="Documents d'assurance et de prévoyance — chiffres-clés 2026 Suisse"
+              category="ASSURANCES"
+              categoryColor="#86A789"
+            />
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
@@ -243,25 +260,6 @@ export default function ChiffresCles2026Page() {
               </ul>
             </section>
 
-            {/* Tags + Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, marginTop: 32, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </article>
 
           {/* RIGHT SIDEBAR */}

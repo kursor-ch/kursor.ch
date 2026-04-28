@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArticleHeroImage } from "@/components/articles/ArticleHeroImage";
 
 export const metadata: Metadata = {
   title: "Lex Koller 2026 : ce que le durcissement change pour les résidents en Suisse",
@@ -11,6 +12,14 @@ export const metadata: Metadata = {
     description:
       "Le Conseil fédéral veut restreindre l’acquisition d’immeubles par les étrangers. Décryptage de l’avant-projet et impact concret pour les résidents et frontaliers.",
     type: "article",
+    images: [
+      {
+        url: "/images/articles/lex-koller-2026.jpg",
+        width: 1200,
+        height: 514,
+        alt: "Immeuble résidentiel moderne en Suisse — contexte de la réforme Lex Koller 2026",
+      },
+    ],
   },
 };
 
@@ -119,6 +128,13 @@ export default function LexKoller2026Page() {
           {/* MAIN CONTENT */}
           <article>
 
+            <ArticleHeroImage
+              src="/images/articles/lex-koller-2026.jpg"
+              alt="Immeuble résidentiel moderne en Suisse — contexte de la réforme Lex Koller 2026"
+              category="LOGEMENT"
+              categoryColor="#3B82F6"
+            />
+
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Le Conseil fédéral a annoncé le <strong style={{ color: "#111827" }}>15 avril 2026</strong> un durcissement de la loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger, mieux connue sous le nom de <strong style={{ color: "#111827" }}>Lex Koller</strong>. La consultation publique sur l’avant-projet court jusqu’au 15 juillet 2026, avec une entrée en vigueur visée pour 2027.
@@ -215,25 +231,6 @@ export default function LexKoller2026Page() {
               </ul>
             </section>
 
-            {/* Tags + Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, marginTop: 32, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </article>
 
           {/* RIGHT SIDEBAR */}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArticleHeroImage } from "@/components/articles/ArticleHeroImage";
 
 export const metadata: Metadata = {
   title: "« Pas de Gen Z » : une offre d’emploi en Suisse relance le débat sur les jeunes au travail",
@@ -11,6 +12,14 @@ export const metadata: Metadata = {
     description:
       "Une entreprise zurichoise exclut la génération Z de ses candidatures. Que révèle cette polémique sur le marché du travail suisse en 2026 ?",
     type: "article",
+    images: [
+      {
+        url: "/images/articles/gen-z-emploi-2026.jpg",
+        width: 1200,
+        height: 514,
+        alt: "Jeune professionnel dans un bureau moderne — marché de l'emploi suisse 2026",
+      },
+    ],
   },
 };
 
@@ -43,6 +52,7 @@ const SOURCES = [
   { title: "Office fédéral de la statistique (OFS) — Statistique des absences au travail 2024", url: "https://www.bfs.admin.ch/bfs/fr/home/statistiques/travail-remuneration.html" },
   { title: "Baromètre du marché du travail Alixio 2026", url: "https://www.alixio.fr" },
 ];
+
 
 
 
@@ -94,6 +104,13 @@ export default function GenZEmploi2026Page() {
 
           {/* MAIN CONTENT */}
           <article>
+
+            <ArticleHeroImage
+              src="/images/articles/gen-z-emploi-2026.jpg"
+              alt="Jeune professionnel dans un bureau moderne — marché de l'emploi suisse 2026"
+              category="EMPLOI"
+              categoryColor="#D97706"
+            />
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
@@ -187,25 +204,6 @@ export default function GenZEmploi2026Page() {
               </ul>
             </section>
 
-            {/* Tags + Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4" style={{ paddingTop: 24, marginTop: 32, borderTop: "1px solid #E2E8F0" }}>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Tags</p>
-                <div className="flex flex-wrap gap-2">
-                  {TAGS.map((tag) => (
-                    <span key={tag} className="font-body rounded-full" style={{ fontSize: 12, fontWeight: 500, color: "#475569", backgroundColor: "#F1F5F9", padding: "5px 14px", border: "1px solid #E2E8F0" }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#94A3B8", marginBottom: 8 }}>Partager</p>
-                <div className="flex items-center gap-3">
-                  {["Li", "X", "Fb"].map((s) => (
-                    <span key={s} className="flex items-center justify-center rounded-full font-body cursor-pointer" style={{ width: 32, height: 32, fontSize: 12, fontWeight: 600, color: "#475569", backgroundColor: "#F1F5F9", border: "1px solid #E2E8F0" }}>{s}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
           </article>
 
           {/* RIGHT SIDEBAR */}
