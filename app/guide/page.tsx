@@ -11,81 +11,11 @@ export const metadata: Metadata = {
 
 const GUIDES = [
   {
-    icon: "\u{1F4CB}",
-    title: "Permis de s\u00E9jour en Suisse",
-    description: "Permis B, C, L, G, frontalier : identifiez le titre adapt\u00E9 \u00E0 votre situation et ma\u00EEtrisez les d\u00E9marches.",
-    href: "/permis-suisse",
-    tag: "S'INSTALLER",
-  },
-  {
-    icon: "\u{1F3E0}",
-    title: "Louer un appartement en Suisse",
-    description: "Dossier de location, garantie de loyer, r\u00E9siliation de bail : tout savoir avant de signer un contrat.",
-    href: "/logement-en-suisse",
-    tag: "LOGEMENT",
-  },
-  {
-    icon: "\u{1F3E5}",
-    title: "Assurance maladie en Suisse",
-    description: "LAMal, LCA, franchise, primes : comment choisir la meilleure caisse maladie et r\u00E9duire vos co\u00FBts.",
-    href: "/assurance-maladie",
-    tag: "SANT\u00C9",
-  },
-  {
-    icon: "\u{1F4BC}",
-    title: "Trouver un emploi en Suisse",
-    description: "CV suisse, m\u00E9tiers qui recrutent, permis de travail, canaux de recherche et salaires 2026.",
-    href: "/emploi-suisse",
-    tag: "EMPLOI",
-  },
-  {
-    icon: "\u{1F4B0}",
-    title: "Calcul salaire net suisse frontalier",
-    description: "Simulateur brut-net, cotisations, imp\u00F4t \u00E0 la source, diff\u00E9rences cantonales et charges invisibles.",
-    href: "/salaire-suisse",
-    tag: "EMPLOI",
-  },
-  {
-    icon: "\u{1F3E2}",
-    title: "Cr\u00E9er une soci\u00E9t\u00E9 en Suisse",
-    description: "S\u00E0rl, SA ou raison individuelle : d\u00E9marches, capital, co\u00FBts et obligations l\u00E9gales.",
-    href: "/creation-entreprise",
-    tag: "ENTREPRENDRE",
-  },
-  {
-    icon: "\u{1F4C8}",
-    title: "Optimisation fiscale en Suisse",
-    description: "6 leviers pour r\u00E9duire vos imp\u00F4ts : 3e pilier, LPP, immobilier, dividendes, frontaliers.",
-    href: "/fiscalite-business",
-    tag: "FISCALIT\u00C9",
-  },
-  {
-    icon: "\u{1F3AF}",
-    title: "3e pilier suisse : le guide complet",
-    description: "Pilier 3a vs 3b, banque vs assurance, multi-comptes, rattrapage 2026, frontaliers TOU.",
-    href: "/retraite-suisse",
-    tag: "PATRIMOINE",
-  },
-  {
-    icon: "\u{1F4B8}",
-    title: "Placement suisse : guide pour investir",
-    description: "ETF, actions, 3e pilier, immobilier, fiscalit\u00E9 : le guide pour r\u00E9sidents et non-r\u00E9sidents.",
-    href: "/analyse-lpp",
-    tag: "PATRIMOINE",
-  },
-  {
     icon: "\u{1F4DD}",
     title: "Imp\u00F4ts en Suisse pour les \u00E9trangers",
     description: "Imp\u00F4t \u00E0 la source, TOU, permis B/C/L, d\u00E9ductions, double imposition et d\u00E9claration fiscale.",
     href: "/impots-suisse-etrangers",
     tag: "FISCALIT\u00C9",
-  },
-  {
-    icon: "\u{1F465}",
-    title: "Coaching carri\u00E8re en Suisse",
-    description: "Optimiser votre CV, pr\u00E9parer vos entretiens, n\u00E9gocier votre salaire avec un accompagnement personnalis\u00E9.",
-    href: "/coaching-carriere",
-    tag: "EMPLOI",
   },
 ];
 
