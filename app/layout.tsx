@@ -46,8 +46,14 @@ export default function RootLayout({
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
   return (
-    <html lang="fr" className={`${ibmPlexSans.variable} ${fraunces.variable} ${outfit.variable}`}>
+    <html lang="fr-CH" className={`${ibmPlexSans.variable} ${fraunces.variable} ${outfit.variable}`}>
       <head>
+        <link rel="alternate" hrefLang="fr-CH" href="https://www.kursor.ch" />
+        <link rel="alternate" hrefLang="fr-FR" href="https://www.kursor.ch" />
+        <link rel="alternate" hrefLang="fr" href="https://www.kursor.ch" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.kursor.ch" />
+        <meta name="geo.region" content="CH" />
+        <meta name="geo.placename" content="Suisse" />
         <meta name="google-site-verification" content="6hLQbxoNFJS31MuJUJPMV6MvhbGk47qHTVBYCC9i4LE" />
         <Script
           async
