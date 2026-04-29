@@ -11,6 +11,7 @@ const GUIDES = [
   { title: "3e pilier suisse : le guide complet", href: "/retraite-suisse" },
   { title: "Placement suisse : guide pour investir", href: "/analyse-lpp" },
   { title: "Coaching carrière en Suisse", href: "/coaching-carriere" },
+  { title: "Impôts en Suisse pour les étrangers", href: "/impots-suisse-etrangers" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {
