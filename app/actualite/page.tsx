@@ -71,66 +71,6 @@ const ARTICLES: Article[] = [
     href: "/actualite/chiffres-cles-assurance-prevoyance-2026",
     image: "/images/articles/chiffres-cles-2026.jpg",
   },
-  {
-    icon: "🎯",
-    tag: "PRÉVOYANCE",
-    title: "3e pilier 2026 : plafond relevé et nouvelles déductions fiscales",
-    description:
-      "Le Conseil fédéral a confirmé le relèvement du plafond de versement au pilier 3a à 7 258 CHF pour les salariés. Une opportunité à saisir avant le 31 décembre pour optimiser votre charge fiscale.",
-    author: "Équipe Kursor",
-    date: "14 avril 2026",
-    readTime: "5 min",
-  },
-  {
-    icon: "🏥",
-    tag: "SANTÉ",
-    title: "LAMal 2026 : hausse des primes et nouvelles caisses moins chères",
-    description:
-      "Les primes d'assurance maladie ont encore augmenté en moyenne de 6 % pour 2026. Tour d'horizon des caisses qui tirent leur épingle du jeu et des astuces pour réduire votre facture.",
-    author: "Laura B.",
-    date: "8 avril 2026",
-    readTime: "7 min",
-  },
-  {
-    icon: "🏠",
-    tag: "LOGEMENT",
-    title: "Marché immobilier suisse : les loyers sous pression en 2026",
-    description:
-      "Le taux d'intérêt de référence maintenu à 1,75 % n'a pas suffi à freiner la hausse des loyers dans les grandes villes. Genève, Zurich et Lausanne restent les marchés les plus tendus.",
-    author: "Marc T.",
-    date: "1er avril 2026",
-    readTime: "6 min",
-  },
-  {
-    icon: "🌍",
-    tag: "FRONTALIERS",
-    title: "Frontaliers franco-suisses : ce qui change au 1er janvier 2026",
-    description:
-      "Nouveau régime fiscal pour les frontaliers, règles de télétravail assouplies à 40 % et mise à jour de la convention de sécurité sociale franco-suisse : le point complet sur les changements 2026.",
-    author: "Karim D.",
-    date: "24 mars 2026",
-    readTime: "8 min",
-  },
-  {
-    icon: "💼",
-    tag: "EMPLOI",
-    title: "Salaires en Suisse 2026 : quels secteurs ont le plus augmenté ?",
-    description:
-      "L'indexation des salaires sur l'inflation a profité à l'industrie pharmaceutique, à l'IT et à la construction. Les données de l'OFS révèlent un écart croissant entre cantons.",
-    author: "Sophie M.",
-    date: "18 mars 2026",
-    readTime: "5 min",
-  },
-  {
-    icon: "🏢",
-    tag: "ENTREPRENEURIAT",
-    title: "Créer une Sàrl en Suisse en 2026 : capital réduit à 20 000 CHF confirmé",
-    description:
-      "La réforme du droit des sociétés entre en vigueur. Le capital minimum pour une Sàrl passe à 20 000 CHF, rendant la création d'entreprise plus accessible pour les indépendants et startups.",
-    author: "Équipe Kursor",
-    date: "10 mars 2026",
-    readTime: "4 min",
-  },
 ];
 
 /* ───────── PAGE ───────── */
