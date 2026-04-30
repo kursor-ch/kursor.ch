@@ -125,6 +125,7 @@ export default function OptInScreen({ onSubmit, onBack }: OptInScreenProps) {
           href="/politique-de-confidentialite"
           className="underline hover:text-amber transition-colors"
           target="_blank"
+          rel="noopener noreferrer"
         >
           politique de confidentialité
         </Link>
