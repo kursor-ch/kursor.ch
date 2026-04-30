@@ -42,6 +42,7 @@ export default function ContactScreen({
   const [partnerShareOptin, setPartnerShareOptin] = useState(false);
   const [newsletterOptin, setNewsletterOptin] = useState(false);
   const [showConsentError, setShowConsentError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = (): boolean => {
     const newErrors: typeof errors = {};
@@ -64,7 +65,9 @@ export default function ContactScreen({
   };
 
   const handleSubmit = () => {
+    if (isSubmitting) return;
     if (validate()) {
+      setIsSubmitting(true);
       onSubmit({
         rgpd_accepted: rgpdAccepted,
         partner_share_optin: partnerShareOptin,
@@ -365,6 +368,7 @@ export default function ContactScreen({
           className="underline transition-colors"
           style={{ color: "#9CA3AF" }}
           target="_blank"
+          rel="noopener noreferrer"
         >
           politique de confidentialité
         </Link>
@@ -382,16 +386,18 @@ export default function ContactScreen({
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+          disabled={isSubmitting}
+          aria-busy={isSubmitting}
+          className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:hover:scale-100"
           style={{ backgroundColor: ACCENT }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = ACCENT_HOVER)
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = ACCENT)
-          }
+          onMouseEnter={(e) => {
+            if (!isSubmitting) e.currentTarget.style.backgroundColor = ACCENT_HOVER;
+          }}
+          onMouseLeave={(e) => {
+            if (!isSubmitting) e.currentTarget.style.backgroundColor = ACCENT;
+          }}
         >
-          Voir mon audit prévoyance →
+          {isSubmitting ? "Envoi en cours…" : "Voir mon audit prévoyance →"}
         </button>
       </div>
     </div>
