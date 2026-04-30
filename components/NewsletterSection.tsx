@@ -5,15 +5,12 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 async function submitEmail(email: string) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-  } else {
-    console.log("Newsletter signup:", email);
-  }
+  if (!webhookUrl) return;
+  await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
 }
 
 function DiamondDivider() {

@@ -83,63 +83,85 @@ export default function ContactScreen({
 
       <div className="space-y-5">
         <div>
-          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+          <label htmlFor="contact-prenom" className="text-sm font-medium text-gray-700 font-body mb-1 block">
             Prénom <span className="text-rouge">*</span>
           </label>
           <input
+            id="contact-prenom"
             type="text"
             placeholder="Prénom"
             value={contact.prenom}
             onChange={(e) => update("prenom", e.target.value)}
             className={inputCls("prenom")}
+            aria-invalid={!!errors.prenom}
+            aria-describedby={errors.prenom ? "contact-prenom-error" : undefined}
+            autoComplete="given-name"
+            required
           />
           {errors.prenom && (
-            <p className="text-xs text-rouge mt-1">{errors.prenom}</p>
+            <p id="contact-prenom-error" className="text-xs text-rouge mt-1">{errors.prenom}</p>
           )}
         </div>
         <div>
-          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+          <label htmlFor="contact-nom" className="text-sm font-medium text-gray-700 font-body mb-1 block">
             Nom <span className="text-rouge">*</span>
           </label>
           <input
+            id="contact-nom"
             type="text"
             placeholder="Nom"
             value={contact.nom}
             onChange={(e) => update("nom", e.target.value)}
             className={inputCls("nom")}
+            aria-invalid={!!errors.nom}
+            aria-describedby={errors.nom ? "contact-nom-error" : undefined}
+            autoComplete="family-name"
+            required
           />
           {errors.nom && (
-            <p className="text-xs text-rouge mt-1">{errors.nom}</p>
+            <p id="contact-nom-error" className="text-xs text-rouge mt-1">{errors.nom}</p>
           )}
         </div>
         <div>
-          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+          <label htmlFor="contact-email" className="text-sm font-medium text-gray-700 font-body mb-1 block">
             Email <span className="text-rouge">*</span>
           </label>
           <input
+            id="contact-email"
             type="email"
             placeholder="Email"
             value={contact.email}
             onChange={(e) => update("email", e.target.value)}
             className={inputCls("email")}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "contact-email-error" : undefined}
+            autoComplete="email"
+            inputMode="email"
+            required
           />
           {errors.email && (
-            <p className="text-xs text-rouge mt-1">{errors.email}</p>
+            <p id="contact-email-error" className="text-xs text-rouge mt-1">{errors.email}</p>
           )}
         </div>
         <div>
-          <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
+          <label htmlFor="contact-telephone" className="text-sm font-medium text-gray-700 font-body mb-1 block">
             Numéro de téléphone <span className="text-rouge">*</span>
           </label>
           <input
+            id="contact-telephone"
             type="tel"
             placeholder="Numéro de téléphone"
             value={contact.telephone}
             onChange={(e) => update("telephone", e.target.value)}
             className={inputCls("telephone")}
+            aria-invalid={!!errors.telephone}
+            aria-describedby={errors.telephone ? "contact-telephone-error" : undefined}
+            autoComplete="tel"
+            inputMode="tel"
+            required
           />
           {errors.telephone && (
-            <p className="text-xs text-rouge mt-1">{errors.telephone}</p>
+            <p id="contact-telephone-error" className="text-xs text-rouge mt-1">{errors.telephone}</p>
           )}
         </div>
       </div>

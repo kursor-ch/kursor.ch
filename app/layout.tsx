@@ -4,7 +4,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IBM_Plex_Sans, Fraunces, Outfit } from "next/font/google";
-import TestNavbar from "@/components/test/TestNavbar";
+import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScrollRevealProvider } from "@/components/shared/ScrollRevealProvider";
 
@@ -78,7 +78,7 @@ export default function RootLayout({
         )}
       </head>
       <body className="min-h-screen font-body">
-        <TestNavbar />
+        <Navbar />
         {children}
         <Footer />
         <ScrollRevealProvider />

@@ -114,7 +114,7 @@ export default function QuestionScreen({
           type="button"
           onClick={onNext}
           disabled={!canProceed}
-          className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-100 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-md"
+          className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100"
           style={{
             backgroundColor: canProceed ? ACCENT : ACCENT,
             opacity: canProceed ? 1 : 0.5,

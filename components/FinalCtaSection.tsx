@@ -7,19 +7,16 @@ import { KBullet } from "@/components/shared/KBullet";
 
 async function submitEmail(email: string, newsletterOptIn: boolean) {
   const webhookUrl = process.env.NEXT_PUBLIC_NEWSLETTER_WEBHOOK_URL;
-  if (webhookUrl) {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        source: "lp_final_cta",
-        newsletter_optin: newsletterOptIn,
-      }),
-    });
-  } else {
-    console.log("Final CTA email:", email, "newsletter_optin:", newsletterOptIn);
-  }
+  if (!webhookUrl) return;
+  await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      source: "lp_final_cta",
+      newsletter_optin: newsletterOptIn,
+    }),
+  });
 }
 
 export default function FinalCtaSection() {
