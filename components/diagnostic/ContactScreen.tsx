@@ -32,6 +32,7 @@ export default function ContactScreen({
   const [consent, setConsent] = useState(false);
   const [partnerContact, setPartnerContact] = useState(false);
   const [showConsentError, setShowConsentError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = (): boolean => {
     const newErrors: typeof errors = {};
@@ -52,7 +53,9 @@ export default function ContactScreen({
   };
 
   const handleSubmit = () => {
+    if (isSubmitting) return;
     if (validate()) {
+      setIsSubmitting(true);
       onSubmit({ consent, partnerContact });
     }
   };
@@ -266,6 +269,7 @@ export default function ContactScreen({
           href="/politique-de-confidentialite"
           className="underline hover:text-amber transition-colors"
           target="_blank"
+          rel="noopener noreferrer"
         >
           politique de confidentialité
         </Link>
@@ -283,9 +287,11 @@ export default function ContactScreen({
         <button
           type="button"
           onClick={handleSubmit}
-          className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+          disabled={isSubmitting}
+          aria-busy={isSubmitting}
+          className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:hover:scale-100"
         >
-          Générer mon score →
+          {isSubmitting ? "Envoi en cours…" : "Générer mon score →"}
         </button>
       </div>
     </div>
