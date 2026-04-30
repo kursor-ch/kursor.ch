@@ -1,246 +1,276 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const NAV_LINKS = [
-  { label: "Emploi", href: "/emploi" },
-  { label: "Logement", href: "/logement" },
-  { label: "Assurance", href: "/assurance" },
-  { label: "Retraite", href: "/retraite" },
-  { label: "Actualités", href: "/actualite" },
+const MENU = [
+  {
+    label: "S'installer",
+    items: [
+      { name: "Logement & Relocation", href: "/logement-en-suisse", cta: "Trouver mon logement" },
+      { name: "Assurances & LAMal", href: "/assurance-maladie", cta: "Comparer les offres" },
+      { name: "Guide Permis B & G", href: "/permis-suisse", cta: "Diagnostic Statut" },
+    ],
+  },
+  {
+    label: "Travailler",
+    items: [
+      { name: "Trouver un emploi en Suisse", href: "/emploi-suisse", cta: "Déposer mon CV" },
+      { name: "Simulateur de Salaire", href: "/salaire-suisse", cta: "Estimer mon net" },
+      { name: "Coaching", href: "/coaching-carriere", cta: "Booster mon profil" },
+    ],
+  },
+  {
+    label: "Entreprendre",
+    items: [
+      { name: "Création de Société", href: "/creation-entreprise", cta: "Parler à une fiduciaire" },
+      { name: "Optimisation Fiscale", href: "/fiscalite-business", cta: "Demander un audit" },
+    ],
+  },
+  {
+    label: "Patrimoine",
+    items: [
+      { name: "Retraite & 3ème Pilier", href: "/retraite-suisse", cta: "Faire mon bilan" },
+      { name: "Analyse du 2ème Pilier (LPP)", href: "/analyse-lpp", cta: "Optimiser mon capital" },
+    ],
+  },
+  {
+    label: "Académie",
+    items: [
+      { name: "La Formation Complète", href: "/formation-suisse", cta: "Accéder à l'App" },
+    ],
+  },
+  {
+    label: "Ressources",
+    items: [
+      { name: "Guide", href: "/guide", cta: "" },
+      { name: "Actualités", href: "/actualite", cta: "" },
+    ],
+  },
 ];
-
-const INFO_LINKS = [
-  { label: "Comment ça marche", href: "/comment-ca-marche" },
-  { label: "À propos", href: "/a-propos" },
-];
-
-const DIAGNOSTIC_PATHS = ["/emploi", "/logement", "/assurance", "/retraite"];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  const isDiagnosticPage = DIAGNOSTIC_PATHS.some((p) => pathname.startsWith(p));
-
-  useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 0);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  const allMenuLinks = [...NAV_LINKS, ...INFO_LINKS];
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
 
   return (
     <nav
-      className="sticky top-0 z-50 border-b font-body transition-all duration-200"
-      style={{
-        backgroundColor: scrolled ? "rgba(253,250,245,0.85)" : "#FDFAF5",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottomColor: "#E5E7EB",
-        boxShadow: scrolled ? "0 1px 3px rgba(0,0,0,0.04)" : "none",
-      }}
+      className="sticky top-0 z-50 border-b font-body"
+      style={{ backgroundColor: "#FDFAF5", borderBottomColor: "#E5E7EB" }}
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="flex items-center justify-between h-14 md:h-16">
-          {/* Left: Logo + brand */}
+      <div className="mx-auto px-4 sm:px-6" style={{ maxWidth: 1120 }}>
+        <div className="flex items-center justify-between" style={{ height: 60 }}>
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <Image
-              src="/kursor-logo-amber.png"
-              alt="Kursor CH"
-              width={40}
-              height={40}
-              style={{ height: 40, width: "auto" }}
-            />
-            <span style={{ fontSize: 14, lineHeight: 1 }}>
-              <span style={{ fontWeight: 600, color: "#111827" }}>
-                Kursor
-              </span>{" "}
-              <span style={{ fontWeight: 400, color: "#9CA3AF" }}>CH</span>
-            </span>
-            <svg
-              viewBox="0 0 32 32"
-              width="16"
-              height="16"
-              aria-hidden="true"
-              style={{ borderRadius: 2, display: "block" }}
-            >
+            <Image src="/kursor-logo-amber.png" alt="Kursor" width={36} height={36} style={{ height: 36, width: "auto" }} />
+            <span className="hidden sm:inline" style={{ fontSize: 15, fontWeight: 600, color: "#111827" }}>Kursor</span>
+            <span className="hidden sm:inline" style={{ fontSize: 10, fontWeight: 400, color: "#9CA3AF" }}>CH</span>
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style={{ borderRadius: 2, display: "block" }}>
               <rect width="32" height="32" fill="#DA291C" />
-              <rect x="13" y="6" width="6" height="20" fill="#FFFFFF" />
-              <rect x="6" y="13" width="20" height="6" fill="#FFFFFF" />
+              <rect x="13" y="6" width="6" height="20" fill="#FFF" />
+              <rect x="6" y="13" width="20" height="6" fill="#FFF" />
             </svg>
           </Link>
 
-          {/* Center: Nav links (desktop) */}
-          <div className="hidden md:flex items-center gap-6">
-            {isDiagnosticPage ? (
-              <Link
-                href="/"
-                className="transition-colors duration-200"
-                style={{
-                  fontSize: 14,
-                  fontWeight: 400,
-                  color: "#6B7280",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#111827")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "#6B7280")
-                }
+          {/* Desktop menu */}
+          <div className="hidden lg:flex items-center gap-1">
+            {MENU.map((section) => (
+              <div
+                key={section.label}
+                className="relative"
+                onMouseEnter={() => setOpenMenu(section.label)}
+                onMouseLeave={() => setOpenMenu(null)}
+                style={{ paddingBottom: openMenu === section.label ? 8 : 0 }}
               >
-                &larr; Retour
-              </Link>
-            ) : (
-              NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    data-active={isActive ? "true" : undefined}
-                    className="nav-link-animated transition-colors duration-200 pb-1"
+                <button
+                  className="px-3 rounded-md transition-colors"
+                  aria-haspopup="true"
+                  aria-expanded={openMenu === section.label}
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color: openMenu === section.label ? "#D97706" : "#6B7280",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    height: 60,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  {section.label}
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ transition: "transform 0.2s", transform: openMenu === section.label ? "rotate(180deg)" : "rotate(0)" }}>
+                    <path d="M2 4 L5 7 L8 4" />
+                  </svg>
+                </button>
+
+                {openMenu === section.label && (
+                  <div
+                    className="absolute left-0 bg-white rounded-xl"
                     style={{
-                      fontSize: 14,
-                      fontWeight: 400,
-                      color: isActive ? "#D97706" : "#6B7280",
+                      top: "100%",
+                      minWidth: 300,
+                      border: "1px solid #E5E7EB",
+                      boxShadow: "0 12px 36px rgba(0,0,0,0.08)",
+                      padding: "8px 0",
+                      zIndex: 100,
                     }}
                   >
-                    {link.label}
-                  </Link>
-                );
-              })
-            )}
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="flex items-center justify-between px-4 py-3 transition-colors"
+                        style={{ fontSize: 14, color: "#111827" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FFFBF0"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+                      >
+                        <div>
+                          <p style={{ fontWeight: 500, fontSize: 14, color: "#111827" }}>{item.name}</p>
+                          {item.cta && (
+                            <p style={{ fontSize: 12, color: "#D97706", marginTop: 2 }}>{item.cta}</p>
+                          )}
+                        </div>
+                        <span style={{ fontSize: 12, color: "#D1D5DB" }}>{"→"}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Right: CTA + hamburger */}
+          {/* Right: hamburger (mobile) + CTA (desktop) */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/#outils"
-              className="rounded-lg text-white cta-btn"
-              style={{
-                backgroundColor: "#D97706",
-                fontSize: 14,
-                fontWeight: 500,
-                padding: "10px 20px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#B45309";
-                e.currentTarget.style.boxShadow =
-                  "0 0 20px rgba(217,119,6,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#D97706";
-                e.currentTarget.style.boxShadow = "none";
-              }}
+            {/* Hamburger button */}
+            <button
+              className="lg:hidden flex items-center justify-center"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              style={{ width: 40, height: 40, backgroundColor: "transparent", border: "none", cursor: "pointer" }}
+              aria-label="Menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
             >
-              Évaluer mon projet
-            </Link>
-
-            {/* Hamburger (mobile only) — animated three lines ↔ X */}
-            {!isDiagnosticPage && (
-              <button
-                type="button"
-                onClick={() => setMenuOpen((v) => !v)}
-                className={`inline-flex items-center justify-center rounded-md p-2 text-gray-600 md:hidden ${
-                  menuOpen ? "hamburger-open" : ""
-                }`}
-                aria-expanded={menuOpen}
-                aria-label="Menu de navigation"
-              >
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                >
-                  <line x1="4" y1="5" x2="20" y2="5" className="hamburger-line hamburger-line-1" />
-                  <line x1="4" y1="12" x2="20" y2="12" className="hamburger-line hamburger-line-2" />
-                  <line x1="4" y1="19" x2="20" y2="19" className="hamburger-line hamburger-line-3" />
+              {mobileOpen ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
-              </button>
-            )}
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2" strokeLinecap="round">
+                  <path d="M3 7h18M3 12h18M3 17h18" />
+                </svg>
+              )}
+            </button>
+
+            {/* Desktop CTA */}
+            <Link
+              href="/emploi"
+              className="hidden lg:inline-flex rounded-lg text-white no-underline"
+              style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "10px 20px" }}
+            >
+              {`Démarrer mon diagnostic`}
+            </Link>
           </div>
         </div>
-
-        {/* Mobile slide-down menu */}
-        {!isDiagnosticPage && (
-          <div
-            className={`overflow-hidden transition-all duration-200 ease-in-out md:hidden ${
-              menuOpen ? "max-h-80 pb-4" : "max-h-0"
-            }`}
-          >
-            <div className="flex flex-col gap-1 pt-1">
-              {NAV_LINKS.map((link, i) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-md px-3 py-2 transition-colors duration-200 mobile-menu-link ${
-                    menuOpen ? "menu-item-stagger" : ""
-                  }`}
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color:
-                      pathname === link.href ? "#D97706" : "#6B7280",
-                    backgroundColor:
-                      pathname === link.href
-                        ? "rgba(217,119,6,0.05)"
-                        : undefined,
-                    animationDelay: menuOpen ? `${i * 50}ms` : "0ms",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              {/* Divider */}
-              <div
-                className="mx-3 my-2"
-                style={{ height: 1, backgroundColor: "#E5E7EB" }}
-              />
-
-              {INFO_LINKS.map((link, i) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`rounded-md px-3 py-2 transition-colors duration-200 mobile-menu-link ${
-                    menuOpen ? "menu-item-stagger" : ""
-                  }`}
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color:
-                      pathname === link.href ? "#D97706" : "#6B7280",
-                    backgroundColor:
-                      pathname === link.href
-                        ? "rgba(217,119,6,0.05)"
-                        : undefined,
-                    animationDelay: menuOpen
-                      ? `${(NAV_LINKS.length + i) * 50}ms`
-                      : "0ms",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div
+          id="mobile-menu"
+          style={{
+            backgroundColor: "#FDFAF5",
+            borderTop: "1px solid #E5E7EB",
+            maxHeight: "calc(100vh - 60px)",
+            overflowY: "auto",
+          }}
+        >
+          <div className="px-4 py-3">
+            {MENU.map((section) => (
+              <div key={section.label} style={{ borderBottom: "1px solid #F1F5F9" }}>
+                <button
+                  onClick={() => setMobileSection(mobileSection === section.label ? null : section.label)}
+                  aria-expanded={mobileSection === section.label}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "14px 0",
+                    fontSize: 15,
+                    fontWeight: 600,
+                    color: mobileSection === section.label ? "#D97706" : "#111827",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  {section.label}
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    style={{
+                      transition: "transform 0.2s",
+                      transform: mobileSection === section.label ? "rotate(180deg)" : "rotate(0)",
+                    }}
+                  >
+                    <path d="M3 5l3 3 3-3" />
+                  </svg>
+                </button>
+
+                {mobileSection === section.label && (
+                  <div style={{ paddingBottom: 8 }}>
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="block no-underline"
+                        style={{
+                          padding: "10px 16px",
+                          fontSize: 14,
+                          color: "#475569",
+                          borderRadius: 8,
+                        }}
+                      >
+                        <p style={{ fontWeight: 500, color: "#111827" }}>{item.name}</p>
+                        {item.cta && (
+                          <p style={{ fontSize: 12, color: "#D97706", marginTop: 2 }}>{item.cta}</p>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {/* Mobile CTA */}
+            <Link
+              href="/emploi"
+              onClick={() => setMobileOpen(false)}
+              className="block text-center no-underline rounded-lg text-white"
+              style={{
+                backgroundColor: "#D97706",
+                fontSize: 15,
+                fontWeight: 600,
+                padding: "14px 0",
+                marginTop: 16,
+                marginBottom: 8,
+              }}
+            >
+              {`Démarrer mon diagnostic`}
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

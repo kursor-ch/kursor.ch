@@ -11,7 +11,7 @@ const resources = [
       "Guide Retraite 2026 : pourquoi les expatriés perdent en moyenne 180 000 CHF",
     source: "Kursor CH",
     reading: "12 min de lecture",
-    href: "/actualite",
+    href: "/retraite",
   },
   {
     category: "Assurances",
@@ -19,7 +19,7 @@ const resources = [
       "Guide Audit Assurances 2026 : les 7 erreurs qui coûtent le plus cher",
     source: "Kursor CH",
     reading: "10 min de lecture",
-    href: "/actualite",
+    href: "/assurance",
   },
   {
     category: "Logement",
@@ -27,7 +27,7 @@ const resources = [
       "Guide Logement Suisse romande : le dossier qui passe du premier coup",
     source: "Kursor CH",
     reading: "8 min de lecture",
-    href: "/actualite",
+    href: "/logement",
   },
 ];
 
