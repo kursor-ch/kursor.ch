@@ -11,9 +11,6 @@ import type {
 } from "@/components/logement/ContactScreen";
 import LoadingScreen from "@/components/logement/LoadingScreen";
 import ResultsScreen from "@/components/logement/ResultsScreen";
-import SoftExitFrontalier from "@/components/logement/SoftExitFrontalier";
-import SoftExitExploration from "@/components/logement/SoftExitExploration";
-import SoftExitLowBudget from "@/components/logement/SoftExitLowBudget";
 import {
   logementQuestionScreens,
   countActiveScreens,
@@ -26,7 +23,7 @@ import type { LogementVerdict } from "@/lib/logement/verdicts";
 import { getLogementVerdict } from "@/lib/logement/verdicts";
 import type { LogementPersona } from "@/lib/logement/personas";
 import { resolvePersona } from "@/lib/logement/personas";
-import { computePriority, resolveSoftExit } from "@/lib/logement/routing";
+import { computePriority } from "@/lib/logement/routing";
 import type { Priority } from "@/lib/shared/schemaTypes";
 import { generateLeadId } from "@/lib/shared/leadId";
 import {
@@ -55,15 +52,6 @@ declare global {
 //   QUESTION_END — Contact form  (computed dynamically as N+1)
 //   LOADING      — QUESTION_END + 1
 //   RESULTS      — QUESTION_END + 2
-//   97           — SoftExitFrontalier
-//   98           — SoftExitExploration
-//   99           — SoftExitLowBudget
-//
-// Using large sentinel indices for soft-exits keeps the "linear advance"
-// logic simple — if screen < 90 we're in the main flow, otherwise terminal.
-const SOFT_EXIT_FRONTALIER = 97;
-const SOFT_EXIT_EXPLORATION = 98;
-const SOFT_EXIT_LOW_BUDGET = 99;
 
 // Maximum possible question index in the flow (7 question screens → 1..7).
 const MAX_QUESTION_INDEX = logementQuestionScreens.length;
@@ -121,12 +109,6 @@ export default function LogementApp() {
   // subsequent same-device visits can show the "Reprendre le diagnostic"
   // resume UI on the teaser.
   //
-  // After seeding the answer, soft-exit resolution runs — frontalier and
-  // futur_resident_exploration route directly to their soft-exit screens
-  // (preserves qualification logic). Otherwise we advance to the first
-  // non-skipped active question after Q1 (respects Q1bis skipWhen, which
-  // means Persona C lands on Q1bis, not Q2).
-  //
   // localStorage is intentionally NOT cleared here — it is cleared only on
   // webhook submission success (`handleSubmit`) or the teaser's "Recommencer"
   // button. This preserves the resume-after-bounce feature.
@@ -165,37 +147,6 @@ export default function LogementApp() {
     }
 
     setAnswers((prev) => ({ ...prev, q1_statut: prefill }));
-
-    const seededAnswers = { q1_statut: prefill } as Partial<LogementAnswers>;
-    const softExit = resolveSoftExit(seededAnswers);
-
-    if (softExit === "frontalier") {
-      trackEvent("Soft Exit Shown", {
-        funnel: "logement",
-        reason: softExit,
-        source: "prefill",
-      });
-      bumpScreen(SOFT_EXIT_FRONTALIER);
-      return;
-    }
-    if (softExit === "exploration") {
-      trackEvent("Soft Exit Shown", {
-        funnel: "logement",
-        reason: softExit,
-        source: "prefill",
-      });
-      bumpScreen(SOFT_EXIT_EXPLORATION);
-      return;
-    }
-    if (softExit === "low_budget") {
-      trackEvent("Soft Exit Shown", {
-        funnel: "logement",
-        reason: softExit,
-        source: "prefill",
-      });
-      bumpScreen(SOFT_EXIT_LOW_BUDGET);
-      return;
-    }
 
     // Advance to the first non-skipped active question after Q1 (e.g. Q1bis
     // for Persona C, Q2 otherwise).
@@ -236,19 +187,6 @@ export default function LogementApp() {
     }
 
     if (screen >= 1 && screen <= MAX_QUESTION_INDEX) {
-      // Check for soft-exit conditions with current answers.
-      const softExit = resolveSoftExit(answers as Partial<LogementAnswers>);
-      if (softExit) {
-        trackEvent("Soft Exit Shown", {
-          funnel: "logement",
-          reason: softExit,
-        });
-        if (softExit === "frontalier") bumpScreen(SOFT_EXIT_FRONTALIER);
-        else if (softExit === "exploration") bumpScreen(SOFT_EXIT_EXPLORATION);
-        else if (softExit === "low_budget") bumpScreen(SOFT_EXIT_LOW_BUDGET);
-        return;
-      }
-
       trackEvent("Question Screen Completed", {
         funnel: "logement",
         screen: String(screen),
@@ -429,10 +367,6 @@ export default function LogementApp() {
                 answers={answers as unknown as LogementAnswers}
               />
             )}
-
-          {screen === SOFT_EXIT_FRONTALIER && <SoftExitFrontalier />}
-          {screen === SOFT_EXIT_EXPLORATION && <SoftExitExploration />}
-          {screen === SOFT_EXIT_LOW_BUDGET && <SoftExitLowBudget />}
         </div>
       )}
     </main>

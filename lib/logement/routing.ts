@@ -2,26 +2,6 @@ import type { CrossSell, PartnerRouting, Priority } from "@/lib/shared/schemaTyp
 import type { LogementAnswers } from "./scoring";
 import type { LogementPersonaCode } from "./personas";
 
-export type SoftExitReason = "frontalier" | "exploration" | "low_budget";
-
-// Resolves whether the current answers should route to a soft-exit screen.
-// Called after each answer update; returns the first applicable reason.
-export function resolveSoftExit(
-  answers: Partial<LogementAnswers>
-): SoftExitReason | null {
-  if (answers.q1_statut === "frontalier") return "frontalier";
-  if (answers.q1_statut === "futur_resident_exploration") return "exploration";
-  // Q1bis only applies to Persona C — ignore stale answers if Q1 was changed
-  // back to a non-Persona-C option via the Retour button.
-  if (
-    answers.q1_statut === "futur_resident_offre_confirmee" &&
-    answers.q1bis_offer_confirmed === "offer_confirmed_no"
-  )
-    return "exploration";
-  if (answers.q4_budget === "lt1600") return "low_budget";
-  return null;
-}
-
 // Priority from brief §6. Persona C is always very_hot regardless of score.
 export function computePriority(
   personaCode: LogementPersonaCode,
@@ -77,11 +57,3 @@ export function mapArrivalWindow(
   return "gt6m";
 }
 
-// Cross-sell mapping for soft-exit captures. Powers the lightweight
-// soft-exit webhook's applicable_funnels field.
-export function softExitApplicableFunnels(
-  reason: SoftExitReason
-): ("emploi" | "assurance" | "retraite")[] {
-  if (reason === "frontalier") return ["assurance", "retraite"];
-  return ["emploi"];
-}
