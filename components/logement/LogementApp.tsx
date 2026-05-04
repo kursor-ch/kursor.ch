@@ -236,7 +236,18 @@ export default function LogementApp() {
   };
 
   const handleSubmit = async (optIns: LogementOptIns) => {
-    if (!persona || !scoreResult || !verdict) return;
+    if (!persona || !scoreResult || !verdict) {
+      console.error(
+        "[Logement] handleSubmit aborted: missing persona/score/verdict",
+        {
+          q1_statut: answers.q1_statut,
+          hasPersona: !!persona,
+          hasScore: !!scoreResult,
+          hasVerdict: !!verdict,
+        }
+      );
+      return;
+    }
 
     trackEvent("Contact Info Submitted", { funnel: "logement" });
 
