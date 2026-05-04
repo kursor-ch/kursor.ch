@@ -26,15 +26,21 @@ const PERSONAS: Record<LogementPersonaCode, LogementPersona> = {
   },
 };
 
-// Resolve persona from the statut answer. Returns null for soft-exited
-// statuses (frontalier, exploration) since they don't reach scoring.
+// Resolve persona from the statut answer. All five q1_statut values map to a
+// persona — `futur_resident_exploration` and `frontalier` are routed to A and
+// B respectively (closest behavioural fit). Returns null only as a defensive
+// guard against future unmapped values, which the caller logs.
 export function resolvePersona(
   answers: LogementAnswers
 ): LogementPersona | null {
   switch (answers.q1_statut) {
     case "resident_b_recent":
       return PERSONAS.A;
+    case "futur_resident_exploration":
+      return PERSONAS.A;
     case "resident_installed":
+      return PERSONAS.B;
+    case "frontalier":
       return PERSONAS.B;
     case "futur_resident_offre_confirmee":
       return PERSONAS.C;
