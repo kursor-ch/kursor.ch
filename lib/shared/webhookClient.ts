@@ -35,13 +35,19 @@ export async function sendWebhook(
   leadId: string
 ): Promise<boolean> {
   const url = getMainWebhookUrl();
-  if (!url) return false;
+  if (!url) {
+    console.log("[webhook] no URL configured — skipping submission", { leadId });
+    return false;
+  }
 
   const body = JSON.stringify(payload);
   const storageKey = `${PENDING_PREFIX}${leadId}`;
 
+  console.log("[webhook] POST", { url, payload });
+
   try {
     const first = await postJson(url, body);
+    console.log("[webhook] response (attempt 1)", { url, status: first.status, ok: first.ok });
     if (first.ok) {
       if (typeof window !== "undefined") {
         localStorage.removeItem(storageKey);
@@ -53,6 +59,7 @@ export async function sendWebhook(
     await wait(2000);
     try {
       const second = await postJson(url, body);
+      console.log("[webhook] response (attempt 2)", { url, status: second.status, ok: second.ok });
       if (second.ok) {
         if (typeof window !== "undefined") {
           localStorage.removeItem(storageKey);
