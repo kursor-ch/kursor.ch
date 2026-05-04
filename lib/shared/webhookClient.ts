@@ -43,7 +43,7 @@ export async function sendWebhook(
   const body = JSON.stringify(payload);
   const storageKey = `${PENDING_PREFIX}${leadId}`;
 
-  console.log("[webhook] POST", { url, payload });
+  console.log("[webhook] POST", { url, leadId, funnel: payload.funnel_id });
 
   try {
     const first = await postJson(url, body);
