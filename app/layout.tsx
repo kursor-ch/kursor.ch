@@ -29,7 +29,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "KURSOR CH - Simplifiez votre vie en Suisse.",
+  title: "KURSOR CH - Simplifiez votre vie en Suisse. Évaluez votre projet Suisse en 3 minutes grâce à nos outils gratuits.",
   description:
     "Emploi, logement, assurances, prévoyance. Quatre diagnostics gratuits pour identifier, en 5 minutes, les décisions qui vont peser sur votre budget pendant 10 ans.",
   metadataBase: new URL("https://kursor.ch"),
