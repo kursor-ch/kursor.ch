@@ -7,6 +7,7 @@ import { IBM_Plex_Sans, Fraunces, Outfit } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScrollRevealProvider } from "@/components/shared/ScrollRevealProvider";
+import CookieBanner from "@/components/cookies/CookieBanner";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -65,6 +66,27 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            // Consent Mode v2 — refus par défaut tant que l'utilisateur n'a pas choisi
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500
+            });
+            // Restaurer le choix utilisateur si déjà donné
+            try {
+              var saved = localStorage.getItem('kursor-cookie-consent');
+              if (saved) {
+                var c = JSON.parse(saved);
+                gtag('consent', 'update', {
+                  ad_storage: c.marketing ? 'granted' : 'denied',
+                  ad_user_data: c.marketing ? 'granted' : 'denied',
+                  ad_personalization: c.marketing ? 'granted' : 'denied',
+                  analytics_storage: c.analytics ? 'granted' : 'denied'
+                });
+              }
+            } catch(e){}
             gtag('config', 'G-DL8PGLDKRF');
           `}
         </Script>
@@ -82,6 +104,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <ScrollRevealProvider />
+        <CookieBanner />
         <Analytics />
         <SpeedInsights />
       </body>
