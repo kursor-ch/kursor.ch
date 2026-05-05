@@ -6,6 +6,12 @@ import { Answers, computeScore, ScoreBreakdown } from "@/lib/scoring";
 import { getVerdict, Verdict } from "@/lib/verdicts";
 import { buildPayload, sendWebhook, retryPendingWebhook } from "@/lib/webhook";
 import ProgressBar from "@/components/ui/ProgressBar";
+import {
+  trackDiagnosticStarted,
+  trackQuestionAnswered,
+  trackContactSubmitted,
+  trackDiagnosticCompleted,
+} from "@/lib/gtm";
 import IntroScreen from "@/components/diagnostic/IntroScreen";
 import QuestionScreen from "@/components/diagnostic/QuestionScreen";
 import ContactScreen, {
@@ -53,6 +59,7 @@ export default function DiagnosticApp() {
 
   const handleAnswer = useCallback((questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
+    trackQuestionAnswered("emploi", questionId, value, 0);
   }, []);
 
   const canProceedFromQuestionScreen = (screenIndex: number): boolean => {
@@ -69,6 +76,7 @@ export default function DiagnosticApp() {
 
     if (screen === 0) {
       trackEvent("Diagnostic Started", { funnel: "work" });
+      trackDiagnosticStarted("emploi");
     }
     if (screen >= 1 && screen <= 3) {
       trackEvent("Question Screen Completed", {
@@ -101,6 +109,10 @@ export default function DiagnosticApp() {
       verdict: v.key,
       score: String(computed.total),
     });
+
+    // GTM dataLayer events (pour GA4 / Google Ads / Meta via GTM)
+    trackContactSubmitted("emploi", optIns.partnerContact);
+    trackDiagnosticCompleted("emploi", computed.total, v.key);
 
     const payload = buildPayload(contact, computed, v.key, answers, optIns);
     await sendWebhook(payload);
