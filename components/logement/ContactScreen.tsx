@@ -37,7 +37,6 @@ export default function ContactScreen({
   >({});
   const [rgpdAccepted, setRgpdAccepted] = useState(false);
   const [partnerShareOptin, setPartnerShareOptin] = useState(false);
-  const [newsletterOptin, setNewsletterOptin] = useState(false);
   const [showConsentError, setShowConsentError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -68,7 +67,7 @@ export default function ContactScreen({
       onSubmit({
         rgpd_accepted: rgpdAccepted,
         partner_share_optin: partnerShareOptin,
-        newsletter_optin: newsletterOptin,
+        newsletter_optin: false,
       });
     }
   };
@@ -133,9 +132,9 @@ export default function ContactScreen({
           <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
             Numéro de téléphone
             {phoneRequired ? (
-              <span className="ml-1 text-rouge font-semibold">obligatoire</span>
+              <span className="text-rouge"> *</span>
             ) : (
-              <span className="ml-1 text-gray-400 font-normal">(optionnel)</span>
+              <span className="text-gray-400 font-normal"> (optionnel)</span>
             )}
           </label>
           <input
@@ -268,49 +267,6 @@ export default function ContactScreen({
               type="checkbox"
               checked={partnerShareOptin}
               onChange={(e) => setPartnerShareOptin(e.target.checked)}
-              className="sr-only"
-            />
-          </div>
-        </label>
-
-        {/* Newsletter */}
-        <label
-          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm ${
-            newsletterOptin
-              ? "border-amber bg-[#FEF3C7] shadow-md"
-              : "border-stone-200 hover:border-amber/40 hover:shadow-md"
-          }`}
-        >
-          <div
-            className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-              newsletterOptin ? "border-amber bg-amber" : "border-gray-300"
-            }`}
-          >
-            {newsletterOptin && (
-              <svg
-                className="w-3 h-3 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-          <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              Je souhaite recevoir la newsletter Kursor (1 email par semaine,
-              désinscription en 1 clic).
-            </span>
-            <input
-              type="checkbox"
-              checked={newsletterOptin}
-              onChange={(e) => setNewsletterOptin(e.target.checked)}
               className="sr-only"
             />
           </div>
