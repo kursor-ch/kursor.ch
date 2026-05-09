@@ -73,44 +73,36 @@ export const logementQuestionScreens: LogementQuestionScreen[] = [
     ],
   },
 
-  // Q2 — Canton visé
+  // Q2 + Q3 — Canton visé + horizon (merged for fewer taps on mobile)
   {
-    title: "Dans quel canton cherchez-vous ?",
+    title: "Où et pour quand ?",
     subtitle:
       "Chaque canton a son propre marché. Genève et Vaud sont structurellement plus tendus.",
     questions: [
       {
         id: "q2_canton",
-        label: "Sélectionnez le canton visé",
-        type: "select",
+        label: "Canton visé",
+        type: "pill",
         options: [
+          // Order matters — Genève and Vaud first, they cover >70% of intent.
           { label: "Genève", key: "geneve" },
-          { label: "Vaud (Lausanne et alentours)", key: "vaud" },
-          { label: "Valais", key: "valais" },
-          { label: "Neuchâtel", key: "neuchatel" },
+          { label: "Vaud", key: "vaud" },
           { label: "Fribourg", key: "fribourg" },
+          { label: "Neuchâtel", key: "neuchatel" },
+          { label: "Valais", key: "valais" },
           { label: "Jura", key: "jura" },
-          { label: "Plusieurs cantons en parallèle", key: "multi_canton" },
+          { label: "Plusieurs cantons", key: "multi_canton" },
         ],
       },
-    ],
-  },
-
-  // Q3 — Urgence
-  {
-    title: "Pour quand devez-vous avoir trouvé un logement ?",
-    subtitle:
-      "Votre horizon de recherche change tout : plus la fenêtre est courte, plus la pression sur le dossier est forte.",
-    questions: [
       {
         id: "q3_urgence",
-        label: "Votre horizon cible",
-        type: "card",
+        label: "Horizon cible",
+        type: "pill",
         options: [
-          { label: "Sous 1 mois — c'est urgent", key: "lt1m" },
+          { label: "Sous 1 mois — urgent", key: "lt1m" },
           { label: "Dans 1 à 3 mois", key: "1_3m" },
           { label: "Dans 3 à 6 mois", key: "3_6m" },
-          { label: "Plus de 6 mois — j'anticipe", key: "gt6m" },
+          { label: "Plus de 6 mois", key: "gt6m" },
         ],
       },
     ],
@@ -131,26 +123,6 @@ export const logementQuestionScreens: LogementQuestionScreen[] = [
           { label: "2 200 à 3 000 CHF", key: "2200_3000" },
           { label: "3 000 à 4 500 CHF", key: "3000_4500" },
           { label: "Plus de 4 500 CHF", key: "gt4500" },
-        ],
-      },
-    ],
-  },
-
-  // Q5 — Durée de recherche déjà engagée
-  {
-    title: "Depuis combien de temps cherchez-vous activement ?",
-    subtitle:
-      "Si vous cherchez depuis plusieurs mois sans succès, c'est un signal — souvent lié à la méthode, pas au profil.",
-    questions: [
-      {
-        id: "q5_duree_recherche",
-        label: "Durée de recherche",
-        type: "card",
-        options: [
-          { label: "Je n'ai pas encore commencé", key: "pas_commence" },
-          { label: "Moins d'un mois", key: "lt1m" },
-          { label: "1 à 3 mois", key: "1_3m" },
-          { label: "Plus de 3 mois — je galère", key: "gt3m" },
         ],
       },
     ],

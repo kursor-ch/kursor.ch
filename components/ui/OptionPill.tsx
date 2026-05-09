@@ -15,6 +15,7 @@ export default function OptionPill({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={selected}
       data-selected={selected ? "true" : undefined}
       className={`option-button inline-flex items-center px-4 py-2.5 rounded-full border-2 text-sm font-medium shadow-sm ${
         selected

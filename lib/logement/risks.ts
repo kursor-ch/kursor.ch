@@ -55,17 +55,6 @@ export function detectLogementRisks(
     });
   }
 
-  // Galère depuis plus de 3 mois
-  if (answers.q5_duree_recherche === "gt3m") {
-    risks.push({
-      id: "recherche_longue",
-      severity: "ÉLEVÉ",
-      title: "Recherche supérieure à 3 mois sans aboutir",
-      detail:
-        "Signal fort qu'un blocage structurel existe — méthode, dossier, ou positionnement de budget.",
-    });
-  }
-
   // Budget gate proximity (1600-2200)
   if (answers.q4_budget === "1600_2200") {
     risks.push({

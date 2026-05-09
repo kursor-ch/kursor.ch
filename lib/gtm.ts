@@ -10,6 +10,7 @@
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -19,6 +20,14 @@ export type GtmEvent =
   | "diagnostic_question_answered"
   | "diagnostic_contact_submitted"
   | "diagnostic_completed"
+  // Logement funnel-specific events
+  | "logement_funnel_started"
+  | "logement_step_completed"
+  | "logement_contact_shown"
+  | "logement_consent_shown"
+  | "logement_submitted"
+  | "logement_submit_failed"
+  | "newsletter_optin_logement"
   // Conversions
   | "lead_submitted"
   | "newsletter_subscribed"

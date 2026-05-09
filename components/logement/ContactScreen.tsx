@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { pushEvent } from "@/lib/gtm";
 
 export interface LogementContactInfo {
   prenom: string;
@@ -9,66 +9,61 @@ export interface LogementContactInfo {
   telephone: string;
 }
 
-export interface LogementOptIns {
-  rgpd_accepted: boolean;
-  partner_share_optin: boolean;
-  newsletter_optin: boolean;
-}
-
 interface ContactScreenProps {
   contact: LogementContactInfo;
   onChange: (contact: LogementContactInfo) => void;
-  onSubmit: (optIns: LogementOptIns) => void;
+  onContinue: () => void;
   onBack: () => void;
-  phoneRequired: boolean;
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Accept either:
+//   • Swiss format: starts with "+41" or "0", followed by 9 (CH mobile/landline
+//     after the leading 0) digits — total digit count 10 (+41xxxxxxxxx → 11
+//     after the leading +) or 10 starting with 0.
+//   • Generic E.164: + followed by 8–15 digits.
+// Spaces, dots, dashes and parentheses are stripped before matching.
+function isValidPhone(raw: string): boolean {
+  const compact = raw.replace(/[\s().-]/g, "");
+  // Swiss +41 (followed by 9 digits, total 12 chars including '+')
+  if (/^\+41\d{9}$/.test(compact)) return true;
+  // Swiss local 0XX XXX XX XX (10 digits starting with 0)
+  if (/^0\d{9}$/.test(compact)) return true;
+  // Generic international E.164
+  if (/^\+\d{8,15}$/.test(compact)) return true;
+  return false;
+}
+
 export default function ContactScreen({
   contact,
   onChange,
-  onSubmit,
+  onContinue,
   onBack,
-  phoneRequired,
 }: ContactScreenProps) {
   const [errors, setErrors] = useState<
     Partial<Record<keyof LogementContactInfo, string>>
   >({});
-  const [rgpdAccepted, setRgpdAccepted] = useState(false);
-  const [partnerShareOptin, setPartnerShareOptin] = useState(false);
-  const [showConsentError, setShowConsentError] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    pushEvent("logement_contact_shown");
+  }, []);
 
   const validate = (): boolean => {
     const newErrors: typeof errors = {};
     if (!contact.prenom.trim()) newErrors.prenom = "Requis";
     if (!contact.email.trim() || !EMAIL_REGEX.test(contact.email))
       newErrors.email = "Email invalide";
-    if (phoneRequired) {
-      if (
-        !contact.telephone.trim() ||
-        contact.telephone.replace(/\D/g, "").length < 8
-      )
-        newErrors.telephone = "Numéro invalide";
-    }
+    if (!contact.telephone.trim() || !isValidPhone(contact.telephone))
+      newErrors.telephone = "Numéro invalide";
 
     setErrors(newErrors);
-
-    if (!rgpdAccepted) setShowConsentError(true);
-
-    return Object.keys(newErrors).length === 0 && rgpdAccepted;
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = () => {
-    if (isSubmitting) return;
     if (validate()) {
-      setIsSubmitting(true);
-      onSubmit({
-        rgpd_accepted: rgpdAccepted,
-        partner_share_optin: partnerShareOptin,
-        newsletter_optin: false,
-      });
+      onContinue();
     }
   };
 
@@ -93,7 +88,7 @@ export default function ContactScreen({
         </h2>
         <p className="text-sm text-gray-500 leading-relaxed font-body mt-1">
           Encore quelques secondes — entrez vos coordonnées pour recevoir votre
-          score de difficulté et un bilan avec les leviers à actionner.
+          score et un bilan personnalisé.
         </p>
       </div>
 
@@ -130,15 +125,11 @@ export default function ContactScreen({
         </div>
         <div>
           <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
-            Numéro de téléphone
-            {phoneRequired ? (
-              <span className="text-rouge"> *</span>
-            ) : (
-              <span className="text-gray-400 font-normal"> (optionnel)</span>
-            )}
+            Numéro de téléphone <span className="text-rouge">*</span>
           </label>
           <input
             type="tel"
+            inputMode="tel"
             placeholder="+41 79 123 45 67"
             value={contact.telephone}
             onChange={(e) => update("telephone", e.target.value)}
@@ -147,149 +138,11 @@ export default function ContactScreen({
           {errors.telephone && (
             <p className="text-xs text-rouge mt-1">{errors.telephone}</p>
           )}
-          {phoneRequired && (
-            <p className="text-xs text-gray-400 mt-1">
-              Votre profil est prioritaire — un expert vous rappelle sous 2h
-              ouvrées.
-            </p>
-          )}
+          <p className="text-xs text-gray-400 mt-1">
+            Pour qualifier rapidement votre dossier par téléphone si nécessaire.
+          </p>
         </div>
       </div>
-
-      {/* Separator */}
-      <div className="border-t border-stone-200" />
-
-      {/* Consent intro */}
-      <div>
-        <h3 className="text-[16px] font-heading text-[#111827] mb-2">
-          Une dernière chose avant vos résultats
-        </h3>
-        <p className="text-[13px] font-body text-[#9CA3AF] mb-4">
-          Vos données sont traitées de manière confidentielle et ne sont jamais
-          revendues.
-        </p>
-      </div>
-
-      <div className="space-y-4">
-        {/* Mandatory RGPD */}
-        <label
-          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm ${
-            rgpdAccepted
-              ? "border-amber bg-[#FEF3C7] shadow-md"
-              : showConsentError
-              ? "border-rouge bg-rouge/5"
-              : "border-stone-200 hover:border-amber/40 hover:shadow-md"
-          }`}
-        >
-          <div
-            className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-              rgpdAccepted
-                ? "border-amber bg-amber"
-                : showConsentError
-                ? "border-rouge"
-                : "border-gray-300"
-            }`}
-          >
-            {rgpdAccepted && (
-              <svg
-                className="w-3 h-3 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-          <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              J&apos;accepte que Kursor CH traite mes données afin de me
-              fournir mon estimation et me recontacter.
-              <span className="text-rouge ml-0.5">*</span>
-            </span>
-            <input
-              type="checkbox"
-              checked={rgpdAccepted}
-              onChange={(e) => {
-                setRgpdAccepted(e.target.checked);
-                if (e.target.checked) setShowConsentError(false);
-              }}
-              className="sr-only"
-            />
-          </div>
-        </label>
-        {showConsentError && (
-          <p className="text-xs text-rouge -mt-2 ml-1">
-            Ce consentement est obligatoire pour recevoir votre estimation.
-          </p>
-        )}
-
-        {/* Partner share */}
-        <label
-          className={`flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm ${
-            partnerShareOptin
-              ? "border-amber bg-[#FEF3C7] shadow-md"
-              : "border-stone-200 hover:border-amber/40 hover:shadow-md"
-          }`}
-        >
-          <div
-            className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-              partnerShareOptin ? "border-amber bg-amber" : "border-gray-300"
-            }`}
-          >
-            {partnerShareOptin && (
-              <svg
-                className="w-3 h-3 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-          <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              Je souhaite être mis en relation avec notre partenaire logement
-              exclusif. Gratuit et sans engagement.
-            </span>
-            <input
-              type="checkbox"
-              checked={partnerShareOptin}
-              onChange={(e) => setPartnerShareOptin(e.target.checked)}
-              className="sr-only"
-            />
-          </div>
-        </label>
-
-        <p className="text-xs text-rouge ml-1">
-          <span>*</span> requis
-        </p>
-      </div>
-
-      <p className="text-xs text-gray-400 font-body">
-        En soumettant ce formulaire, vous confirmez avoir pris connaissance de
-        notre{" "}
-        <Link
-          href="/politique-de-confidentialite"
-          className="underline hover:text-amber transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          politique de confidentialité
-        </Link>
-        .
-      </p>
 
       <div className="flex gap-3 pt-2">
         <button
@@ -302,11 +155,9 @@ export default function ContactScreen({
         <button
           type="button"
           onClick={handleSubmit}
-          disabled={isSubmitting}
-          aria-busy={isSubmitting}
-          className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:hover:scale-100"
+          className="flex-1 px-6 py-3.5 rounded-xl bg-amber text-white font-semibold shadow-md shadow-amber/20 transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
         >
-          {isSubmitting ? "Envoi en cours…" : "Voir mon estimation →"}
+          Continuer →
         </button>
       </div>
     </div>

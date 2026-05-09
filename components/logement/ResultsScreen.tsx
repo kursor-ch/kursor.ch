@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import DifficultyGauge from "./DifficultyGauge";
 import { KWatermark } from "@/components/shared/KWatermark";
 import type { LogementScoreResult } from "@/lib/logement/scoring";
@@ -8,6 +9,7 @@ import type { LogementVerdict } from "@/lib/logement/verdicts";
 import type { LogementPersona } from "@/lib/logement/personas";
 import { detectLogementRisks, SEVERITY_COLORS } from "@/lib/logement/risks";
 import type { RiskSeverity } from "@/lib/logement/risks";
+import { pushEvent } from "@/lib/gtm";
 
 interface ResultsScreenProps {
   score: LogementScoreResult;
@@ -34,6 +36,16 @@ export default function ResultsScreen({
   answers,
 }: ResultsScreenProps) {
   const risks = detectLogementRisks(answers, persona.code);
+  const [newsletterDismissed, setNewsletterDismissed] = useState(false);
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
+  const handleNewsletterSubscribe = () => {
+    // TODO(team): wire to dedicated newsletter endpoint when n8n exposes one.
+    // Until then, the dataLayer event is the source of truth so the marketing
+    // team can route it via GTM.
+    pushEvent("newsletter_optin_logement", { source: "results_page" });
+    setNewsletterSubscribed(true);
+  };
 
   return (
     <section className="relative">
@@ -133,6 +145,46 @@ export default function ResultsScreen({
             minutes.
           </p>
         </div>
+
+        {/* Newsletter card — dismissible. The dataLayer event is the source of
+            truth until n8n exposes a dedicated newsletter endpoint. */}
+        {!newsletterDismissed && (
+          <div className="max-w-md mx-auto">
+            <div className="relative text-left rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setNewsletterDismissed(true)}
+                aria-label="Masquer la proposition d'inscription à la newsletter"
+                className="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-lg leading-none"
+              >
+                ×
+              </button>
+              {newsletterSubscribed ? (
+                <p className="text-sm font-body text-vert pr-6">
+                  Merci, vous êtes inscrit·e. Premier conseil dans votre boîte
+                  email cette semaine.
+                </p>
+              ) : (
+                <>
+                  <p className="text-sm font-semibold text-gray-900 pr-6 mb-1">
+                    1 conseil concret par semaine
+                  </p>
+                  <p className="text-[13px] text-gray-500 leading-relaxed mb-3">
+                    Recevez 1 conseil concret par semaine pour votre
+                    installation en Suisse romande.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleNewsletterSubscribe}
+                    className="px-4 py-2 rounded-lg bg-amber text-white text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
+                  >
+                    Je m&apos;inscris
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Calendly CTA */}
         <div className="max-w-md mx-auto pt-4 border-t border-gray-100 space-y-3">
