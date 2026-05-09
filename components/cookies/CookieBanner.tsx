@@ -11,13 +11,6 @@ type Consent = {
   timestamp: number;
 };
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
-  }
-}
-
 function applyConsent(consent: Consent) {
   if (typeof window === "undefined") return;
   if (typeof window.gtag === "function") {

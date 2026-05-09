@@ -3,6 +3,12 @@ import type { LogementTier } from "./verdicts";
 import { getLogementVerdict } from "./verdicts";
 
 // Internal keys MUST match docs/Logement_Build_Brief.md §3 exactly.
+//
+// Q5 (durée de recherche) was dropped from the user-facing flow on 2026-05-09
+// because it overlapped with Q3 (urgence) and stretched the funnel for marginal
+// signal. Its 0–25 scoring weight was redistributed across Q3 and Q6 below to
+// keep the difficulty score in the same ~0–100 range and preserve the verdict
+// thresholds in verdicts.ts without re-tuning.
 export interface LogementAnswers {
   q1_statut:
     | "resident_b_recent"
@@ -21,7 +27,6 @@ export interface LogementAnswers {
     | "multi_canton";
   q3_urgence: "lt1m" | "1_3m" | "3_6m" | "gt6m";
   q4_budget: "lt1600" | "1600_2200" | "2200_3000" | "3000_4500" | "gt4500";
-  q5_duree_recherche: "pas_commence" | "lt1m" | "1_3m" | "gt3m";
   q6_attestation_non_poursuite:
     | "oui_a_jour"
     | "oui_perimee"
@@ -41,11 +46,20 @@ export interface LogementScoreResult {
   weeksMax: number;
 }
 
-// Difficulty-point tables — brief §3.
+// Difficulty-point tables.
+//
+// Q5 (durée de recherche) used to contribute 0/5/15/25 points. After Q5 was
+// dropped from the flow (2026-05-09), its signal was redistributed:
+//   • Q3 absorbs the urgency-pressure portion (+10/+8/+3 to the three short
+//     horizons).
+//   • Q6 absorbs the preparation-friction portion (+5/+8/+10/+5 to the
+//     "attestation absent or stale" branches).
+// Realistic ceiling stays ~100 (Genève · 1600–2200 budget · lt1m · non_inconnu
+// + Persona C ⇒ 30+15+25+10 = 80, ×1.4 = 112 → clamp 100). Floor stays ~0.
 const Q3_POINTS: Record<LogementAnswers["q3_urgence"], number> = {
-  lt1m: 20,
-  "1_3m": 10,
-  "3_6m": 0,
+  lt1m: 30,
+  "1_3m": 18,
+  "3_6m": 3,
   gt6m: -5,
 };
 
@@ -58,22 +72,15 @@ const Q4_POINTS: Record<LogementAnswers["q4_budget"], number> = {
   gt4500: -5,
 };
 
-const Q5_POINTS: Record<LogementAnswers["q5_duree_recherche"], number> = {
-  pas_commence: 0,
-  lt1m: 5,
-  "1_3m": 15,
-  gt3m: 25,
-};
-
 const Q6_POINTS: Record<
   LogementAnswers["q6_attestation_non_poursuite"],
   number
 > = {
   oui_a_jour: -5,
-  oui_perimee: 5,
-  non_pas_encore: 10,
-  non_inconnu: 15,
-  na_pas_en_suisse: 0,
+  oui_perimee: 10,
+  non_pas_encore: 18,
+  non_inconnu: 25,
+  na_pas_en_suisse: 5,
 };
 
 const PERSONA_MOD: Record<LogementPersonaCode, number> = {
@@ -105,7 +112,6 @@ export function computeLogementScore(
   const base =
     Q3_POINTS[answers.q3_urgence] +
     Q4_POINTS[answers.q4_budget] +
-    Q5_POINTS[answers.q5_duree_recherche] +
     Q6_POINTS[answers.q6_attestation_non_poursuite];
 
   const personaModifier = PERSONA_MOD[personaCode];

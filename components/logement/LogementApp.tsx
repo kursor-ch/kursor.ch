@@ -5,10 +5,9 @@ import ProgressBar from "@/components/ui/ProgressBar";
 import IntroScreen from "@/components/logement/IntroScreen";
 import QuestionScreen from "@/components/logement/QuestionScreen";
 import ContactScreen from "@/components/logement/ContactScreen";
-import type {
-  LogementContactInfo,
-  LogementOptIns,
-} from "@/components/logement/ContactScreen";
+import type { LogementContactInfo } from "@/components/logement/ContactScreen";
+import ConsentScreen from "@/components/logement/ConsentScreen";
+import type { LogementOptIns } from "@/components/logement/ConsentScreen";
 import LoadingScreen from "@/components/logement/LoadingScreen";
 import ResultsScreen from "@/components/logement/ResultsScreen";
 import {
@@ -31,6 +30,7 @@ import {
   sendWebhook,
 } from "@/lib/shared/webhookClient";
 import { buildLogementPayload } from "@/lib/logement/webhook";
+import { pushEvent } from "@/lib/gtm";
 import {
   LOGEMENT_Q1_STORAGE_KEY,
   isValidQ1OptionKey,
@@ -49,15 +49,17 @@ declare global {
 //   0            — Intro
 //   1..N         — Question screens (offset-by-1 into logementQuestionScreens,
 //                  respecting Q1bis skipWhen)
-//   QUESTION_END — Contact form  (computed dynamically as N+1)
-//   LOADING      — QUESTION_END + 1
-//   RESULTS      — QUESTION_END + 2
+//   CONTACT      — Contact form  (computed dynamically as N+1)
+//   CONSENT      — Consent collection (CONTACT + 1)
+//   LOADING      — CONSENT + 1
+//   RESULTS      — LOADING + 1
 
-// Maximum possible question index in the flow (7 question screens → 1..7).
+// Maximum possible question index in the flow.
 const MAX_QUESTION_INDEX = logementQuestionScreens.length;
 const CONTACT_SCREEN = MAX_QUESTION_INDEX + 1;
-const LOADING_SCREEN = MAX_QUESTION_INDEX + 2;
-const RESULTS_SCREEN = MAX_QUESTION_INDEX + 3;
+const CONSENT_SCREEN = MAX_QUESTION_INDEX + 2;
+const LOADING_SCREEN = MAX_QUESTION_INDEX + 3;
+const RESULTS_SCREEN = MAX_QUESTION_INDEX + 4;
 
 function trackEvent(event: string, props?: Record<string, string>) {
   if (typeof window !== "undefined" && window.plausible) {
@@ -85,6 +87,7 @@ export default function LogementApp() {
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
   const directionRef = useRef<"forward" | "back">("forward");
+  const funnelStartedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -154,6 +157,10 @@ export default function LogementApp() {
       funnel: "logement",
       source: "prefill",
     });
+    if (!funnelStartedRef.current) {
+      pushEvent("logement_funnel_started", { source: "prefill" });
+      funnelStartedRef.current = true;
+    }
     const nextIdx = nextQuestionIndex(0, { q1_statut: prefill });
     bumpScreen(nextIdx === -1 ? CONTACT_SCREEN : nextIdx + 1);
   }, []);
@@ -181,6 +188,10 @@ export default function LogementApp() {
     directionRef.current = "forward";
     if (screen === 0) {
       trackEvent("Diagnostic Started", { funnel: "logement" });
+      if (!funnelStartedRef.current) {
+        pushEvent("logement_funnel_started");
+        funnelStartedRef.current = true;
+      }
       // First question index (0) → screen index 1
       bumpScreen(1);
       return;
@@ -232,7 +243,17 @@ export default function LogementApp() {
       return;
     }
 
+    if (screen === CONSENT_SCREEN) {
+      bumpScreen(CONTACT_SCREEN);
+      return;
+    }
+
     bumpScreen(Math.max(0, screen - 1));
+  };
+
+  const goToConsent = () => {
+    directionRef.current = "forward";
+    bumpScreen(CONSENT_SCREEN);
   };
 
   const handleSubmit = async (optIns: LogementOptIns) => {
@@ -282,7 +303,18 @@ export default function LogementApp() {
         completionPath: usedBackRef.current ? "non_linear" : "linear",
       });
 
-      await sendWebhook(payload, leadIdRef.current);
+      const ok = await sendWebhook(payload, leadIdRef.current);
+      if (ok) {
+        pushEvent("logement_submitted", {
+          verdict: verdict.key,
+          score: scoreResult.final,
+          priority,
+        });
+      } else {
+        pushEvent("logement_submit_failed", {
+          message: "webhook returned non-200 or persisted to localStorage",
+        });
+      }
 
       // Diagnostic completed successfully — clear the teaser resume key so a
       // post-submission return to the landing page shows the fresh teaser,
@@ -295,6 +327,9 @@ export default function LogementApp() {
     } catch (err) {
       // Build/validation errors: don't block the user from seeing results;
       // the diagnostic ran client-side. Log and continue.
+      pushEvent("logement_submit_failed", {
+        message: err instanceof Error ? err.message : "unknown error",
+      });
       if (process.env.NODE_ENV !== "production") {
         console.error("buildLogementPayload failed", err);
       }
@@ -302,7 +337,8 @@ export default function LogementApp() {
   };
 
   // Progress bar math — counts only screens that will actually be shown.
-  const totalSteps = countActiveScreens(answers) + 1; // + contact
+  // + 2 for contact and consent screens.
+  const totalSteps = countActiveScreens(answers) + 2;
   const currentStep =
     screen >= 1 && screen <= MAX_QUESTION_INDEX
       ? // 1-based position among active screens up to and including `screen`
@@ -310,11 +346,15 @@ export default function LogementApp() {
           .slice(0, screen)
           .filter((s) => !s.skipWhen?.(answers)).length
       : screen === CONTACT_SCREEN
+      ? totalSteps - 1
+      : screen === CONSENT_SCREEN
       ? totalSteps
       : 0;
 
   const showProgress =
-    (screen >= 1 && screen <= MAX_QUESTION_INDEX) || screen === CONTACT_SCREEN;
+    (screen >= 1 && screen <= MAX_QUESTION_INDEX) ||
+    screen === CONTACT_SCREEN ||
+    screen === CONSENT_SCREEN;
 
   return (
     <main
@@ -356,10 +396,13 @@ export default function LogementApp() {
             <ContactScreen
               contact={contact}
               onChange={setContact}
-              onSubmit={handleSubmit}
+              onContinue={goToConsent}
               onBack={goBack}
-              phoneRequired={priority === "hot" || priority === "very_hot"}
             />
+          )}
+
+          {screen === CONSENT_SCREEN && (
+            <ConsentScreen onSubmit={handleSubmit} onBack={goBack} />
           )}
 
           {screen === LOADING_SCREEN && (
