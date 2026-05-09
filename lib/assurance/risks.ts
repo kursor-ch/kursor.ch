@@ -43,19 +43,16 @@ export function detectResidentTrous(
     });
   }
 
-  if (answers.q9_evenements === "changement_emploi") {
-    trous.push({
-      id: "laa_gap",
-      label: "Gap LAA au changement d'emploi",
-      severity: "ÉLEVÉ",
-      risque_chf: 20_000,
-      description:
-        "La règle des 31 jours de la LAA crée une fenêtre où aucune assurance accident professionnelle ne vous couvre — frais médicaux à votre charge, souvent >20 000 CHF.",
-    });
-  }
+  // Q9 (événements) was dropped from the user-facing flow on 2026-05-09.
+  // The laa_gap risk that fired on changement_emploi is no longer detected
+  // automatically; specialist surfaces it during the 48h follow-up call.
+
+  const noComplementaires =
+    answers.q8_complementaires.length === 0 ||
+    answers.q8_complementaires.includes("aucune");
 
   if (
-    answers.q8_complementaires === "aucune" &&
+    noComplementaires &&
     (answers.q3_famille === "couple_avec_enfants" ||
       answers.q3_famille === "parent_solo")
   ) {

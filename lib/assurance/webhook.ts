@@ -118,7 +118,10 @@ export function buildAssurancePayloadResident(
     },
     persona: { code: input.persona.code, label: input.persona.label },
     priority: input.priority,
-    answers: { ...input.answers } as Record<string, string>,
+    // q8_complementaires is a multi-select array internally — flatten to a
+    // comma-separated string for the v1.0 webhook contract (`answers` is
+    // Record<string, string>). n8n splits on comma to recover the array.
+    answers: flattenResidentAnswers(input.answers),
     partner_routing: buildPartnerRouting(
       input.persona.code,
       input.priority,
@@ -130,6 +133,21 @@ export function buildAssurancePayloadResident(
       completionPath: input.completionPath,
     }),
     assurance_data,
+  };
+}
+
+function flattenResidentAnswers(
+  a: AssuranceAnswersResident
+): Record<string, string> {
+  return {
+    q1_statut: a.q1_statut,
+    q2_canton: a.q2_canton,
+    q3_famille: a.q3_famille,
+    q4_caisse: a.q4_caisse,
+    q5_franchise: a.q5_franchise,
+    q6_modele: a.q6_modele,
+    q7_ijm: a.q7_ijm,
+    q8_complementaires: a.q8_complementaires.join(","),
   };
 }
 

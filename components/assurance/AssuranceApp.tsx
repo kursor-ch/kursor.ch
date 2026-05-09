@@ -6,8 +6,8 @@ import AssuranceLanding from "./AssuranceLanding";
 import QuestionScreen from "./QuestionScreen";
 import ContactScreen, {
   AssuranceContactInfo,
-  AssuranceOptIns,
 } from "./ContactScreen";
+import ConsentScreen, { AssuranceOptIns } from "./ConsentScreen";
 import LoadingScreen from "./LoadingScreen";
 import ResultsScreenResident from "./ResultsScreenResident";
 import ResultsScreenFrontalier from "./ResultsScreenFrontalier";
@@ -23,6 +23,7 @@ import type {
   AssuranceAnswersResident,
   AssurancePersona,
   FrontalierComparatif,
+  Q8Complementaire,
   SurcoutResult,
   TrouDeCouverture,
 } from "@/lib/assurance/types";
@@ -56,6 +57,7 @@ import {
   buildAssurancePayloadFrontalier,
   buildAssurancePayloadResident,
 } from "@/lib/assurance/webhook";
+import { pushEvent } from "@/lib/gtm";
 
 declare global {
   interface Window {
@@ -68,22 +70,27 @@ declare global {
 
 type Branch = "resident" | "frontalier";
 
-// Screen index layout:
+// Screen index layout (post-2026-05-09 refactor):
 //   0           — Intro (AssuranceLanding with onStart)
 //   1           — Q1 (shared filter)
-//   2..9        — Résident Q2 → Q9 (screen i = résident index i-2)
-//   11..16      — Frontalier QF1 → QF6 (screen i = frontalier index i-11)
+//   2..7        — Résident screens (6 total: S2 canton+foyer merged, S3 caisse,
+//                 S4 franchise, S5 modèle, S6 IJM, S7 complémentaires)
+//   11..16      — Frontalier QF1 → QF6
 //   20          — Contact
-//   21          — Loading
-//   22          — Results
+//   21          — Consent (NEW)
+//   22          — Loading
+//   23          — Results
 //   90          — SoftExitSansActivite
 const SCREEN_INTRO = 0;
 const SCREEN_Q1 = 1;
-const SCREEN_RESIDENT_START = 2; // → 9 (Q2..Q9)
-const SCREEN_FRONTALIER_START = 11; // → 16 (QF1..QF6)
+const SCREEN_RESIDENT_START = 2; // → 7 (6 screens)
+const SCREEN_RESIDENT_LAST = SCREEN_RESIDENT_START + assuranceResidentScreens.length - 1;
+const SCREEN_FRONTALIER_START = 11; // → 16 (6 screens)
+const SCREEN_FRONTALIER_LAST = SCREEN_FRONTALIER_START + assuranceFrontalierScreens.length - 1;
 const SCREEN_CONTACT = 20;
-const SCREEN_LOADING = 21;
-const SCREEN_RESULTS = 22;
+const SCREEN_CONSENT = 21;
+const SCREEN_LOADING = 22;
+const SCREEN_RESULTS = 23;
 const SCREEN_SOFTEXIT_SANS_ACTIVITE = 90;
 
 function trackEvent(event: string, props?: Record<string, string>) {
@@ -96,6 +103,10 @@ export default function AssuranceApp() {
   const [screen, setScreen] = useState(SCREEN_INTRO);
   const [screenKey, setScreenKey] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  // q8_complementaires is the only multi-select question — stored separately
+  // as an array. Flattened to a comma-separated string at payload-build time
+  // so the webhook contract `answers: Record<string, string>` stays satisfied.
+  const [multiAnswers, setMultiAnswers] = useState<Record<string, string[]>>({});
   const [branch, setBranch] = useState<Branch | null>(null);
   const [contact, setContact] = useState<AssuranceContactInfo>({
     prenom: "",
@@ -116,6 +127,7 @@ export default function AssuranceApp() {
   const usedBackRef = useRef<boolean>(false);
   const leadIdRef = useRef<string>(generateLeadId());
   const directionRef = useRef<"forward" | "back">("forward");
+  const funnelStartedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -136,19 +148,21 @@ export default function AssuranceApp() {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   }, []);
 
-  // Resolve the current question screen (Q1, résident, or frontalier) from
-  // the screen index. Returns null for non-question screens.
+  const handleMultiAnswer = useCallback(
+    (questionId: string, values: string[]) => {
+      setMultiAnswers((prev) => ({ ...prev, [questionId]: values }));
+    },
+    []
+  );
+
   const currentQuestionScreen = (
     idx: number
   ): AssuranceQuestionScreen | null => {
     if (idx === SCREEN_Q1) return assuranceQ1;
-    if (idx >= SCREEN_RESIDENT_START && idx <= SCREEN_RESIDENT_START + 7) {
+    if (idx >= SCREEN_RESIDENT_START && idx <= SCREEN_RESIDENT_LAST) {
       return assuranceResidentScreens[idx - SCREEN_RESIDENT_START];
     }
-    if (
-      idx >= SCREEN_FRONTALIER_START &&
-      idx <= SCREEN_FRONTALIER_START + 5
-    ) {
+    if (idx >= SCREEN_FRONTALIER_START && idx <= SCREEN_FRONTALIER_LAST) {
       return assuranceFrontalierScreens[idx - SCREEN_FRONTALIER_START];
     }
     return null;
@@ -157,15 +171,17 @@ export default function AssuranceApp() {
   const canProceedFromQuestion = (idx: number): boolean => {
     const qs = currentQuestionScreen(idx);
     if (!qs) return false;
-    return qs.questions.every((q) => answers[q.id] !== undefined);
+    return qs.questions.every((q) => {
+      if (q.multiSelect) {
+        return (multiAnswers[q.id] || []).length >= 1;
+      }
+      return answers[q.id] !== undefined;
+    });
   };
 
-  // Submit a background soft-exit webhook — email isn't collected here (user
-  // hasn't given one yet). The actual newsletter capture lives on
-  // SoftExitSansActivite. This ping is a no-op unless the env var is set;
-  // it signals "sans_activite reached" for analytics purposes. Skipping to
-  // keep behavior conservative — the user-initiated soft-exit submit in
-  // SoftExitSansActivite carries the email/consent.
+  // Background analytics ping for the sans_activite branch — fires only if
+  // the user has already entered an email earlier (rare). The user-initiated
+  // capture in SoftExitSansActivite carries the actual newsletter opt-in.
   const pingSoftExit = async () => {
     if (!contact.email) return;
     await sendSoftExitWebhook({
@@ -182,6 +198,10 @@ export default function AssuranceApp() {
     directionRef.current = "forward";
     if (screen === SCREEN_INTRO) {
       trackEvent("Diagnostic Started", { funnel: "assurance" });
+      if (!funnelStartedRef.current) {
+        pushEvent("assurance_funnel_started");
+        funnelStartedRef.current = true;
+      }
       bumpScreen(SCREEN_Q1);
       return;
     }
@@ -196,6 +216,7 @@ export default function AssuranceApp() {
           funnel: "assurance",
           reason: "sans_activite",
         });
+        pushEvent("assurance_disqualified", { reason: "sans_activite" });
         void pingSoftExit();
         bumpScreen(SCREEN_SOFTEXIT_SANS_ACTIVITE);
         return;
@@ -203,6 +224,7 @@ export default function AssuranceApp() {
 
       if (q1 === "frontalier") {
         setBranch("frontalier");
+        pushEvent("assurance_frontalier_branch");
         bumpScreen(SCREEN_FRONTALIER_START);
       } else {
         setBranch("resident");
@@ -211,34 +233,30 @@ export default function AssuranceApp() {
       return;
     }
 
-    // Résident flow: Q2..Q9 → Contact
-    if (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_START + 7) {
+    // Résident flow
+    if (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_LAST) {
       trackEvent("Question Screen Completed", {
         funnel: "assurance",
         branch: "resident",
         screen: String(screen - SCREEN_RESIDENT_START + 2),
       });
-      if (screen < SCREEN_RESIDENT_START + 7) {
+      if (screen < SCREEN_RESIDENT_LAST) {
         bumpScreen(screen + 1);
       } else {
-        // Q9 completed — compute and advance to Contact
         prepareResidentResults();
         bumpScreen(SCREEN_CONTACT);
       }
       return;
     }
 
-    // Frontalier flow: QF1..QF6 → Contact
-    if (
-      screen >= SCREEN_FRONTALIER_START &&
-      screen <= SCREEN_FRONTALIER_START + 5
-    ) {
+    // Frontalier flow
+    if (screen >= SCREEN_FRONTALIER_START && screen <= SCREEN_FRONTALIER_LAST) {
       trackEvent("Question Screen Completed", {
         funnel: "assurance",
         branch: "frontalier",
         screen: String(screen - SCREEN_FRONTALIER_START + 1),
       });
-      if (screen < SCREEN_FRONTALIER_START + 5) {
+      if (screen < SCREEN_FRONTALIER_LAST) {
         bumpScreen(screen + 1);
       } else {
         prepareFrontalierResults();
@@ -248,8 +266,16 @@ export default function AssuranceApp() {
     }
   };
 
+  const buildResidentAnswers = (): AssuranceAnswersResident => {
+    const q8 = (multiAnswers.q8_complementaires || []) as Q8Complementaire[];
+    return {
+      ...(answers as unknown as AssuranceAnswersResident),
+      q8_complementaires: q8,
+    };
+  };
+
   const prepareResidentResults = () => {
-    const typed = answers as unknown as AssuranceAnswersResident;
+    const typed = buildResidentAnswers();
     const s = computeSurcout(typed);
     const t = detectResidentTrous(typed);
     const p = identifyPersonaResident(typed);
@@ -269,8 +295,6 @@ export default function AssuranceApp() {
     const c = computeFrontalierComparatif(typed);
     const t = detectFrontalierTrous(typed);
     const p = identifyPersonaFrontalier(typed);
-    // Frontalier tier: always at least "surcouts_significatifs" if piège N-2,
-    // else compute from delta.
     const deltaAnnuel = Math.abs(c.cout_lamal_annuel - c.cout_cmu_projete);
     const criticalCount = t.filter((x) => x.severity === "CRITIQUE").length;
     const syntheticSurcout: SurcoutResult = {
@@ -307,7 +331,7 @@ export default function AssuranceApp() {
       bumpScreen(SCREEN_INTRO);
       return;
     }
-    if (screen > SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_START + 7) {
+    if (screen > SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_LAST) {
       bumpScreen(screen - 1);
       return;
     }
@@ -315,10 +339,7 @@ export default function AssuranceApp() {
       bumpScreen(SCREEN_Q1);
       return;
     }
-    if (
-      screen > SCREEN_FRONTALIER_START &&
-      screen <= SCREEN_FRONTALIER_START + 5
-    ) {
+    if (screen > SCREEN_FRONTALIER_START && screen <= SCREEN_FRONTALIER_LAST) {
       bumpScreen(screen - 1);
       return;
     }
@@ -327,12 +348,20 @@ export default function AssuranceApp() {
       return;
     }
     if (screen === SCREEN_CONTACT) {
-      if (branch === "resident") bumpScreen(SCREEN_RESIDENT_START + 7);
-      else if (branch === "frontalier")
-        bumpScreen(SCREEN_FRONTALIER_START + 5);
+      if (branch === "resident") bumpScreen(SCREEN_RESIDENT_LAST);
+      else if (branch === "frontalier") bumpScreen(SCREEN_FRONTALIER_LAST);
       else bumpScreen(SCREEN_Q1);
       return;
     }
+    if (screen === SCREEN_CONSENT) {
+      bumpScreen(SCREEN_CONTACT);
+      return;
+    }
+  };
+
+  const goToConsent = () => {
+    directionRef.current = "forward";
+    bumpScreen(SCREEN_CONSENT);
   };
 
   const handleSubmit = async (optIns: AssuranceOptIns) => {
@@ -363,12 +392,14 @@ export default function AssuranceApp() {
         ? "non_linear"
         : "linear";
 
+      let ok = false;
+
       if (branch === "resident" && surcout) {
         const payload = buildAssurancePayloadResident({
           leadId: leadIdRef.current,
           contact: commonContact,
           consent: commonConsent,
-          answers: answers as unknown as AssuranceAnswersResident,
+          answers: buildResidentAnswers(),
           persona,
           surcout,
           trous,
@@ -377,7 +408,10 @@ export default function AssuranceApp() {
           sessionStartTs: sessionStartRef.current,
           completionPath,
         });
-        await sendWebhook(payload, leadIdRef.current);
+        // q8_complementaires array → comma-separated string conversion
+        // happens inside buildAssurancePayloadResident so the webhook
+        // contract stays Record<string, string>.
+        ok = await sendWebhook(payload, leadIdRef.current);
       } else if (branch === "frontalier" && comparatif) {
         const payload = buildAssurancePayloadFrontalier({
           leadId: leadIdRef.current,
@@ -392,43 +426,61 @@ export default function AssuranceApp() {
           sessionStartTs: sessionStartRef.current,
           completionPath,
         });
-        await sendWebhook(payload, leadIdRef.current);
+        ok = await sendWebhook(payload, leadIdRef.current);
+      }
+
+      if (ok) {
+        pushEvent("assurance_submitted", {
+          branch,
+          persona: persona.code,
+          priority,
+        });
+      } else {
+        pushEvent("assurance_submit_failed", {
+          message: "webhook returned non-200 or persisted to localStorage",
+        });
       }
     } catch (err) {
+      pushEvent("assurance_submit_failed", {
+        message: err instanceof Error ? err.message : "unknown error",
+      });
       if (process.env.NODE_ENV !== "production") {
         console.error("buildAssurancePayload failed", err);
       }
     }
   };
 
-  // Progress bar math: Q1 + branch questions + Contact.
-  const totalSteps =
-    (branch === "resident" ? 8 : branch === "frontalier" ? 6 : 0) + 2;
+  // Progress bar: Q1 (shared) + branch questions + Contact + Consent.
+  const branchQuestionCount =
+    branch === "resident"
+      ? assuranceResidentScreens.length
+      : branch === "frontalier"
+      ? assuranceFrontalierScreens.length
+      : 0;
+  const totalSteps = 1 + branchQuestionCount + 2; // Q1 + branch + Contact + Consent
+
   const currentStep = (() => {
     if (screen === SCREEN_Q1) return 1;
-    if (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_START + 7)
+    if (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_LAST)
       return 1 + (screen - SCREEN_RESIDENT_START + 1);
-    if (
-      screen >= SCREEN_FRONTALIER_START &&
-      screen <= SCREEN_FRONTALIER_START + 5
-    )
+    if (screen >= SCREEN_FRONTALIER_START && screen <= SCREEN_FRONTALIER_LAST)
       return 1 + (screen - SCREEN_FRONTALIER_START + 1);
-    if (screen === SCREEN_CONTACT) return totalSteps;
+    if (screen === SCREEN_CONTACT) return totalSteps - 1;
+    if (screen === SCREEN_CONSENT) return totalSteps;
     return 0;
   })();
 
   const showProgress =
     screen === SCREEN_Q1 ||
-    (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_START + 7) ||
-    (screen >= SCREEN_FRONTALIER_START &&
-      screen <= SCREEN_FRONTALIER_START + 5) ||
-    screen === SCREEN_CONTACT;
+    (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_LAST) ||
+    (screen >= SCREEN_FRONTALIER_START && screen <= SCREEN_FRONTALIER_LAST) ||
+    screen === SCREEN_CONTACT ||
+    screen === SCREEN_CONSENT;
 
   const isQuestionScreen =
     screen === SCREEN_Q1 ||
-    (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_START + 7) ||
-    (screen >= SCREEN_FRONTALIER_START &&
-      screen <= SCREEN_FRONTALIER_START + 5);
+    (screen >= SCREEN_RESIDENT_START && screen <= SCREEN_RESIDENT_LAST) ||
+    (screen >= SCREEN_FRONTALIER_START && screen <= SCREEN_FRONTALIER_LAST);
 
   return (
     <main
@@ -447,36 +499,38 @@ export default function AssuranceApp() {
           <AssuranceLanding onStart={() => goNext()} />
         </div>
       ) : (
-        <div
-          className="max-w-xl mx-auto px-6 py-4 md:py-14"
-          key={screenKey}
-        >
-          {isQuestionScreen && (() => {
-            const qs = currentQuestionScreen(screen);
-            if (!qs) return null;
-            return (
-              <QuestionScreen
-                screen={qs}
-                answers={answers}
-                onAnswer={handleAnswer}
-                onNext={goNext}
-                onBack={goBack}
-                canProceed={canProceedFromQuestion(screen)}
-                canGoBack={screen > SCREEN_Q1}
-                direction={directionRef.current}
-              />
-            );
-          })()}
+        <div className="max-w-xl mx-auto px-6 py-4 md:py-14" key={screenKey}>
+          {isQuestionScreen &&
+            (() => {
+              const qs = currentQuestionScreen(screen);
+              if (!qs) return null;
+              return (
+                <QuestionScreen
+                  screen={qs}
+                  answers={answers}
+                  multiAnswers={multiAnswers}
+                  onAnswer={handleAnswer}
+                  onMultiAnswer={handleMultiAnswer}
+                  onNext={goNext}
+                  onBack={goBack}
+                  canProceed={canProceedFromQuestion(screen)}
+                  canGoBack={screen > SCREEN_Q1}
+                  direction={directionRef.current}
+                />
+              );
+            })()}
 
           {screen === SCREEN_CONTACT && branch && (
             <ContactScreen
               contact={contact}
               onChange={setContact}
-              onSubmit={handleSubmit}
+              onContinue={goToConsent}
               onBack={goBack}
-              phoneRequired={priority === "hot" || priority === "very_hot"}
-              branch={branch}
             />
+          )}
+
+          {screen === SCREEN_CONSENT && (
+            <ConsentScreen onSubmit={handleSubmit} onBack={goBack} />
           )}
 
           {screen === SCREEN_LOADING && branch && (
@@ -497,7 +551,7 @@ export default function AssuranceApp() {
                 surcout={surcout}
                 trous={trous}
                 verdict={verdict}
-                answers={answers as unknown as AssuranceAnswersResident}
+                answers={buildResidentAnswers()}
               />
             )}
 

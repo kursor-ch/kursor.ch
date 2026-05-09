@@ -1,4 +1,5 @@
 import type {
+  AssuranceData,
   CrossSell,
   PartnerRouting,
   Priority,
@@ -109,25 +110,15 @@ export function buildCrossSell(
   };
 }
 
-// Maps résident answers to the assurance_data webhook extension.
+// Maps résident answers to the assurance_data webhook extension. Return
+// type is the schema's AssuranceData minus the branch discriminator (set
+// at the call site in lib/assurance/webhook.ts) — keeps this in lockstep
+// with the v1.0 schema.
 export function buildAssuranceDataResident(
   answers: AssuranceAnswersResident,
   surcout: SurcoutResult,
   trous: TrouDeCouverture[]
-): {
-  current_caisse_known: boolean;
-  franchise_chf: 300 | 500 | 1000 | 1500 | 2000 | 2500 | null;
-  model: "libre" | "medecin_famille" | "hmo" | "telmed" | "unknown";
-  ijm_status:
-    | "covered_employer_full"
-    | "echelle_berne_only"
-    | "unknown"
-    | "independant_no_ijm"
-    | "independant_with_ijm";
-  complementaires_count: number;
-  estimated_surcout_annuel_chf: number;
-  trous_couverture_identified: string[];
-} {
+): Omit<AssuranceData, "branch"> {
   const franchise: 300 | 500 | 1000 | 1500 | 2000 | 2500 | null = (() => {
     switch (answers.q5_franchise) {
       case "300":
@@ -149,6 +140,7 @@ export function buildAssuranceDataResident(
       case "medecin_famille":
       case "hmo":
       case "telmed":
+      case "alternatif":
         return answers.q6_modele;
       default:
         return "unknown" as const;
@@ -170,18 +162,11 @@ export function buildAssuranceDataResident(
     }
   })();
 
-  const complementaires_count = (() => {
-    switch (answers.q8_complementaires) {
-      case "aucune":
-        return 0;
-      case "plusieurs":
-        return 2;
-      case "ne_sais_pas":
-        return 0;
-      default:
-        return 1;
-    }
-  })();
+  // q8_complementaires is now a multi-select array (2026-05-09). Count
+  // real entries — the "aucune" and "ndr" sentinels each contribute zero.
+  const complementaires_count = answers.q8_complementaires.filter(
+    (v) => v !== "aucune" && v !== "ndr"
+  ).length;
 
   const current_caisse_known =
     answers.q4_caisse !== "pas_encore" && answers.q4_caisse !== "moins_1an";

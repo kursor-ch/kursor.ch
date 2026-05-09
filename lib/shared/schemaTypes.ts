@@ -122,7 +122,7 @@ export interface AssuranceData {
   branch: "resident" | "frontalier";
   current_caisse_known: boolean;
   franchise_chf: 300 | 500 | 1000 | 1500 | 2000 | 2500 | null;
-  model: "libre" | "medecin_famille" | "hmo" | "telmed" | "unknown";
+  model: "libre" | "medecin_famille" | "hmo" | "telmed" | "alternatif" | "unknown";
   ijm_status:
     | "covered_employer_full"
     | "echelle_berne_only"

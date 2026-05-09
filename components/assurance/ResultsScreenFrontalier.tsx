@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { KWatermark } from "@/components/shared/KWatermark";
 import { KBullet } from "@/components/shared/KBullet";
 import LamalCmuComparisonCard from "./LamalCmuComparisonCard";
 import TrousList from "./TrousList";
+import { pushEvent } from "@/lib/gtm";
 import type {
   AssurancePersona,
   FrontalierComparatif,
@@ -38,6 +40,18 @@ export default function ResultsScreenFrontalier({
   trous,
   verdict,
 }: ResultsScreenFrontalierProps) {
+  const [newsletterDismissed, setNewsletterDismissed] = useState(false);
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
+  const handleNewsletterSubscribe = () => {
+    // TODO(team): wire to dedicated newsletter endpoint when n8n exposes one.
+    pushEvent("newsletter_optin_assurance", {
+      source: "results_page",
+      branch: "frontalier",
+    });
+    setNewsletterSubscribed(true);
+  };
+
   return (
     <section className="relative">
       <KWatermark position="top-right" size="lg" offset={80} />
@@ -116,9 +130,58 @@ export default function ResultsScreenFrontalier({
         <div className="max-w-md mx-auto text-center">
           <p className="text-sm text-gray-500">
             Votre bilan détaillé arrive dans votre boîte email sous quelques
-            minutes.
+            minutes. Le spécialiste exécutera la comparaison LAMal/CMU avec
+            vous personnellement, en tenant compte de vos détails fiscaux
+            précis.
           </p>
         </div>
+
+        {/* Newsletter card — dismissible. dataLayer event is the source of
+            truth until n8n exposes a dedicated newsletter endpoint. */}
+        {!newsletterDismissed && (
+          <div className="max-w-xl mx-auto">
+            <div className="relative text-left rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setNewsletterDismissed(true)}
+                aria-label="Masquer la proposition d'inscription à la newsletter"
+                className="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-lg leading-none"
+              >
+                ×
+              </button>
+              {newsletterSubscribed ? (
+                <p className="text-sm font-body" style={{ color: "#15803D" }}>
+                  Merci, vous êtes inscrit·e. Premier conseil dans votre boîte
+                  email cette semaine.
+                </p>
+              ) : (
+                <>
+                  <p className="text-sm font-semibold text-gray-900 pr-6 mb-1 font-body">
+                    1 conseil d&apos;optimisation assurance santé par semaine
+                  </p>
+                  <p className="text-[13px] text-gray-500 leading-relaxed mb-3 font-body">
+                    Écrit pour les frontaliers et résidents en Suisse romande.
+                    Désinscription en 1 clic.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleNewsletterSubscribe}
+                    className="px-4 py-2 rounded-lg text-white text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
+                    style={{ backgroundColor: "#86A789" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#6F8E72")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#86A789")
+                    }
+                  >
+                    Je m&apos;inscris
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="max-w-md mx-auto text-center pt-4 border-t border-gray-100 space-y-3">
           <a
