@@ -1,5 +1,17 @@
 // Assurance funnel — answer keys MUST match docs/Audit_Assurances_Spec_Verrouillee
 // and the question definitions in questions.ts exactly.
+//
+// Q9 (événements à venir) was dropped from the user-facing flow on 2026-05-09
+// — it only fed the laa_gap risk for the changement_emploi cohort (~10–15% of
+// users). Risk removed from risks.ts; specialist surfaces it during the call.
+//
+// Q6 modèle gained "alternatif" as a user-facing collapse of HMO/Telmed on
+// the same date. Existing "hmo"/"telmed" enum values stay for backward compat
+// with cached sessions and prior Airtable rows.
+//
+// Q8 complémentaires moved from a single-value enum to a multi-select array
+// on the same date. Users can now select multiple complémentaires with
+// "aucune" and "ndr" as mutually-exclusive sentinels.
 
 export type AssuranceBranch = "resident" | "frontalier";
 
@@ -47,6 +59,7 @@ export type Q5Franchise =
 export type Q6Modele =
   | "libre"
   | "medecin_famille"
+  | "alternatif"
   | "hmo"
   | "telmed"
   | "ne_sais_pas";
@@ -58,21 +71,15 @@ export type Q7Ijm =
   | "independant_sans_ijm"
   | "independant_avec_ijm";
 
-export type Q8Complementaires =
-  | "aucune"
-  | "hospitalisation"
+export type Q8Complementaire =
+  | "hospitalisation_privee"
+  | "hospitalisation_commune"
   | "ambulatoire"
   | "dentaire"
-  | "plusieurs"
-  | "ne_sais_pas";
-
-export type Q9Evenements =
-  | "stable"
-  | "changement_emploi"
-  | "demenagement_canton"
-  | "enfant"
-  | "independant"
-  | "quitter_suisse";
+  | "maternite"
+  | "voyage_assistance"
+  | "aucune"
+  | "ndr";
 
 export interface AssuranceAnswersResident {
   q1_statut: Q1Statut;
@@ -82,8 +89,7 @@ export interface AssuranceAnswersResident {
   q5_franchise: Q5Franchise;
   q6_modele: Q6Modele;
   q7_ijm: Q7Ijm;
-  q8_complementaires: Q8Complementaires;
-  q9_evenements: Q9Evenements;
+  q8_complementaires: Q8Complementaire[];
 }
 
 export type QF1DroitOption =

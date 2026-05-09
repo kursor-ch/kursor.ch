@@ -49,13 +49,13 @@ export default function SoftExitSansActivite() {
           Autre priorité
         </span>
         <h2 className="text-2xl md:text-3xl font-heading font-semibold text-gray-900 mb-3">
-          Merci pour vos réponses.
+          Merci pour votre réponse.
         </h2>
         <p className="text-gray-600 font-body leading-relaxed">
-          Notre audit assurances est conçu pour les actifs en Suisse (salariés,
-          indépendants, frontaliers). Votre situation nécessite un
-          accompagnement différent — mais vous pourriez être intéressé par
-          notre Audit Retraite.
+          L&apos;audit assurance est conçu pour les actifs en Suisse — salariés,
+          indépendants, frontaliers. Inscrivez-vous à notre newsletter pour
+          recevoir nos prochains contenus sur la couverture santé en Suisse,
+          ou jetez un œil à notre Audit Retraite ci-dessous.
         </p>
       </div>
 

@@ -10,6 +10,11 @@ export interface Question {
   label: string;
   hint?: string;
   type: QuestionType;
+  // When true, the question collects an array of selected keys instead of a
+  // single value. Only one funnel uses this today (assurance Q8 complémentaires);
+  // the funnel-specific QuestionScreen consults this flag and routes to a
+  // multi-select renderer.
+  multiSelect?: boolean;
   options: QuestionOption[];
 }
 

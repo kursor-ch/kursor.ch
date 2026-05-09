@@ -37,6 +37,16 @@ export type GtmEvent =
   | "retraite_submit_failed"
   | "retraite_disqualified"
   | "newsletter_optin_retraite"
+  // Assurance funnel-specific events
+  | "assurance_funnel_started"
+  | "assurance_step_completed"
+  | "assurance_frontalier_branch"
+  | "assurance_contact_shown"
+  | "assurance_consent_shown"
+  | "assurance_submitted"
+  | "assurance_submit_failed"
+  | "assurance_disqualified"
+  | "newsletter_optin_assurance"
   // Conversions
   | "lead_submitted"
   | "newsletter_subscribed"

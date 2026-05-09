@@ -34,47 +34,42 @@ export const assuranceQ1: AssuranceQuestionScreen = {
   ],
 };
 
-// Résident branch — 8 screens after Q1 (Q2 → Q9).
+// Résident branch — 6 screens after Q1 (Q2+Q3 merged → Q4 → Q5 → Q6 → Q7 →
+// Q8). Q9 (événements) was dropped on 2026-05-09; the laa_gap risk it fed
+// is no longer surfaced automatically.
 export const assuranceResidentScreens: AssuranceQuestionScreen[] = [
+  // S2 — Canton + foyer (merged)
   {
     branch: "resident",
-    title: "Dans quel canton résidez-vous actuellement ?",
+    title: "Où vivez-vous, et avec qui ?",
     subtitle:
-      "Les primes LAMal varient de plus de 100 CHF par mois entre cantons. Votre canton conditionne la base du calcul.",
+      "Le canton conditionne la prime LAMal de référence. Le foyer impacte les complémentaires utiles et les doublons à éliminer.",
     questions: [
       {
         id: "q2_canton",
-        label: "Sélectionnez votre canton",
-        type: "select",
+        label: "Canton de résidence",
+        type: "pill",
         options: [
+          // Order — high-volume cantons first, then alphabetical.
           { label: "Genève", key: "geneve" },
           { label: "Vaud", key: "vaud" },
-          { label: "Valais", key: "valais" },
-          { label: "Neuchâtel", key: "neuchatel" },
-          { label: "Fribourg", key: "fribourg" },
-          { label: "Jura", key: "jura" },
-          { label: "Berne", key: "berne" },
           { label: "Zurich", key: "zurich" },
-          { label: "Bâle-Ville ou Bâle-Campagne", key: "bale" },
+          { label: "Berne", key: "berne" },
+          { label: "Bâle", key: "bale" },
+          { label: "Fribourg", key: "fribourg" },
+          { label: "Neuchâtel", key: "neuchatel" },
+          { label: "Valais", key: "valais" },
+          { label: "Jura", key: "jura" },
           { label: "Tessin", key: "tessin" },
           { label: "Autre canton", key: "autre" },
         ],
       },
-    ],
-  },
-
-  {
-    branch: "resident",
-    title: "Quelle est votre situation familiale ?",
-    subtitle:
-      "Couple et enfants changent les doublons de couverture (RC ménage, assurances complémentaires) et les modèles d'optimisation.",
-    questions: [
       {
         id: "q3_famille",
-        label: "Votre situation",
+        label: "Foyer",
         type: "card",
         options: [
-          { label: "Seul", key: "seul" },
+          { label: "Seul(e)", key: "seul" },
           { label: "En couple, sans enfant", key: "couple_sans_enfant" },
           { label: "En couple, avec enfants à charge", key: "couple_avec_enfants" },
           { label: "Parent solo avec enfants à charge", key: "parent_solo" },
@@ -83,6 +78,7 @@ export const assuranceResidentScreens: AssuranceQuestionScreen[] = [
     ],
   },
 
+  // S3 — Caisse maladie inertie
   {
     branch: "resident",
     title:
@@ -118,11 +114,13 @@ export const assuranceResidentScreens: AssuranceQuestionScreen[] = [
     ],
   },
 
+  // S4 — Franchise LAMal. The "ne_sais_pas" option is rendered as a secondary
+  // text-link in QuestionScreen, not as a chip.
   {
     branch: "resident",
-    title: "Quel est le montant de votre franchise LAMal annuelle ?",
+    title: "Quel est le montant de votre franchise LAMal ?",
     subtitle:
-      "La franchise est le premier levier d'optimisation — si elle est mal calibrée, vous payez trop, souvent des centaines de francs par an.",
+      "La franchise est le 1er levier d'optimisation. Mal calibrée, elle vous coûte des centaines de francs en trop chaque année.",
     questions: [
       {
         id: "q5_franchise",
@@ -139,38 +137,38 @@ export const assuranceResidentScreens: AssuranceQuestionScreen[] = [
     ],
   },
 
+  // S5 — Modèle d'assurance. The "ne_sais_pas" option is rendered as a
+  // secondary link. "alternatif" replaces the prior hmo+telmed split in the
+  // user-facing UI; the schema enum still accepts hmo/telmed for backward
+  // compatibility.
   {
     branch: "resident",
-    title: "Quel modèle d'assurance avez-vous choisi ?",
+    title: "Quel modèle d'assurance avez-vous ?",
     subtitle:
-      "Les modèles alternatifs (médecin de famille, HMO, Telmed) offrent 10 à 20% de réduction sur la prime. Le modèle libre est le plus cher.",
+      "Les modèles alternatifs (médecin de famille, HMO, Telmed) offrent 10 à 20% de réduction par rapport au modèle libre.",
     questions: [
       {
         id: "q6_modele",
         label: "Votre modèle",
         type: "card",
         options: [
-          {
-            label: "Modèle libre (je peux consulter n'importe quel médecin directement)",
-            key: "libre",
-          },
-          {
-            label: "Modèle médecin de famille (je passe par mon généraliste)",
-            key: "medecin_famille",
-          },
-          { label: "Modèle HMO (je vais dans un centre médical défini)", key: "hmo" },
-          { label: "Modèle Telmed (j'appelle avant chaque consultation)", key: "telmed" },
+          { label: "Libre (je consulte n'importe quel médecin)", key: "libre" },
+          { label: "Médecin de famille", key: "medecin_famille" },
+          { label: "HMO ou Telmed", key: "alternatif" },
           { label: "Je ne sais pas", key: "ne_sais_pas" },
         ],
       },
     ],
   },
 
+  // S6 — Perte de gain / IJM. QuestionScreen renders only the subset of
+  // options that match q1_statut (3 cards: salarié variants vs indépendant
+  // variants). The full 5-value enum is preserved for type compatibility.
   {
     branch: "resident",
     title: "En cas de maladie longue durée, qui paie votre salaire ?",
     subtitle:
-      "Sans IJM, une incapacité de travail de plus de quelques semaines peut coûter des dizaines de milliers de francs — c'est le trou de couverture le plus critique.",
+      "Sans IJM adaptée, une incapacité prolongée peut coûter des dizaines de milliers de francs.",
     questions: [
       {
         id: "q7_ijm",
@@ -178,91 +176,68 @@ export const assuranceResidentScreens: AssuranceQuestionScreen[] = [
         type: "card",
         options: [
           {
-            label:
-              "Mon employeur a souscrit une assurance IJM, je suis couvert à 80% pendant 730 jours",
+            label: "Mon employeur paie ≥80% pendant 730 jours",
             key: "ijm_employeur",
           },
           {
-            label:
-              "Mon employeur ne paie que selon l'Échelle de Berne (quelques semaines)",
+            label: "Mon employeur paie le minimum légal seulement",
             key: "echelle_berne",
           },
-          { label: "Je ne sais pas, je n'ai jamais vérifié", key: "ne_sais_pas" },
+          { label: "Je ne sais pas", key: "ne_sais_pas" },
           {
-            label: "Je suis indépendant et je n'ai pas souscrit d'IJM personnelle",
-            key: "independant_sans_ijm",
+            label: "Oui, j'ai une IJM personnelle",
+            key: "independant_avec_ijm",
           },
           {
-            label: "Je suis indépendant et j'ai une IJM personnelle",
-            key: "independant_avec_ijm",
+            label: "Non, aucune IJM personnelle",
+            key: "independant_sans_ijm",
           },
         ],
       },
     ],
   },
 
+  // S7 — Complémentaires LCA (multi-select). "aucune" and "ndr" are
+  // mutually-exclusive sentinels enforced in QuestionScreen.
   {
     branch: "resident",
-    title: "Avez-vous des assurances complémentaires (LCA) ? Si oui, lesquelles ?",
+    title: "Quelles complémentaires (LCA) avez-vous aujourd'hui ?",
     subtitle:
-      "Les complémentaires sont souvent mal calibrées — trop de doublons, trop de protections inutiles, ou à l'inverse une famille non couverte pour les soins dentaires et ambulatoires.",
+      "Les complémentaires sont l'angle mort le plus coûteux : doublons fréquents, garanties inadaptées au profil, ou couverture trop maigre.",
     questions: [
       {
         id: "q8_complementaires",
-        label: "Vos complémentaires",
-        type: "card",
+        label: "Sélectionnez tout ce qui s'applique",
+        type: "pill",
+        multiSelect: true,
         options: [
-          { label: "Aucune complémentaire", key: "aucune" },
-          { label: "Hospitalisation (mi-privée ou privée)", key: "hospitalisation" },
           {
-            label: "Ambulatoire (médecines alternatives, lunettes, soins non LAMal)",
+            label: "Hospitalisation (privée ou semi-privée)",
+            key: "hospitalisation_privee",
+          },
+          {
+            label: "Hospitalisation (division commune flexible)",
+            key: "hospitalisation_commune",
+          },
+          {
+            label: "Soins ambulatoires (médecines alternatives, prévention)",
             key: "ambulatoire",
           },
-          { label: "Dentaire", key: "dentaire" },
-          { label: "Plusieurs complémentaires combinées", key: "plusieurs" },
-          { label: "Je ne sais plus exactement", key: "ne_sais_pas" },
-        ],
-      },
-    ],
-  },
-
-  {
-    branch: "resident",
-    title:
-      "Quelle est votre situation personnelle ou professionnelle dans les prochains mois ?",
-    subtitle:
-      "Certains événements (changement d'emploi, déménagement, naissance, indépendance) ouvrent une fenêtre de recalibrage — voire créent temporairement des trous de couverture.",
-    questions: [
-      {
-        id: "q9_evenements",
-        label: "Votre situation à venir",
-        type: "card",
-        options: [
-          { label: "Stable, pas de changement prévu", key: "stable" },
-          {
-            label: "Je vais changer d'emploi ou je viens de quitter mon emploi",
-            key: "changement_emploi",
-          },
-          {
-            label: "Je vais déménager dans un autre canton",
-            key: "demenagement_canton",
-          },
-          {
-            label: "Je vais avoir un enfant ou je viens d'en avoir un",
-            key: "enfant",
-          },
-          {
-            label: "Je vais passer en indépendant ou créer une société",
-            key: "independant",
-          },
-          { label: "Je vais quitter la Suisse", key: "quitter_suisse" },
+          { label: "Dentaire (soins, orthodontie)", key: "dentaire" },
+          { label: "Maternité", key: "maternite" },
+          { label: "Voyage / assistance", key: "voyage_assistance" },
+          { label: "Aucune complémentaire", key: "aucune" },
+          { label: "Je ne sais pas exactement", key: "ndr" },
         ],
       },
     ],
   },
 ];
 
-// Frontalier branch — 6 screens after Q1 (QF1 → QF6).
+// Frontalier branch — 6 screens after Q1 (QF1 → QF6). Comparator inputs
+// (qf3_rfr + qf4_salaire + qf5_couverture + qf6_acces_soins) all preserved
+// so computeFrontalierComparatif stays accurate. UI refreshed with pill
+// rendering for the bracket questions (QF3, QF4).
 export const assuranceFrontalierScreens: AssuranceQuestionScreen[] = [
   {
     branch: "frontalier",
@@ -331,13 +306,13 @@ export const assuranceFrontalierScreens: AssuranceQuestionScreen[] = [
       {
         id: "qf3_rfr",
         label: "Votre RFR N-2",
-        type: "card",
+        type: "pill",
         options: [
-          { label: "Moins de 15 000 EUR", key: "moins_15k" },
-          { label: "15 000 à 30 000 EUR", key: "15k_30k" },
-          { label: "30 000 à 50 000 EUR", key: "30k_50k" },
-          { label: "50 000 à 80 000 EUR", key: "50k_80k" },
-          { label: "Plus de 80 000 EUR", key: "plus_80k" },
+          { label: "< 15 000 EUR", key: "moins_15k" },
+          { label: "15 000 – 30 000", key: "15k_30k" },
+          { label: "30 000 – 50 000", key: "30k_50k" },
+          { label: "50 000 – 80 000", key: "50k_80k" },
+          { label: "> 80 000 EUR", key: "plus_80k" },
           { label: "Je ne sais pas", key: "ne_sais_pas" },
         ],
       },
@@ -353,12 +328,12 @@ export const assuranceFrontalierScreens: AssuranceQuestionScreen[] = [
       {
         id: "qf4_salaire",
         label: "Votre salaire brut annuel",
-        type: "card",
+        type: "pill",
         options: [
-          { label: "Moins de 60 000 CHF", key: "moins_60k" },
-          { label: "60 000 à 100 000 CHF", key: "60k_100k" },
-          { label: "100 000 à 150 000 CHF", key: "100k_150k" },
-          { label: "Plus de 150 000 CHF", key: "plus_150k" },
+          { label: "< 60 000 CHF", key: "moins_60k" },
+          { label: "60 000 – 100 000", key: "60k_100k" },
+          { label: "100 000 – 150 000", key: "100k_150k" },
+          { label: "> 150 000 CHF", key: "plus_150k" },
         ],
       },
     ],

@@ -50,11 +50,14 @@ function doublonsSurcout(
 
   const isCouple =
     q3 === "couple_sans_enfant" || q3 === "couple_avec_enfants";
-  const hasComplementaire =
-    q8 !== "aucune" && q8 !== "ne_sais_pas";
+  // Filter out the mutually-exclusive sentinels — they signal "no real
+  // complémentaires" or "user can't answer", neither of which feeds doublons.
+  const real = q8.filter((v) => v !== "aucune" && v !== "ndr");
+  const hasComplementaire = real.length > 0;
+  const isMulti = real.length >= 2;
 
   if (isCouple && hasComplementaire) total += 300;
-  if (q8 === "plusieurs") total += 200;
+  if (isMulti) total += 200;
 
   return total;
 }
