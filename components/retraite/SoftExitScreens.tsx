@@ -141,7 +141,10 @@ export function SoftExitSansActivite() {
       <div>
         <span
           className="inline-block px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.14em] font-body mb-4"
-          style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
+          style={{
+            backgroundColor: "var(--funnel-accent-soft, #EDE9FE)",
+            color: "var(--funnel-accent, #7C3AED)",
+          }}
         >
           Autre priorité
         </span>
@@ -197,7 +200,10 @@ export function SoftExitPreRetraite() {
       <div>
         <span
           className="inline-block px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.14em] font-body mb-4"
-          style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
+          style={{
+            backgroundColor: "var(--funnel-accent-soft, #EDE9FE)",
+            color: "var(--funnel-accent, #7C3AED)",
+          }}
         >
           Stratégie pré-retraite
         </span>
@@ -260,7 +266,10 @@ export function SoftExitJeuneHorizon() {
       <div>
         <span
           className="inline-block px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.14em] font-body mb-4"
-          style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
+          style={{
+            backgroundColor: "var(--funnel-accent-soft, #EDE9FE)",
+            color: "var(--funnel-accent, #7C3AED)",
+          }}
         >
           Le temps est votre allié
         </span>

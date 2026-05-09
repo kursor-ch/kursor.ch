@@ -1,28 +1,37 @@
 import type { QuestionScreen } from "@/lib/questions";
 
-// Eight linear screens (Q1 → Q8). No branching. Frontaliers (Q1=frontalier)
-// stay in the same flow — routing and results messaging are flagged via
-// answers, not via a separate branch.
+// Six linear screens (S1 → S6). No branching at the question level. Soft-exit
+// branching is orchestrated by RetraiteApp from outside the screen array.
+//
+// Screen-to-payload mapping:
+//   S1 (q1_statut_form) + S2 (q1_permis_form) → q1_statut on advance from S2.
+//     The "_form" keys are UI-only intermediate state and must be stripped
+//     from the payload before submission. See RetraiteApp.derivePersistedAnswers.
+//   S2 also collects q3_canton (one of the 11 canton chips).
+//   S3 collects q2_anciennete (5 cards).
+//   S4 collects q4_revenu (6 chips + secondary "préfère pas répondre" link
+//     handled in QuestionScreen — selecting it sets q4_revenu: "prefere_pas").
+//   S5 collects q5_3a (4 cards, collapsed from prior 5 on 2026-05-09).
+//   S6 collects q8_horizon (5 cards).
+//
+// Q6 (LPP) and Q7 (inquiétude) were dropped on 2026-05-09 — see types.ts
+// header comment for context.
 export const retraiteScreens: QuestionScreen[] = [
+  // S1 — Statut professionnel
   {
-    title: "Quelle est votre situation actuelle en Suisse ?",
+    title: "Quelle est votre situation professionnelle ?",
     subtitle:
-      "Votre statut détermine le plafond 3a applicable (salarié : 7 258 CHF, indépendant : jusqu'à 36 288 CHF) et la logique de rachat rétroactif.",
+      "Votre statut détermine le plafond 3a applicable (7 258 CHF salarié, jusqu'à 36 288 CHF indépendant).",
     questions: [
       {
-        id: "q1_statut",
+        id: "q1_statut_form",
         label: "Choisissez l'option qui correspond le mieux",
         type: "card",
         options: [
-          { label: "Salarié, citoyen suisse", key: "salarie_suisse" },
-          { label: "Salarié, permis C", key: "salarie_c" },
-          { label: "Salarié, permis B", key: "salarie_b" },
-          { label: "Frontalier, permis G", key: "frontalier" },
-          { label: "Indépendant, citoyen suisse", key: "independant_suisse" },
-          { label: "Indépendant, permis B ou C", key: "independant_bc" },
+          { label: "Salarié(e)", key: "salarie" },
+          { label: "Indépendant(e)", key: "independant" },
           {
-            label:
-              "Sans activité professionnelle (étudiant, sans emploi, retraité)",
+            label: "Sans activité (étudiant, sans emploi, retraité)",
             key: "sans_activite",
           },
         ],
@@ -30,14 +39,54 @@ export const retraiteScreens: QuestionScreen[] = [
     ],
   },
 
+  // S2 — Permis + Canton (two questions on one screen, manual Continuer)
+  {
+    title: "Où et avec quel statut ?",
+    subtitle:
+      "Permis et canton conditionnent l'éligibilité 3a et votre taux marginal d'imposition.",
+    questions: [
+      {
+        id: "q1_permis_form",
+        label: "Votre permis",
+        type: "pill",
+        options: [
+          { label: "Citoyen suisse", key: "citoyen" },
+          { label: "Permis C", key: "permis_c" },
+          { label: "Permis B", key: "permis_b" },
+          { label: "Frontalier (G)", key: "permis_g" },
+        ],
+      },
+      {
+        id: "q3_canton",
+        label: "Votre canton",
+        type: "pill",
+        options: [
+          // Order matters — GE/VD/ZH/BE first cover the bulk of intent.
+          { label: "Genève", key: "geneve" },
+          { label: "Vaud", key: "vaud" },
+          { label: "Zurich", key: "zurich" },
+          { label: "Berne", key: "berne" },
+          { label: "Bâle", key: "bale" },
+          { label: "Fribourg", key: "fribourg" },
+          { label: "Neuchâtel", key: "neuchatel" },
+          { label: "Valais", key: "valais" },
+          { label: "Jura", key: "jura" },
+          { label: "Tessin", key: "tessin" },
+          { label: "Autre canton", key: "autre" },
+        ],
+      },
+    ],
+  },
+
+  // S3 — Ancienneté en Suisse
   {
     title: "Depuis quand vivez-vous en Suisse ?",
     subtitle:
-      "Le rachat rétroactif 3a permet de rattraper jusqu'à 10 années de cotisations manquées. Votre ancienneté détermine votre potentiel de rattrapage.",
+      "Le rachat rétroactif 3a permet de rattraper jusqu'à 10 années de cotisations manquées.",
     questions: [
       {
         id: "q2_anciennete",
-        label: "Votre ancienneté en Suisse",
+        label: "Votre ancienneté",
         type: "card",
         options: [
           { label: "Depuis ma naissance", key: "naissance" },
@@ -50,156 +99,57 @@ export const retraiteScreens: QuestionScreen[] = [
     ],
   },
 
+  // S4 — Revenu annuel brut. The "prefere_pas" option is rendered as a
+  // secondary text-link below the chips in QuestionScreen, not as a chip.
   {
-    title: "Dans quel canton résidez-vous actuellement ?",
+    title: "Revenu annuel brut approximatif ?",
     subtitle:
-      "Le taux marginal d'imposition varie de plus de 15 points entre cantons. Votre canton conditionne l'économie fiscale réelle par franc cotisé en 3a.",
-    questions: [
-      {
-        id: "q3_canton",
-        label: "Sélectionnez votre canton",
-        type: "select",
-        options: [
-          { label: "Genève", key: "geneve" },
-          { label: "Vaud", key: "vaud" },
-          { label: "Valais", key: "valais" },
-          { label: "Neuchâtel", key: "neuchatel" },
-          { label: "Fribourg", key: "fribourg" },
-          { label: "Jura", key: "jura" },
-          { label: "Berne", key: "berne" },
-          { label: "Bâle-Ville ou Bâle-Campagne", key: "bale" },
-          { label: "Zurich", key: "zurich" },
-          { label: "Tessin", key: "tessin" },
-          { label: "Autre canton", key: "autre" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Quel est votre revenu annuel brut approximatif ?",
-    subtitle:
-      "Votre revenu détermine le plafond 3a pour les indépendants (20% max) et votre taux marginal — donc l'économie fiscale réelle sur chaque versement.",
+      "Indication seulement — utilisée uniquement pour estimer votre taux marginal d'imposition.",
     questions: [
       {
         id: "q4_revenu",
         label: "Votre revenu annuel brut",
-        type: "card",
+        type: "pill",
         options: [
-          { label: "Moins de 50 000 CHF", key: "moins_50k" },
-          { label: "50 000 à 80 000 CHF", key: "50k_80k" },
-          { label: "80 000 à 120 000 CHF", key: "80k_120k" },
-          { label: "120 000 à 180 000 CHF", key: "120k_180k" },
-          { label: "180 000 à 250 000 CHF", key: "180k_250k" },
-          { label: "Plus de 250 000 CHF", key: "plus_250k" },
+          { label: "< 50 000 CHF", key: "moins_50k" },
+          { label: "50 000 – 80 000", key: "50k_80k" },
+          { label: "80 000 – 120 000", key: "80k_120k" },
+          { label: "120 000 – 180 000", key: "120k_180k" },
+          { label: "180 000 – 250 000", key: "180k_250k" },
+          { label: "> 250 000 CHF", key: "plus_250k" },
+          // "prefere_pas" is rendered separately as a secondary link.
           { label: "Préfère ne pas répondre", key: "prefere_pas" },
         ],
       },
     ],
   },
 
+  // S5 — Situation 3a (4 cards, collapsed from prior 5)
   {
-    title: "Avez-vous actuellement un 3ème pilier (3a) ?",
+    title: "Votre 3ème pilier (3a) aujourd'hui ?",
     subtitle:
-      "Le 3a est le levier fiscal le plus direct en Suisse : chaque franc versé est déduit de votre revenu imposable. Sans 3a, vous payez l'impôt plein.",
+      "Le 3a est le levier fiscal le plus direct : chaque franc versé est déduit de votre revenu imposable.",
     questions: [
       {
         id: "q5_3a",
         label: "Votre situation 3a",
         type: "card",
         options: [
-          {
-            label: "Oui, et je verse le maximum chaque année",
-            key: "oui_max",
-          },
-          {
-            label: "Oui, mais je verse moins que le maximum",
-            key: "oui_partiel",
-          },
-          {
-            label: "Oui, mais je l'ai ouvert il y a moins de 2 ans",
-            key: "oui_recent",
-          },
-          { label: "Non, mais je sais ce que c'est", key: "non_sait" },
-          {
-            label: "Non, et je ne sais pas vraiment ce que c'est",
-            key: "non_ignore",
-          },
+          { label: "Oui, je verse le maximum", key: "oui_max" },
+          { label: "Oui, mais sous-utilisé", key: "oui_partiel" },
+          { label: "Ouvert récemment (< 2 ans)", key: "oui_recent" },
+          { label: "Pas encore", key: "non" },
         ],
       },
     ],
   },
 
-  {
-    title: "Avez-vous déjà lu votre certificat LPP ?",
-    subtitle:
-      "Le certificat LPP révèle votre potentiel de rachat volontaire sur le 2e pilier — souvent plusieurs dizaines de milliers de francs déductibles, ignorés faute de lecture.",
-    questions: [
-      {
-        id: "q6_lpp",
-        label: "Votre rapport au certificat LPP",
-        type: "card",
-        options: [
-          {
-            label:
-              "Oui, je le consulte régulièrement et je connais mon potentiel de rachat",
-            key: "oui_regulier",
-          },
-          {
-            label:
-              "Oui, mais je ne comprends pas vraiment ce qu'il contient",
-            key: "oui_incompris",
-          },
-          { label: "Non, je ne l'ouvre jamais", key: "non_jamais" },
-          { label: "Je ne savais pas que ça existait", key: "non_inconnu" },
-          { label: "Je suis indépendant / pas concerné", key: "independant" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Quelle est votre plus grande inquiétude concernant votre retraite ?",
-    subtitle:
-      "Votre préoccupation principale guide le type d'optimisation qui aura le plus d'impact pour vous.",
-    questions: [
-      {
-        id: "q7_inquietude",
-        label: "Votre préoccupation principale",
-        type: "card",
-        options: [
-          {
-            label: "Ne pas avoir assez pour maintenir mon niveau de vie",
-            key: "niveau_vie",
-          },
-          {
-            label: "Payer trop d'impôts sans raison maintenant",
-            key: "impots",
-          },
-          {
-            label: "Ne pas comprendre mes droits en tant qu'expatrié",
-            key: "droits_expat",
-          },
-          { label: "Ne pas savoir par où commencer", key: "par_ou_commencer" },
-          {
-            label:
-              "Manquer une opportunité d'optimisation que je ne connais pas",
-            key: "opportunite",
-          },
-          {
-            label: "Mon départ futur de Suisse et mes droits acquis",
-            key: "depart_suisse",
-          },
-        ],
-      },
-    ],
-  },
-
+  // S6 — Horizon retraite/départ
   {
     title:
-      "Dans combien d'années prévoyez-vous de prendre votre retraite ou de quitter la Suisse ?",
+      "Dans combien d'années prévoyez-vous votre retraite — ou un départ de Suisse ?",
     subtitle:
-      "Votre horizon détermine la stratégie : arbitrage fiscal court terme, capitalisation long terme, ou optimisation pré-départ.",
+      "Votre horizon détermine la stratégie : court terme, capitalisation, ou optimisation pré-départ.",
     questions: [
       {
         id: "q8_horizon",
@@ -216,3 +166,40 @@ export const retraiteScreens: QuestionScreen[] = [
     ],
   },
 ];
+
+// Map (statut, permis) UI selections to the canonical q1_statut value.
+// Returns null for the indep+G combination (UI disables this chip; this is a
+// safety net in case it ever leaks through).
+export function deriveQ1Statut(
+  statut: string | undefined,
+  permis: string | undefined
+): string | null {
+  if (statut === "sans_activite") return "sans_activite";
+  if (!statut || !permis) return null;
+
+  if (statut === "salarie") {
+    switch (permis) {
+      case "citoyen":
+        return "salarie_suisse";
+      case "permis_c":
+        return "salarie_c";
+      case "permis_b":
+        return "salarie_b";
+      case "permis_g":
+        return "frontalier";
+    }
+  }
+  if (statut === "independant") {
+    switch (permis) {
+      case "citoyen":
+        return "independant_suisse";
+      case "permis_b":
+      case "permis_c":
+        return "independant_bc";
+      case "permis_g":
+        // Disabled in UI; we never reach here, but guard for safety.
+        return null;
+    }
+  }
+  return null;
+}
