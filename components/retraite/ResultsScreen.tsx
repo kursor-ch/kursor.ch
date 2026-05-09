@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { KWatermark } from "@/components/shared/KWatermark";
 import { KBullet } from "@/components/shared/KBullet";
@@ -13,6 +14,7 @@ import {
   getPersonaVerdictParagraph,
   type RetraiteVerdict,
 } from "@/lib/retraite/verdicts";
+import { pushEvent } from "@/lib/gtm";
 
 const CANTON_LABELS: Record<RetraiteAnswers["q3_canton"], string> = {
   geneve: "Genève",
@@ -69,6 +71,9 @@ export default function ResultsScreen({
   verdict,
   answers,
 }: ResultsScreenProps) {
+  const [newsletterDismissed, setNewsletterDismissed] = useState(false);
+  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
   const annees_sans_3a = Math.min(score.annees_sans_3a, 10);
   const startYear = currentYear() - annees_sans_3a;
   const yearRows = Array.from({ length: annees_sans_3a }, (_, i) => ({
@@ -83,11 +88,15 @@ export default function ResultsScreen({
         )
       : 0;
 
-  const personaParagraph = getPersonaVerdictParagraph(
-    answers.q7_inquietude,
-    persona,
-    score
-  );
+  const personaParagraph = getPersonaVerdictParagraph(persona, score);
+
+  const handleNewsletterSubscribe = () => {
+    // TODO(team): wire to dedicated newsletter endpoint when n8n exposes one.
+    // Until then, the dataLayer event is the source of truth so the marketing
+    // team can route it via GTM.
+    pushEvent("newsletter_optin_retraite", { source: "results_page" });
+    setNewsletterSubscribed(true);
+  };
 
   const showRachat = score.annees_sans_3a > 0;
   const showEmphasis = score.annees_sans_3a >= 5 && monthsOfRent > 0;
@@ -305,6 +314,52 @@ export default function ResultsScreen({
             Confidentiel · Données hébergées en Suisse
           </p>
         </div>
+
+        {/* ===== NEWSLETTER CARD — dismissible ===== */}
+        {!newsletterDismissed && (
+          <div className="max-w-xl mx-auto">
+            <div className="relative rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setNewsletterDismissed(true)}
+                aria-label="Masquer la proposition d'inscription à la newsletter"
+                className="absolute top-2 right-3 text-gray-400 hover:text-gray-600 text-lg leading-none"
+              >
+                ×
+              </button>
+              {newsletterSubscribed ? (
+                <p className="text-sm font-body" style={{ color: "#15803D" }}>
+                  Merci, vous êtes inscrit·e. Premier conseil dans votre boîte
+                  email cette semaine.
+                </p>
+              ) : (
+                <>
+                  <p className="text-sm font-semibold text-gray-900 pr-6 mb-1 font-body">
+                    1 conseil d&apos;optimisation prévoyance par semaine
+                  </p>
+                  <p className="text-[13px] text-gray-500 leading-relaxed mb-3 font-body">
+                    Écrit pour les résidents en Suisse. Désinscription en 1
+                    clic.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleNewsletterSubscribe}
+                    className="px-4 py-2 rounded-lg text-white text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200"
+                    style={{ backgroundColor: "#7C3AED" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#6D28D9")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#7C3AED")
+                    }
+                  >
+                    Je m&apos;inscris
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ===== CROSS-SELL CARD ===== */}
         <div className="max-w-xl mx-auto">

@@ -1,6 +1,15 @@
 // Audit Retraite — answer keys MUST match docs/Tunnel_Retraite_Audit_Spec_Verrouillee
 // and the question definitions in questions.ts exactly. Route is /retraite,
 // internal funnel_id is "retraite".
+//
+// Q6 (LPP certificat) and Q7 (inquiétude principale) were dropped from the
+// user-facing flow on 2026-05-09 — they didn't move the score, only colored
+// persona/sales tone. lpp_flag is now derived (default true for salariés,
+// false for indépendants); persona-verdict copy is now keyed on persona.code
+// only. Airtable columns for q6/q7 receive null going forward.
+//
+// Q5 was collapsed from 5 to 4 options on 2026-05-09 — non_sait + non_ignore
+// merged to "non". Persona detection defaults the merged "non" to A.
 
 export type Q1Statut =
   | "salarie_suisse"
@@ -44,23 +53,7 @@ export type Q5TroisiemePilier =
   | "oui_max"
   | "oui_partiel"
   | "oui_recent"
-  | "non_sait"
-  | "non_ignore";
-
-export type Q6Lpp =
-  | "oui_regulier"
-  | "oui_incompris"
-  | "non_jamais"
-  | "non_inconnu"
-  | "independant";
-
-export type Q7Inquietude =
-  | "niveau_vie"
-  | "impots"
-  | "droits_expat"
-  | "par_ou_commencer"
-  | "opportunite"
-  | "depart_suisse";
+  | "non";
 
 export type Q8Horizon =
   | "moins_5ans"
@@ -75,8 +68,6 @@ export interface RetraiteAnswers {
   q3_canton: Q3Canton;
   q4_revenu: Q4Revenu;
   q5_3a: Q5TroisiemePilier;
-  q6_lpp: Q6Lpp;
-  q7_inquietude: Q7Inquietude;
   q8_horizon: Q8Horizon;
 }
 

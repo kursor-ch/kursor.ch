@@ -36,11 +36,12 @@ export function resolveSoftExitEnd(
     return "pre_retraite";
   }
 
-  // Likely <25: low income AND recent arrival AND no 3a knowledge.
+  // Likely <25: low income AND recent arrival AND no 3a (collapsed branch
+  // covers prior non_ignore + non_sait).
   if (
     answers.q4_revenu === "moins_50k" &&
     answers.q2_anciennete === "moins_2ans" &&
-    answers.q5_3a === "non_ignore"
+    answers.q5_3a === "non"
   ) {
     return "jeune_horizon";
   }
@@ -170,9 +171,9 @@ function current3aStatus(
     case "oui_partiel":
     case "oui_recent":
       return "has_some_below_max";
-    case "non_sait":
-      return "none";
-    case "non_ignore":
+    case "non":
+      // Collapsed from prior non_sait + non_ignore on 2026-05-09. We default
+      // to "unsure" — the more conservative of the two prior values.
       return "unsure";
   }
 }

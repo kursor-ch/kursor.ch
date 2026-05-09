@@ -1,3 +1,11 @@
+// Q6 (LPP certificat) was dropped on 2026-05-09 — lpp_flag is now derived
+// from q1_statut alone (true for salariés/frontaliers, false for indépendants).
+// Q7 was also dropped; it had no scoring impact, only colored the persona
+// verdict paragraph.
+//
+// Q5 was collapsed from 5 to 4 options on the same date — prior non_sait and
+// non_ignore both fold into the new "non" branch with identical scoring
+// treatment (the two never differed in scoring, only in persona detection).
 import { estimateRevenuChf, getTauxMarginal } from "./data/canton-taux";
 import type {
   Q1Statut,
@@ -34,8 +42,7 @@ function estimateVersementActuel(
     case "oui_recent":
       // Recent opener — typically near max, but missing-years count is what matters.
       return Math.round(plafond * 0.8);
-    case "non_sait":
-    case "non_ignore":
+    case "non":
       return 0;
   }
 }
@@ -46,7 +53,7 @@ function anneesSansCotisation(
 ): number {
   // When the person has no 3a at all: every year in Switzerland counts, capped
   // at the legal 10-year rachat window.
-  if (q5 === "non_sait" || q5 === "non_ignore") {
+  if (q5 === "non") {
     switch (q2) {
       case "naissance":
       case "plus_10ans":
@@ -93,14 +100,13 @@ function horizonYears(q8: RetraiteAnswers["q8_horizon"]): number | null {
   }
 }
 
-function shouldFlagLpp(
-  q1: Q1Statut,
-  q6: RetraiteAnswers["q6_lpp"]
-): boolean {
-  if (isIndependant(q1)) return false;
-  return (
-    q6 === "oui_incompris" || q6 === "non_jamais" || q6 === "non_inconnu"
-  );
+function shouldFlagLpp(q1: Q1Statut): boolean {
+  // Q6 (LPP certificat awareness) was dropped from the user-facing flow on
+  // 2026-05-09. lpp_flag now defaults to true for salariés/frontaliers (most
+  // don't read their certificate; the LPP rachat lever is worth surfacing on
+  // every salarié results page) and false for indépendants (LPP doesn't apply
+  // unless they've opted in voluntarily).
+  return !isIndependant(q1);
 }
 
 export function computeRetraiteScore(
@@ -137,7 +143,7 @@ export function computeRetraiteScore(
     rachat_retroactif_economie,
     taux_marginal,
     plafond_3a,
-    lpp_flag: shouldFlagLpp(answers.q1_statut, answers.q6_lpp),
+    lpp_flag: shouldFlagLpp(answers.q1_statut),
     horizon_years: horizonYears(answers.q8_horizon),
   };
 }

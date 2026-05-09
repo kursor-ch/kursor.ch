@@ -28,6 +28,15 @@ export type GtmEvent =
   | "logement_submitted"
   | "logement_submit_failed"
   | "newsletter_optin_logement"
+  // Retraite funnel-specific events
+  | "retraite_funnel_started"
+  | "retraite_step_completed"
+  | "retraite_contact_shown"
+  | "retraite_consent_shown"
+  | "retraite_submitted"
+  | "retraite_submit_failed"
+  | "retraite_disqualified"
+  | "newsletter_optin_retraite"
   // Conversions
   | "lead_submitted"
   | "newsletter_subscribed"

@@ -1,11 +1,20 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import Link from "next/link";
 import type { QuestionScreen as QScreen } from "@/lib/questions";
 import RetraiteOptionCard from "./RetraiteOptionCard";
+import RetraiteOptionPill from "./RetraiteOptionPill";
+import { pushEvent } from "@/lib/gtm";
 
 const ACCENT = "#7C3AED";
 const ACCENT_LIGHT = "#EDE9FE";
 const ACCENT_HOVER = "#6D28D9";
+
+// Delay between selecting an option and auto-advancing to the next screen.
+// Long enough for the user to register the visual confirmation, short enough
+// not to feel sluggish.
+const AUTO_ADVANCE_MS = 150;
 
 interface QuestionScreenProps {
   screen: QScreen;
@@ -28,6 +37,42 @@ export default function QuestionScreen({
   canGoBack,
   direction = "forward",
 }: QuestionScreenProps) {
+  // Single-question screens auto-advance after a short confirmation pulse.
+  // Multi-question screens (e.g. permis + canton) need a manual Continuer.
+  const isAutoAdvance = screen.questions.length === 1;
+  const autoAdvanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (autoAdvanceTimerRef.current) {
+        clearTimeout(autoAdvanceTimerRef.current);
+        autoAdvanceTimerRef.current = null;
+      }
+    };
+  }, [screen]);
+
+  const handleAnswer = (questionId: string, value: string) => {
+    onAnswer(questionId, value);
+    pushEvent("retraite_step_completed", { step: questionId, value });
+
+    if (isAutoAdvance) {
+      if (autoAdvanceTimerRef.current) {
+        clearTimeout(autoAdvanceTimerRef.current);
+      }
+      autoAdvanceTimerRef.current = setTimeout(() => {
+        onNext();
+      }, AUTO_ADVANCE_MS);
+    }
+  };
+
+  // Independant + permis G is not a supported combination — the indep
+  // frontalier path is routed elsewhere. Disable the chip and surface a
+  // helper link.
+  const isPermisGDisabled = (questionId: string, optionKey: string) =>
+    questionId === "q1_permis_form" &&
+    optionKey === "permis_g" &&
+    answers.q1_statut_form === "independant";
+
   return (
     <div
       className={`${direction === "back" ? "screen-enter-back" : "screen-enter-forward"} space-y-10`}
@@ -47,58 +92,137 @@ export default function QuestionScreen({
         )}
       </div>
 
-      {screen.questions.map((q) => (
-        <div key={q.id} className="space-y-3">
-          <label className="block text-lg font-semibold text-gray-800">
-            {q.label}
-          </label>
-          {q.hint && <p className="text-sm text-gray-500 -mt-1">{q.hint}</p>}
+      {screen.questions.map((q) => {
+        const labelId = `${q.id}-label`;
 
-          {q.type === "card" ? (
-            <div className="space-y-2.5">
-              {q.options.map((opt, i) => (
-                <div
-                  key={opt.key}
-                  className="animate-stagger-item"
-                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
-                >
-                  <RetraiteOptionCard
-                    label={opt.label}
-                    selected={answers[q.id] === opt.key}
-                    onClick={() => onAnswer(q.id, opt.key)}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div
-              className="animate-stagger-item"
-              style={{ animationDelay: "0.3s" }}
+        // Special case: the q4_revenu pill set carries a "prefere_pas" option
+        // that we render as a secondary text-link below the chips, not as a
+        // chip. Filter it out from the chip render and add the link below.
+        const isRevenu = q.id === "q4_revenu";
+        const chipOptions = isRevenu
+          ? q.options.filter((o) => o.key !== "prefere_pas")
+          : q.options;
+
+        return (
+          <div key={q.id} className="space-y-3">
+            <label
+              id={labelId}
+              className="block text-lg font-semibold text-gray-800"
             >
-              <select
-                value={answers[q.id] || ""}
-                onChange={(e) => onAnswer(q.id, e.target.value)}
-                className="w-full rounded-xl border-2 bg-white py-4 px-4 text-base appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%2378716c%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.23%207.21a.75.75%200%20011.06.02L10%2011.168l3.71-3.938a.75.75%200%20111.08%201.04l-4.25%204.5a.75.75%200%2001-1.08%200l-4.25-4.5a.75.75%200%2001.02-1.06z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-10 transition-colors duration-200 focus:outline-none focus:ring-0"
-                style={{
-                  borderColor: "#E7E5E4",
-                  color: answers[q.id] ? "#111827" : "#9CA3AF",
-                }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "#E7E5E4")}
+              {q.label}
+            </label>
+            {q.hint && <p className="text-sm text-gray-500 -mt-1">{q.hint}</p>}
+
+            {q.type === "card" ? (
+              <div
+                role="radiogroup"
+                aria-labelledby={labelId}
+                className="space-y-2.5"
               >
-                <option value="" disabled>
-                  Sélectionnez une option
-                </option>
-                {q.options.map((opt) => (
-                  <option key={opt.key} value={opt.key}>
-                    {opt.label}
-                  </option>
+                {chipOptions.map((opt, i) => (
+                  <div
+                    key={opt.key}
+                    className="animate-stagger-item"
+                    style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                  >
+                    <RetraiteOptionCard
+                      label={opt.label}
+                      selected={answers[q.id] === opt.key}
+                      onClick={() => handleAnswer(q.id, opt.key)}
+                    />
+                  </div>
                 ))}
-              </select>
-            </div>
-          )}
-        </div>
-      ))}
+              </div>
+            ) : q.type === "pill" ? (
+              <>
+                <div
+                  role="radiogroup"
+                  aria-labelledby={labelId}
+                  className="flex flex-wrap gap-2"
+                >
+                  {chipOptions.map((opt, i) => {
+                    const disabled = isPermisGDisabled(q.id, opt.key);
+                    return (
+                      <div
+                        key={opt.key}
+                        className="animate-stagger-item"
+                        style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                      >
+                        <RetraiteOptionPill
+                          label={opt.label}
+                          selected={answers[q.id] === opt.key}
+                          disabled={disabled}
+                          onClick={() => {
+                            if (disabled) return;
+                            handleAnswer(q.id, opt.key);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                {q.id === "q1_permis_form" &&
+                  answers.q1_statut_form === "independant" && (
+                    <p className="text-xs text-gray-500 mt-2 font-body">
+                      Pour les indépendants frontaliers, voir{" "}
+                      <Link
+                        href="/assurance"
+                        className="underline transition-colors"
+                        style={{ color: ACCENT }}
+                      >
+                        Audit Assurances
+                      </Link>
+                      .
+                    </p>
+                  )}
+                {isRevenu && (
+                  <button
+                    type="button"
+                    onClick={() => handleAnswer(q.id, "prefere_pas")}
+                    className="text-sm font-body underline mt-3 transition-colors"
+                    style={{ color: "#9CA3AF" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = ACCENT)
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "#9CA3AF")
+                    }
+                  >
+                    Préfère ne pas répondre →
+                  </button>
+                )}
+              </>
+            ) : (
+              // Legacy "select" rendering — kept as a defensive fallback for
+              // any question type that might still pass through.
+              <div
+                className="animate-stagger-item"
+                style={{ animationDelay: "0.3s" }}
+              >
+                <select
+                  value={answers[q.id] || ""}
+                  onChange={(e) => handleAnswer(q.id, e.target.value)}
+                  aria-labelledby={labelId}
+                  className="w-full rounded-xl border-2 bg-white py-4 px-4 text-base appearance-none pr-10 transition-colors duration-200 focus:outline-none focus:ring-0"
+                  style={{
+                    borderColor: "#E7E5E4",
+                    color: answers[q.id] ? "#111827" : "#9CA3AF",
+                  }}
+                >
+                  <option value="" disabled>
+                    Sélectionnez une option
+                  </option>
+                  {q.options.map((opt) => (
+                    <option key={opt.key} value={opt.key}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       <div className="flex gap-3 pt-4">
         {canGoBack && (
@@ -110,23 +234,28 @@ export default function QuestionScreen({
             Retour
           </button>
         )}
-        <button
-          type="button"
-          onClick={onNext}
-          disabled={!canProceed}
-          className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100"
-          style={{
-            backgroundColor: ACCENT,
-            opacity: canProceed ? 1 : 0.5,
-            boxShadow: `0 4px 6px -1px ${ACCENT_LIGHT}`,
-          }}
-          onMouseEnter={(e) => {
-            if (canProceed) e.currentTarget.style.backgroundColor = ACCENT_HOVER;
-          }}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = ACCENT)}
-        >
-          Continuer
-        </button>
+        {!isAutoAdvance && (
+          <button
+            type="button"
+            onClick={onNext}
+            disabled={!canProceed}
+            className="flex-1 px-6 py-3.5 rounded-xl text-white font-semibold shadow-md transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100"
+            style={{
+              backgroundColor: ACCENT,
+              opacity: canProceed ? 1 : 0.5,
+              boxShadow: `0 4px 6px -1px ${ACCENT_LIGHT}`,
+            }}
+            onMouseEnter={(e) => {
+              if (canProceed)
+                e.currentTarget.style.backgroundColor = ACCENT_HOVER;
+            }}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = ACCENT)
+            }
+          >
+            Continuer
+          </button>
+        )}
       </div>
     </div>
   );

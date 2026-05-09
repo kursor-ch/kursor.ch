@@ -45,8 +45,8 @@ export function identifyPersona(
     return makePersona("B");
   }
 
-  if (answers.q5_3a === "non_sait") return makePersona("B");
-
-  // non_ignore — doesn't know what a 3a is.
+  // q5_3a === "non" (collapsed from prior non_sait + non_ignore on 2026-05-09).
+  // Default to Persona A — the more conservative cross-sell when we can't tell
+  // ignorant-but-aware from outright unaware.
   return makePersona("A");
 }

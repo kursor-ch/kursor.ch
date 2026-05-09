@@ -18,6 +18,7 @@ export default function RetraiteOptionCard({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={selected}
       data-selected={selected ? "true" : undefined}
       className={`option-button w-full text-left px-5 py-4 rounded-xl border-2 text-[15px] font-medium flex items-center gap-3 shadow-sm ${
         selected ? "" : "bg-white text-gray-700 border-stone-200"
