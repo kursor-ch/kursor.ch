@@ -72,10 +72,11 @@ export default function GuidePage() {
       <section className="mx-auto px-6" style={{ maxWidth: 1120, paddingTop: 56, paddingBottom: 64 }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {GUIDES.map((guide) => (
-            <div
+            <Link
               key={guide.href}
-              className="rounded-xl bg-white overflow-hidden"
-              style={{ border: "1px solid #E2E8F0" }}
+              href={guide.href}
+              className="rounded-xl bg-white overflow-hidden block transition-shadow hover:shadow-lg"
+              style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}
             >
               {/* Card header */}
               <div
@@ -111,23 +112,21 @@ export default function GuidePage() {
                 >
                   {guide.description}
                 </p>
-                <Link
-                  href={guide.href}
+                <span
                   className="font-body"
                   style={{
                     fontSize: 14,
                     fontWeight: 500,
                     color: "#D97706",
-                    textDecoration: "none",
                     display: "inline-flex",
                     alignItems: "center",
                     gap: 4,
                   }}
                 >
                   {"Lire le guide →"}
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
