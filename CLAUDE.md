@@ -1,37 +1,26 @@
-# Kursor CH
+# CLAUDE.md
 
-Multi-funnel lead generation platform for the Swiss expatriation niche.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What it does
+## Kursor CH
 
-Interactive diagnostics that score and qualify French-speaking professionals considering expatriation to Switzerland. Leads are captured, scored, sent an automated report, and stored in a CRM for manual routing to specialized partners (recruiters, fiduciaries, insurers, pension advisors, real estate agents).
+Multi-funnel lead generation platform for the Swiss expatriation niche. Interactive diagnostics score and qualify French-speaking professionals considering expatriation to Switzerland; leads are captured, scored, sent an automated report, and stored in a CRM for manual partner routing.
 
 ## Live funnels
 
 | Funnel | Route | Status |
 |--------|-------|--------|
-| Emploi (Salarié) | /emploi | Active |
-| Logement | /logement | Active |
-| Assurance | /assurance | Active |
-| Retraite | /retraite | Active |
-| Entrepreneur | /diagnostic/entrepreneur | Planned |
+| Emploi (Salarié) | `/emploi` | Active (legacy webhook schema) |
+| Logement | `/logement` | Active (v1.0 schema) |
+| Assurance | `/assurance` | Active (v1.0 schema) |
+| Retraite | `/retraite` | Active (v1.0 schema) |
+| Entrepreneur | `/diagnostic/entrepreneur` | Planned |
+
+`/prevoyance` 301-redirects to `/retraite` (see `next.config.js`).
 
 ## Tech stack
 
-- Frontend: Next.js 14, TypeScript, Tailwind CSS
-- Hosting: Vercel (kursor.ch)
-- Automation: n8n Cloud
-- Email: Brevo (transactional)
-- CRM: Airtable
-- Analytics: Plausible (cookieless)
-
-## Pipeline
-
-```
-Content (TikTok/IG/YT) → Lead magnet (diagnostic) → Score + results on screen
-    → Webhook → n8n → Brevo email + Airtable CRM + Telegram notification
-    → Manual partner routing by founders
-```
+Next.js 14 App Router · TypeScript (strict) · Tailwind CSS · Vercel · n8n Cloud · Brevo · Airtable · Plausible · GTM/GA4.
 
 ## Development
 
@@ -39,33 +28,88 @@ Content (TikTok/IG/YT) → Lead magnet (diagnostic) → Score + results on scree
 npm install
 npm run dev        # local server at localhost:3000
 npm run build      # production build
-npm run lint       # ESLint check
+npm run lint       # ESLint check (next/core-web-vitals)
 ```
+
+There is no test runner configured. TypeScript path alias `@/*` resolves to the repo root.
 
 ## Environment variables
 
 ```
-# Main diagnostic submission endpoint (schema v1.0 — used by Logement,
-# and by future funnels that conform to docs/WEBHOOK_SCHEMA.md)
+# Main diagnostic submission endpoint (schema v1.0). Used by Logement,
+# Assurance, Retraite, and any new funnel conforming to docs/WEBHOOK_SCHEMA.md.
 NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL=https://n8n.kursor.ch/webhook/diagnostic-submission
 
-# Legacy endpoint (Emploi funnel still uses this). Logement's webhook client
-# falls back to this if NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL is unset.
+# Legacy endpoint still used by the Emploi funnel (lib/webhook.ts).
+# v1.0 funnels also fall back to this if NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL is unset.
 NEXT_PUBLIC_WEBHOOK_URL=https://[n8n-instance].app.n8n.cloud/webhook/kursor-lead
 
-# Lightweight soft-exit captures (newsletter-only from Logement soft-exits).
-# Silent no-op if unset.
+# Soft-exit captures (newsletter-only, lightweight payload). No-op if unset.
 NEXT_PUBLIC_SOFT_EXIT_WEBHOOK_URL=https://n8n.kursor.ch/webhook/soft-exit-capture
 
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=kursor.ch
+
+# Server-side only — used by /api/recent and /api/stats to proxy Airtable
+# for the homepage social-proof tickers. Both routes return 204 if unset.
+AIRTABLE_API_TOKEN=...
+AIRTABLE_BASE_ID=...
 ```
+
+## Architecture
+
+### Funnel anatomy
+
+Every funnel follows the same shape:
+
+- `app/<funnel>/page.tsx` — thin server component that renders the funnel's client app
+- `components/<funnel>/<Funnel>App.tsx` — `"use client"` orchestrator. A screen-index state machine: intro → question screens → contact + consent → loading → results (plus optional soft-exit branches). Direction-aware (forward/back), persists nothing across reloads except the webhook retry queue.
+- `lib/<funnel>/` — funnel-specific logic split into:
+  - `questions.ts` — question/screen definitions (option keys are internal snake_case, not display text)
+  - `scoring.ts` — pure score computation from answers
+  - `verdicts.ts` — score → tier/label/summary
+  - `personas.ts` — persona resolution
+  - `routing.ts` — priority, partner routing, cross-sell, soft-exit resolution
+  - `webhook.ts` — builds the funnel-specific `WebhookPayloadV1` (see schema below)
+
+The Emploi funnel is the historical exception — it uses the flat `components/diagnostic/`, `lib/scoring.ts`, `lib/verdicts.ts`, `lib/webhook.ts` layout and still ships a pre-v1.0 flat payload. There is a `TODO(post-logement)` in `lib/shared/schemaTypes.ts` to migrate it; n8n handles both shapes during the transition. Don't "harmonize" Emploi into the v1.0 layout casually — coordinate with the n8n side.
+
+### Webhook contract (v1.0)
+
+The cross-funnel webhook contract is the spine of the system. Two artifacts must stay in lockstep:
+
+- `docs/WEBHOOK_SCHEMA.md` — human-readable spec, source of truth
+- `lib/shared/schemaTypes.ts` — TypeScript types mirroring it
+
+When changing the schema, update both, follow the evolution rules in `WEBHOOK_SCHEMA.md` (no removals, no renames, additive-only without bumping `schema_version`), and remember n8n must accept the new shape before any client-side rollout.
+
+`lib/shared/webhookClient.ts` implements the transport: POST → on non-200, wait 2s and retry once → on second failure, persist the body to `localStorage` under `kursor_pending_submission_{lead_id}`. On every funnel app mount, `retryPendingWebhooks()` flushes any persisted submissions. `sendSoftExitWebhook()` is best-effort, no retry, no localStorage.
+
+`lib/shared/leadId.ts` generates a client-side `KCH-YYYY-NNNNNN` ID; the n8n response is authoritative and may renumber on collision.
+
+### Answer-key convention
+
+Quiz answers are stored as internal snake_case keys (e.g. `"futur_resident_offre_confirmee"`), never display text. This is load-bearing — n8n routing, scoring tables, and persona resolution all match against these keys. Renaming an option key is a breaking change; renaming display copy is free.
+
+### Tracking
+
+- GTM (`GTM-5BT6Q484`) and GA4 (`G-DL8PGLDKRF`) are wired in `app/layout.tsx` with Google Consent Mode v2 — defaults to denied, restored from `localStorage["kursor-cookie-consent"]` written by `components/cookies/CookieBanner.tsx`.
+- Funnel events are pushed to `window.dataLayer` via `lib/gtm.ts` (`trackDiagnosticStarted`, `trackQuestionAnswered`, `trackContactSubmitted`, `trackDiagnosticCompleted`). Each funnel app also fires Plausible custom events directly via `window.plausible`.
+- Vercel Analytics + Speed Insights are mounted in the root layout.
+
+### Styling tokens
+
+`tailwind.config.ts` defines the brand palette (`amber` `#D97706`, `creme`, `vert`, `vert-assurance`, `orange`, `rouge`) and three font CSS variables loaded via `next/font` in `app/layout.tsx`: `--font-heading` (Fraunces), `--font-body` (IBM Plex Sans), `--font-outfit` (Outfit). Funnel apps set per-flow accent CSS vars (`--funnel-accent`, `--funnel-accent-soft`) on their root `<main>`.
+
+### Internal API routes
+
+`app/api/recent` and `app/api/stats` proxy Airtable for the homepage tickers. Both gracefully return 204 when Airtable env vars are missing — preserve that fallback so dev environments without secrets still render.
 
 ## Docs
 
-- docs/BUILD_SPEC.md — full build specification
-- docs/LOCKED_DECISIONS.md — all strategic decisions, scoring tables
-- docs/DIAGNOSTIC_SPEC_WORK.md — Work funnel spec (questions, scoring, report)
-- docs/WEBHOOK_SCHEMA.md — cross-funnel webhook contract (v1.0)
+- `docs/BUILD_SPEC.md` — full build specification
+- `docs/LOCKED_DECISIONS.md` — strategic decisions, scoring tables
+- `docs/DIAGNOSTIC_SPEC_WORK.md` — Emploi funnel spec (questions, scoring, report)
+- `docs/WEBHOOK_SCHEMA.md` — cross-funnel webhook contract (v1.0)
 
 ## License
 
