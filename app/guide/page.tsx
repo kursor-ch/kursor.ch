@@ -17,6 +17,13 @@ const GUIDES = [
     href: "/impots-suisse-etrangers",
     tag: "FISCALIT\u00C9",
   },
+  {
+    icon: "\u{1F4CA}",
+    title: "Bar\u00E8mes d\u2019imp\u00F4t sur le revenu en Suisse",
+    description: "Bar\u00E8me IFD 2026 officiel, imp\u00F4ts cantonaux et coefficients communaux. M\u00E9thode de calcul pas-\u00E0-pas.",
+    href: "/impot-suisse",
+    tag: "FISCALIT\u00C9",
+  },
 ];
 
 /* ───────── PAGE ───────── */

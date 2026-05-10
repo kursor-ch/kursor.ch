@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/retraite-suisse", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/analyse-lpp", priority: 0.7, changeFrequency: "monthly" as const },
     { url: "/impots-suisse-etrangers", priority: 0.8, changeFrequency: "monthly" as const },
+    { url: "/impot-suisse", priority: 0.8, changeFrequency: "monthly" as const },
 
     // Autres
     { url: "/formation-suisse", priority: 0.5, changeFrequency: "monthly" as const },

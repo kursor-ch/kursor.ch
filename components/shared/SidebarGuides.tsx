@@ -12,6 +12,7 @@ const GUIDES = [
   { title: "Placement suisse : guide pour investir", href: "/analyse-lpp" },
   { title: "Coaching carrière en Suisse", href: "/coaching-carriere" },
   { title: "Impôts en Suisse pour les étrangers", href: "/impots-suisse-etrangers" },
+  { title: "Barèmes d’impôt sur le revenu en Suisse", href: "/impot-suisse" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {
