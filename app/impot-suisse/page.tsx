@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
-  title: "Barèmes d’impôt sur le revenu en Suisse 2026",
-  description: "Barème IFD 2026 officiel, impôts cantonaux et coefficients communaux : méthode de calcul pas-à-pas, splitting et exemples concrets.",
+  title: "Barème impôt revenu Suisse 2026 : IFD, tranches et calcul ICC",
+  description: "Barèmes d’impôt en Suisse 2026 : tranches IFD officielles, barèmes cantonaux et méthode de calcul. Écart Zoug-Genève : plus de 30 000 CHF par an.",
 };
 
 /* ───────── DATA ───────── */
