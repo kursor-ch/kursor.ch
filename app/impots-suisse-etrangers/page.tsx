@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
-  title: "Imp\u00F4ts en Suisse pour les \u00E9trangers : guide complet 2025",
+  title: "Imp\u00F4ts en Suisse pour les \u00E9trangers : guide complet 2026",
   description: "Guide complet sur les imp\u00F4ts en Suisse pour les \u00E9trangers : imp\u00F4t \u00E0 la source, TOU, permis B/C/L, d\u00E9ductions fiscales, double imposition et d\u00E9claration.",
 };
 
@@ -30,7 +30,7 @@ const A_RETENIR = [
 ];
 
 const DEDUCTIONS_TOU = [
-  "Cotisations au 3e pilier A (jusqu\u2019\u00E0 CHF 7 258 pour les salari\u00E9s en 2025)",
+  "Cotisations au 3e pilier A (jusqu\u2019\u00E0 CHF 7 258 pour les salari\u00E9s en 2026)",
   "Rachats du 2e pilier (LPP)",
   "Primes d\u2019assurance maladie",
   "Frais de transport domicile-travail",
@@ -67,7 +67,7 @@ export default function ImpotsEtrangersPage() {
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>GUIDE</span>
           <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
             Imp{"\u00F4"}ts en Suisse pour les {"\u00E9"}trangers :<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>le guide complet 2025</span>
+            <span className="font-heading italic" style={{ color: "#D97706" }}>le guide complet 2026</span>
           </h1>
           <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
             <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>{"\u{1F464}"}</div>
