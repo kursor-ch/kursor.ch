@@ -13,6 +13,7 @@ const GUIDES = [
   { title: "Coaching carrière en Suisse", href: "/coaching-carriere" },
   { title: "Impôts en Suisse pour les étrangers", href: "/impots-suisse-etrangers" },
   { title: "Barèmes d’impôt sur le revenu en Suisse", href: "/impot-suisse" },
+  { title: "Meilleures entreprises suisses 2026", href: "/meilleures-entreprises-suisses" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {

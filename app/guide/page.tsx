@@ -24,6 +24,13 @@ const GUIDES = [
     href: "/impot-suisse",
     tag: "FISCALIT\u00C9",
   },
+  {
+    icon: "\u{1F3E2}",
+    title: "Meilleures entreprises suisses 2026",
+    description: "Top 10 Randstad et liste des meilleures entreprises suisses par secteur : horlogerie, banque, pharma, tech, transports.",
+    href: "/meilleures-entreprises-suisses",
+    tag: "EMPLOI",
+  },
 ];
 
 /* ───────── PAGE ───────── */
