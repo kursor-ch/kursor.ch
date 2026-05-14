@@ -31,6 +31,13 @@ const GUIDES = [
     href: "/meilleures-entreprises-suisses",
     tag: "EMPLOI",
   },
+  {
+    icon: "\u{1F4B6}",
+    title: "Coût de la vie en Suisse en 2026",
+    description: "Prix par poste, budgets types par profil, comparaison Suisse-France et écarts entre cantons. Le guide complet pour s’installer.",
+    href: "/cout-vie-en-suisse",
+    tag: "S’INSTALLER",
+  },
 ];
 
 /* ───────── PAGE ───────── */

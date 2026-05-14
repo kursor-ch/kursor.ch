@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/impots-suisse-etrangers", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/impot-suisse", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/meilleures-entreprises-suisses", priority: 0.8, changeFrequency: "monthly" as const },
+    { url: "/cout-vie-en-suisse", priority: 0.8, changeFrequency: "monthly" as const },
 
     // Autres
     { url: "/formation-suisse", priority: 0.5, changeFrequency: "monthly" as const },
