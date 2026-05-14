@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 
 export const metadata: Metadata = {
-  title: "Coût de la vie en Suisse en 2026 : le guide complet",
-  description: "Coût de la vie en Suisse 2026 : prix par poste, budgets types par profil, comparaison Suisse-France et écarts entre cantons.",
+  title: "Coût de la vie en Suisse 2026 : prix, budget et salaire réel",
+  description: "Combien coûte la vie en Suisse en 2026 ? Prix réels, assurance LAMal, impôts par canton et budgets mensuels types pour bien préparer votre installation.",
   alternates: {
     canonical: "https://kursor.ch/cout-vie-en-suisse",
   },
