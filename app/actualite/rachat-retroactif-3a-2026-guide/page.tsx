@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: "/images/articles/rachat-3a-2026.jpg",
         width: 1200,
         height: 514,
-        alt: "Prévoyance et épargne retraite en Suisse — rachat rétroactif 3ème pilier 2026",
+        alt: "Prévoyance et épargne retraite en Suisse, rachat rétroactif 3ème pilier 2026",
       },
     ],
   },
@@ -68,9 +68,9 @@ const RELATED_ARTICLES = [
 ];
 
 const SOURCES = [
-  { title: "Ordonnance sur la prévoyance professionnelle vieillesse, survivants et invalidité (OPP3) — modification du 1er janvier 2026", url: "https://www.fedlex.admin.ch/eli/cc/1985/1898_1898_1898/fr" },
-  { title: "CA Nextbank — « Dès 2026, rachat rétroactif de vos lacunes de pilier 3A »", url: "https://www.ca-nextbank.ch" },
-  { title: "Qualibroker Swiss Risk & Care — Chiffres-clés 2026 (Prévoyance professionnelle et privée)", url: "https://www.swissriskcare.ch" },
+  { title: "Ordonnance sur la prévoyance professionnelle vieillesse, survivants et invalidité (OPP3) : modification du 1er janvier 2026", url: "https://www.fedlex.admin.ch/eli/cc/1985/1898_1898_1898/fr" },
+  { title: "CA Nextbank : « Dès 2026, rachat rétroactif de vos lacunes de pilier 3A »", url: "https://www.ca-nextbank.ch" },
+  { title: "Qualibroker Swiss Risk & Care : Chiffres-clés 2026 (Prévoyance professionnelle et privée)", url: "https://www.swissriskcare.ch" },
 ];
 
 
@@ -127,7 +127,7 @@ export default function RachatRetroactif3aPage() {
 
             <ArticleHeroImage
               src="/images/articles/rachat-3a-2026.jpg"
-              alt="Prévoyance et épargne retraite en Suisse — rachat rétroactif 3ème pilier 2026"
+              alt="Prévoyance et épargne retraite en Suisse, rachat rétroactif 3ème pilier 2026"
               category="PRÉVOYANCE"
               categoryColor="#7C3AED"
             />
@@ -137,7 +137,7 @@ export default function RachatRetroactif3aPage() {
               Depuis le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la modification de l’OPP3 ouvre une porte que beaucoup d’expatriés croyaient fermée à jamais : il est désormais possible de <strong style={{ color: "#111827" }}>racheter rétroactivement</strong> jusqu’à dix ans de cotisations manquées au pilier 3a. Pour un résident arrivé en Suisse il y a cinq ans sans avoir ouvert de 3a, cela peut représenter à terme <strong style={{ color: "#111827" }}>plus de 36 000 CHF</strong> de versements rattrapables et entre 9 000 et 14 000 CHF d’économies d’impôts immédiates.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              C’est, sans concurrence, l’évolution fiscale la plus importante de 2026 pour les résidents francophones de Suisse. L’opportunité est massive, mais les règles sont strictes — et la moindre erreur de séquencement peut faire perdre le bénéfice de plusieurs milliers de francs.
+              C’est, sans concurrence, l’évolution fiscale la plus importante de 2026 pour les résidents francophones de Suisse. L’opportunité est massive, mais les règles sont strictes : la moindre erreur de séquencement peut faire perdre le bénéfice de plusieurs milliers de francs.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               Cet article décortique le mécanisme, donne deux exemples chiffrés concrets, et expose la stratégie de séquencement à respecter pour ne rien laisser sur la table.
@@ -235,7 +235,7 @@ export default function RachatRetroactif3aPage() {
             <div className="scroll-reveal hover-lift rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
               <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>Combien perdez-vous chaque année sans 3ème pilier optimisé ?</p>
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
-                Notre Audit Retraite calcule votre perte fiscale cumulée et votre éligibilité au rachat rétroactif — en 2 minutes.
+                Notre Audit Retraite calcule votre perte fiscale cumulée et votre éligibilité au rachat rétroactif, en 2 minutes.
               </p>
               <Link href="/prevoyance" className="hover-cta font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Calculer ma perte fiscale →</Link>
             </div>

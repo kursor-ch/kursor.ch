@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 import { ArticleHeroImage } from "@/components/articles/ArticleHeroImage";
 
 export const metadata: Metadata = {
-  title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse — tout ce qui change",
+  title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse, tout ce qui change",
   description:
     "Plafonds 3a, franchise LAMal, LAA, LPP, Échelle de Berne : les chiffres actualisés pour 2026 et ce qu’ils signifient pour votre budget.",
   alternates: { canonical: "/actualite/chiffres-cles-assurance-prevoyance-2026" },
   openGraph: {
-    title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse — tout ce qui change",
+    title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse, tout ce qui change",
     description:
       "Plafonds 3a, franchise LAMal, LAA, LPP, Échelle de Berne : les chiffres actualisés pour 2026 et ce qu’ils signifient pour votre budget.",
     type: "article",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: "/images/articles/chiffres-cles-2026.jpg",
         width: 1200,
         height: 514,
-        alt: "Documents d'assurance et de prévoyance — chiffres-clés 2026 Suisse",
+        alt: "Documents d'assurance et de prévoyance, chiffres-clés 2026 Suisse",
       },
     ],
   },
@@ -76,7 +76,7 @@ const RELATED_ARTICLES = [
 ];
 
 const SOURCES = [
-  { title: "Qualibroker Swiss Risk & Care — Chiffres-clés 2026 (Prévoyance professionnelle, AVS/AI, LAA, 3ème pilier, Échelle de Berne)", url: "https://www.swissriskcare.ch" },
+  { title: "Qualibroker Swiss Risk & Care : Chiffres-clés 2026 (Prévoyance professionnelle, AVS/AI, LAA, 3ème pilier, Échelle de Berne)", url: "https://www.swissriskcare.ch" },
 ];
 
 
@@ -93,7 +93,7 @@ export default function ChiffresCles2026Page() {
           <span className="inline-block font-body uppercase rounded-full" style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#D97706", backgroundColor: "rgba(217,119,6,0.1)", padding: "4px 12px", marginBottom: 16 }}>🏥 ASSURANCES</span>
           <h1 className="font-heading" style={{ fontSize: 42, fontWeight: 600, color: "#111827", lineHeight: 1.15 }}>
             Chiffres-clés 2026 :<br />
-            <span className="font-heading italic" style={{ color: "#D97706" }}>assurance, prévoyance, salaire — tout ce qui change</span>
+            <span className="font-heading italic" style={{ color: "#D97706" }}>assurance, prévoyance, salaire : tout ce qui change</span>
           </h1>
           <div className="flex items-center gap-3" style={{ marginTop: 24 }}>
             <div className="flex items-center justify-center rounded-full" style={{ width: 36, height: 36, backgroundColor: "rgba(217,119,6,0.1)" }}>👤</div>
@@ -133,14 +133,14 @@ export default function ChiffresCles2026Page() {
 
             <ArticleHeroImage
               src="/images/articles/chiffres-cles-2026.jpg"
-              alt="Documents d'assurance et de prévoyance — chiffres-clés 2026 Suisse"
+              alt="Documents d'assurance et de prévoyance, chiffres-clés 2026 Suisse"
               category="ASSURANCES"
               categoryColor="#86A789"
             />
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Chaque année, les seuils qui régissent vos assurances, votre prévoyance et votre protection salariale en Suisse sont mis à jour. Pour <strong style={{ color: "#111827" }}>2026</strong>, plusieurs plafonds ont changé — certains à votre avantage, d’autres beaucoup moins. Voici les chiffres à connaître pour ne pas surpayer ni vous retrouver sous-couvert.
+              Chaque année, les seuils qui régissent vos assurances, votre prévoyance et votre protection salariale en Suisse sont mis à jour. Pour <strong style={{ color: "#111827" }}>2026</strong>, plusieurs plafonds ont changé : certains à votre avantage, d’autres beaucoup moins. Voici les chiffres à connaître pour ne pas surpayer ni vous retrouver sous-couvert.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               La plupart des résidents ne tiennent pas le compte de ces ajustements. Leur courtier le fait peut-être à leur place, mais le mal est souvent déjà fait : couverture inadaptée, cotisations trop hautes, déductions oubliées. Connaître les seuils 2026 vous permet de décider en connaissance de cause, dès aujourd’hui.
@@ -212,7 +212,7 @@ export default function ChiffresCles2026Page() {
             {/* Section 5 — Échelle de Berne */}
             <h2 id="berne" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Échelle de Berne : combien de temps votre employeur paie en cas de maladie ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              C’est la section que la plupart des résidents ignorent — et celle qui crée le plus gros trou de couverture dans les budgets familiaux. En l’absence d’assurance perte de gain collective, l’obligation de l’employeur de continuer à verser le salaire en cas de maladie est régie par le Code des obligations et calibrée par l’<strong style={{ color: "#111827" }}>échelle de Berne</strong> (ou de Bâle / Zurich, selon la juridiction du contrat ; les seuils sont proches).
+              C’est la section que la plupart des résidents ignorent, et celle qui crée le plus gros trou de couverture dans les budgets familiaux. En l’absence d’assurance perte de gain collective, l’obligation de l’employeur de continuer à verser le salaire en cas de maladie est régie par le Code des obligations et calibrée par l’<strong style={{ color: "#111827" }}>échelle de Berne</strong> (ou de Bâle / Zurich, selon la juridiction du contrat ; les seuils sont proches).
             </p>
             <div className="flex flex-col gap-2" style={{ marginBottom: 24 }}>
               {ECHELLE_BERNE.map((e) => (
@@ -241,7 +241,7 @@ export default function ChiffresCles2026Page() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
               <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>Payez-vous trop cher pour vos assurances ?</p>
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
-                Notre Audit Assurances identifie votre surcoût annuel et vos trous de couverture — en 2 minutes, gratuitement.
+                Notre Audit Assurances identifie votre surcoût annuel et vos trous de couverture, en 2 minutes, gratuitement.
               </p>
               <Link href="/assurance" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Vérifier ma couverture →</Link>
             </div>

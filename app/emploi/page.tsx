@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Diagnostic Emploi — Kursor CH",
+  title: "Diagnostic Emploi | Kursor CH",
   description:
     "Évaluez la viabilité de votre projet d'expatriation professionnelle en Suisse. Diagnostic gratuit en 2 minutes.",
 };

@@ -17,7 +17,7 @@ const values = [
   {
     title: "Spécialisé Suisse.",
     description:
-      "Chaque donnée, chaque conseil, chaque partenaire est ancré dans la réalité suisse — pas des généralités copiées d\u2019internet.",
+      "Chaque donnée, chaque conseil, chaque partenaire est ancré dans la réalité suisse. Pas des généralités copiées d\u2019internet.",
   },
 ];
 
@@ -115,8 +115,8 @@ export default function AProposPage() {
             lineHeight: 1.8,
           }}
         >
-          Le système suisse est complexe. Fiscalité, assurances, prévoyance
-          — chaque décision prise dans les premiers mois engage pour des
+          Le système suisse est complexe. Fiscalité, assurances, prévoyance,
+          chaque décision prise dans les premiers mois engage pour des
           années. Kursor CH existe pour que ces décisions soient éclairées,
           pas subies.
         </p>

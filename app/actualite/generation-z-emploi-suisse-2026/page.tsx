@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: "/images/articles/gen-z-emploi-2026.jpg",
         width: 1200,
         height: 514,
-        alt: "Jeune professionnel dans un bureau moderne — marché de l'emploi suisse 2026",
+        alt: "Jeune professionnel dans un bureau moderne, marché de l'emploi suisse 2026",
       },
     ],
   },
@@ -35,7 +35,7 @@ const TOC = [
 const VALEURS = [
   { label: "Ponctualité", desc: "Arriver en avance, pas « à l’heure ». Une réunion à 9h00 commence à 8h55. C’est une question de respect, pas de chronométrie." },
   { label: "Fiabilité", desc: "Les arrêts maladie répétés ou non documentés sont mal vus, y compris dans les conventions collectives qui les autorisent. Faible absentéisme = profil sérieux." },
-  { label: "Performance", desc: "La Leistungsbereitschaft — disponibilité à performer — est une attente culturelle forte. Faire ce qu’on dit qu’on va faire, sans drame." },
+  { label: "Performance", desc: "La Leistungsbereitschaft (disponibilité à performer) est une attente culturelle forte. Faire ce qu’on dit qu’on va faire, sans drame." },
   { label: "Communication", desc: "Directe, factuelle, sans fioritures. Pas de double discours, pas de politesse excessive qui brouille le message. Dire « non » est respecté." },
 ];
 
@@ -46,10 +46,10 @@ const RELATED_ARTICLES = [
 ];
 
 const SOURCES = [
-  { title: "RTS — « Offre d’emploi discriminatoire en Suisse : la génération Z exclue des candidatures », 19 février 2026", url: "https://www.rts.ch/info/suisse" },
-  { title: "24 Heures — « Pas de génération Z ! : une offre d’emploi exclut les jeunes », 9 février 2026", url: "https://www.24heures.ch" },
-  { title: "Le Temps — « Les jeunes, tous fainéants ? À Zurich, une offre d’emploi discriminant la génération Z fait polémique », 13 février 2026", url: "https://www.letemps.ch" },
-  { title: "Office fédéral de la statistique (OFS) — Statistique des absences au travail 2024", url: "https://www.bfs.admin.ch/bfs/fr/home/statistiques/travail-remuneration.html" },
+  { title: "RTS, « Offre d’emploi discriminatoire en Suisse : la génération Z exclue des candidatures », 19 février 2026", url: "https://www.rts.ch/info/suisse" },
+  { title: "24 Heures, « Pas de génération Z ! : une offre d’emploi exclut les jeunes », 9 février 2026", url: "https://www.24heures.ch" },
+  { title: "Le Temps, « Les jeunes, tous fainéants ? À Zurich, une offre d’emploi discriminant la génération Z fait polémique », 13 février 2026", url: "https://www.letemps.ch" },
+  { title: "Office fédéral de la statistique (OFS) : Statistique des absences au travail 2024", url: "https://www.bfs.admin.ch/bfs/fr/home/statistiques/travail-remuneration.html" },
   { title: "Baromètre du marché du travail Alixio 2026", url: "https://www.alixio.fr" },
 ];
 
@@ -107,17 +107,17 @@ export default function GenZEmploi2026Page() {
 
             <ArticleHeroImage
               src="/images/articles/gen-z-emploi-2026.jpg"
-              alt="Jeune professionnel dans un bureau moderne — marché de l'emploi suisse 2026"
+              alt="Jeune professionnel dans un bureau moderne, marché de l'emploi suisse 2026"
               category="EMPLOI"
               categoryColor="#D97706"
             />
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              En janvier 2026, une entreprise de soins à domicile de la région zurichoise a publié sur Jobs.ch une annonce excluant explicitement les candidats nés après 1997 — la génération Z. Le texte évoquait une « culture du certificat médical du lundi et du vendredi » et précisait que la société ne souhaitait recevoir aucune candidature de cette tranche d’âge. Largement reprise par les médias romands, l’annonce a été modifiée après une vague de critiques.
+              En janvier 2026, une entreprise de soins à domicile de la région zurichoise a publié sur Jobs.ch une annonce excluant explicitement les candidats nés après 1997, la génération Z. Le texte évoquait une « culture du certificat médical du lundi et du vendredi » et précisait que la société ne souhaitait recevoir aucune candidature de cette tranche d’âge. Largement reprise par les médias romands, l’annonce a été modifiée après une vague de critiques.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pourquoi en parler ici ? Parce que cet incident, derrière son aspect anecdotique, met à nu une série de tensions du marché du travail suisse en 2026 — tensions qui concernent directement les candidats internationaux qui s’apprêtent à postuler.
+              Pourquoi en parler ici ? Parce que cet incident, derrière son aspect anecdotique, met à nu une série de tensions du marché du travail suisse en 2026. Ces tensions concernent directement les candidats internationaux qui s’apprêtent à postuler.
             </p>
 
             {/* Section 1 — Ce qui s’est passé */}
@@ -149,7 +149,7 @@ export default function GenZEmploi2026Page() {
               Le sociologue <strong style={{ color: "#111827" }}>François Höpflinger</strong>, longtemps rattaché à l’Université de Zurich, le rappelle régulièrement dans ses analyses : les écarts <strong style={{ color: "#111827" }}>au sein</strong> d’une génération (formation, milieu familial, secteur d’activité) sont nettement supérieurs aux écarts <strong style={{ color: "#111827" }}>entre</strong> générations. La grille de lecture générationnelle relève davantage du marketing que de la donnée.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Le contexte conjoncturel suisse complète le tableau : le chômage est remonté à <strong style={{ color: "#111827" }}>3,1 %</strong> (environ 152 000 inscrits), les postes ouverts sont passés d’environ <strong style={{ color: "#111827" }}>65 000 à 50 000</strong> en un an. Le rapport de force se déplace vers les employeurs — d’où, sans doute, certains débordements dans la rédaction des annonces.
+              Le contexte conjoncturel suisse complète le tableau : le chômage est remonté à <strong style={{ color: "#111827" }}>3,1 %</strong> (environ 152 000 inscrits), les postes ouverts sont passés d’environ <strong style={{ color: "#111827" }}>65 000 à 50 000</strong> en un an. Le rapport de force se déplace vers les employeurs, ce qui explique sans doute certains débordements dans la rédaction des annonces.
             </p>
 
             {/* Section 3 — Candidats internationaux */}
@@ -169,7 +169,7 @@ export default function GenZEmploi2026Page() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Les candidats internationaux qui comprennent et incarnent ces codes — <strong style={{ color: "#111827" }}>quel que soit leur âge</strong> — partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre <Link href="/emploi-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>guide complet sur le marché de l’emploi suisse</Link> détaille les autres paramètres : permis, plateformes, CV au format helvétique.
+              Les candidats internationaux qui comprennent et incarnent ces codes, <strong style={{ color: "#111827" }}>quel que soit leur âge</strong>, partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre <Link href="/emploi-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>guide complet sur le marché de l’emploi suisse</Link> détaille les autres paramètres : permis, plateformes, CV au format helvétique.
             </p>
 
             {/* Section 4 — Vrai enjeu */}
@@ -178,14 +178,14 @@ export default function GenZEmploi2026Page() {
               Malgré le repositionnement du rapport de force, les <strong style={{ color: "#111827" }}>pénuries structurelles</strong> ne disparaissent pas. Santé, construction, IT, ingénierie : ces quatre secteurs continuent d’afficher un déficit de candidats qualifiés que le marché peine à combler. Le baromètre Alixio 2026 ajoute un point contre-intuitif : les jeunes actifs retrouvent en moyenne un nouveau poste <strong style={{ color: "#111827" }}>plus rapidement</strong> que les actifs seniors.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Le secteur où l’annonce de Fit for Care a été postée — les soins à domicile — est précisément celui où la pénurie est la plus aiguë de toute la Confédération. Plusieurs experts du domaine ont qualifié l’exclusion d’une génération entière de candidatures, dans ce contexte, de <strong style={{ color: "#111827" }}>« politique de recrutement à courte vue, voire irresponsable »</strong>. La polémique en dit autant sur la stratégie de l’employeur que sur la fragilité du secteur lui-même.
+              Le secteur où l’annonce de Fit for Care a été postée, les soins à domicile, est précisément celui où la pénurie est la plus aiguë de toute la Confédération. Plusieurs experts du domaine ont qualifié l’exclusion d’une génération entière de candidatures, dans ce contexte, de <strong style={{ color: "#111827" }}>« politique de recrutement à courte vue, voire irresponsable »</strong>. La polémique en dit autant sur la stratégie de l’employeur que sur la fragilité du secteur lui-même.
             </p>
 
             {/* CTA finale */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
               <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>Quel est votre potentiel salarial en Suisse ?</p>
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
-                Notre Diagnostic Emploi évalue votre profil et estime votre fourchette de salaire — en 2 minutes, gratuitement.
+                Notre Diagnostic Emploi évalue votre profil et estime votre fourchette de salaire, en 2 minutes, gratuitement.
               </p>
               <Link href="/emploi" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Évaluer mon profil →</Link>
             </div>

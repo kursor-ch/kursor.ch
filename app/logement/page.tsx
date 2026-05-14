@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Diagnostic Logement — Kursor CH",
+  title: "Diagnostic Logement | Kursor CH",
   description:
     "Estimez la difficulté de votre recherche de logement en Suisse romande. Diagnostic gratuit en 2 minutes.",
 };

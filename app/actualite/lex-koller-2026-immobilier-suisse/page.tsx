@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: "/images/articles/lex-koller-2026.jpg",
         width: 1200,
         height: 514,
-        alt: "Immeuble résidentiel moderne en Suisse — contexte de la réforme Lex Koller 2026",
+        alt: "Immeuble résidentiel moderne en Suisse, contexte de la réforme Lex Koller 2026",
       },
     ],
   },
@@ -73,7 +73,7 @@ const RELATED_ARTICLES = [
 ];
 
 const SOURCES = [
-  { title: "Communiqué du Conseil fédéral du 15 avril 2026 — Restrictions accrues sur l’acquisition d’immeubles par des personnes à l’étranger", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
+  { title: "Communiqué du Conseil fédéral du 15 avril 2026 : Restrictions accrues sur l’acquisition d’immeubles par des personnes à l’étranger", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
   { title: "Avant-projet de révision de la LFAIE (Loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger)", url: "https://www.admin.ch/gov/fr/accueil/documentation/communiques.html" },
 ];
 
@@ -130,7 +130,7 @@ export default function LexKoller2026Page() {
 
             <ArticleHeroImage
               src="/images/articles/lex-koller-2026.jpg"
-              alt="Immeuble résidentiel moderne en Suisse — contexte de la réforme Lex Koller 2026"
+              alt="Immeuble résidentiel moderne en Suisse, contexte de la réforme Lex Koller 2026"
               category="LOGEMENT"
               categoryColor="#3B82F6"
             />
@@ -143,7 +143,7 @@ export default function LexKoller2026Page() {
               Le contexte est connu : la Suisse fait face à une pénurie de logements aiguë, particulièrement dans les centres urbains romands. Cette réforme s’inscrit dans le paquet de mesures d’accompagnement liées à l’initiative populaire « Pas de Suisse à 10 millions », adoptée par le Parlement comme priorité politique en 2025.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pour notre audience — résidents francophones titulaires d’un permis B ou C, frontaliers, expatriés en réflexion sur leur projet d’achat — l’enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
+              Pour notre audience, résidents francophones titulaires d’un permis B ou C, frontaliers, expatriés en réflexion sur leur projet d’achat, l’enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
             </p>
 
             {/* Section 1 — Ce qui change */}
@@ -185,7 +185,7 @@ export default function LexKoller2026Page() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Une nuance essentielle, souvent occultée dans les commentaires médiatiques : la Lex Koller régit <strong style={{ color: "#111827" }}>l’achat</strong>, pas la <strong style={{ color: "#111827" }}>location</strong>. La quasi-totalité de notre audience accède au logement par le marché locatif — un terrain qui reste totalement à l’écart de la réforme.
+              Une nuance essentielle, souvent occultée dans les commentaires médiatiques : la Lex Koller régit <strong style={{ color: "#111827" }}>l’achat</strong>, pas la <strong style={{ color: "#111827" }}>location</strong>. La quasi-totalité de notre audience accède au logement par le marché locatif, un terrain qui reste totalement à l’écart de la réforme.
             </p>
 
             {/* Section 3 — Impact marché locatif */}
@@ -212,7 +212,7 @@ export default function LexKoller2026Page() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "28px 28px", marginBottom: 32 }}>
               <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#111827", marginBottom: 8 }}>Vous cherchez un logement en Suisse romande ?</p>
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
-                Notre Diagnostic Logement estime votre temps de recherche et identifie les pièges à éviter — en 2 minutes, gratuitement.
+                Notre Diagnostic Logement estime votre temps de recherche et identifie les pièges à éviter, en 2 minutes, gratuitement.
               </p>
               <Link href="/logement" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Estimer mon temps de recherche →</Link>
             </div>

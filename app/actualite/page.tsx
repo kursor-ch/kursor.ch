@@ -40,7 +40,7 @@ const ARTICLES: Article[] = [
     tag: "LOGEMENT",
     title: "Lex Koller 2026 : ce que le durcissement change pour les résidents en Suisse",
     description:
-      "Le Conseil fédéral a annoncé le 15 avril 2026 un avant-projet qui restreint l'acquisition d'immeubles par des étrangers. Décryptage des cinq mesures et impact concret par profil — résidents, frontaliers, locataires.",
+      "Le Conseil fédéral a annoncé le 15 avril 2026 un avant-projet qui restreint l'acquisition d'immeubles par des étrangers. Décryptage des cinq mesures et impact concret par profil : résidents, frontaliers, locataires.",
     author: "Équipe Kursor",
     date: "25 avril 2026",
     readTime: "6 min",
@@ -62,7 +62,7 @@ const ARTICLES: Article[] = [
   {
     icon: "🏥",
     tag: "ASSURANCES",
-    title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse — tout ce qui change",
+    title: "Chiffres-clés 2026 : assurance, prévoyance et salaire en Suisse, tout ce qui change",
     description:
       "Plafonds 3a, seuils LAA, paramètres LPP, taux de conversion, échelle de Berne : les chiffres actualisés pour 2026 et leur impact concret sur votre budget et votre couverture.",
     author: "Équipe Kursor",

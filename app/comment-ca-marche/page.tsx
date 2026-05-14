@@ -140,7 +140,7 @@ const steps = [
     number: "1",
     title: "Choisissez votre diagnostic",
     description:
-      "Emploi, logement, assurance ou prévoyance — sélectionnez le domaine qui vous concerne. Chaque diagnostic est adapté à votre situation spécifique.",
+      "Emploi, logement, assurance ou prévoyance : sélectionnez le domaine qui vous concerne. Chaque diagnostic est adapté à votre situation spécifique.",
     Visual: StepVisual1,
   },
   {
@@ -154,14 +154,14 @@ const steps = [
     number: "3",
     title: "Recevez votre rapport personnalisé",
     description:
-      "Score de viabilité, forces détectées, risques identifiés et chiffres clés — tout arrive par email dans les minutes qui suivent.",
+      "Score de viabilité, forces détectées, risques identifiés et chiffres clés : tout arrive par email dans les minutes qui suivent.",
     Visual: StepVisual3,
   },
   {
     number: "4",
     title: "Accédez aux bons experts",
     description:
-      "Si vous le souhaitez, nous vous mettons en relation avec nos partenaires spécialisés. Recruteurs, courtiers, conseillers — chacun est sélectionné pour son expertise. Gratuit et sans engagement.",
+      "Si vous le souhaitez, nous vous mettons en relation avec nos partenaires spécialisés. Recruteurs, courtiers, conseillers : chacun est sélectionné pour son expertise. Gratuit et sans engagement.",
     Visual: StepVisual4,
   },
 ];
