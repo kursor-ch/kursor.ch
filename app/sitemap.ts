@@ -37,13 +37,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/meilleures-entreprises-suisses", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/cout-vie-en-suisse", priority: 0.8, changeFrequency: "monthly" as const },
 
+    // Actualités (articles individuels)
+    { url: "/actualite/rachat-retroactif-3a-2026-guide", priority: 0.7, changeFrequency: "monthly" as const },
+    { url: "/actualite/lex-koller-2026-immobilier-suisse", priority: 0.7, changeFrequency: "monthly" as const },
+    { url: "/actualite/generation-z-emploi-suisse-2026", priority: 0.7, changeFrequency: "monthly" as const },
+    { url: "/actualite/chiffres-cles-assurance-prevoyance-2026", priority: 0.7, changeFrequency: "monthly" as const },
+
     // Autres
     { url: "/formation-suisse", priority: 0.5, changeFrequency: "monthly" as const },
     { url: "/guide", priority: 0.7, changeFrequency: "weekly" as const },
     { url: "/actualite", priority: 0.7, changeFrequency: "weekly" as const },
     { url: "/a-propos", priority: 0.5, changeFrequency: "yearly" as const },
     { url: "/comment-ca-marche", priority: 0.6, changeFrequency: "monthly" as const },
+
+    // Pages légales
     { url: "/politique-de-confidentialite", priority: 0.3, changeFrequency: "yearly" as const },
+    { url: "/mentions-legales", priority: 0.3, changeFrequency: "yearly" as const },
+    { url: "/cookies", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
   return pages.map((p) => ({
