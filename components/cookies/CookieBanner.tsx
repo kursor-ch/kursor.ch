@@ -11,8 +11,30 @@ type Consent = {
   timestamp: number;
 };
 
+declare global {
+  interface Window {
+    dataLayer?: Record<string, unknown>[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 function applyConsent(consent: Consent) {
   if (typeof window === "undefined") return;
+
+  // Méthode officielle GTM/Consent Mode v2 : pousser via dataLayer
+  // Fonctionne même si gtag n'est pas encore défini (GTM le créera plus tard)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "cookie_consent_update",
+    consent: {
+      ad_storage: consent.marketing ? "granted" : "denied",
+      ad_user_data: consent.marketing ? "granted" : "denied",
+      ad_personalization: consent.marketing ? "granted" : "denied",
+      analytics_storage: consent.analytics ? "granted" : "denied",
+    },
+  });
+
+  // Fallback gtag direct si déjà disponible
   if (typeof window.gtag === "function") {
     window.gtag("consent", "update", {
       ad_storage: consent.marketing ? "granted" : "denied",
