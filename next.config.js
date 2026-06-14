@@ -10,6 +10,16 @@ const nextConfig = {
         destination: "/retraite",
         permanent: true,
       },
+      {
+        source: "/emploi",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/logement",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   async headers() {
