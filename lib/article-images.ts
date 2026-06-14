@@ -34,11 +34,11 @@ export const ARTICLE_IMAGES: Record<string, ArticleImage> = {
     alt: "Vue urbaine d'une ville suisse représentant le coût de la vie",
   },
   "/assurance-maladie": {
-    src: `https://images.unsplash.com/photo-1576091160399-112ba8d25d1f${PARAMS}`,
-    alt: "Stéthoscope médical symbolisant l'assurance maladie en Suisse",
+    src: `https://images.unsplash.com/photo-1505751172876-fa1923c5c528${PARAMS}`,
+    alt: "Professionnel de santé symbolisant l'assurance maladie en Suisse",
   },
   "/permis-suisse": {
-    src: `https://images.unsplash.com/photo-1554224154-26032cbc3da7${PARAMS}`,
+    src: `https://images.unsplash.com/photo-1488646953014-85cb44e25828${PARAMS}`,
     alt: "Passeport et documents de voyage pour le permis de séjour suisse",
   },
   "/creation-entreprise": {
