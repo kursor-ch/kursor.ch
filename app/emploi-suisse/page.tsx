@@ -282,7 +282,7 @@ export default function EmploiSuissePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#111827", padding: "32px 28px", marginBottom: 40 }}>
               <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>{"Pr\u00EAt \u00E0 d\u00E9crocher votre emploi en Suisse ?"}</h3>
               <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>{"Nos experts \u00E9valuent votre profil et vous orientent vers les meilleures opportunit\u00E9s. Diagnostic gratuit."}</p>
-              <Link href="/emploi" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
+              <Link href="/" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
             </div>
 
             {/* Tags + Share */}
@@ -295,7 +295,7 @@ export default function EmploiSuissePage() {
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
                 <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>{"\u00C9valuer mon potentiel"}</p>
                 <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>{"D\u00E9couvrez en 2 min quelles opportunit\u00E9s d\u2019emploi correspondent \u00E0 votre profil en Suisse."}</p>
-                <Link href="/emploi" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
+                <Link href="/" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>{"\u00C9valuer mon potentiel \u2192"}</Link>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>{"Gratuit \u00B7 2 minutes \u00B7 R\u00E9sultats imm\u00E9diats"}</p>
               </div>
               <SidebarGuides exclude="/emploi-suisse" />

@@ -295,7 +295,7 @@ export default function ImpotSuissePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#111827", padding: "32px 28px", marginBottom: 40 }}>
               <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Optimisez votre situation fiscale</h3>
               <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>Diagnostic gratuit en 2 minutes pour identifier les déductions auxquelles vous avez droit selon votre canton.</p>
-              <a href="/emploi" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6 }}>Lancer mon diagnostic {"→"}</a>
+              <a href="/" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6 }}>Lancer mon diagnostic {"→"}</a>
             </div>
           </article>
 

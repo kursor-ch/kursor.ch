@@ -214,7 +214,7 @@ export default function LexKoller2026Page() {
               <p className="font-body" style={{ fontSize: 14.5, color: "#475569", lineHeight: 1.65, marginBottom: 18 }}>
                 Notre Diagnostic Logement estime votre temps de recherche et identifie les pièges à éviter, en 2 minutes, gratuitement.
               </p>
-              <Link href="/logement" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Estimer mon temps de recherche →</Link>
+              <Link href="/" className="font-body rounded-lg text-white border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", display: "inline-flex", alignItems: "center", gap: 6, textDecoration: "none" }}>Estimer mon temps de recherche →</Link>
             </div>
 
             {/* Sources */}
@@ -239,7 +239,7 @@ export default function LexKoller2026Page() {
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
                 <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>Estimer mon temps de recherche</p>
                 <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>Découvrez en 2 min combien de temps vous passerez à chercher un logement et quels pièges éviter.</p>
-                <Link href="/logement" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>Lancer le diagnostic →</Link>
+                <Link href="/" className="font-body rounded-lg text-white w-full border-0 cursor-pointer" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textDecoration: "none" }}>Lancer le diagnostic →</Link>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>Gratuit · 2 minutes · Résultats immédiats</p>
               </div>
             </div>
