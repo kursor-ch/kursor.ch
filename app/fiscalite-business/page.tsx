@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Optimisation fiscale Suisse 2026 : 6 leviers pour payer moins",
@@ -76,6 +78,10 @@ export default function FiscaliteBusinessPage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/fiscalite-business");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
               La Suisse offre l’un des cadres fiscaux les plus favorables d’Europe, mais ses subtilités cantonales et fédérales rendent l’optimisation difficile sans méthode. Entre prévoyance, immobilier, choix de domicile et statuts spécifiques, les leviers existent, encore faut-il les actionner au bon moment et dans le bon ordre. Ce guide rassemble les stratégies réellement efficaces en 2026, du résident suisse au frontalier genevois en passant par l’expatrié français et le dirigeant de PME.
             </p>

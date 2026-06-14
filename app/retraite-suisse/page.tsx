@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "3e pilier suisse 2026 : guide complet pour bien le choisir",
@@ -105,6 +107,10 @@ export default function RetraiteSuissePage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/retraite-suisse");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
 
             {/* À retenir */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>

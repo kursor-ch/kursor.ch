@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Barème impôt revenu Suisse 2026 : IFD, tranches et calcul ICC",
@@ -121,6 +123,10 @@ export default function ImpotSuissePage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/impot-suisse");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
               En Suisse, il n{"’"}existe pas un barème d{"’"}impôt sur le revenu, mais <strong style={{ color: "#111827" }}>trois barèmes superposés</strong> : fédéral, cantonal et communal. Pour un même salaire, l{"’"}écart entre Zoug et Genève peut dépasser <strong style={{ color: "#111827" }}>30 000 CHF par an</strong>. Ce guide présente les barèmes officiels 2026 et la méthode de calcul, et complète notre dossier sur <a href="/impots-suisse-etrangers" style={{ color: "#D97706", textDecoration: "underline" }}>les impôts en Suisse pour les étrangers</a>.

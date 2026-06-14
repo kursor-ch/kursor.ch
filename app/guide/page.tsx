@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
+import { ARTICLE_IMAGES } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Guides pratiques pour vivre en Suisse | Kursor",
@@ -100,12 +102,24 @@ export default function GuidePage() {
               style={{ border: "1px solid #E2E8F0", textDecoration: "none" }}
             >
               {/* Card header */}
-              <div
-                className="flex items-center justify-center"
-                style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 42 }}
-              >
-                {guide.icon}
-              </div>
+              {ARTICLE_IMAGES[guide.href] ? (
+                <div className="relative w-full" style={{ height: 180, backgroundColor: "#FFFBF0" }}>
+                  <Image
+                    src={ARTICLE_IMAGES[guide.href].src}
+                    alt={ARTICLE_IMAGES[guide.href].alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                  />
+                </div>
+              ) : (
+                <div
+                  className="flex items-center justify-center"
+                  style={{ height: 100, backgroundColor: "#FFFBF0", fontSize: 42 }}
+                >
+                  {guide.icon}
+                </div>
+              )}
 
               {/* Card body */}
               <div style={{ padding: "24px 24px 20px" }}>

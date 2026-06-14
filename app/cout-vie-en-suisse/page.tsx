@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Coût de la vie en Suisse 2026 : prix, budget et salaire réel",
@@ -242,6 +244,10 @@ export default function CoutVieEnSuissePage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/cout-vie-en-suisse");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               S{"’"}installer en Suisse fait rêver beaucoup d{"’"}expatriés : salaires élevés, qualité de vie, stabilité. Mais une question revient toujours en premier : est-ce que le coût de la vie va absorber le gain de salaire ? La réponse honnête : la Suisse est chère, nettement plus que la France, mais le pouvoir d{"’"}achat y reste supérieur une fois l{"’"}équation complète posée. Encore faut-il intégrer les bons postes, notamment ceux qu{"’"}on oublie : l{"’"}assurance maladie obligatoire et la fiscalité cantonale.

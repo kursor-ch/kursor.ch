@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Meilleures entreprises suisses 2026 : liste par secteur",
@@ -363,6 +365,10 @@ export default function MeilleuresEntreprisesPage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/meilleures-entreprises-suisses");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
               La Suisse abrite certaines des entreprises les plus reconnues au monde, dans des secteurs aussi variés que l{"’"}horlogerie, la pharma, la finance privée ou l{"’"}agroalimentaire — un écosystème porté aussi bien par les grands groupes que par <a href="/creation-entreprise" style={{ color: "#D97706", textDecoration: "underline" }}>la création d{"’"}entreprise en Suisse</a>. Voici la liste de référence des meilleures entreprises suisses en 2025-2026, classées par secteur, croisée avec le <strong style={{ color: "#111827" }}>Top 10 Randstad 2025</strong> et les classements Statista et Universum.

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Permis de s\u00E9jour en Suisse : le guide complet pour bien choisir et obtenir le v\u00F4tre",
@@ -107,6 +109,10 @@ export default function PermisSuissePage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/permis-suisse");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>

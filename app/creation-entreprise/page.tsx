@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Créer une société en Suisse : guide complet pour Français 2026",
@@ -98,6 +100,10 @@ export default function CreationEntreprisePage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/creation-entreprise");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
               Avec sa fiscalité attractive, ses démarches administratives simplifiées et un écosystème entrepreneurial dynamique, la Suisse attire chaque année des milliers d’entrepreneurs étrangers. Que vous soyez frontalier français, expatrié ou simplement séduit par le modèle helvétique, créer une société en Suisse représente une opportunité stratégique, notamment grâce à <a href="/fiscalite-business" style={{ color: "#D97706", textDecoration: "underline" }}>l’optimisation fiscale en Suisse</a>. Encore faut-il connaître les bonnes démarches, choisir la forme juridique adaptée et anticiper les obligations légales. Ce guide vous livre toutes les clés pour réussir votre projet d’implantation, de la première idée à l’inscription au Registre du commerce.

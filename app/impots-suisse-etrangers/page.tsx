@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
+import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
+import { getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Imp\u00F4ts en Suisse pour les \u00E9trangers : guide complet 2026",
@@ -104,6 +106,10 @@ export default function ImpotsEtrangersPage() {
 
           {/* MAIN CONTENT */}
           <article>
+            {(() => {
+              const img = getArticleImage("/impots-suisse-etrangers");
+              return img ? <GuideHeroImage src={img.src} alt={img.alt} /> : null;
+            })()}
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               S{"\u2019"}installer en Suisse s{"\u00E9"}duit chaque ann{"\u00E9"}e des milliers d{"\u2019"}expatri{"\u00E9"}s attir{"\u00E9"}s par la qualit{"\u00E9"} de vie, la stabilit{"\u00E9"} {"\u00E9"}conomique et un environnement fiscal r{"\u00E9"}put{"\u00E9"} attractif. Pourtant, comprendre les imp{"\u00F4"}ts en Suisse pour les {"\u00E9"}trangers demande un v{"\u00E9"}ritable effort d{"\u2019"}adaptation, surtout lorsqu{"\u2019"}on vient d{"\u2019"}un pays au syst{"\u00E8"}me centralis{"\u00E9"} comme la France ou la Belgique.
