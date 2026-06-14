@@ -15,13 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Guides SEO — S'installer
     { url: "/permis-suisse", priority: 0.8, changeFrequency: "monthly" as const },
-    { url: "/logement-en-suisse", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/assurance-maladie", priority: 0.8, changeFrequency: "monthly" as const },
-
-    // Guides SEO — Travailler
-    { url: "/emploi-suisse", priority: 0.8, changeFrequency: "monthly" as const },
-    { url: "/salaire-suisse", priority: 0.8, changeFrequency: "monthly" as const },
-    { url: "/coaching-carriere", priority: 0.7, changeFrequency: "monthly" as const },
 
     // Guides SEO — Entreprendre
     { url: "/creation-entreprise", priority: 0.8, changeFrequency: "monthly" as const },

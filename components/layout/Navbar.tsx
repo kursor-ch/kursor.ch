@@ -8,17 +8,8 @@ const MENU = [
   {
     label: "S'installer",
     items: [
-      { name: "Logement & Relocation", href: "/logement-en-suisse", cta: "Trouver mon logement" },
       { name: "Assurances & LAMal", href: "/assurance-maladie", cta: "Comparer les offres" },
       { name: "Guide Permis B & G", href: "/permis-suisse", cta: "Diagnostic Statut" },
-    ],
-  },
-  {
-    label: "Travailler",
-    items: [
-      { name: "Trouver un emploi en Suisse", href: "/emploi-suisse", cta: "Déposer mon CV" },
-      { name: "Simulateur de Salaire", href: "/salaire-suisse", cta: "Estimer mon net" },
-      { name: "Coaching", href: "/coaching-carriere", cta: "Booster mon profil" },
     ],
   },
   {

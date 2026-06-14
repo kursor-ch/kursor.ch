@@ -20,6 +20,26 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/emploi-suisse",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/salaire-suisse",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/coaching-carriere",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/logement-en-suisse",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   async headers() {

@@ -64,7 +64,7 @@ const STRATEGIE = [
 const RELATED_ARTICLES = [
   { icon: "🏥", tag: "ASSURANCES", title: "Chiffres-clés 2026 : tout ce qui change en assurance et prévoyance", author: "Équipe Kursor", date: "25 avril 2026", readTime: "7 min", href: "/actualite/chiffres-cles-assurance-prevoyance-2026" },
   { icon: "🏠", tag: "LOGEMENT", title: "Lex Koller 2026 : ce que le durcissement change pour les résidents", author: "Équipe Kursor", date: "25 avril 2026", readTime: "6 min", href: "/actualite/lex-koller-2026-immobilier-suisse" },
-  { icon: "💼", tag: "EMPLOI", title: "Trouver un travail en Suisse : guide 2026 et métiers qui recrutent", author: "Équipe Kursor", date: "Avril 2026", readTime: "15 min", href: "/emploi-suisse" },
+  { icon: "💼", tag: "EMPLOI", title: "Meilleures entreprises suisses 2026 : la liste par secteur", author: "Équipe Kursor", date: "Mai 2026", readTime: "9 min", href: "/meilleures-entreprises-suisses" },
 ];
 
 const SOURCES = [

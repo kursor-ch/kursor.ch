@@ -2,15 +2,11 @@ import Link from "next/link";
 
 const GUIDES = [
   { title: "Permis de séjour en Suisse : le guide complet", href: "/permis-suisse" },
-  { title: "Trouver un travail en Suisse : guide 2026", href: "/emploi-suisse" },
-  { title: "Calcul salaire net suisse frontalier", href: "/salaire-suisse" },
-  { title: "Louer un appartement en Suisse", href: "/logement-en-suisse" },
   { title: "Assurance maladie en Suisse : bien choisir", href: "/assurance-maladie" },
   { title: "Créer une société en Suisse", href: "/creation-entreprise" },
   { title: "Optimisation fiscale en Suisse 2026", href: "/fiscalite-business" },
   { title: "3e pilier suisse : le guide complet", href: "/retraite-suisse" },
   { title: "Placement suisse : guide pour investir", href: "/analyse-lpp" },
-  { title: "Coaching carrière en Suisse", href: "/coaching-carriere" },
   { title: "Impôts en Suisse pour les étrangers", href: "/impots-suisse-etrangers" },
   { title: "Barèmes d’impôt sur le revenu en Suisse", href: "/impot-suisse" },
   { title: "Meilleures entreprises suisses 2026", href: "/meilleures-entreprises-suisses" },

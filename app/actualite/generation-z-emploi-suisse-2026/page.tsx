@@ -40,7 +40,7 @@ const VALEURS = [
 ];
 
 const RELATED_ARTICLES = [
-  { icon: "💼", tag: "EMPLOI", title: "Trouver un travail en Suisse : guide 2026 et métiers qui recrutent", author: "Équipe Kursor", date: "Avril 2026", readTime: "15 min", href: "/emploi-suisse" },
+  { icon: "💼", tag: "EMPLOI", title: "Meilleures entreprises suisses 2026 : la liste par secteur", author: "Équipe Kursor", date: "Mai 2026", readTime: "9 min", href: "/meilleures-entreprises-suisses" },
   { icon: "🎯", tag: "PRÉVOYANCE", title: "Rachat rétroactif 3a 2026 : rattraper jusqu’à 10 ans de cotisations", author: "Équipe Kursor", date: "25 avril 2026", readTime: "8 min", href: "/actualite/rachat-retroactif-3a-2026-guide" },
   { icon: "🏠", tag: "LOGEMENT", title: "Lex Koller 2026 : ce que le durcissement change pour les résidents", author: "Équipe Kursor", date: "25 avril 2026", readTime: "6 min", href: "/actualite/lex-koller-2026-immobilier-suisse" },
 ];
@@ -169,7 +169,7 @@ export default function GenZEmploi2026Page() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Les candidats internationaux qui comprennent et incarnent ces codes, <strong style={{ color: "#111827" }}>quel que soit leur âge</strong>, partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre <Link href="/emploi-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>guide complet sur le marché de l’emploi suisse</Link> détaille les autres paramètres : permis, plateformes, CV au format helvétique.
+              Les candidats internationaux qui comprennent et incarnent ces codes, <strong style={{ color: "#111827" }}>quel que soit leur âge</strong>, partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre <Link href="/meilleures-entreprises-suisses" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>liste des meilleures entreprises suisses par secteur</Link> donne un point de départ pour cibler les bons employeurs.
             </p>
 
             {/* Section 4 — Vrai enjeu */}
