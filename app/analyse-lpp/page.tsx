@@ -224,7 +224,7 @@ export default function AnalyseLppPage() {
             <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: "20px 24px", marginBottom: 16 }}>
               <p className="font-body" style={{ fontSize: 15, fontWeight: 600, color: "#111827", marginBottom: 8 }}>R{"\é"}sidents suisses</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.7 }}>
-                Acc{"\è"}s complet : compte titres, mandat de gestion, 3e pilier, actions SIX. Le 3e pilier est l{"\u2019"}instrument fiscal le plus puissant, avec une d{"\é"}duction jusqu{"\u2019"}{"\à"} <strong style={{ color: "#111827" }}>7{"\u202f"}258 CHF en 2026</strong>. {"\À"} privil{"\é"}gier avant tout autre placement.
+                Acc{"\è"}s complet : compte titres, mandat de gestion, 3e pilier, actions SIX. Parmi ces v{"\é"}hicules, <Link href="/retraite-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le 3e pilier suisse</Link> est l{"\u2019"}instrument fiscal le plus puissant, avec une d{"\é"}duction jusqu{"\u2019"}{"\à"} <strong style={{ color: "#111827" }}>7{"\u202f"}258 CHF en 2026</strong>. {"\À"} privil{"\é"}gier avant tout autre placement.
               </p>
             </div>
 
@@ -268,7 +268,7 @@ export default function AnalyseLppPage() {
               Fiscalit{"\é"} des placements : le tableau qu{"\u2019"}il faut comprendre
             </h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 20 }}>
-              La fiscalit{"\é"} suisse est favorable aux particuliers sur les plus-values, mais attentive aux dividendes. Le tableau ci-dessous synth{"\é"}tise les principaux cas :
+              La fiscalit{"\é"} suisse est favorable aux particuliers sur les plus-values, mais attentive aux dividendes, avec <Link href="/impot-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les taux d{"’"}imposition en Suisse</Link> qui varient fortement d{"’"}un canton {"\à"} l{"’"}autre. Le tableau ci-dessous synth{"\é"}tise les principaux cas :
             </p>
 
             <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #E2E8F0", marginBottom: 20 }}>
@@ -342,7 +342,7 @@ export default function AnalyseLppPage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En r{"\é"}sum{"\é"}</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Le placement suisse offre stabilit{"\é"} mon{"\é"}taire et juridique, fiscalit{"\é"} avantageuse pour les particuliers, et un {"\é"}ventail d{"\u2019"}instruments du compte {"\é"}pargne au mandat sophistiqu{"\é"}. Pour un r{"\é"}sident, le 3e pilier est l{"\u2019"}arme fiscale la plus efficace. Pour un non-r{"\é"}sident, les ETF cot{"\é"}s et la convention fiscale bilat{"\é"}rale permettent un acc{"\è"}s simple. La r{"\é"}ussite tient {"\à"} la discipline : objectifs clairs, horizon long, frais ma{"\î"}tris{"\é"}s, sang-froid en p{"\é"}riode de turbulences.
+                Le placement suisse offre stabilit{"\é"} mon{"\é"}taire et juridique, fiscalit{"\é"} avantageuse pour les particuliers, et un {"\é"}ventail d{"\u2019"}instruments du compte {"\é"}pargne au mandat sophistiqu{"\é"}. Pour un r{"\é"}sident, le 3e pilier est l{"\u2019"}arme fiscale la plus efficace, d{"\u2019"}autant plus depuis l{"\u2019"}ouverture en 2026 de <Link href="/actualite/rachat-retroactif-3a-2026-guide" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le rachat r{"\\u00e9"}troactif du 3a</Link>. Pour un non-r{"\é"}sident, les ETF cot{"\é"}s et la convention fiscale bilat{"\é"}rale permettent un acc{"\è"}s simple. La r{"\é"}ussite tient {"\à"} la discipline : objectifs clairs, horizon long, frais ma{"\î"}tris{"\é"}s, sang-froid en p{"\é"}riode de turbulences.
               </p>
             </div>
 

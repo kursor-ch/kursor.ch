@@ -127,7 +127,7 @@ export default function RetraiteSuissePage() {
               Les 1er et 2e piliers ne couvrent en moyenne que <strong style={{ color: "#111827" }}>55 % à 60 % du dernier salaire</strong> une fois à la retraite. Pour les revenus supérieurs à 90 000 CHF annuels et pour les profils ayant connu des interruptions de carrière (études, expatriation, maternité, chômage), le ratio descend souvent sous 50 %. Le 3e pilier comble cet écart tout en offrant des avantages fiscaux que peu de pays accordent à leurs épargnants.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pour un salarié au taux marginal d{"'"}imposition de 35 %, chaque versement de 7 258 CHF dans le 3a génère environ <strong style={{ color: "#111827" }}>2 540 CHF d{"'"}économie d{"'"}impôt immédiate</strong>. Sur 30 ans de carrière, c{"'"}est plus de 75 000 CHF d{"'"}impôts économisés, sans compter les intérêts capitalisés et la croissance des fonds de prévoyance.
+              Pour un salarié au taux marginal d{"'"}imposition de 35 %, chaque versement de 7 258 CHF dans le 3a génère environ <strong style={{ color: "#111827" }}>2 540 CHF d{"'"}économie d{"'"}impôt immédiate</strong>. Sur 30 ans de carrière, c{"'"}est plus de 75 000 CHF d{"'"}impôts économisés, sans compter les intérêts capitalisés et la croissance des fonds de prévoyance, ce qui en fait l{"'"}un des leviers les plus efficaces pour <Link href="/analyse-lpp" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le placement suisse</Link> à long terme.
             </p>
 
             {/* Section 2 */}
@@ -179,7 +179,7 @@ export default function RetraiteSuissePage() {
               Au moment de la retraite, l{"'"}administration additionne tous les retraits de capital de prévoyance d{"'"}une même année pour calculer l{"'"}impôt, qui est progressif. Plus le retrait est important, plus le taux marginal grimpe.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La parade : ouvrir <strong style={{ color: "#111827" }}>3 à 5 comptes 3a différents</strong> pendant la vie active, puis les retirer sur des années fiscales distinctes entre 60 et 70 ans. Sur un capital total de 300 000 CHF, échelonner les retraits sur 5 ans plutôt qu{"'"}en une fois peut faire économiser <strong style={{ color: "#111827" }}>15 000 à 25 000 CHF d{"'"}impôts</strong> selon le canton.
+              La parade : ouvrir <strong style={{ color: "#111827" }}>3 à 5 comptes 3a différents</strong> pendant la vie active, puis les retirer sur des années fiscales distinctes entre 60 et 70 ans. Sur un capital total de 300 000 CHF, échelonner les retraits sur 5 ans plutôt qu{"'"}en une fois peut faire économiser <strong style={{ color: "#111827" }}>15 000 à 25 000 CHF d{"'"}impôts</strong> selon le canton et selon <Link href="/impot-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les taux d{"'"}imposition en Suisse</Link> applicables à votre commune.
             </p>
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
@@ -195,7 +195,7 @@ export default function RetraiteSuissePage() {
               Jusqu{"'"}en 2025, une année de cotisation 3a non utilisée était définitivement perdue. Depuis le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la loi autorise enfin le rattrapage rétroactif des versements manqués sur les années précédentes, dans la limite du plafond annuel de chaque exercice concerné.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Un cadre qui n{"'"}a pas versé sur son 3a depuis quelques années peut, dès 2026, effectuer un versement de rattrapage cumulant plusieurs années, <strong style={{ color: "#111827" }}>entièrement déductible du revenu de l{"'"}année en cours</strong>. Pour les hauts revenus, c{"'"}est l{"'"}équivalent d{"'"}un rachat LPP plus souple, sans délai de blocage de trois ans avant retrait en capital.
+              Un cadre qui n{"'"}a pas versé sur son 3a depuis quelques années peut, dès 2026, effectuer un versement de rattrapage cumulant plusieurs années, <strong style={{ color: "#111827" }}>entièrement déductible du revenu de l{"'"}année en cours</strong>. Pour les hauts revenus, <Link href="/actualite/rachat-retroactif-3a-2026-guide" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le rachat rétroactif du 3a</Link> est l{"'"}équivalent d{"'"}un rachat LPP plus souple, sans délai de blocage de trois ans avant retrait en capital.
             </p>
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir : rattrapage rétroactif 2026</p>

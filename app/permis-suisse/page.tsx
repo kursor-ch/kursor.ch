@@ -110,7 +110,7 @@ export default function PermisSuissePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Vous projetez de vivre, travailler ou {"\u00E9"}tudier en Suisse ? Avant m{"\u00EA"}me de chercher un logement, une {"\u00E9"}tape est incontournable : obtenir le bon <strong style={{ color: "#111827" }}>permis de s{"\u00E9"}jour</strong>. Entre les cat{"\u00E9"}gories <strong style={{ color: "#111827" }}>UE/AELE</strong> et <strong style={{ color: "#111827" }}>{"\u00C9"}tats tiers</strong>, les permis B, C, L, G ou encore Ci, le syst{"\u00E8"}me peut sembler complexe. Ce guide vous aide {"\u00E0"} identifier le titre qui correspond {"\u00E0"} votre situation.
+              Vous projetez de vivre, travailler ou {"\u00E9"}tudier en Suisse ? Avant m{"\u00EA"}me de chercher un logement, une {"\u00E9"}tape est incontournable : obtenir le bon <strong style={{ color: "#111827" }}>permis de s{"\u00E9"}jour</strong>. Entre les cat{"\u00E9"}gories <strong style={{ color: "#111827" }}>UE/AELE</strong> et <strong style={{ color: "#111827" }}>{"\u00C9"}tats tiers</strong>, les permis B, C, L, G ou encore Ci, le syst{"\u00E8"}me peut sembler complexe. Ce guide vous aide {"\u00E0"} identifier le titre qui correspond {"\u00E0"} votre situation, et {"\u00E0"} anticiper <Link href="/cout-vie-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le co{"\u00FB"}t de la vie en Suisse</Link>.
             </p>
 
             {/* A retenir 1 */}
@@ -184,7 +184,7 @@ export default function PermisSuissePage() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              L{"\u2019"}obtention d{"\u2019"}un permis B pour un ressortissant d{"\u2019"}{"\u00C9"}tat tiers suppose une <strong style={{ color: "#111827" }}>qualification professionnelle {"\u00E9"}lev{"\u00E9"}e</strong>, un employeur pr{"\u00EA"}t {"\u00E0"} justifier son recrutement et le respect des <strong style={{ color: "#111827" }}>contingents cantonaux</strong> fix{"\u00E9"}s annuellement par le Conseil f{"\u00E9"}d{"\u00E9"}ral.
+              L{"\u2019"}obtention d{"\u2019"}un permis B pour un ressortissant d{"\u2019"}{"\u00C9"}tat tiers suppose une <strong style={{ color: "#111827" }}>qualification professionnelle {"\u00E9"}lev{"\u00E9"}e</strong>, un employeur pr{"\u00EA"}t {"\u00E0"} justifier son recrutement et le respect des <strong style={{ color: "#111827" }}>contingents cantonaux</strong> fix{"\u00E9"}s annuellement par le Conseil f{"\u00E9"}d{"\u00E9"}ral. Une fois le titre obtenu, il convient aussi d{"\u2019"}anticiper <Link href="/impots-suisse-etrangers" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les imp{"\u00F4"}ts en Suisse pour les {"\u00E9"}trangers</Link>, souvent pr{"\u00E9"}lev{"\u00E9"}s {"\u00E0"} la source.
             </p>
 
             {/* Section 4 — Comment obtenir */}
@@ -200,7 +200,7 @@ export default function PermisSuissePage() {
                 </div>
               ))}
             </div>
-            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 16 }}>Les frais varient de <strong style={{ color: "#111827" }}>60 {"\u00E0"} 160 CHF</strong> selon les cantons et le type de permis.</p>
+            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 16 }}>Les frais varient de <strong style={{ color: "#111827" }}>60 {"\u00E0"} 160 CHF</strong> selon les cantons et le type de permis. {"\u00C0"} cela s{"\u2019"}ajoute, d{"\u00E8"}s l{"\u2019"}arriv{"\u00E9"}e, la souscription obligatoire {"\u00E0"} <Link href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>la caisse maladie en Suisse</Link>.</p>
 
             {/* A retenir 2 */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>

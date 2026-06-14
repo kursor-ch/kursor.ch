@@ -137,7 +137,7 @@ export default function ImpotsEtrangersPage() {
               Globalement, environ <strong style={{ color: "#111827" }}>30 % des recettes fiscales</strong> reviennent {"\u00E0"} la Conf{"\u00E9"}d{"\u00E9"}ration, 40 % aux cantons et 30 % aux communes.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Cette structure explique pourquoi vivre {"\u00E0"} <strong style={{ color: "#111827" }}>Zoug, Schwyz ou Nidwald</strong> peut entra{"\u00EE"}ner une charge fiscale bien plus l{"\u00E9"}g{"\u00E8"}re qu{"\u2019"}{"\u00E0"} Gen{"\u00E8"}ve, Neuch{"\u00E2"}tel ou B{"\u00E2"}le-Ville. Pour un m{"\u00EA"}me salaire, la diff{"\u00E9"}rence d{"\u2019"}imposition entre deux cantons peut atteindre plusieurs dizaines de milliers de francs par an.
+              Cette structure explique pourquoi vivre {"\u00E0"} <strong style={{ color: "#111827" }}>Zoug, Schwyz ou Nidwald</strong> peut entra{"\u00EE"}ner une charge fiscale bien plus l{"\u00E9"}g{"\u00E8"}re qu{"\u2019"}{"\u00E0"} Gen{"\u00E8"}ve, Neuch{"\u00E2"}tel ou B{"\u00E2"}le-Ville. Pour un m{"\u00EA"}me salaire, la diff{"\u00E9"}rence d{"\u2019"}imposition entre deux cantons peut atteindre plusieurs dizaines de milliers de francs par an : pour les d{"\u00E9"}tails chiffr{"\u00E9"}s, consultez notre dossier sur <a href="/impot-suisse" style={{ color: "#D97706", textDecoration: "underline" }}>les taux d{"\u2019"}imposition en Suisse</a>.
             </p>
 
             {/* Section 2 */}
@@ -221,7 +221,7 @@ export default function ImpotsEtrangersPage() {
               ))}
             </ul>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>
-              Dans les autres cas, vous pouvez demander volontairement la TOU <strong style={{ color: "#111827" }}>avant le 31 mars</strong> de l{"\u2019"}ann{"\u00E9"}e suivante. Cette d{"\u00E9"}marche permet de d{"\u00E9"}duire un large {"\u00E9"}ventail de frais r{"\u00E9"}els :
+              Dans les autres cas, vous pouvez demander volontairement la TOU <strong style={{ color: "#111827" }}>avant le 31 mars</strong> de l{"\u2019"}ann{"\u00E9"}e suivante. Cette d{"\u00E9"}marche permet de d{"\u00E9"}duire un large {"\u00E9"}ventail de frais r{"\u00E9"}els et constitue un pilier de <a href="/fiscalite-business" style={{ color: "#D97706", textDecoration: "underline" }}>l{"\u2019"}optimisation fiscale en Suisse</a> :
             </p>
             <div className="flex flex-col gap-2" style={{ marginBottom: 16 }}>
               {DEDUCTIONS_TOU.map((item) => (
@@ -284,7 +284,7 @@ export default function ImpotsEtrangersPage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En r{"\u00E9"}sum{"\u00E9"}</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Naviguer dans la fiscalit{"\u00E9"} suisse en tant qu{"\u2019"}{"\u00E9"}tranger exige de comprendre plusieurs m{"\u00E9"}canismes interd{"\u00E9"}pendants : la r{"\u00E9"}sidence fiscale, le type de permis, l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source, la taxation ordinaire ult{"\u00E9"}rieure et les conventions de double imposition. Si la complexit{"\u00E9"} du syst{"\u00E8"}me peut sembler intimidante au premier abord, elle ouvre aussi des possibilit{"\u00E9"}s d{"\u2019"}optimisation r{"\u00E9"}elles, notamment via le choix du canton de r{"\u00E9"}sidence, la pr{"\u00E9"}voyance priv{"\u00E9"}e (3e pilier) ou les rachats LPP. Pour les expatri{"\u00E9"}s disposant de revenus d{"\u00E9"}passant CHF 120 000 ou de biens {"\u00E0"} l{"\u2019"}{"\u00E9"}tranger, la taxation ordinaire ult{"\u00E9"}rieure devient incontournable et constitue souvent un levier puissant pour r{"\u00E9"}duire la charge fiscale.
+                Naviguer dans la fiscalit{"\u00E9"} suisse en tant qu{"\u2019"}{"\u00E9"}tranger exige de comprendre plusieurs m{"\u00E9"}canismes interd{"\u00E9"}pendants : la r{"\u00E9"}sidence fiscale, le type de permis, l{"\u2019"}imp{"\u00F4"}t {"\u00E0"} la source, la taxation ordinaire ult{"\u00E9"}rieure et les conventions de double imposition. Si la complexit{"\u00E9"} du syst{"\u00E8"}me peut sembler intimidante au premier abord, elle ouvre aussi des possibilit{"\u00E9"}s d{"\u2019"}optimisation r{"\u00E9"}elles, notamment via le choix du canton de r{"\u00E9"}sidence, la pr{"\u00E9"}voyance priv{"\u00E9"}e (3e pilier), les rachats LPP ou le choix de <a href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline" }}>la caisse maladie en Suisse</a>. Pour les expatri{"\u00E9"}s disposant de revenus d{"\u00E9"}passant CHF 120 000 ou de biens {"\u00E0"} l{"\u2019"}{"\u00E9"}tranger, la taxation ordinaire ult{"\u00E9"}rieure devient incontournable et constitue souvent un levier puissant pour r{"\u00E9"}duire la charge fiscale.
               </p>
             </div>
 

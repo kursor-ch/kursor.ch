@@ -123,7 +123,7 @@ export default function ImpotSuissePage() {
           <article>
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              En Suisse, il n{"’"}existe pas un barème d{"’"}impôt sur le revenu, mais <strong style={{ color: "#111827" }}>trois barèmes superposés</strong> : fédéral, cantonal et communal. Pour un même salaire, l{"’"}écart entre Zoug et Genève peut dépasser <strong style={{ color: "#111827" }}>30 000 CHF par an</strong>. Ce guide présente les barèmes officiels 2026 et la méthode de calcul.
+              En Suisse, il n{"’"}existe pas un barème d{"’"}impôt sur le revenu, mais <strong style={{ color: "#111827" }}>trois barèmes superposés</strong> : fédéral, cantonal et communal. Pour un même salaire, l{"’"}écart entre Zoug et Genève peut dépasser <strong style={{ color: "#111827" }}>30 000 CHF par an</strong>. Ce guide présente les barèmes officiels 2026 et la méthode de calcul, et complète notre dossier sur <a href="/impots-suisse-etrangers" style={{ color: "#D97706", textDecoration: "underline" }}>les impôts en Suisse pour les étrangers</a>.
             </p>
 
             {/* À retenir intro */}
@@ -143,7 +143,7 @@ export default function ImpotSuissePage() {
               Conséquence directe : le <strong style={{ color: "#111827" }}>taux moyen est toujours inférieur au taux marginal</strong>. Une personne dans la {"«"} tranche à 13 % {"»"} ne paie jamais 13 % de la totalité de son revenu.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Chaque canton vote son propre barème, et chaque commune ajuste sa majoration via un coefficient. La Suisse compte environ <strong style={{ color: "#111827" }}>2 100 communes</strong> : il y a donc plus de 2 000 combinaisons cantonales et communales possibles.
+              Chaque canton vote son propre barème, et chaque commune ajuste sa majoration via un coefficient. La Suisse compte environ <strong style={{ color: "#111827" }}>2 100 communes</strong> : il y a donc plus de 2 000 combinaisons cantonales et communales possibles, ce qui influence directement <a href="/cout-vie-en-suisse" style={{ color: "#D97706", textDecoration: "underline" }}>le coût de la vie en Suisse</a>.
             </p>
 
             {/* Section 2 */}
@@ -287,7 +287,7 @@ export default function ImpotSuissePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En résumé</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Les barèmes d{"’"}impôt en Suisse forment un système à trois étages : <strong style={{ color: "#111827" }}>IFD fédéral progressif</strong> (0 % à 11,5 %), <strong style={{ color: "#111827" }}>barème cantonal</strong> (26 systèmes différents, du flat tax uranais aux 17 tranches genevoises), et <strong style={{ color: "#111827" }}>coefficient communal</strong> (multiplicateur de 50 % à 120 %+). Pour calculer son impôt : revenu imposable après déductions, IFD, barème cantonal avec splitting éventuel, centimes additionnels, coefficient communal. Trois leviers d{"’"}optimisation : choix de la commune, déductions (3e pilier, rachats LPP), splitting automatique pour les couples mariés.
+                Les barèmes d{"’"}impôt en Suisse forment un système à trois étages : <strong style={{ color: "#111827" }}>IFD fédéral progressif</strong> (0 % à 11,5 %), <strong style={{ color: "#111827" }}>barème cantonal</strong> (26 systèmes différents, du flat tax uranais aux 17 tranches genevoises), et <strong style={{ color: "#111827" }}>coefficient communal</strong> (multiplicateur de 50 % à 120 %+). Pour calculer son impôt : revenu imposable après déductions, IFD, barème cantonal avec splitting éventuel, centimes additionnels, coefficient communal. Trois leviers d{"’"}optimisation : choix de la commune, déductions (3e pilier, rachats LPP), splitting automatique pour les couples mariés. Pour aller plus loin, consultez notre guide complet sur <a href="/fiscalite-business" style={{ color: "#D97706", textDecoration: "underline" }}>l{"’"}optimisation fiscale en Suisse</a>.
               </p>
             </div>
 

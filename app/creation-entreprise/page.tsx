@@ -100,7 +100,7 @@ export default function CreationEntreprisePage() {
           <article>
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Avec sa fiscalité attractive, ses démarches administratives simplifiées et un écosystème entrepreneurial dynamique, la Suisse attire chaque année des milliers d’entrepreneurs étrangers. Que vous soyez frontalier français, expatrié ou simplement séduit par le modèle helvétique, créer une société en Suisse représente une opportunité stratégique. Encore faut-il connaître les bonnes démarches, choisir la forme juridique adaptée et anticiper les obligations légales. Ce guide vous livre toutes les clés pour réussir votre projet d’implantation, de la première idée à l’inscription au Registre du commerce.
+              Avec sa fiscalité attractive, ses démarches administratives simplifiées et un écosystème entrepreneurial dynamique, la Suisse attire chaque année des milliers d’entrepreneurs étrangers. Que vous soyez frontalier français, expatrié ou simplement séduit par le modèle helvétique, créer une société en Suisse représente une opportunité stratégique, notamment grâce à <a href="/fiscalite-business" style={{ color: "#D97706", textDecoration: "underline" }}>l’optimisation fiscale en Suisse</a>. Encore faut-il connaître les bonnes démarches, choisir la forme juridique adaptée et anticiper les obligations légales. Ce guide vous livre toutes les clés pour réussir votre projet d’implantation, de la première idée à l’inscription au Registre du commerce.
             </p>
 
             {/* À retenir 1 */}
@@ -222,7 +222,7 @@ export default function CreationEntreprisePage() {
             {/* Section 4 — Coûts et délais */}
             <h2 id="couts-delais" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Coûts et délais : à quoi s’attendre ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Comparée à la France, la Suisse impressionne par sa rapidité administrative. Les documents constitutifs sont prêts en <strong style={{ color: "#111827" }}>24 à 48 heures</strong> chez les prestataires spécialisés, et le Registre du commerce traite généralement les dossiers en deux à trois semaines.
+              Comparée à la France, la Suisse impressionne par sa rapidité administrative et par <a href="/impot-suisse" style={{ color: "#D97706", textDecoration: "underline" }}>les taux d’imposition en Suisse</a> qui restent compétitifs pour les sociétés. Les documents constitutifs sont prêts en <strong style={{ color: "#111827" }}>24 à 48 heures</strong> chez les prestataires spécialisés, et le Registre du commerce traite généralement les dossiers en deux à trois semaines.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 12 }}>Côté budget, comptez environ :</p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 16 }}>
@@ -301,7 +301,7 @@ export default function CreationEntreprisePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>En résumé</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Créer une société en Suisse est plus simple qu’on ne l’imagine, à condition d’être bien préparé. Le choix de la structure juridique, du canton d’implantation et du partenaire pour vous accompagner conditionnent la réussite de votre projet. Entre des délais courts, une fiscalité modulable et un écosystème économique porteur, la Suisse offre un terrain de jeu idéal pour les entrepreneurs français ambitieux. Avec un dossier solide et les bons conseils, votre société helvétique peut voir le jour en quelques semaines à peine.
+                Créer une société en Suisse est plus simple qu’on ne l’imagine, à condition d’être bien préparé. Le choix de la structure juridique, du canton d’implantation et du partenaire pour vous accompagner conditionnent la réussite de votre projet. Entre des délais courts, une fiscalité modulable et un écosystème économique porteur, la Suisse offre un terrain de jeu idéal pour les entrepreneurs français ambitieux : pour s’en convaincre, il suffit de regarder <a href="/meilleures-entreprises-suisses" style={{ color: "#D97706", textDecoration: "underline" }}>les meilleures entreprises en Suisse</a>. Avec un dossier solide et les bons conseils, votre société helvétique peut voir le jour en quelques semaines à peine.
               </p>
             </div>
 

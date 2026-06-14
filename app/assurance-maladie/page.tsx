@@ -115,7 +115,7 @@ export default function AssuranceMaladiePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Choisir sa <strong style={{ color: "#111827" }}>caisse maladie en Suisse</strong> n{"\u2019"}a jamais {"\u00E9"}t{"\u00E9"} aussi strat{"\u00E9"}gique. Avec une hausse moyenne des primes de <strong style={{ color: "#111827" }}>4,4 % en 2026</strong> et une prime adulte atteignant <strong style={{ color: "#111827" }}>393,30 CHF/mois</strong> en moyenne nationale, l{"\u2019"}{"\u00E9"}cart entre les assureurs peut repr{"\u00E9"}senter <strong style={{ color: "#111827" }}>plusieurs milliers de francs d{"\u2019"}{"\u00E9"}conomies par an</strong>. Mais les primes ne font pas tout : satisfaction client, qualit{"\u00E9"} du service, mod{"\u00E8"}les alternatifs et digitalisation p{"\u00E8"}sent lourd dans la balance.
+              Choisir sa <strong style={{ color: "#111827" }}>caisse maladie en Suisse</strong> n{"\u2019"}a jamais {"\u00E9"}t{"\u00E9"} aussi strat{"\u00E9"}gique. Avec une hausse moyenne des primes de <strong style={{ color: "#111827" }}>4,4 % en 2026</strong> et une prime adulte atteignant <strong style={{ color: "#111827" }}>393,30 CHF/mois</strong> en moyenne nationale, l{"\u2019"}{"\u00E9"}cart entre les assureurs peut repr{"\u00E9"}senter <strong style={{ color: "#111827" }}>plusieurs milliers de francs d{"\u2019"}{"\u00E9"}conomies par an</strong>. Cette prime p{"\u00E8"}se lourdement dans <Link href="/cout-vie-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le co{"\u00FB"}t de la vie en Suisse</Link>. Mais les primes ne font pas tout : satisfaction client, qualit{"\u00E9"} du service, mod{"\u00E8"}les alternatifs et digitalisation p{"\u00E8"}sent lourd dans la balance.
             </p>
 
             {/* A retenir 1 */}
@@ -139,7 +139,7 @@ export default function AssuranceMaladiePage() {
             {/* Methodologie */}
             <h2 id="methodologie" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>{"Comment avons-nous \u00E9tabli ce classement ?"}</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              {"Nous avons crois\u00E9 plusieurs crit\u00E8res objectifs pour identifier les meilleures caisses maladie de 2026 :"}
+              {"Nous avons crois\u00E9 plusieurs crit\u00E8res objectifs, en nous appuyant notamment sur "}<Link href="/actualite/chiffres-cles-assurance-prevoyance-2026" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les chiffres cl{"\u00E9"}s assurance et pr{"\u00E9"}voyance</Link>{", pour identifier les meilleures caisses maladie de 2026 :"}
             </p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 32 }}>
               {[
@@ -263,7 +263,7 @@ export default function AssuranceMaladiePage() {
             {/* Changer de caisse */}
             <h2 id="changer" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comment changer de caisse maladie en 2026 ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le changement suit un <strong style={{ color: "#111827" }}>calendrier strict</strong> :
+              Le changement suit un <strong style={{ color: "#111827" }}>calendrier strict</strong>, valable pour tous les r{"é"}sidents quel que soit <Link href="/permis-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le permis de s{"é"}jour en Suisse</Link> d{"é"}tenu :
             </p>
             <div className="flex flex-col gap-3" style={{ marginBottom: 32 }}>
               {[

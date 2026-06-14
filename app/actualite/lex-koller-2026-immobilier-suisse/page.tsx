@@ -140,10 +140,10 @@ export default function LexKoller2026Page() {
               Le Conseil fédéral a annoncé le <strong style={{ color: "#111827" }}>15 avril 2026</strong> un durcissement de la loi fédérale sur l’acquisition d’immeubles par des personnes à l’étranger, mieux connue sous le nom de <strong style={{ color: "#111827" }}>Lex Koller</strong>. La consultation publique sur l’avant-projet court jusqu’au 15 juillet 2026, avec une entrée en vigueur visée pour 2027.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Le contexte est connu : la Suisse fait face à une pénurie de logements aiguë, particulièrement dans les centres urbains romands. Cette réforme s’inscrit dans le paquet de mesures d’accompagnement liées à l’initiative populaire « Pas de Suisse à 10 millions », adoptée par le Parlement comme priorité politique en 2025.
+              Le contexte est connu : la Suisse fait face à une pénurie de logements aiguë, particulièrement dans les centres urbains romands, qui pèse aussi lourdement sur <Link href="/cout-vie-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le coût de la vie en Suisse</Link>. Cette réforme s’inscrit dans le paquet de mesures d’accompagnement liées à l’initiative populaire « Pas de Suisse à 10 millions », adoptée par le Parlement comme priorité politique en 2025.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Pour notre audience, résidents francophones titulaires d’un permis B ou C, frontaliers, expatriés en réflexion sur leur projet d’achat, l’enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
+              Pour notre audience, résidents francophones titulaires d’un <Link href="/permis-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>permis de séjour en Suisse</Link> de type B ou C, frontaliers, expatriés en réflexion sur leur projet d’achat, l’enjeu est de comprendre ce qui se joue concrètement et ce qui change ou non pour leur situation.
             </p>
 
             {/* Section 1 — Ce qui change */}
@@ -194,7 +194,7 @@ export default function LexKoller2026Page() {
               C’est ici que l’analyse mérite d’être prudente. Restreindre les acquéreurs étrangers ne résoudra pas la crise locative qui touche la Suisse romande. Les données récentes le rappellent crûment : taux de vacance inférieur à <strong style={{ color: "#111827" }}>0,5 % à Genève</strong>, autour de <strong style={{ color: "#111827" }}>0,8 % dans le canton de Vaud</strong>, des niveaux historiquement bas que partagent Zurich et Bâle-Ville.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La pénurie suisse est avant tout un problème d’offre. Délais d’autorisation de construire, recours systématiques, cherté du foncier, frilosité des investisseurs institutionnels face à la régulation des loyers : ce sont ces freins structurels qui pèsent sur la disponibilité, bien davantage que la demande des acquéreurs étrangers, statistiquement marginale dans le total des transactions.
+              La pénurie suisse est avant tout un problème d’offre. Délais d’autorisation de construire, recours systématiques, cherté du foncier, frilosité des investisseurs institutionnels face à la régulation des loyers : ce sont ces freins structurels qui pèsent sur la disponibilité, bien davantage que la demande des acquéreurs étrangers, statistiquement marginale dans le total des transactions et déjà encadrée par <Link href="/impots-suisse-etrangers" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les impôts en Suisse pour les étrangers</Link>.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               Pour un résident en recherche de logement, la réalité ne change pas : le marché locatif romand reste extrêmement tendu, les délais de recherche s’étirent, et les meilleures candidatures sont celles qui combinent dossier solide, réactivité et bonne connaissance des codes locaux.

@@ -134,7 +134,7 @@ export default function RachatRetroactif3aPage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Depuis le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la modification de l’OPP3 ouvre une porte que beaucoup d’expatriés croyaient fermée à jamais : il est désormais possible de <strong style={{ color: "#111827" }}>racheter rétroactivement</strong> jusqu’à dix ans de cotisations manquées au pilier 3a. Pour un résident arrivé en Suisse il y a cinq ans sans avoir ouvert de 3a, cela peut représenter à terme <strong style={{ color: "#111827" }}>plus de 36 000 CHF</strong> de versements rattrapables et entre 9 000 et 14 000 CHF d’économies d’impôts immédiates.
+              Depuis le <strong style={{ color: "#111827" }}>1er janvier 2026</strong>, la modification de l’OPP3 ouvre une porte que beaucoup d’expatriés croyaient fermée à jamais : il est désormais possible de <strong style={{ color: "#111827" }}>racheter rétroactivement</strong> jusqu’à dix ans de cotisations manquées au pilier 3a, qui forme avec le 3b <Link href="/retraite-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le 3e pilier suisse</Link>. Pour un résident arrivé en Suisse il y a cinq ans sans avoir ouvert de 3a, cela peut représenter à terme <strong style={{ color: "#111827" }}>plus de 36 000 CHF</strong> de versements rattrapables et entre 9 000 et 14 000 CHF d’économies d’impôts immédiates.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               C’est, sans concurrence, l’évolution fiscale la plus importante de 2026 pour les résidents francophones de Suisse. L’opportunité est massive, mais les règles sont strictes : la moindre erreur de séquencement peut faire perdre le bénéfice de plusieurs milliers de francs.
@@ -218,7 +218,7 @@ export default function RachatRetroactif3aPage() {
             <div className="scroll-reveal rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>
               <p className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#D97706", marginBottom: 10 }}>À retenir</p>
               <p className="font-body" style={{ fontSize: 14, color: "#475569", lineHeight: 1.65 }}>
-                Pour un cadre romand au taux marginal de 35 % qui combine cotisation 3a courante (7 258 CHF) et rachat LPP (10 000 CHF) la même année, l’économie fiscale immédiate dépasse <strong style={{ color: "#111827" }}>6 000 CHF</strong>. Le rachat rétroactif vient s’ajouter à ce socle.
+                Pour un cadre romand au taux marginal de 35 % qui combine cotisation 3a courante (7 258 CHF) et rachat LPP (10 000 CHF) la même année, l’économie fiscale immédiate dépasse <strong style={{ color: "#111827" }}>6 000 CHF</strong>, un gain qui varie selon <Link href="/impot-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les taux d’imposition en Suisse</Link> applicables à votre canton. Le rachat rétroactif vient s’ajouter à ce socle.
               </p>
             </div>
 
@@ -228,7 +228,7 @@ export default function RachatRetroactif3aPage() {
               À partir de <strong style={{ color: "#111827" }}>décembre 2026</strong>, l’AVS versera pour la première fois de son histoire une 13ème rente mensuelle, équivalente environ à un douzième supplémentaire de la rente annuelle. Pour un retraité touchant la rente maximale individuelle (2 520 CHF/mois), cela représente un complément annuel d’environ 2 520 CHF.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Cette nouveauté ne modifie pas la stratégie de rachat 3a : les deux mesures sont indépendantes. Mais elle s’inscrit dans le contexte plus large d’une recomposition de la prévoyance suisse, où le 1er pilier se renforce légèrement, pendant que le 3ème pilier devient le levier d’optimisation le plus puissant à la disposition des résidents.
+              Cette nouveauté ne modifie pas la stratégie de rachat 3a : les deux mesures sont indépendantes. Mais elle s’inscrit dans le contexte plus large d’une recomposition de la prévoyance suisse, où le 1er pilier se renforce légèrement, pendant que le 3ème pilier devient le levier d’optimisation le plus puissant à la disposition des résidents pour <Link href="/analyse-lpp" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le placement suisse</Link> de long terme.
             </p>
 
             {/* CTA finale */}

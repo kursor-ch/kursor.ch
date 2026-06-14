@@ -149,7 +149,7 @@ export default function GenZEmploi2026Page() {
               Le sociologue <strong style={{ color: "#111827" }}>François Höpflinger</strong>, longtemps rattaché à l’Université de Zurich, le rappelle régulièrement dans ses analyses : les écarts <strong style={{ color: "#111827" }}>au sein</strong> d’une génération (formation, milieu familial, secteur d’activité) sont nettement supérieurs aux écarts <strong style={{ color: "#111827" }}>entre</strong> générations. La grille de lecture générationnelle relève davantage du marketing que de la donnée.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Le contexte conjoncturel suisse complète le tableau : le chômage est remonté à <strong style={{ color: "#111827" }}>3,1 %</strong> (environ 152 000 inscrits), les postes ouverts sont passés d’environ <strong style={{ color: "#111827" }}>65 000 à 50 000</strong> en un an. Le rapport de force se déplace vers les employeurs, ce qui explique sans doute certains débordements dans la rédaction des annonces.
+              Le contexte conjoncturel suisse complète le tableau : le chômage est remonté à <strong style={{ color: "#111827" }}>3,1 %</strong> (environ 152 000 inscrits), les postes ouverts sont passés d’environ <strong style={{ color: "#111827" }}>65 000 à 50 000</strong> en un an, le tout dans un pays où <Link href="/cout-vie-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le coût de la vie en Suisse</Link> reste l’un des plus élevés d’Europe. Le rapport de force se déplace vers les employeurs, ce qui explique sans doute certains débordements dans la rédaction des annonces.
             </p>
 
             {/* Section 3 — Candidats internationaux */}
@@ -169,7 +169,7 @@ export default function GenZEmploi2026Page() {
               ))}
             </div>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Les candidats internationaux qui comprennent et incarnent ces codes, <strong style={{ color: "#111827" }}>quel que soit leur âge</strong>, partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre <Link href="/meilleures-entreprises-suisses" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>liste des meilleures entreprises suisses par secteur</Link> donne un point de départ pour cibler les bons employeurs.
+              Les candidats internationaux qui comprennent et incarnent ces codes, <strong style={{ color: "#111827" }}>quel que soit leur âge</strong>, partent avec un avantage net sur des candidats locaux qui prennent leur marché pour acquis. Notre panorama listant <Link href="/meilleures-entreprises-suisses" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>les meilleures entreprises en Suisse</Link> donne un point de départ pour cibler les bons employeurs.
             </p>
 
             {/* Section 4 — Vrai enjeu */}
@@ -178,7 +178,7 @@ export default function GenZEmploi2026Page() {
               Malgré le repositionnement du rapport de force, les <strong style={{ color: "#111827" }}>pénuries structurelles</strong> ne disparaissent pas. Santé, construction, IT, ingénierie : ces quatre secteurs continuent d’afficher un déficit de candidats qualifiés que le marché peine à combler. Le baromètre Alixio 2026 ajoute un point contre-intuitif : les jeunes actifs retrouvent en moyenne un nouveau poste <strong style={{ color: "#111827" }}>plus rapidement</strong> que les actifs seniors.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Le secteur où l’annonce de Fit for Care a été postée, les soins à domicile, est précisément celui où la pénurie est la plus aiguë de toute la Confédération. Plusieurs experts du domaine ont qualifié l’exclusion d’une génération entière de candidatures, dans ce contexte, de <strong style={{ color: "#111827" }}>« politique de recrutement à courte vue, voire irresponsable »</strong>. La polémique en dit autant sur la stratégie de l’employeur que sur la fragilité du secteur lui-même.
+              Le secteur où l’annonce de Fit for Care a été postée, les soins à domicile, est précisément celui où la pénurie est la plus aiguë de toute la Confédération — un secteur en première ligne face au vieillissement de la population et à la pression sur <Link href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>la caisse maladie en Suisse</Link>. Plusieurs experts du domaine ont qualifié l’exclusion d’une génération entière de candidatures, dans ce contexte, de <strong style={{ color: "#111827" }}>« politique de recrutement à courte vue, voire irresponsable »</strong>. La polémique en dit autant sur la stratégie de l’employeur que sur la fragilité du secteur lui-même.
             </p>
 
             {/* CTA finale */}

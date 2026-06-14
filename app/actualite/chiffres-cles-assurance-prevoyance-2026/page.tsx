@@ -140,7 +140,7 @@ export default function ChiffresCles2026Page() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Chaque année, les seuils qui régissent vos assurances, votre prévoyance et votre protection salariale en Suisse sont mis à jour. Pour <strong style={{ color: "#111827" }}>2026</strong>, plusieurs plafonds ont changé : certains à votre avantage, d’autres beaucoup moins. Voici les chiffres à connaître pour ne pas surpayer ni vous retrouver sous-couvert.
+              Chaque année, les seuils qui régissent vos assurances, votre prévoyance et votre protection salariale en Suisse sont mis à jour. Pour <strong style={{ color: "#111827" }}>2026</strong>, plusieurs plafonds ont changé : certains à votre avantage, d’autres beaucoup moins, en particulier pour <Link href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>la caisse maladie en Suisse</Link>. Voici les chiffres à connaître pour ne pas surpayer ni vous retrouver sous-couvert.
             </p>
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
               La plupart des résidents ne tiennent pas le compte de ces ajustements. Leur courtier le fait peut-être à leur place, mais le mal est souvent déjà fait : couverture inadaptée, cotisations trop hautes, déductions oubliées. Connaître les seuils 2026 vous permet de décider en connaissance de cause, dès aujourd’hui.
@@ -199,7 +199,7 @@ export default function ChiffresCles2026Page() {
             {/* Section 4 — 3a */}
             <h2 id="3a" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>3ème pilier : les plafonds 2026</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              Les deux plafonds 3a sont stables et confirmés pour 2026 :
+              Les deux plafonds 3a, qui structurent <Link href="/retraite-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le 3e pilier suisse</Link>, sont stables et confirmés pour 2026 :
             </p>
             <ul className="list-none p-0 m-0" style={{ marginBottom: 16 }}>
               <li className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 8 }}>• <strong style={{ color: "#111827" }}>Salariés</strong> affiliés à un 2ème pilier : <strong style={{ color: "#111827" }}>7 258 CHF</strong> par an, intégralement déductibles du revenu imposable.</li>
