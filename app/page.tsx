@@ -79,7 +79,7 @@ export default function HomePage() {
               <a href="#outils" className="hover-cta font-body rounded-xl text-white no-underline inline-flex items-center gap-2" style={{ backgroundColor: "#D97706", fontSize: 15, fontWeight: 500, padding: "14px 28px", boxShadow: "0 4px 16px rgba(217,119,6,0.18)" }}>
                 {"D\u00e9marrer mon diagnostic"} <span>{"\u2192"}</span>
               </a>
-              <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 4 outils</a>
+              <a href="#outils" className="font-body no-underline" style={{ fontSize: 15, fontWeight: 500, color: "#475569", padding: "14px 4px" }}>Voir les 2 outils</a>
             </div>
 
             {/* Mini stats */}
@@ -105,7 +105,7 @@ export default function HomePage() {
               <div className="flex items-start justify-between" style={{ marginBottom: 24 }}>
                 <div>
                   <p className="font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "#D97706" }}>Tableau de bord</p>
-                  <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#0F172A", marginTop: 4 }}>Vos 4 diagnostics</p>
+                  <p className="font-heading" style={{ fontSize: 20, fontWeight: 600, color: "#0F172A", marginTop: 4 }}>Vos 2 diagnostics</p>
                 </div>
                 <span className="inline-flex items-center gap-1.5 rounded-full font-body" style={{ fontSize: 12, fontWeight: 600, color: "#15803D", backgroundColor: "rgba(21,128,61,0.06)", border: "1px solid rgba(21,128,61,0.15)", padding: "5px 14px" }}>
                   <span className="rounded-full" style={{ width: 7, height: 7, backgroundColor: "#15803D" }} />
@@ -189,7 +189,7 @@ export default function HomePage() {
           <div className="text-center mx-auto" style={{ maxWidth: 720 }}>
             <span className="inline-block font-body uppercase" style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: "#D97706" }}>Nos solutions</span>
             <h2 className="font-heading text-[28px] sm:text-[34px] lg:text-[40px]" style={{ fontWeight: 600, color: "#0F172A", lineHeight: 1.15, letterSpacing: "-0.01em", marginTop: 14 }}>
-              Quatre outils. Une vie suisse.<br />
+              Deux outils. Une vie suisse.<br />
               <span className="font-heading italic" style={{ color: "#D97706", fontWeight: 500 }}>Cinq minutes par diagnostic.</span>
             </h2>
           </div>
