@@ -253,7 +253,7 @@ export default function CoutVieEnSuissePage() {
               S{"’"}installer en Suisse fait rêver beaucoup d{"’"}expatriés : salaires élevés, qualité de vie, stabilité. Mais une question revient toujours en premier : est-ce que le coût de la vie va absorber le gain de salaire ? La réponse honnête : la Suisse est chère, nettement plus que la France, mais le pouvoir d{"’"}achat y reste supérieur une fois l{"’"}équation complète posée. Encore faut-il intégrer les bons postes, notamment ceux qu{"’"}on oublie : l{"’"}assurance maladie obligatoire et la fiscalité cantonale.
             </p>
             <p className="font-body" style={{ fontSize: 15, color: "#64748B", lineHeight: 1.7, marginBottom: 24, fontStyle: "italic" }}>
-              Ce guide détaille les prix réels en 2026, poste par poste, en francs suisses, puis reconstruit des budgets mensuels concrets selon votre profil. Données 2026, taux de change indicatif retenu : 1 CHF ≈ 1,07 €.
+              Ce guide détaille les prix réels en 2026, poste par poste, en francs suisses, puis reconstruit des budgets mensuels concrets selon votre profil, à compléter par notre <a href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline" }}>guide complet pour s{"’"}installer en Suisse</a>. Données 2026, taux de change indicatif retenu : 1 CHF ≈ 1,07 €.
             </p>
 
             {/* À retenir */}
