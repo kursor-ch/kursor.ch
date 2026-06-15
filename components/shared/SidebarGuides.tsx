@@ -11,6 +11,7 @@ const GUIDES = [
   { title: "Barèmes d’impôt sur le revenu en Suisse", href: "/impot-suisse" },
   { title: "Meilleures entreprises suisses 2026", href: "/meilleures-entreprises-suisses" },
   { title: "Coût de la vie en Suisse en 2026", href: "/cout-vie-en-suisse" },
+  { title: "S'installer en Suisse pour un Français", href: "/s-installer-en-suisse-pour-un-francais" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {

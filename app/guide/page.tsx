@@ -40,6 +40,13 @@ const GUIDES = [
     href: "/cout-vie-en-suisse",
     tag: "S’INSTALLER",
   },
+  {
+    icon: "\u{1F1EB}\u{1F1F7}",
+    title: "S'installer en Suisse pour un Français",
+    description: "Permis de séjour, fiscalité, logement, santé : toutes les démarches pour réussir votre expatriation en Suisse depuis la France.",
+    href: "/s-installer-en-suisse-pour-un-francais",
+    tag: "S’INSTALLER",
+  },
 ];
 
 /* ───────── PAGE ───────── */

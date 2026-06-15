@@ -57,6 +57,10 @@ export const ARTICLE_IMAGES: Record<string, ArticleImage> = {
     src: `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab${PARAMS}`,
     alt: "Vue de Zurich représentant les meilleures entreprises suisses",
   },
+  "/s-installer-en-suisse-pour-un-francais": {
+    src: `https://images.unsplash.com/photo-1469474968028-56623f02e42e${PARAMS}`,
+    alt: "Paysage de montagnes suisses pour les Français qui s'installent en Suisse",
+  },
 };
 
 export function getArticleImage(path: string): ArticleImage | null {
