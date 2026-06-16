@@ -191,7 +191,7 @@ export default function SInstallerEnSuissePage() {
 
             <h3 className="font-heading" style={{ fontSize: 19, fontWeight: 600, color: "#111827", marginBottom: 12 }}>La déclaration d{"'"}arrivée à la commune</h3>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
-              Toute personne s{"'"}installant en Suisse doit déclarer son arrivée auprès de l{"'"}administration communale dans les <strong style={{ color: "#111827" }}>8 jours</strong> suivant son installation. Cette déclaration doit impérativement intervenir avant votre premier jour de travail.
+              Toute personne s{"'"}installant en Suisse doit déclarer son arrivée auprès de l{"'"}administration communale dans les <strong style={{ color: "#111827" }}>8 jours</strong> suivant son installation. Cette déclaration doit impérativement intervenir avant votre premier jour de travail. C{"'"}est également le bon moment pour ouvrir un compte local : pour comparer les offres, consultez notre sélection de <a href="/meilleure-banque-suisse" style={{ color: "#D97706", textDecoration: "underline" }}>la meilleure banque suisse</a> selon votre profil.
             </p>
 
             <h3 className="font-heading" style={{ fontSize: 19, fontWeight: 600, color: "#111827", marginBottom: 12 }}>Le permis de conduire</h3>

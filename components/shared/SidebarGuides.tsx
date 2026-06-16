@@ -12,6 +12,7 @@ const GUIDES = [
   { title: "Meilleures entreprises suisses 2026", href: "/meilleures-entreprises-suisses" },
   { title: "Coût de la vie en Suisse en 2026", href: "/cout-vie-en-suisse" },
   { title: "S'installer en Suisse pour un Français", href: "/s-installer-en-suisse-pour-un-francais" },
+  { title: "Meilleure banque suisse 2026", href: "/meilleure-banque-suisse" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {

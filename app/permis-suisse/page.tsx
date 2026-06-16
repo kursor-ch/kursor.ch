@@ -206,7 +206,7 @@ export default function PermisSuissePage() {
                 </div>
               ))}
             </div>
-            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 16 }}>Les frais varient de <strong style={{ color: "#111827" }}>60 {"\u00E0"} 160 CHF</strong> selon les cantons et le type de permis. {"\u00C0"} cela s{"\u2019"}ajoute, d{"\u00E8"}s l{"\u2019"}arriv{"\u00E9"}e, la souscription obligatoire {"\u00E0"} <Link href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>la caisse maladie en Suisse</Link>.</p>
+            <p className="font-body" style={{ fontSize: 14, color: "#64748B", marginBottom: 16 }}>Les frais varient de <strong style={{ color: "#111827" }}>60 {"\u00E0"} 160 CHF</strong> selon les cantons et le type de permis. {"\u00C0"} cela s{"\u2019"}ajoute, d{"\u00E8"}s l{"\u2019"}arriv{"\u00E9"}e, la souscription obligatoire {"\u00E0"} <Link href="/assurance-maladie" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>la caisse maladie en Suisse</Link>. Une fois le titre en poche, l{"\u2019"}{"\u00E9"}tape suivante est de <Link href="/meilleure-banque-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>choisir une banque suisse</Link> pour y domicilier votre salaire.</p>
 
             {/* A retenir 2 */}
             <div className="rounded-xl" style={{ backgroundColor: "#FFFBF0", border: "1px solid rgba(217,119,6,0.25)", padding: "20px 24px", marginBottom: 32 }}>

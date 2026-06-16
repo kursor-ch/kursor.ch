@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/meilleures-entreprises-suisses", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/cout-vie-en-suisse", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/s-installer-en-suisse-pour-un-francais", priority: 0.9, changeFrequency: "monthly" as const },
+    { url: "/meilleure-banque-suisse", priority: 0.8, changeFrequency: "monthly" as const },
 
     // Actualités (articles individuels)
     { url: "/actualite/rachat-retroactif-3a-2026-guide", priority: 0.7, changeFrequency: "monthly" as const },

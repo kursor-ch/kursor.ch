@@ -47,6 +47,13 @@ const GUIDES = [
     href: "/s-installer-en-suisse-pour-un-francais",
     tag: "S’INSTALLER",
   },
+  {
+    icon: "\u{1F3E6}",
+    title: "Meilleure banque suisse 2026",
+    description: "Comparatif complet des banques suisses : traditionnelles, cantonales, néobanques (Alpian, Neon, Yuh). Choisir selon votre profil.",
+    href: "/meilleure-banque-suisse",
+    tag: "S’INSTALLER",
+  },
 ];
 
 /* ───────── PAGE ───────── */
