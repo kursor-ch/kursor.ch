@@ -38,15 +38,17 @@ const A_RETENIR = [
   "Certaines banques permettent d'ouvrir un compte <strong>avant votre arrivée</strong> en Suisse, ce qui facilite les premières démarches.",
 ];
 
+const FAVICON = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
 const COMPARATIF_TABLE = [
-  { banque: "Alpian", type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~0,20 %", twint: "Non (prépayé)", agence: "Non" },
-  { banque: "Migros Bank", type: "Traditionnelle", frais: "Gratuit", chf: "Gratuit", etranger: "~2,0 %", twint: "Oui", agence: "Oui" },
-  { banque: "PostFinance", type: "Traditionnelle", frais: "Gratuit", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui (La Poste)" },
-  { banque: "Neon", type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~1,5 %", twint: "Oui", agence: "Non" },
-  { banque: "Yuh", type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~1,5 %", twint: "Oui", agence: "Non" },
-  { banque: "Raiffeisen", type: "Coopérative", frais: "Variable", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
-  { banque: "UBS", type: "Traditionnelle", frais: "Payant", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
-  { banque: "BCGE / BCV / BCF", type: "Cantonale", frais: "Variable", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
+  { banque: "Alpian", logo: FAVICON("alpian.com"), type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~0,20 %", twint: "Non (prépayé)", agence: "Non" },
+  { banque: "Migros Bank", logo: FAVICON("migrosbank.ch"), type: "Traditionnelle", frais: "Gratuit", chf: "Gratuit", etranger: "~2,0 %", twint: "Oui", agence: "Oui" },
+  { banque: "PostFinance", logo: FAVICON("postfinance.ch"), type: "Traditionnelle", frais: "Gratuit", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui (La Poste)" },
+  { banque: "Neon", logo: FAVICON("neon.eu"), type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~1,5 %", twint: "Oui", agence: "Non" },
+  { banque: "Yuh", logo: FAVICON("yuh.com"), type: "Néobanque", frais: "Gratuit", chf: "Gratuit", etranger: "~1,5 %", twint: "Oui", agence: "Non" },
+  { banque: "Raiffeisen", logo: FAVICON("raiffeisen.ch"), type: "Coopérative", frais: "Variable", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
+  { banque: "UBS", logo: FAVICON("ubs.com"), type: "Traditionnelle", frais: "Payant", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
+  { banque: "BCGE / BCV / BCF", logo: FAVICON("bcv.ch"), type: "Cantonale", frais: "Variable", chf: "Gratuit", etranger: "Variable", twint: "Oui", agence: "Oui" },
 ];
 
 const BANQUES_CANTONALES = [
@@ -139,7 +141,7 @@ export default function MeilleureBanqueSuissePage() {
 
             {/* Intro */}
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
-              Choisir la meilleure banque suisse est l{"'"}une des premières décisions concrètes à prendre lorsqu{"'"}on s{"'"}installe en Suisse. Avec plus de <strong style={{ color: "#111827" }}>130 établissements bancaires</strong> actifs sur le territoire helvétique, l{"'"}offre peut sembler intimidante, d{"'"}autant que le fonctionnement du système bancaire suisse diffère sensiblement de ce que les Français connaissent. Banque traditionnelle ou néobanque ? Banque cantonale ou établissement national ? Compte gratuit ou offre premium ? Ce comparatif des banques suisses vous donne toutes les clés pour choisir selon votre profil et vos usages. Pour aller plus loin, consultez aussi notre <a href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>guide complet pour s{"'"}installer en Suisse</a>.
+              Choisir la meilleure banque suisse est l{"'"}une des premières décisions concrètes à prendre lorsqu{"'"}on s{"'"}installe en Suisse. Avec plus de <strong style={{ color: "#111827" }}>130 établissements bancaires</strong> actifs sur le territoire helvétique, l{"'"}offre peut sembler intimidante, d{"'"}autant que le fonctionnement du système bancaire suisse diffère sensiblement de ce que les Français connaissent. Banque traditionnelle ou néobanque ? Banque cantonale ou établissement national ? Compte gratuit ou offre premium ? Ce comparatif des banques suisses vous donne toutes les clés pour choisir selon votre profil et vos usages. Pour aller plus loin sur la démarche pour <a href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>s{"'"}installer en Suisse</a>, consultez aussi notre guide dédié.
             </p>
 
             {/* Section 1 */}
@@ -275,7 +277,13 @@ export default function MeilleureBanqueSuissePage() {
                 <tbody>
                   {COMPARATIF_TABLE.map((row, i) => (
                     <tr key={row.banque} style={{ backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F8FAFC", borderTop: "1px solid #F1F5F9" }}>
-                      <td className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#111827", padding: "10px 14px" }}>{row.banque}</td>
+                      <td className="font-body" style={{ fontSize: 13, fontWeight: 700, color: "#111827", padding: "10px 14px" }}>
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={row.logo} alt="" width={20} height={20} style={{ borderRadius: 4, flexShrink: 0 }} />
+                          {row.banque}
+                        </span>
+                      </td>
                       <td className="font-body" style={{ fontSize: 13, color: "#475569", padding: "10px 14px" }}>{row.type}</td>
                       <td className="font-body" style={{ fontSize: 13, color: "#475569", padding: "10px 14px" }}>{row.frais}</td>
                       <td className="font-body" style={{ fontSize: 13, color: "#475569", padding: "10px 14px" }}>{row.chf}</td>
