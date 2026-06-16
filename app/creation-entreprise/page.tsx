@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
-import { getArticleImage } from "@/lib/article-images";
+import { ARTICLE_IMAGES, getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Créer une société en Suisse : guide complet pour Français 2026",
@@ -47,9 +49,9 @@ const ERREURS = [
 
 
 const RELATED_ARTICLES = [
-  { icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait du Registre du commerce : comment l’obtenir", author: "Laura B.", date: "10 avril 2026", readTime: "4 min" },
-  { icon: "\u{1F4B3}", tag: "FINANCES", title: "TVA en Suisse : tout ce que les indépendants doivent savoir", author: "Karim D.", date: "2 avril 2026", readTime: "7 min" },
-  { icon: "\u{1F3E2}", tag: "ENTREPRENDRE", title: "Domiciliation d’entreprise en Suisse : avantages et limites", author: "Julie M.", date: "18 mars 2026", readTime: "6 min" },
+  { href: "/meilleures-entreprises-suisses", icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait du Registre du commerce : comment l’obtenir", author: "Laura B.", date: "10 avril 2026", readTime: "4 min" },
+  { href: "/fiscalite-business", icon: "\u{1F4B3}", tag: "FINANCES", title: "TVA en Suisse : tout ce que les indépendants doivent savoir", author: "Karim D.", date: "2 avril 2026", readTime: "7 min" },
+  { href: "/fiscalite-business", icon: "\u{1F3E2}", tag: "ENTREPRENDRE", title: "Domiciliation d’entreprise en Suisse : avantages et limites", author: "Julie M.", date: "18 mars 2026", readTime: "6 min" },
 ];
 
 /* ───────── PAGE ───────── */
@@ -340,8 +342,20 @@ export default function CreationEntreprisePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {RELATED_ARTICLES.map((a) => (
-              <div key={a.title} className="rounded-xl bg-white overflow-hidden cursor-pointer" style={{ border: "1px solid #E2E8F0" }}>
-                <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>{a.icon}</div>
+              <Link key={a.title} href={a.href} className="rounded-xl bg-white overflow-hidden block no-underline" style={{ border: "1px solid #E2E8F0", color: "inherit" }}>
+                {ARTICLE_IMAGES[a.href] ? (
+                  <div className="relative w-full" style={{ height: 160, backgroundColor: "#FFFBF0" }}>
+                    <Image
+                      src={ARTICLE_IMAGES[a.href].src}
+                      alt={ARTICLE_IMAGES[a.href].alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>{a.icon}</div>
+                )}
                 <div style={{ padding: "20px 24px" }}>
                   <span className="inline-block font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#D97706", marginBottom: 8 }}>{a.tag}</span>
                   <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</h3>
@@ -350,7 +364,7 @@ export default function CreationEntreprisePage() {
                     <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.readTime}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

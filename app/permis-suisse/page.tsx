@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
-import { getArticleImage } from "@/lib/article-images";
+import { ARTICLE_IMAGES, getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Permis de s\u00E9jour en Suisse : le guide complet pour bien choisir et obtenir le v\u00F4tre",
@@ -56,9 +57,9 @@ const ERREURS = [
 
 
 const RELATED_ARTICLES = [
-  { icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait de poursuites : comment l\u2019obtenir rapidement", author: "Laura B.", date: "5 avril 2026", readTime: "4 min" },
-  { icon: "\u{1F4B0}", tag: "FINANCES", title: "Ouvrir un compte bancaire en Suisse : guide 2026", author: "Karim D.", date: "28 mars 2026", readTime: "6 min" },
-  { icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Colocation en Suisse : droits, contrats et bons plans", author: "Julie M.", date: "12 mars 2026", readTime: "7 min" },
+  { href: "/s-installer-en-suisse-pour-un-francais", icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "Extrait de poursuites : comment l\u2019obtenir rapidement", author: "Laura B.", date: "5 avril 2026", readTime: "4 min" },
+  { href: "/meilleure-banque-suisse", icon: "\u{1F4B0}", tag: "FINANCES", title: "Ouvrir un compte bancaire en Suisse : guide 2026", author: "Karim D.", date: "28 mars 2026", readTime: "6 min" },
+  { href: "/cout-vie-en-suisse", icon: "\u{1F3E0}", tag: "LOGEMENT", title: "Colocation en Suisse : droits, contrats et bons plans", author: "Julie M.", date: "12 mars 2026", readTime: "7 min" },
 ];
 
 /* ───────── PAGE ───────── */
@@ -331,8 +332,20 @@ export default function PermisSuissePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {RELATED_ARTICLES.map((a) => (
-              <div key={a.title} className="rounded-xl bg-white overflow-hidden cursor-pointer" style={{ border: "1px solid #E2E8F0" }}>
-                <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>{a.icon}</div>
+              <Link key={a.title} href={a.href} className="rounded-xl bg-white overflow-hidden block no-underline" style={{ border: "1px solid #E2E8F0", color: "inherit" }}>
+                {ARTICLE_IMAGES[a.href] ? (
+                  <div className="relative w-full" style={{ height: 160, backgroundColor: "#FFFBF0" }}>
+                    <Image
+                      src={ARTICLE_IMAGES[a.href].src}
+                      alt={ARTICLE_IMAGES[a.href].alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>{a.icon}</div>
+                )}
                 <div style={{ padding: "20px 24px" }}>
                   <span className="inline-block font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#D97706", marginBottom: 8 }}>{a.tag}</span>
                   <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</h3>
@@ -341,7 +354,7 @@ export default function PermisSuissePage() {
                     <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.readTime}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

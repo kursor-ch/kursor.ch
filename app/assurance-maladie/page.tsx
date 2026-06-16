@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import SidebarGuides from "@/components/shared/SidebarGuides";
 import { GuideHeroImage } from "@/components/articles/GuideHeroImage";
-import { getArticleImage } from "@/lib/article-images";
+import { ARTICLE_IMAGES, getArticleImage } from "@/lib/article-images";
 
 export const metadata: Metadata = {
   title: "Top 10 des meilleures caisses maladie en Suisse en 2026",
@@ -56,9 +57,9 @@ const TABLE_DATA = [
 
 
 const RELATED_ARTICLES = [
-  { icon: "\u{1F3E5}", tag: "SANT\u00C9", title: "M\u00E9decin en Suisse : comment trouver et s\u2019inscrire", author: "Laura B.", date: "15 avril 2026", readTime: "5 min" },
-  { icon: "\u{1F4B0}", tag: "FINANCES", title: "3\u00E8me pilier : pourquoi commencer d\u00E8s votre arriv\u00E9e", author: "Karim D.", date: "10 avril 2026", readTime: "7 min" },
-  { icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "D\u00E9claration d\u2019imp\u00F4ts pour expatri\u00E9s : guide 2026", author: "Julie M.", date: "2 avril 2026", readTime: "9 min" },
+  { href: "/permis-suisse", icon: "\u{1F3E5}", tag: "SANT\u00C9", title: "M\u00E9decin en Suisse : comment trouver et s\u2019inscrire", author: "Laura B.", date: "15 avril 2026", readTime: "5 min" },
+  { href: "/retraite-suisse", icon: "\u{1F4B0}", tag: "FINANCES", title: "3\u00E8me pilier : pourquoi commencer d\u00E8s votre arriv\u00E9e", author: "Karim D.", date: "10 avril 2026", readTime: "7 min" },
+  { href: "/impots-suisse-etrangers", icon: "\u{1F4CB}", tag: "ADMINISTRATIF", title: "D\u00E9claration d\u2019imp\u00F4ts pour expatri\u00E9s : guide 2026", author: "Julie M.", date: "2 avril 2026", readTime: "9 min" },
 ];
 
 /* ───────── PAGE ───────── */
@@ -339,10 +340,22 @@ export default function AssuranceMaladiePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {RELATED_ARTICLES.map((a) => (
-              <div key={a.title} className="rounded-xl bg-white overflow-hidden cursor-pointer" style={{ border: "1px solid #E2E8F0" }}>
-                <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>
-                  {a.icon}
-                </div>
+              <Link key={a.title} href={a.href} className="rounded-xl bg-white overflow-hidden block no-underline" style={{ border: "1px solid #E2E8F0", color: "inherit" }}>
+                {ARTICLE_IMAGES[a.href] ? (
+                  <div className="relative w-full" style={{ height: 160, backgroundColor: "#FFFBF0" }}>
+                    <Image
+                      src={ARTICLE_IMAGES[a.href].src}
+                      alt={ARTICLE_IMAGES[a.href].alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center" style={{ height: 120, backgroundColor: "#FFFBF0", fontSize: 40 }}>
+                    {a.icon}
+                  </div>
+                )}
                 <div style={{ padding: "20px 24px" }}>
                   <span className="inline-block font-body uppercase" style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", color: "#D97706", marginBottom: 8 }}>{a.tag}</span>
                   <h3 className="font-body" style={{ fontSize: 16, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>{a.title}</h3>
@@ -351,7 +364,7 @@ export default function AssuranceMaladiePage() {
                     <p className="font-body" style={{ fontSize: 11, color: "#94A3B8" }}>{a.readTime}</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
