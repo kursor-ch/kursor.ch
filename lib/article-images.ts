@@ -66,8 +66,8 @@ export const ARTICLE_IMAGES: Record<string, ArticleImage> = {
     alt: "Banque et services financiers en Suisse",
   },
   "/prendre-sa-retraite-en-suisse": {
-    src: `https://images.unsplash.com/photo-1502602898657-3e91760cbb34${PARAMS}`,
-    alt: "Couple de retraités profitant d'un paysage suisse alpin et lacustre",
+    src: `https://images.unsplash.com/photo-1527668752968-14dc70a27c95${PARAMS}`,
+    alt: "Paysage alpin suisse symbolisant une retraite paisible en Suisse",
   },
 };
 
