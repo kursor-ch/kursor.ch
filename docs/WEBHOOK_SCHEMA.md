@@ -101,7 +101,7 @@ Every webhook submission, regardless of funnel, follows this top-level structure
 |---|---|---|---|
 | `schema_version` | string | yes | Always `"1.0"` for current version. Bumps when breaking changes occur. |
 | `funnel_id` | enum string | yes | One of: `"emploi"`, `"logement"`, `"assurance"`, `"retraite"`. Drives all routing logic in n8n. |
-| `lead_id` | string | yes | Format: `KCH-YYYY-NNNNN`. Generated client-side at form completion. Used for tracking across all systems. |
+| `lead_id` | string | no (généré par n8n si absent) | Format: `KCH-YYYY-NNNNN`. Généré par n8n à la réception (recommandé : autonumber Airtable formaté `KCH-{année}-{NNNNN}`) et renvoyé dans la réponse 200. Optionnel dans le payload entrant front → n8n : si présent (cas Emploi legacy), n8n l'honore ; si absent (cas Retraite et nouveaux funnels), n8n le génère. Used for tracking across all systems. |
 | `submitted_at` | ISO 8601 string | yes | UTC timestamp of submission. |
 
 ### `contact` object
@@ -119,6 +119,7 @@ Every webhook submission, regardless of funnel, follows this top-level structure
 | `rgpd_accepted` | boolean | yes | Must be `true` to submit. RGPD/nLPD compliance. |
 | `partner_share_optin` | boolean | yes | If `false`, lead receives bilan but is NOT transmitted to partner. Critical legal flag. |
 | `newsletter_optin` | boolean | yes | Independent opt-in for weekly newsletter. Default `false`. |
+| `resale_optin` | boolean | no (défaut `false`) | Consentement à la **transmission du lead à des courtiers/conseillers tiers en vue d'une revente B2B**. Décoché par défaut. Distinct de `partner_share_optin` (mise en relation avec un partenaire nommé). Drapeau légal critique pour le modèle revente. |
 
 ### `verdict` object
 
@@ -200,6 +201,9 @@ All fields optional but recommended. Used for analytics, attribution, and debugg
 | Field | Type | Description |
 |---|---|---|
 | `source` | string | Always `"kursor.ch"` from the website. May expand to `"kursor.app"` etc. later. |
+| `acquisition_channel` | string | Canal d'acquisition résolu : `"tiktok"`, `"google_organic"`, `"direct"`, `"referral"`, `"search_other"`. **Distinct de `source`** (qui reste `"kursor.ch"`, l'identifiant du site). Capturé en first-touch par `lib/shared/tracking.ts`. |
+| `utm_content` | string | Paramètre UTM standard (ex. identifiant de vidéo TikTok). |
+| `landing_page` | string | Chemin de la page d'atterrissage first-touch (attribution). |
 | `user_agent` | string | Browser user-agent string. |
 | `referrer` | string | HTTP referrer when the user landed. |
 | `utm_source` | string | Standard UTM parameter. |
@@ -207,6 +211,8 @@ All fields optional but recommended. Used for analytics, attribution, and debugg
 | `utm_campaign` | string | Standard UTM parameter. |
 | `session_duration_seconds` | number | Time from landing on the diagnostic to submission. |
 | `completion_path` | string | Either `"linear"` (no back-button used) or `"non_linear"` (user navigated back during quiz). |
+
+> Rappel : `metadata.source` n'est **jamais** écrasé par le canal. Le canal vit dans `acquisition_channel`.
 
 ---
 
@@ -341,7 +347,7 @@ If the webhook returns a non-200 status, the front-end should:
 
 The front-end MUST validate before POST:
 
-- All required fields present and non-null.
+- All required fields present and non-null (`lead_id` exclu : optionnel dans le payload entrant, généré par n8n si absent).
 - `email` matches a basic email regex.
 - `telephone` present if `priority` is `"hot"` or `"very_hot"`.
 - `consent.rgpd_accepted` is `true`.
@@ -354,7 +360,8 @@ If validation fails, the front-end should NOT submit and should show specific fi
 
 The n8n webhook workflow MUST validate every incoming payload against the schema:
 
-- Reject payloads missing `schema_version`, `funnel_id`, `lead_id`, `submitted_at`, `contact.email`, or `consent.rgpd_accepted`.
+- Reject payloads missing `schema_version`, `funnel_id`, `submitted_at`, `contact.email`, or `consent.rgpd_accepted`.
+- Générer `lead_id` si absent du payload entrant (recommandé : autonumber Airtable formaté `KCH-{année}-{NNNNN}`) ; honorer le `lead_id` fourni s'il est présent (cas Emploi legacy).
 - Reject payloads with unknown `funnel_id` values.
 - Log all rejections to a dedicated Airtable table for debugging.
 - Return `400 Bad Request` with a JSON body explaining which field failed validation.
@@ -385,6 +392,7 @@ To prevent breaking the live Emploi funnel when extending the schema for Logemen
 |---|---|---|
 | 1.0 | 2026-04-15 | Initial schema. Supports Emploi (live), Logement, Assurances, Retraite. Includes Persona C for Logement (futur résident avec offre confirmée). |
 | 1.0 | 2026-04-19 | Additive: `frontalier_data.decision_window_status` gains `"unknown"`. Soft-exit capture gains `"sans_activite"` reason (used by Assurances funnel). No breaking changes — schema_version unchanged. |
+| 1.0 | 2026-06-18 | Additif : `consent.resale_optin`, `metadata.acquisition_channel`, `metadata.utm_content`, `metadata.landing_page`. Correction : `lead_id` généré par n8n, optionnel dans le payload entrant (honoré si fourni). Aucun changement cassant — `schema_version` inchangé. |
 
 ---
 
