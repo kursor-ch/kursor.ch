@@ -133,8 +133,11 @@ export default function RetraiteSuissePage() {
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Les 1er et 2e piliers ne couvrent en moyenne que <strong style={{ color: "#111827" }}>55 % à 60 % du dernier salaire</strong> une fois à la retraite. Pour les revenus supérieurs à 90 000 CHF annuels et pour les profils ayant connu des interruptions de carrière (études, expatriation, maternité, chômage), le ratio descend souvent sous 50 %. Le 3e pilier comble cet écart tout en offrant des avantages fiscaux que peu de pays accordent à leurs épargnants.
             </p>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Pour un salarié au taux marginal d{"'"}imposition de 35 %, chaque versement de 7 258 CHF dans le 3a génère environ <strong style={{ color: "#111827" }}>2 540 CHF d{"'"}économie d{"'"}impôt immédiate</strong>. Sur 30 ans de carrière, c{"'"}est plus de 75 000 CHF d{"'"}impôts économisés, sans compter les intérêts capitalisés et la croissance des fonds de prévoyance, ce qui en fait l{"'"}un des leviers les plus efficaces pour <Link href="/analyse-lpp" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>le placement suisse</Link> à long terme.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              Si vous envisagez de vous expatrier à l{"'"}heure de la retraite, voyez aussi notre guide pour <Link href="/prendre-sa-retraite-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>prendre sa retraite en Suisse</Link> : permis B retraité, AVS, fiscalité et budget mensuel y sont détaillés étape par étape.
             </p>
 
             {/* Section 2 */}

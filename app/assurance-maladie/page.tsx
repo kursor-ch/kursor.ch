@@ -231,7 +231,7 @@ export default function AssuranceMaladiePage() {
             {/* Comment choisir */}
             <h2 id="choisir" className="font-heading" style={{ fontSize: 26, fontWeight: 600, color: "#111827", marginBottom: 16, scrollMarginTop: 80 }}>Comment choisir la caisse qui vous correspond ?</h2>
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
-              La meilleure caisse maladie n{"\u2019"}existe pas dans l{"\u2019"}absolu : elle d{"\u00E9"}pend de votre profil, de votre canton de r{"\u00E9"}sidence et de vos habitudes de sant{"\u00E9"}, un arbitrage qui fait partie des {"\u00E9"}tapes cl{"\u00E9"}s pour <Link href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>s{"\u2019"}installer en Suisse</Link>. Posez-vous ces questions :
+              La meilleure caisse maladie n{"\u2019"}existe pas dans l{"\u2019"}absolu : elle d{"\u00E9"}pend de votre profil, de votre canton de r{"\u00E9"}sidence et de vos habitudes de sant{"\u00E9"}, un arbitrage qui fait partie des {"\u00E9"}tapes cl{"\u00E9"}s pour <Link href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>s{"\u2019"}installer en Suisse</Link>, ou pour <Link href="/prendre-sa-retraite-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>prendre sa retraite en Suisse</Link> selon votre situation. Posez-vous ces questions :
             </p>
             <div className="flex flex-col gap-3" style={{ marginBottom: 24 }}>
               {[

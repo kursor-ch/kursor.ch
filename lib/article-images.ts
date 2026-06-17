@@ -65,6 +65,10 @@ export const ARTICLE_IMAGES: Record<string, ArticleImage> = {
     src: `https://images.unsplash.com/photo-1565514020179-026b92b84bb6${PARAMS}`,
     alt: "Banque et services financiers en Suisse",
   },
+  "/prendre-sa-retraite-en-suisse": {
+    src: `https://images.unsplash.com/photo-1502602898657-3e91760cbb34${PARAMS}`,
+    alt: "Couple de retraités profitant d'un paysage suisse alpin et lacustre",
+  },
 };
 
 export function getArticleImage(path: string): ArticleImage | null {

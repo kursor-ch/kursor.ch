@@ -13,6 +13,7 @@ const GUIDES = [
   { title: "Coût de la vie en Suisse en 2026", href: "/cout-vie-en-suisse" },
   { title: "S'installer en Suisse pour un Français", href: "/s-installer-en-suisse-pour-un-francais" },
   { title: "Meilleure banque suisse 2026", href: "/meilleure-banque-suisse" },
+  { title: "Prendre sa retraite en Suisse : guide 2026", href: "/prendre-sa-retraite-en-suisse" },
 ];
 
 export default function SidebarGuides({ exclude }: { exclude?: string }) {

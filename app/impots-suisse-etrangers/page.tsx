@@ -116,8 +116,11 @@ export default function ImpotsEtrangersPage() {
             <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               <a href="/s-installer-en-suisse-pour-un-francais" style={{ color: "#D97706", textDecoration: "underline" }}>S{"\u2019"}installer en Suisse</a> depuis la France s{"\u00E9"}duit chaque ann{"\u00E9"}e des milliers d{"\u2019"}expatri{"\u00E9"}s attir{"\u00E9"}s par la qualit{"\u00E9"} de vie, la stabilit{"\u00E9"} {"\u00E9"}conomique et un environnement fiscal r{"\u00E9"}put{"\u00E9"} attractif. Pourtant, comprendre les imp{"\u00F4"}ts en Suisse pour les {"\u00E9"}trangers demande un v{"\u00E9"}ritable effort d{"\u2019"}adaptation, surtout lorsqu{"\u2019"}on vient d{"\u2019"}un pays au syst{"\u00E8"}me centralis{"\u00E9"} comme la France ou la Belgique.
             </p>
-            <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+            <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               Ce guide vous explique en d{"\u00E9"}tail comment fonctionne la fiscalit{"\u00E9"} suisse appliqu{"\u00E9"}e aux r{"\u00E9"}sidents {"\u00E9"}trangers, quels sont vos droits et obligations selon votre permis de s{"\u00E9"}jour, et comment tirer parti des dispositifs existants pour all{"\u00E9"}ger l{"\u00E9"}galement votre charge fiscale.
+            </p>
+            <p className="font-body" style={{ fontSize: 16, color: "#475569", lineHeight: 1.75, marginBottom: 24 }}>
+              Si vous arrivez en Suisse {"\u00E0"} l{"\u2019"}heure de la retraite plut{"\u00F4"}t qu{"\u2019"}en activit{"\u00E9"}, voyez aussi notre dossier d{"\u00E9"}di{"\u00E9"} pour <a href="/prendre-sa-retraite-en-suisse" style={{ color: "#D97706", textDecoration: "underline" }}>prendre sa retraite en Suisse</a>, avec les sp{"\u00E9"}cificit{"\u00E9"}s fiscales des retrait{"\u00E9"}s fran{"\u00E7"}ais et la convention bilat{"\u00E9"}rale d{"\u00E9"}taill{"\u00E9"}e.
             </p>
 
             {/* A retenir */}

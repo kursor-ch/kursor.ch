@@ -155,8 +155,11 @@ export default function SInstallerEnSuissePage() {
             <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               <strong style={{ color: "#111827" }}>Un cadre de vie de qualité.</strong> Avec 175 lacs, des massifs alpins accessibles et des villes à taille humaine, la Suisse conjugue nature et modernité. Les horaires de travail, souvent de 42 heures hebdomadaires, laissent de la place aux activités extra-professionnelles.
             </p>
-            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 16 }}>
               <strong style={{ color: "#111827" }}>La langue, un atout pour les Français.</strong> Genève, Lausanne, Neuchâtel, le Jura et le Valais sont francophones ou bilingues. Un Français peut donc s{"'"}installer en Suisse romande sans barrière linguistique, tout en ayant la possibilité d{"'"}apprendre l{"'"}allemand ou l{"'"}italien dans d{"'"}autres cantons.
+            </p>
+            <p className="font-body" style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, marginBottom: 32 }}>
+              Ces atouts valent aussi pour les retraités : pour le détail du parcours spécifique (permis B retraité, AVS, fiscalité), voyez notre guide dédié pour <a href="/prendre-sa-retraite-en-suisse" style={{ color: "#D97706", textDecoration: "underline", textUnderlineOffset: 3 }}>prendre sa retraite en Suisse</a>.
             </p>
 
             {/* Section 2 */}
