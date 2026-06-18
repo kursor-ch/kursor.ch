@@ -14,6 +14,8 @@ interface ContactScreenProps {
   onChange: (contact: RetraiteContactInfo) => void;
   onContinue: () => void;
   onBack: () => void;
+  // Téléphone requis si true (priority hot/very_hot), optionnel sinon.
+  phoneRequired: boolean;
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,6 +39,7 @@ export default function ContactScreen({
   onChange,
   onContinue,
   onBack,
+  phoneRequired,
 }: ContactScreenProps) {
   const [errors, setErrors] = useState<
     Partial<Record<keyof RetraiteContactInfo, string>>
@@ -51,8 +54,12 @@ export default function ContactScreen({
     if (!contact.prenom.trim()) newErrors.prenom = "Requis";
     if (!contact.email.trim() || !EMAIL_REGEX.test(contact.email))
       newErrors.email = "Email invalide";
-    if (!contact.telephone.trim() || !isValidPhone(contact.telephone))
+    const phoneFilled = contact.telephone.trim().length > 0;
+    if (phoneRequired && !phoneFilled) {
+      newErrors.telephone = "Requis pour votre profil prioritaire";
+    } else if (phoneFilled && !isValidPhone(contact.telephone)) {
       newErrors.telephone = "Numéro invalide";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -141,7 +148,12 @@ export default function ContactScreen({
 
         <div>
           <label className="text-sm font-medium text-gray-700 font-body mb-1 block">
-            Numéro de téléphone <span className="text-rouge">*</span>
+            Numéro de téléphone{" "}
+            {phoneRequired ? (
+              <span className="text-rouge">*</span>
+            ) : (
+              <span className="text-gray-400 font-normal">(optionnel)</span>
+            )}
           </label>
           <input
             type="tel"
@@ -164,7 +176,9 @@ export default function ContactScreen({
             <p className="text-xs text-rouge mt-1">{errors.telephone}</p>
           )}
           <p className="text-xs text-gray-400 mt-1">
-            Un spécialiste en prévoyance vous contactera sous 48h ouvrées.
+            {phoneRequired
+              ? "Votre profil justifie un échange direct — un spécialiste en prévoyance vous rappellera sous 48h ouvrées."
+              : "Facultatif — utile uniquement si vous souhaitez être rappelé(e) par un spécialiste."}
           </p>
         </div>
       </div>

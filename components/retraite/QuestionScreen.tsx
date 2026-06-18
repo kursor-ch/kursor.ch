@@ -95,13 +95,18 @@ export default function QuestionScreen({
       {screen.questions.map((q) => {
         const labelId = `${q.id}-label`;
 
-        // Special case: the q4_revenu pill set carries a "prefere_pas" option
-        // that we render as a secondary text-link below the chips, not as a
-        // chip. Filter it out from the chip render and add the link below.
+        // Cas spécial q4_revenu : "non_renseigne" est rendu en lien secondaire
+        // sous les chips, pas comme chip. On le retire du rendu chip.
+        // Cas spécial q6_lpp : "independant_na" est réservé aux indépendants.
         const isRevenu = q.id === "q4_revenu";
-        const chipOptions = isRevenu
-          ? q.options.filter((o) => o.key !== "prefere_pas")
-          : q.options;
+        const isLpp = q.id === "q6_lpp";
+        let chipOptions = q.options;
+        if (isRevenu) {
+          chipOptions = chipOptions.filter((o) => o.key !== "non_renseigne");
+        }
+        if (isLpp && answers.q1_statut_form !== "independant") {
+          chipOptions = chipOptions.filter((o) => o.key !== "independant_na");
+        }
 
         return (
           <div key={q.id} className="space-y-3">
@@ -178,7 +183,7 @@ export default function QuestionScreen({
                 {isRevenu && (
                   <button
                     type="button"
-                    onClick={() => handleAnswer(q.id, "prefere_pas")}
+                    onClick={() => handleAnswer(q.id, "non_renseigne")}
                     className="text-sm font-body underline mt-3 transition-colors"
                     style={{ color: "#9CA3AF" }}
                     onMouseEnter={(e) =>

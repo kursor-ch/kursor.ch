@@ -8,6 +8,9 @@ export interface RetraiteOptIns {
   rgpd_accepted: boolean;
   partner_share_optin: boolean;
   newsletter_optin: boolean;
+  // Consentement explicite pour la transmission à des courtiers et conseillers
+  // partenaires Kursor en Suisse (modèle de revente B2B). Décoché par défaut.
+  resale_optin: boolean;
 }
 
 interface ConsentScreenProps {
@@ -19,9 +22,72 @@ const ACCENT = "#7C3AED";
 const ACCENT_LIGHT = "#EDE9FE";
 const ACCENT_HOVER = "#6D28D9";
 
+interface ConsentCardProps {
+  checked: boolean;
+  onToggle: (next: boolean) => void;
+  error?: boolean;
+  children: React.ReactNode;
+}
+
+function ConsentCard({ checked, onToggle, error, children }: ConsentCardProps) {
+  return (
+    <label
+      className="flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm"
+      style={{
+        borderColor: checked
+          ? ACCENT
+          : error
+            ? "#DC2626"
+            : "#E7E5E4",
+        backgroundColor: checked
+          ? ACCENT_LIGHT
+          : error
+            ? "#FEF2F2"
+            : "#FFFFFF",
+      }}
+    >
+      <div
+        className="mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200"
+        style={{
+          borderColor: checked ? ACCENT : error ? "#DC2626" : "#D1D5DB",
+          backgroundColor: checked ? ACCENT : "transparent",
+        }}
+      >
+        {checked && (
+          <svg
+            className="w-3 h-3 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={3}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        )}
+      </div>
+      <div className="flex-1">
+        <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
+          {children}
+        </span>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => onToggle(e.target.checked)}
+          className="sr-only"
+        />
+      </div>
+    </label>
+  );
+}
+
 export default function ConsentScreen({ onSubmit, onBack }: ConsentScreenProps) {
   const [rgpdAccepted, setRgpdAccepted] = useState(false);
   const [partnerShareOptin, setPartnerShareOptin] = useState(false);
+  const [resaleOptin, setResaleOptin] = useState(false);
   const [showConsentError, setShowConsentError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -40,6 +106,7 @@ export default function ConsentScreen({ onSubmit, onBack }: ConsentScreenProps) 
       rgpd_accepted: rgpdAccepted,
       partner_share_optin: partnerShareOptin,
       newsletter_optin: false,
+      resale_optin: resaleOptin,
     });
   };
 
@@ -54,142 +121,77 @@ export default function ConsentScreen({ onSubmit, onBack }: ConsentScreenProps) 
           Une dernière chose avant vos résultats
         </h2>
         <p className="text-sm text-gray-500 leading-relaxed font-body mt-1">
-          Vos données sont traitées de manière confidentielle et ne sont jamais
-          revendues.
+          Vos données sont traitées de manière confidentielle et hébergées en
+          Suisse.
         </p>
       </div>
 
       <div className="space-y-4">
-        {/* Mandatory RGPD */}
-        <label
-          className="flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm"
-          style={{
-            borderColor: rgpdAccepted
-              ? ACCENT
-              : showConsentError
-              ? "#DC2626"
-              : "#E7E5E4",
-            backgroundColor: rgpdAccepted
-              ? ACCENT_LIGHT
-              : showConsentError
-              ? "#FEF2F2"
-              : "#FFFFFF",
+        {/* RGPD / nLPD — obligatoire */}
+        <ConsentCard
+          checked={rgpdAccepted}
+          onToggle={(next) => {
+            setRgpdAccepted(next);
+            if (next) setShowConsentError(false);
           }}
+          error={showConsentError}
         >
-          <div
-            className="mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200"
-            style={{
-              borderColor: rgpdAccepted
-                ? ACCENT
-                : showConsentError
-                ? "#DC2626"
-                : "#D1D5DB",
-              backgroundColor: rgpdAccepted ? ACCENT : "transparent",
-            }}
+          J&apos;ai lu et j&apos;accepte la{" "}
+          <Link
+            href="/politique-de-confidentialite"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+            style={{ color: ACCENT }}
           >
-            {rgpdAccepted && (
-              <svg
-                className="w-3 h-3 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-          <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              J&apos;accepte que Kursor CH traite mes données afin de me
-              fournir mon audit et me recontacter.
-              <span className="text-rouge ml-0.5">*</span>
-            </span>
-            <input
-              type="checkbox"
-              checked={rgpdAccepted}
-              onChange={(e) => {
-                setRgpdAccepted(e.target.checked);
-                if (e.target.checked) setShowConsentError(false);
-              }}
-              className="sr-only"
-            />
-          </div>
-        </label>
+            politique de confidentialité
+          </Link>{" "}
+          de Kursor.
+          <span className="text-rouge ml-0.5">*</span>
+        </ConsentCard>
         {showConsentError && (
           <p className="text-xs text-rouge -mt-2 ml-1">
             Ce consentement est obligatoire pour recevoir votre audit.
           </p>
         )}
 
-        {/* Partner share — RGPD/nLPD requires explicit opt-in: default unchecked */}
-        <label
-          className="flex items-start gap-3 p-5 rounded-xl border-2 cursor-pointer transition-all duration-200 bg-white shadow-sm"
-          style={{
-            borderColor: partnerShareOptin ? ACCENT : "#E7E5E4",
-            backgroundColor: partnerShareOptin ? ACCENT_LIGHT : "#FFFFFF",
-          }}
+        {/* Mise en relation avec le spécialiste primaire — facultatif */}
+        <ConsentCard
+          checked={partnerShareOptin}
+          onToggle={setPartnerShareOptin}
         >
-          <div
-            className="mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200"
-            style={{
-              borderColor: partnerShareOptin ? ACCENT : "#D1D5DB",
-              backgroundColor: partnerShareOptin ? ACCENT : "transparent",
-            }}
-          >
-            {partnerShareOptin && (
-              <svg
-                className="w-3 h-3 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            )}
-          </div>
-          <div>
-            <span className="text-sm font-medium text-gray-800 leading-relaxed font-body">
-              Je souhaite être mis en relation avec notre spécialiste prévoyance
-              indépendant. Gratuit et sans engagement.
-            </span>
-            <input
-              type="checkbox"
-              checked={partnerShareOptin}
-              onChange={(e) => setPartnerShareOptin(e.target.checked)}
-              className="sr-only"
-            />
-          </div>
-        </label>
+          Je souhaite être mis(e) en relation avec notre spécialiste prévoyance
+          indépendant. Gratuit et sans engagement.
+        </ConsentCard>
+
+        {/* Revente B2B vers courtiers partenaires — décoché par défaut */}
+        <ConsentCard checked={resaleOptin} onToggle={setResaleOptin}>
+          J&apos;accepte que mes coordonnées et les résultats de mon diagnostic
+          soient transmis à des courtiers et conseillers en prévoyance et
+          assurance, partenaires de Kursor en Suisse, afin d&apos;être
+          recontacté(e) au sujet de ma situation (3e pilier, rachat,
+          optimisation). Je peux retirer ce consentement à tout moment en
+          écrivant à equipe@kursor.ch.
+        </ConsentCard>
 
         <p className="text-xs text-rouge ml-1">
           <span>*</span> requis
         </p>
       </div>
 
-      <p className="text-xs text-gray-400 font-body">
-        En soumettant ce formulaire, vous confirmez avoir pris connaissance de
-        notre{" "}
-        <Link
-          href="/politique-de-confidentialite"
-          className="underline transition-colors"
-          style={{ color: "#9CA3AF" }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          politique de confidentialité
-        </Link>
-        .
-      </p>
+      <div className="rounded-lg bg-stone-50 border border-stone-200 p-4">
+        <p className="text-[11px] uppercase tracking-[0.1em] font-semibold text-gray-500 mb-1 font-body">
+          Transparence nLPD
+        </p>
+        <p className="text-[12px] text-gray-500 leading-relaxed font-body">
+          Responsable du traitement : Kursor CH / GC Consulting. Finalité : mise
+          en relation avec des courtiers et conseillers partenaires en Suisse
+          pour vous accompagner sur le 3e pilier, le rachat rétroactif et
+          l&apos;optimisation fiscale. Destinataires : courtiers et conseillers
+          partenaires en Suisse. Droits d&apos;accès, de rectification et de
+          retrait à tout moment via equipe@kursor.ch.
+        </p>
+      </div>
 
       <div className="flex gap-3 pt-2">
         <button
