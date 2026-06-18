@@ -11,7 +11,7 @@ Multi-funnel lead generation platform for the Swiss expatriation niche. Interact
 | Funnel | Route | Status |
 |--------|-------|--------|
 | Emploi (Salarié) | `/emploi` | Active (legacy webhook schema) |
-| Logement | `/logement` | Active (v1.0 schema) |
+| Logement | `/logement` | Retired — 301-redirects to `/` (funnel code retained) |
 | Assurance | `/assurance` | Active (v1.0 schema) |
 | Retraite | `/retraite` | Active (v1.0 schema) |
 | Entrepreneur | `/diagnostic/entrepreneur` | Planned |
