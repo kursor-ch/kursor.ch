@@ -1,149 +1,86 @@
-// Q6 (LPP certificat) was dropped on 2026-05-09 — lpp_flag is now derived
-// from q1_statut alone (true for salariés/frontaliers, false for indépendants).
-// Q7 was also dropped; it had no scoring impact, only colored the persona
-// verdict paragraph.
-//
-// Q5 was collapsed from 5 to 4 options on the same date — prior non_sait and
-// non_ignore both fold into the new "non" branch with identical scoring
-// treatment (the two never differed in scoring, only in persona detection).
-import { estimateRevenuChf, getTauxMarginal } from "./data/canton-taux";
+// Moteur de calcul Retraite — applique strictement TABLE_FISCALE_Retraite_Calcul.md.
+// Aucun chiffre n'est inventé : tous les paramètres viennent de la table fiscale
+// ou de canton-taux.ts. taux_marginal et perte_cumulee sont retournés pour
+// l'affichage interne / le report email mais NE SONT PAS transmis dans le payload.
+
+import { getTauxMarginal, PLAFOND_INDEP } from "./data/canton-taux";
 import type {
   Q1Statut,
-  Q2Anciennete,
+  Q2Arrivee,
   Q5TroisiemePilier,
   RetraiteAnswers,
   RetraiteScoreResult,
 } from "./types";
 
-export const PLAFOND_3A_SALARIE = 7_258; // 2025/2026 ceiling
-export const PLAFOND_3A_INDEPENDANT_MAX = 36_288; // 2026 value, 20% net capped
+export const PLAFOND_3A_SALARIE = 7_258;
+export const PLAFOND_3A_INDEP_CAP = 36_288;
+export const RACHAT_MAX_ANNEES = 10;
+
+const VERSEMENT_ACTUEL: Record<Q5TroisiemePilier, number> = {
+  max: 1.0,
+  partiel: 0.5,
+  recent: 1.0,
+  non_connait: 0.0,
+  non_ignore: 0.0,
+};
+
+// Conservatif : bottom-of-bracket. Mieux vaut sous-estimer le rattrapage
+// que sur-promettre (un audit Nathan corrigera vers le haut si possible).
+const ANNEES_SUISSE: Record<Q2Arrivee, number> = {
+  depuis_naissance: 10,
+  plus_10_ans: 10,
+  "5_10_ans": 6,
+  "2_5_ans": 3,
+  moins_2_ans: 1,
+};
 
 function isIndependant(q1: Q1Statut): boolean {
   return q1 === "independant_suisse" || q1 === "independant_bc";
 }
 
-function plafondFor(q1: Q1Statut, estimatedRevenu: number): number {
-  if (!isIndependant(q1)) return PLAFOND_3A_SALARIE;
-  return Math.min(
-    PLAFOND_3A_INDEPENDANT_MAX,
-    Math.round(estimatedRevenu * 0.20)
-  );
-}
-
-function estimateVersementActuel(
-  q5: Q5TroisiemePilier,
-  plafond: number
-): number {
-  switch (q5) {
-    case "oui_max":
-      return plafond;
-    case "oui_partiel":
-      return Math.round(plafond * 0.5);
-    case "oui_recent":
-      // Recent opener — typically near max, but missing-years count is what matters.
-      return Math.round(plafond * 0.8);
-    case "non":
-      return 0;
-  }
-}
-
-function anneesSansCotisation(
-  q2: Q2Anciennete,
-  q5: Q5TroisiemePilier
-): number {
-  // When the person has no 3a at all: every year in Switzerland counts, capped
-  // at the legal 10-year rachat window.
-  if (q5 === "non") {
-    switch (q2) {
-      case "naissance":
-      case "plus_10ans":
-        return 10;
-      case "5_10ans":
-        return 7;
-      case "2_5ans":
-        return 3;
-      case "moins_2ans":
-        return 1;
-    }
-  }
-  // Recently opened — years_in_switzerland minus 2.
-  if (q5 === "oui_recent") {
-    switch (q2) {
-      case "naissance":
-      case "plus_10ans":
-        return 8;
-      case "5_10ans":
-        return 5;
-      case "2_5ans":
-        return 1;
-      case "moins_2ans":
-        return 0;
-    }
-  }
-  // oui_max / oui_partiel — treat as no missed years for rachat purposes
-  // (simplification — Nathan does real reconstruction case by case).
-  return 0;
-}
-
-function horizonYears(q8: RetraiteAnswers["q8_horizon"]): number | null {
-  switch (q8) {
-    case "moins_5ans":
-      return 3;
-    case "5_15ans":
-      return 10;
-    case "15_30ans":
-      return 22;
-    case "plus_30ans":
-      return 35;
-    case "ne_sais_pas":
-      return null;
-  }
-}
-
-function shouldFlagLpp(q1: Q1Statut): boolean {
-  // Q6 (LPP certificat awareness) was dropped from the user-facing flow on
-  // 2026-05-09. lpp_flag now defaults to true for salariés/frontaliers (most
-  // don't read their certificate; the LPP rachat lever is worth surfacing on
-  // every salarié results page) and false for indépendants (LPP doesn't apply
-  // unless they've opted in voluntarily).
-  return !isIndependant(q1);
-}
-
 export function computeRetraiteScore(
   answers: RetraiteAnswers
 ): RetraiteScoreResult {
-  const estimatedRevenu = estimateRevenuChf(answers.q4_revenu);
-  const taux_marginal = getTauxMarginal(answers.q3_canton, answers.q4_revenu);
-  const plafond_3a = plafondFor(answers.q1_statut, estimatedRevenu);
+  const taux = getTauxMarginal(answers.q3_canton, answers.q4_revenu);
+  const plafond = isIndependant(answers.q1_statut)
+    ? PLAFOND_INDEP[answers.q4_revenu]
+    : PLAFOND_3A_SALARIE;
 
-  const versement_actuel = estimateVersementActuel(answers.q5_3a, plafond_3a);
-  const perte_annuelle_3a = Math.max(
-    0,
-    Math.round((plafond_3a - versement_actuel) * taux_marginal)
+  const versementActuel = plafond * VERSEMENT_ACTUEL[answers.q5_3a];
+  const perteAnnuelle = Math.round(
+    Math.max(0, plafond - versementActuel) * taux
   );
 
-  const annees_sans_3a = anneesSansCotisation(
-    answers.q2_anciennete,
-    answers.q5_3a
-  );
-  const perte_cumulee = perte_annuelle_3a * Math.max(annees_sans_3a, 1);
+  const anneesSuisse = ANNEES_SUISSE[answers.q2_arrivee];
+  const sans3a =
+    answers.q5_3a === "non_connait" ||
+    answers.q5_3a === "non_ignore" ||
+    answers.q5_3a === "recent";
+  const eligibleRachat = sans3a && anneesSuisse >= 2;
+  const anneesSans3a = eligibleRachat
+    ? Math.min(
+        anneesSuisse - (answers.q5_3a === "recent" ? 1 : 0),
+        RACHAT_MAX_ANNEES
+      )
+    : 0;
 
-  // Rachat rétroactif always uses the salarié ceiling, even for indépendants —
-  // the 2026 law caps retroactive catch-up at the petit 3a ceiling.
-  const rachat_retroactif_montant = annees_sans_3a * PLAFOND_3A_SALARIE;
-  const rachat_retroactif_economie = Math.round(
-    rachat_retroactif_montant * taux_marginal
+  // Le rachat rétroactif est plafonné au 7 258 CHF salarié même pour les
+  // indépendants — règle 2026 (table fiscale).
+  const rachatPotentiel = anneesSans3a * PLAFOND_3A_SALARIE;
+  const economieRachat = Math.round(rachatPotentiel * taux);
+
+  const perteCumulee = Math.round(
+    perteAnnuelle * Math.min(anneesSuisse, RACHAT_MAX_ANNEES)
   );
 
   return {
-    perte_annuelle_3a,
-    perte_cumulee,
-    annees_sans_3a,
-    rachat_retroactif_montant,
-    rachat_retroactif_economie,
-    taux_marginal,
-    plafond_3a,
-    lpp_flag: shouldFlagLpp(answers.q1_statut),
-    horizon_years: horizonYears(answers.q8_horizon),
+    perte_annuelle_3a: perteAnnuelle,
+    perte_cumulee: perteCumulee,
+    annees_sans_3a: anneesSans3a,
+    rachat_retroactif_montant: rachatPotentiel,
+    rachat_retroactif_economie: economieRachat,
+    taux_marginal: taux,
+    plafond_3a: plafond,
+    annees_suisse: anneesSuisse,
   };
 }

@@ -1,134 +1,116 @@
-// Approximate marginal tax rates by canton × income bracket.
-// Source: 2025 cantonal tax scales simplified to bracket midpoints.
-// These are display-level estimates — Nathan does the precise calculation.
-// `prefere_pas` mirrors the 50k–80k column as a conservative default.
+// Source de vérité : TABLE_FISCALE_Retraite_Calcul.md (constantes 2026).
+// Modifier ces chiffres = changer le contrat numérique du diagnostic.
+// `non_renseigne` mappe sur la colonne 80_120k du canton (règle table fiscale).
 
 import type { Q3Canton, Q4Revenu } from "../types";
 
-export const CANTON_TAUX: Record<Q3Canton, Record<Q4Revenu, number>> = {
+type RateBand = Exclude<Q4Revenu, "non_renseigne">;
+
+export const MARGINAL_RATE: Record<Q3Canton, Record<RateBand, number>> = {
   geneve: {
-    moins_50k: 0.25,
-    "50k_80k": 0.30,
-    "80k_120k": 0.33,
-    "120k_180k": 0.35,
-    "180k_250k": 0.37,
-    plus_250k: 0.38,
-    prefere_pas: 0.30,
+    moins_50k: 0.16,
+    "50_80k": 0.25,
+    "80_120k": 0.33,
+    "120_180k": 0.40,
+    "180_250k": 0.43,
+    plus_250k: 0.45,
   },
   vaud: {
-    moins_50k: 0.24,
-    "50k_80k": 0.28,
-    "80k_120k": 0.31,
-    "120k_180k": 0.33,
-    "180k_250k": 0.35,
-    plus_250k: 0.36,
-    prefere_pas: 0.28,
-  },
-  valais: {
-    moins_50k: 0.22,
-    "50k_80k": 0.26,
-    "80k_120k": 0.29,
-    "120k_180k": 0.31,
-    "180k_250k": 0.33,
-    plus_250k: 0.34,
-    prefere_pas: 0.26,
+    moins_50k: 0.14,
+    "50_80k": 0.23,
+    "80_120k": 0.31,
+    "120_180k": 0.37,
+    "180_250k": 0.40,
+    plus_250k: 0.41,
   },
   neuchatel: {
-    moins_50k: 0.26,
-    "50k_80k": 0.30,
-    "80k_120k": 0.33,
-    "120k_180k": 0.35,
-    "180k_250k": 0.37,
-    plus_250k: 0.38,
-    prefere_pas: 0.30,
-  },
-  fribourg: {
-    moins_50k: 0.23,
-    "50k_80k": 0.27,
-    "80k_120k": 0.30,
-    "120k_180k": 0.32,
-    "180k_250k": 0.34,
-    plus_250k: 0.35,
-    prefere_pas: 0.27,
+    moins_50k: 0.14,
+    "50_80k": 0.23,
+    "80_120k": 0.31,
+    "120_180k": 0.37,
+    "180_250k": 0.40,
+    plus_250k: 0.41,
   },
   jura: {
-    moins_50k: 0.25,
-    "50k_80k": 0.29,
-    "80k_120k": 0.32,
-    "120k_180k": 0.34,
-    "180k_250k": 0.36,
-    plus_250k: 0.37,
-    prefere_pas: 0.29,
+    moins_50k: 0.14,
+    "50_80k": 0.23,
+    "80_120k": 0.31,
+    "120_180k": 0.37,
+    "180_250k": 0.40,
+    plus_250k: 0.41,
   },
   berne: {
-    moins_50k: 0.23,
-    "50k_80k": 0.27,
-    "80k_120k": 0.30,
-    "120k_180k": 0.32,
-    "180k_250k": 0.34,
-    plus_250k: 0.35,
-    prefere_pas: 0.27,
+    moins_50k: 0.14,
+    "50_80k": 0.23,
+    "80_120k": 0.31,
+    "120_180k": 0.37,
+    "180_250k": 0.40,
+    plus_250k: 0.41,
   },
   bale: {
-    moins_50k: 0.24,
-    "50k_80k": 0.28,
-    "80k_120k": 0.31,
-    "120k_180k": 0.33,
-    "180k_250k": 0.35,
-    plus_250k: 0.36,
-    prefere_pas: 0.28,
+    moins_50k: 0.13,
+    "50_80k": 0.21,
+    "80_120k": 0.29,
+    "120_180k": 0.35,
+    "180_250k": 0.38,
+    plus_250k: 0.40,
   },
   zurich: {
-    moins_50k: 0.20,
-    "50k_80k": 0.24,
-    "80k_120k": 0.27,
-    "120k_180k": 0.29,
-    "180k_250k": 0.31,
-    plus_250k: 0.32,
-    prefere_pas: 0.24,
+    moins_50k: 0.13,
+    "50_80k": 0.21,
+    "80_120k": 0.29,
+    "120_180k": 0.35,
+    "180_250k": 0.38,
+    plus_250k: 0.40,
+  },
+  fribourg: {
+    moins_50k: 0.12,
+    "50_80k": 0.19,
+    "80_120k": 0.26,
+    "120_180k": 0.31,
+    "180_250k": 0.34,
+    plus_250k: 0.36,
+  },
+  valais: {
+    moins_50k: 0.12,
+    "50_80k": 0.19,
+    "80_120k": 0.26,
+    "120_180k": 0.31,
+    "180_250k": 0.34,
+    plus_250k: 0.36,
   },
   tessin: {
-    moins_50k: 0.22,
-    "50k_80k": 0.26,
-    "80k_120k": 0.29,
-    "120k_180k": 0.31,
-    "180k_250k": 0.33,
-    plus_250k: 0.34,
-    prefere_pas: 0.26,
+    moins_50k: 0.12,
+    "50_80k": 0.19,
+    "80_120k": 0.26,
+    "120_180k": 0.31,
+    "180_250k": 0.34,
+    plus_250k: 0.36,
   },
   autre: {
-    moins_50k: 0.22,
-    "50k_80k": 0.26,
-    "80k_120k": 0.29,
-    "120k_180k": 0.31,
-    "180k_250k": 0.33,
-    plus_250k: 0.34,
-    prefere_pas: 0.26,
+    moins_50k: 0.12,
+    "50_80k": 0.19,
+    "80_120k": 0.26,
+    "120_180k": 0.30,
+    "180_250k": 0.32,
+    plus_250k: 0.33,
   },
 };
 
-export function getTauxMarginal(canton: Q3Canton, revenu: Q4Revenu): number {
-  return CANTON_TAUX[canton][revenu];
-}
+// Plafond 3a indépendant 2026 par tranche de revenu : min(36 288 ; 20% × midpoint).
+// Utilisé uniquement pour le plafond annuel des indépendants ; le rachat
+// rétroactif reste plafonné au 7 258 CHF salarié (règle table fiscale).
+export const PLAFOND_INDEP: Record<Q4Revenu, number> = {
+  moins_50k: 8_000,
+  "50_80k": 13_000,
+  "80_120k": 20_000,
+  "120_180k": 30_000,
+  "180_250k": 36_288,
+  plus_250k: 36_288,
+  non_renseigne: 20_000,
+};
 
-// Bracket midpoint in CHF — used to estimate the 20% plafond indépendant
-// and to derive the year_arrival_switzerland proxy. `prefere_pas` gets a
-// conservative 80k default (median Swiss salary).
-export function estimateRevenuChf(revenu: Q4Revenu): number {
-  switch (revenu) {
-    case "moins_50k":
-      return 40_000;
-    case "50k_80k":
-      return 65_000;
-    case "80k_120k":
-      return 100_000;
-    case "120k_180k":
-      return 150_000;
-    case "180k_250k":
-      return 215_000;
-    case "plus_250k":
-      return 300_000;
-    case "prefere_pas":
-      return 80_000;
-  }
+export function getTauxMarginal(canton: Q3Canton, revenu: Q4Revenu): number {
+  const band: RateBand = revenu === "non_renseigne" ? "80_120k" : revenu;
+  return MARGINAL_RATE[canton][band];
 }

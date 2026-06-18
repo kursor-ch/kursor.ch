@@ -1,23 +1,14 @@
 import type { QuestionScreen } from "@/lib/questions";
 
-// Six linear screens (S1 → S6). No branching at the question level. Soft-exit
-// branching is orchestrated by RetraiteApp from outside the screen array.
+// 8 écrans UI pour 7 questions logiques v2.
+// Q1 est découpé en S1 (statut) + S2 (permis) pour rester lisible ; la valeur
+// canonique q1_statut est dérivée par deriveQ1Statut. Les "_form" sont des
+// états UI strippés du payload — voir derivePersistedAnswers dans RetraiteApp.
 //
-// Screen-to-payload mapping:
-//   S1 (q1_statut_form) + S2 (q1_permis_form) → q1_statut on advance from S2.
-//     The "_form" keys are UI-only intermediate state and must be stripped
-//     from the payload before submission. See RetraiteApp.derivePersistedAnswers.
-//   S2 also collects q3_canton (one of the 11 canton chips).
-//   S3 collects q2_anciennete (5 cards).
-//   S4 collects q4_revenu (6 chips + secondary "préfère pas répondre" link
-//     handled in QuestionScreen — selecting it sets q4_revenu: "prefere_pas").
-//   S5 collects q5_3a (4 cards, collapsed from prior 5 on 2026-05-09).
-//   S6 collects q8_horizon (5 cards).
-//
-// Q6 (LPP) and Q7 (inquiétude) were dropped on 2026-05-09 — see types.ts
-// header comment for context.
+// Slugs verrouillés FIELDMAP_Retraite_Front_n8n_Airtable.md v2 — modifier =
+// breaking n8n / Airtable.
 export const retraiteScreens: QuestionScreen[] = [
-  // S1 — Statut professionnel
+  // S1 — Q1 : statut professionnel
   {
     title: "Quelle est votre situation professionnelle ?",
     subtitle:
@@ -39,11 +30,11 @@ export const retraiteScreens: QuestionScreen[] = [
     ],
   },
 
-  // S2 — Permis + Canton (two questions on one screen, manual Continuer)
+  // S2 — Q1 (suite) : permis
   {
-    title: "Où et avec quel statut ?",
+    title: "Et quel est votre permis ?",
     subtitle:
-      "Permis et canton conditionnent l'éligibilité 3a et votre taux marginal d'imposition.",
+      "Le permis conditionne l'éligibilité 3a et certaines règles fiscales.",
     questions: [
       {
         id: "q1_permis_form",
@@ -56,12 +47,41 @@ export const retraiteScreens: QuestionScreen[] = [
           { label: "Frontalier (G)", key: "permis_g" },
         ],
       },
+    ],
+  },
+
+  // S3 — Q2 : arrivée en Suisse
+  {
+    title: "Depuis quand vivez-vous en Suisse ?",
+    subtitle:
+      "Le rachat rétroactif 3a permet de rattraper jusqu'à 10 années de cotisations manquées.",
+    questions: [
+      {
+        id: "q2_arrivee",
+        label: "Votre ancienneté",
+        type: "card",
+        options: [
+          { label: "Depuis ma naissance", key: "depuis_naissance" },
+          { label: "Plus de 10 ans", key: "plus_10_ans" },
+          { label: "Entre 5 et 10 ans", key: "5_10_ans" },
+          { label: "Entre 2 et 5 ans", key: "2_5_ans" },
+          { label: "Moins de 2 ans", key: "moins_2_ans" },
+        ],
+      },
+    ],
+  },
+
+  // S4 — Q3 : canton
+  {
+    title: "Dans quel canton résidez-vous ?",
+    subtitle:
+      "Le canton détermine votre taux marginal d'imposition — et donc l'économie fiscale réelle d'un versement 3a.",
+    questions: [
       {
         id: "q3_canton",
         label: "Votre canton",
         type: "pill",
         options: [
-          // Order matters — GE/VD/ZH/BE first cover the bulk of intent.
           { label: "Genève", key: "geneve" },
           { label: "Vaud", key: "vaud" },
           { label: "Zurich", key: "zurich" },
@@ -78,29 +98,8 @@ export const retraiteScreens: QuestionScreen[] = [
     ],
   },
 
-  // S3 — Ancienneté en Suisse
-  {
-    title: "Depuis quand vivez-vous en Suisse ?",
-    subtitle:
-      "Le rachat rétroactif 3a permet de rattraper jusqu'à 10 années de cotisations manquées.",
-    questions: [
-      {
-        id: "q2_anciennete",
-        label: "Votre ancienneté",
-        type: "card",
-        options: [
-          { label: "Depuis ma naissance", key: "naissance" },
-          { label: "Plus de 10 ans", key: "plus_10ans" },
-          { label: "Entre 5 et 10 ans", key: "5_10ans" },
-          { label: "Entre 2 et 5 ans", key: "2_5ans" },
-          { label: "Moins de 2 ans", key: "moins_2ans" },
-        ],
-      },
-    ],
-  },
-
-  // S4 — Revenu annuel brut. The "prefere_pas" option is rendered as a
-  // secondary text-link below the chips in QuestionScreen, not as a chip.
+  // S5 — Q4 : revenu (l'option non_renseigne est rendue comme lien
+  // secondaire en bas, pas comme chip — voir QuestionScreen)
   {
     title: "Revenu annuel brut approximatif ?",
     subtitle:
@@ -112,19 +111,19 @@ export const retraiteScreens: QuestionScreen[] = [
         type: "pill",
         options: [
           { label: "< 50 000 CHF", key: "moins_50k" },
-          { label: "50 000 – 80 000", key: "50k_80k" },
-          { label: "80 000 – 120 000", key: "80k_120k" },
-          { label: "120 000 – 180 000", key: "120k_180k" },
-          { label: "180 000 – 250 000", key: "180k_250k" },
+          { label: "50 000 – 80 000", key: "50_80k" },
+          { label: "80 000 – 120 000", key: "80_120k" },
+          { label: "120 000 – 180 000", key: "120_180k" },
+          { label: "180 000 – 250 000", key: "180_250k" },
           { label: "> 250 000 CHF", key: "plus_250k" },
-          // "prefere_pas" is rendered separately as a secondary link.
-          { label: "Préfère ne pas répondre", key: "prefere_pas" },
+          // non_renseigne rendu en lien secondaire en bas
+          { label: "Préfère ne pas répondre", key: "non_renseigne" },
         ],
       },
     ],
   },
 
-  // S5 — Situation 3a (4 cards, collapsed from prior 5)
+  // S6 — Q5 : situation 3a (5 options)
   {
     title: "Votre 3ème pilier (3a) aujourd'hui ?",
     subtitle:
@@ -135,16 +134,39 @@ export const retraiteScreens: QuestionScreen[] = [
         label: "Votre situation 3a",
         type: "card",
         options: [
-          { label: "Oui, je verse le maximum", key: "oui_max" },
-          { label: "Oui, mais sous-utilisé", key: "oui_partiel" },
-          { label: "Ouvert récemment (< 2 ans)", key: "oui_recent" },
-          { label: "Pas encore", key: "non" },
+          { label: "Oui, je verse le maximum chaque année", key: "max" },
+          { label: "Oui, mais en dessous du plafond", key: "partiel" },
+          { label: "Ouvert récemment (< 2 ans)", key: "recent" },
+          { label: "Je sais ce que c'est mais n'ai pas encore ouvert", key: "non_connait" },
+          { label: "Je découvre, j'ignorais l'existence du 3a", key: "non_ignore" },
         ],
       },
     ],
   },
 
-  // S6 — Horizon retraite/départ
+  // S7 — Q6 : LPP (l'option independant_na est filtrée côté RetraiteApp
+  // si q1_statut_form !== "independant")
+  {
+    title: "Votre certificat LPP, vous en faites quoi ?",
+    subtitle:
+      "Le 2ème pilier (LPP) cache souvent des leviers de rachat non exploités — surtout après une augmentation ou un changement d'employeur.",
+    questions: [
+      {
+        id: "q6_lpp",
+        label: "Votre rapport au certificat LPP",
+        type: "card",
+        options: [
+          { label: "Je le consulte régulièrement", key: "consulte_regulierement" },
+          { label: "Je l'ai lu, mais sans tout comprendre", key: "lu_pas_compris" },
+          { label: "Je le reçois mais ne l'ai jamais ouvert", key: "jamais_ouvert" },
+          { label: "J'ignorais qu'il existait", key: "ignore_existence" },
+          { label: "Je suis indépendant·e, je ne suis pas concerné·e", key: "independant_na" },
+        ],
+      },
+    ],
+  },
+
+  // S8 — Q8 : horizon retraite / départ
   {
     title:
       "Dans combien d'années prévoyez-vous votre retraite — ou un départ de Suisse ?",
@@ -156,20 +178,19 @@ export const retraiteScreens: QuestionScreen[] = [
         label: "Votre horizon",
         type: "card",
         options: [
-          { label: "Moins de 5 ans", key: "moins_5ans" },
-          { label: "5 à 15 ans", key: "5_15ans" },
-          { label: "15 à 30 ans", key: "15_30ans" },
-          { label: "Plus de 30 ans", key: "plus_30ans" },
-          { label: "Je ne sais pas encore", key: "ne_sais_pas" },
+          { label: "Moins de 5 ans", key: "moins_5_ans" },
+          { label: "5 à 15 ans", key: "5_15_ans" },
+          { label: "15 à 30 ans", key: "15_30_ans" },
+          { label: "Plus de 30 ans", key: "plus_30_ans" },
+          { label: "Je ne sais pas encore", key: "ne_sait_pas" },
         ],
       },
     ],
   },
 ];
 
-// Map (statut, permis) UI selections to the canonical q1_statut value.
-// Returns null for the indep+G combination (UI disables this chip; this is a
-// safety net in case it ever leaks through).
+// Mappe (statut, permis) UI vers la valeur canonique q1_statut field map v2.
+// Renvoie null pour indépendant+G (UI désactive ce chip ; filet de sécurité).
 export function deriveQ1Statut(
   statut: string | undefined,
   permis: string | undefined
@@ -186,7 +207,7 @@ export function deriveQ1Statut(
       case "permis_b":
         return "salarie_b";
       case "permis_g":
-        return "frontalier";
+        return "frontalier_g";
     }
   }
   if (statut === "independant") {
@@ -197,7 +218,6 @@ export function deriveQ1Statut(
       case "permis_c":
         return "independant_bc";
       case "permis_g":
-        // Disabled in UI; we never reach here, but guard for safety.
         return null;
     }
   }

@@ -18,7 +18,6 @@ import type {
 import { buildVerdictSummary, type RetraiteVerdict } from "./verdicts";
 
 export interface BuildRetraitePayloadInput {
-  leadId: string;
   contact: Contact;
   consent: Consent;
   answers: RetraiteAnswers;
@@ -41,6 +40,8 @@ function assertContract(consent: Consent, priority: Priority, phone?: string) {
   }
 }
 
+// Construit le payload v1.0 sans lead_id : n8n l'assigne à la réception
+// et le renvoie dans la réponse 200 (récupéré par RetraiteApp).
 export function buildRetraitePayload(
   input: BuildRetraitePayloadInput
 ): WebhookPayloadV1 {
@@ -49,7 +50,6 @@ export function buildRetraitePayload(
   return {
     schema_version: "1.0",
     funnel_id: "retraite",
-    lead_id: input.leadId,
     submitted_at: new Date().toISOString(),
     contact: input.contact,
     consent: input.consent,

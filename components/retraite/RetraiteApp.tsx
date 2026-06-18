@@ -54,10 +54,10 @@ declare global {
   }
 }
 
-// Screen index layout (6 questions + contact + consent + loading + results +
-// 3 soft-exits):
-//   0      — Intro (PrevoyanceLanding with onStart)
-//   1..6   — S1..S6 (linear)
+// Layout d'index d'écran (7 questions logiques en 8 écrans UI : Q1 statut +
+// Q1 permis + Q2..Q6 + Q8) + contact + consent + loading + results + 3 soft-exits :
+//   0      — Intro (PrevoyanceLanding avec onStart)
+//   1..8   — S1..S8 (linéaire)
 //   20     — Contact
 //   21     — Consent
 //   22     — Loading
@@ -67,7 +67,7 @@ declare global {
 //   92     — SoftExit jeune_horizon
 const SCREEN_INTRO = 0;
 const SCREEN_Q_START = 1;
-const SCREEN_Q_END = 6;
+const SCREEN_Q_END = 8;
 const SCREEN_CONTACT = 20;
 const SCREEN_CONSENT = 21;
 const SCREEN_LOADING = 22;
@@ -93,9 +93,8 @@ function softExitScreen(reason: RetraiteSoftExitReason): number {
   }
 }
 
-// Strip UI-only intermediate keys (q1_statut_form, q1_permis_form) from
-// answers before they enter the persisted typed payload. Replaces them with
-// the derived canonical q1_statut value.
+// Strippe les clés UI-only (q1_statut_form, q1_permis_form) du payload typé
+// et y substitue la valeur canonique q1_statut field map v2.
 function derivePersistedAnswers(
   raw: Record<string, string>
 ): Record<string, string> {
@@ -103,6 +102,20 @@ function derivePersistedAnswers(
   const derived = deriveQ1Statut(q1_statut_form, q1_permis_form);
   if (derived) rest.q1_statut = derived;
   return rest;
+}
+
+// Pour les non-indépendants, q6_lpp = "independant_na" n'est pas affichable.
+// Filet de sécurité si l'option est sélectionnée puis q1 change : on la coupe.
+function sanitizeQ6Lpp(raw: Record<string, string>): Record<string, string> {
+  if (
+    raw.q6_lpp === "independant_na" &&
+    raw.q1_statut_form !== "independant"
+  ) {
+    const { q6_lpp: _, ...rest } = raw;
+    void _;
+    return rest;
+  }
+  return raw;
 }
 
 export default function RetraiteApp() {
@@ -163,7 +176,7 @@ export default function RetraiteApp() {
     const p = identifyPersona(typed);
     const t = tierFromScore(s);
     const v = getRetraiteVerdict(t);
-    const pri = computePriority(p.code, s, typed.q4_revenu);
+    const pri = computePriority(p.code, s, typed.q1_statut, typed.q4_revenu);
 
     setScore(s);
     setPersona(p);
@@ -214,10 +227,11 @@ export default function RetraiteApp() {
         return;
       }
 
-      // S6 completed — derive q1_statut from the (statut, permis) form
-      // intermediates, then check post-questions soft-exit branches, else
-      // compute results and advance to Contact.
-      const persisted = derivePersistedAnswers(answers);
+      // Dernier écran question (S8) atteint — dérive q1_statut, nettoie q6_lpp
+      // selon le statut, vérifie les soft-exits post-questionnaire, sinon
+      // calcule les résultats et avance vers Contact.
+      const sanitized = sanitizeQ6Lpp(answers);
+      const persisted = derivePersistedAnswers(sanitized);
       const typed = persisted as unknown as RetraiteAnswers;
       const endReason = resolveSoftExitEnd(typed);
       if (endReason) {
@@ -290,7 +304,6 @@ export default function RetraiteApp() {
     try {
       const typed = answers as unknown as RetraiteAnswers;
       const payload = buildRetraitePayload({
-        leadId: leadIdRef.current,
         contact: {
           prenom: contact.prenom,
           email: contact.email,
@@ -300,6 +313,7 @@ export default function RetraiteApp() {
           rgpd_accepted: optIns.rgpd_accepted,
           partner_share_optin: optIns.partner_share_optin,
           newsletter_optin: optIns.newsletter_optin,
+          resale_optin: optIns.resale_optin,
         },
         answers: typed,
         persona,
@@ -309,7 +323,15 @@ export default function RetraiteApp() {
         sessionStartTs: sessionStartRef.current,
         completionPath: usedBackRef.current ? "non_linear" : "linear",
       });
-      const ok = await sendWebhook(payload, leadIdRef.current);
+      // leadIdRef sert uniquement de clé locale pour le retry localStorage.
+      // n8n assigne le lead_id canonique et le renvoie dans la réponse 200.
+      const { ok, leadId: assignedLeadId } = await sendWebhook(
+        payload,
+        leadIdRef.current
+      );
+      if (assignedLeadId) {
+        leadIdRef.current = assignedLeadId;
+      }
       if (ok) {
         pushEvent("retraite_submitted", {
           persona: persona.code,
@@ -330,8 +352,8 @@ export default function RetraiteApp() {
     }
   };
 
-  // Progress bar: 6 questions + contact + consent = 8 steps.
-  const totalSteps = 8;
+  // Barre de progression : 8 écrans questions + contact + consent = 10 étapes.
+  const totalSteps = 10;
   const currentStep = (() => {
     if (screen >= SCREEN_Q_START && screen <= SCREEN_Q_END) {
       return screen - SCREEN_Q_START + 1;
@@ -391,6 +413,7 @@ export default function RetraiteApp() {
               onChange={setContact}
               onContinue={goToConsent}
               onBack={goBack}
+              phoneRequired={priority === "hot" || priority === "very_hot"}
             />
           )}
 

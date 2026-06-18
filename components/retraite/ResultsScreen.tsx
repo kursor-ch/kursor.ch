@@ -258,8 +258,21 @@ export default function ResultsScreen({
           </div>
         )}
 
-        {/* ===== LPP info card ===== */}
-        {score.lpp_flag && (
+        {/* ===== LPP info card =====
+             Dérivé de Q1 + Q6 : on affiche pour les salariés/frontaliers qui
+             ne consultent pas activement leur certificat LPP. */}
+        {(() => {
+          const isSalarie =
+            answers.q1_statut === "salarie_suisse" ||
+            answers.q1_statut === "salarie_c" ||
+            answers.q1_statut === "salarie_b" ||
+            answers.q1_statut === "frontalier_g";
+          const lppUnknown =
+            answers.q6_lpp === "lu_pas_compris" ||
+            answers.q6_lpp === "jamais_ouvert" ||
+            answers.q6_lpp === "ignore_existence";
+          return isSalarie && lppUnknown;
+        })() && (
           <div className="max-w-xl mx-auto">
             <div className="flex gap-3 p-4 rounded-xl bg-[#F5F3FF] border border-[#E9D5FF]">
               <svg
