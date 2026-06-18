@@ -94,11 +94,14 @@ export interface CrossSell {
 
 export interface Metadata {
   source?: string;
+  acquisition_channel?: string;
   user_agent?: string;
   referrer?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
+  utm_content?: string;
+  landing_page?: string;
   session_duration_seconds?: number;
   completion_path?: CompletionPath;
 }
