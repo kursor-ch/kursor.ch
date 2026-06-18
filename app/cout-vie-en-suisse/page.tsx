@@ -471,7 +471,7 @@ export default function CoutVieEnSuissePage() {
             <div className="rounded-xl" style={{ backgroundColor: "#111827", padding: "32px 28px", marginBottom: 40 }}>
               <h3 className="font-heading" style={{ fontSize: 22, fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3 }}>Évaluez votre projet d{"’"}installation en Suisse</h3>
               <p className="font-body" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.6, marginTop: 8 }}>Diagnostic gratuit en 2 minutes pour estimer votre revenu disponible et choisir le bon canton.</p>
-              <a href="/" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6 }}>Lancer mon diagnostic {"→"}</a>
+              <a href="/emploi" className="font-body rounded-lg text-white no-underline" style={{ backgroundColor: "#D97706", fontSize: 14, fontWeight: 500, padding: "12px 24px", marginTop: 16, display: "inline-flex", alignItems: "center", gap: 6 }}>Lancer mon diagnostic {"→"}</a>
             </div>
           </article>
 
@@ -481,7 +481,7 @@ export default function CoutVieEnSuissePage() {
               <div className="rounded-xl bg-white" style={{ border: "1px solid #E2E8F0", padding: 20, marginBottom: 20 }}>
                 <p className="font-body" style={{ fontSize: 15, fontWeight: 700, color: "#111827", marginBottom: 8 }}>Simulez votre budget</p>
                 <p className="font-body" style={{ fontSize: 13, color: "#64748B", lineHeight: 1.6, marginBottom: 16 }}>Évaluez votre revenu disponible selon votre canton, situation familiale et salaire.</p>
-                <a href="/" className="font-body rounded-lg text-white no-underline w-full" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>Faire mon diagnostic {"→"}</a>
+                <a href="/emploi" className="font-body rounded-lg text-white no-underline w-full" style={{ backgroundColor: "#D97706", fontSize: 13, fontWeight: 500, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>Faire mon diagnostic {"→"}</a>
                 <p className="font-body text-center" style={{ fontSize: 11, color: "#94A3B8", marginTop: 8 }}>Gratuit {"·"} 2 minutes {"·"} Résultats immédiats</p>
               </div>
               <SidebarGuides exclude="/cout-vie-en-suisse" />

@@ -18,11 +18,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/emploi",
-        destination: "/",
-        permanent: true,
-      },
-      {
         source: "/logement",
         destination: "/",
         permanent: true,

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/", priority: 1.0, changeFrequency: "weekly" as const },
 
     // Diagnostics / outils
+    { url: "/emploi", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/assurance", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/retraite", priority: 0.9, changeFrequency: "weekly" as const },
 
