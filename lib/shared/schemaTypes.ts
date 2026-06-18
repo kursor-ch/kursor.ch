@@ -21,6 +21,11 @@ export interface Consent {
   rgpd_accepted: boolean;
   partner_share_optin: boolean;
   newsletter_optin: boolean;
+  // Additif schema v1.0 (retraite-first). Consentement explicite pour la
+  // transmission des coordonnées à des courtiers tiers — distinct de
+  // partner_share_optin (qui ne vise que le partenaire primaire nommé).
+  // Décoché par défaut.
+  resale_optin?: boolean;
 }
 
 export interface VerdictScore {
@@ -184,7 +189,9 @@ export interface FrontalierData {
 export interface WebhookPayloadV1 {
   schema_version: "1.0";
   funnel_id: FunnelId;
-  lead_id: string;
+  // n8n assigne lead_id à la réception et le renvoie dans la réponse 200.
+  // Les funnels v1.0 récents (retraite) ne l'envoient pas ; legacy emploi le pose.
+  lead_id?: string;
   submitted_at: string;
   contact: Contact;
   consent: Consent;

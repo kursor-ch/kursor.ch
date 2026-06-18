@@ -26,19 +26,39 @@ function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// Main diagnostic webhook. POST to NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL (fallback
-// NEXT_PUBLIC_WEBHOOK_URL). On non-200, retry once after 2s. On second
-// failure, persist to localStorage under kursor_pending_submission_{lead_id}
-// for flush on next page load.
+async function readLeadIdFromResponse(res: Response): Promise<string | undefined> {
+  try {
+    const json = (await res.clone().json()) as { lead_id?: unknown };
+    if (typeof json.lead_id === "string" && json.lead_id.length > 0) {
+      return json.lead_id;
+    }
+  } catch {
+    // Réponse non-JSON ou vide — c'est OK, n8n peut ne pas renvoyer de body.
+  }
+  return undefined;
+}
+
+export interface SendWebhookResult {
+  ok: boolean;
+  leadId?: string;
+}
+
+// Webhook diagnostic principal. POST vers NEXT_PUBLIC_DIAGNOSTIC_WEBHOOK_URL
+// (fallback NEXT_PUBLIC_WEBHOOK_URL). On non-200, retry une fois après 2s.
+// À la seconde échec, persiste le body dans localStorage sous
+// kursor_pending_submission_{pendingKey} pour flush au prochain mount.
+// `pendingKey` est un identifiant côté front (jamais transmis) qui sert
+// uniquement de clé de cache local. En cas de succès, on tente de lire un
+// `lead_id` dans la réponse — c'est n8n qui le génère / le renumérote.
 export async function sendWebhook(
   payload: WebhookPayloadV1,
-  leadId: string
-): Promise<boolean> {
+  pendingKey: string
+): Promise<SendWebhookResult> {
   const url = getMainWebhookUrl();
-  if (!url) return false;
+  if (!url) return { ok: false };
 
   const body = JSON.stringify(payload);
-  const storageKey = `${PENDING_PREFIX}${leadId}`;
+  const storageKey = `${PENDING_PREFIX}${pendingKey}`;
 
   try {
     const first = await postJson(url, body);
@@ -46,7 +66,8 @@ export async function sendWebhook(
       if (typeof window !== "undefined") {
         localStorage.removeItem(storageKey);
       }
-      return true;
+      const leadId = await readLeadIdFromResponse(first);
+      return { ok: true, leadId };
     }
     throw new Error(`HTTP ${first.status}`);
   } catch {
@@ -57,7 +78,8 @@ export async function sendWebhook(
         if (typeof window !== "undefined") {
           localStorage.removeItem(storageKey);
         }
-        return true;
+        const leadId = await readLeadIdFromResponse(second);
+        return { ok: true, leadId };
       }
       throw new Error(`HTTP ${second.status}`);
     } catch {
@@ -65,17 +87,16 @@ export async function sendWebhook(
         try {
           localStorage.setItem(storageKey, body);
         } catch {
-          // Storage quota exceeded or disabled — swallow.
+          // Quota dépassé / storage désactivé — on ne casse pas le flux.
         }
       }
-      return false;
+      return { ok: false };
     }
   }
 }
 
-// Lightweight soft-exit capture. Fires to a separate n8n endpoint so the
-// main schema stays clean. Silent no-op if the env var is unset (feature
-// flagged off). No retry, no localStorage — this is best-effort.
+// Capture soft-exit légère vers un endpoint n8n distinct. Best-effort :
+// pas de retry, pas de localStorage. Silent no-op si l'env var est absente.
 export async function sendSoftExitWebhook(
   payload: SoftExitPayload
 ): Promise<boolean> {
@@ -90,8 +111,8 @@ export async function sendSoftExitWebhook(
   }
 }
 
-// Flush any webhook submissions that were persisted during a previous
-// session's offline/failure state. Called once on app mount.
+// Flush les payloads persistés pendant une session offline/échec précédente.
+// Appelé une fois au mount de chaque App.
 export function retryPendingWebhooks(): void {
   if (typeof window === "undefined") return;
   const url = getMainWebhookUrl();
@@ -111,7 +132,7 @@ export function retryPendingWebhooks(): void {
         if (res.ok) localStorage.removeItem(key);
       })
       .catch(() => {
-        // Swallow — will retry on next mount.
+        // Re-tente au prochain mount.
       });
   }
 }

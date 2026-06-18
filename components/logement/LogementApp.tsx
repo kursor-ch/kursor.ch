@@ -303,7 +303,7 @@ export default function LogementApp() {
         completionPath: usedBackRef.current ? "non_linear" : "linear",
       });
 
-      const ok = await sendWebhook(payload, leadIdRef.current);
+      const { ok } = await sendWebhook(payload, leadIdRef.current);
       if (ok) {
         pushEvent("logement_submitted", {
           verdict: verdict.key,

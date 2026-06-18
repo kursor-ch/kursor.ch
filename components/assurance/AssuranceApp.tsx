@@ -411,7 +411,7 @@ export default function AssuranceApp() {
         // q8_complementaires array → comma-separated string conversion
         // happens inside buildAssurancePayloadResident so the webhook
         // contract stays Record<string, string>.
-        ok = await sendWebhook(payload, leadIdRef.current);
+        ({ ok } = await sendWebhook(payload, leadIdRef.current));
       } else if (branch === "frontalier" && comparatif) {
         const payload = buildAssurancePayloadFrontalier({
           leadId: leadIdRef.current,
@@ -426,7 +426,7 @@ export default function AssuranceApp() {
           sessionStartTs: sessionStartRef.current,
           completionPath,
         });
-        ok = await sendWebhook(payload, leadIdRef.current);
+        ({ ok } = await sendWebhook(payload, leadIdRef.current));
       }
 
       if (ok) {
