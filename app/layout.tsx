@@ -8,6 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ScrollRevealProvider } from "@/components/shared/ScrollRevealProvider";
 import CookieBanner from "@/components/cookies/CookieBanner";
+import AttributionCapture from "@/components/shared/AttributionCapture";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -119,6 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
+        <AttributionCapture />
         <Navbar />
         {children}
         <Footer />

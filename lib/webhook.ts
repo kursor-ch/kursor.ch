@@ -1,4 +1,5 @@
 import { Answers, ScoreBreakdown } from "./scoring";
+import { getAttribution } from "./shared/tracking";
 
 const STORAGE_KEY = "kursor_pending_lead";
 
@@ -23,6 +24,13 @@ export interface WebhookPayload {
   opt_ins: OptIns;
   consent: boolean;
   timestamp: string;
+  acquisition_channel: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_content: string | null;
+  referrer: string | null;
+  landing_page: string | null;
 }
 
 export function buildPayload(
@@ -32,6 +40,7 @@ export function buildPayload(
   answers: Answers,
   optIns: OptIns
 ): WebhookPayload {
+  const attribution = getAttribution();
   return {
     funnel_id: "work",
     prenom: contact.prenom,
@@ -48,6 +57,13 @@ export function buildPayload(
     opt_ins: optIns,
     consent: optIns.consent,
     timestamp: new Date().toISOString(),
+    acquisition_channel: attribution?.source ?? "direct",
+    utm_source: attribution?.utm_source ?? null,
+    utm_medium: attribution?.utm_medium ?? null,
+    utm_campaign: attribution?.utm_campaign ?? null,
+    utm_content: attribution?.utm_content ?? null,
+    referrer: attribution?.referrer ?? null,
+    landing_page: attribution?.landing_page ?? null,
   };
 }
 
