@@ -41,6 +41,22 @@ export function buildPayload(
   optIns: OptIns
 ): WebhookPayload {
   const attribution = getAttribution();
+
+  // Repli sur l'URL courante quand le first-touch localStorage est vide
+  // (ex. navigateur in-app TikTok sans storage) — même logique de repli que
+  // buildMetadata() côté v1.0 (lib/shared/metadata.ts). On garde null (jamais
+  // de chaîne vide) pour les champs absents : "" casse les Single Select Airtable.
+  const params = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : ""
+  );
+  const docReferrer =
+    typeof document !== "undefined" ? document.referrer || null : null;
+
+  const utmSource = attribution?.utm_source ?? params.get("utm_source");
+  const utmMedium = attribution?.utm_medium ?? params.get("utm_medium");
+  const utmCampaign = attribution?.utm_campaign ?? params.get("utm_campaign");
+  const utmContent = attribution?.utm_content ?? params.get("utm_content");
+
   return {
     funnel_id: "work",
     prenom: contact.prenom,
@@ -58,11 +74,11 @@ export function buildPayload(
     consent: optIns.consent,
     timestamp: new Date().toISOString(),
     acquisition_channel: attribution?.source ?? "direct",
-    utm_source: attribution?.utm_source ?? null,
-    utm_medium: attribution?.utm_medium ?? null,
-    utm_campaign: attribution?.utm_campaign ?? null,
-    utm_content: attribution?.utm_content ?? null,
-    referrer: attribution?.referrer ?? null,
+    utm_source: utmSource || null,
+    utm_medium: utmMedium || null,
+    utm_campaign: utmCampaign || null,
+    utm_content: utmContent || null,
+    referrer: attribution?.referrer ?? docReferrer,
     landing_page: attribution?.landing_page ?? null,
   };
 }
